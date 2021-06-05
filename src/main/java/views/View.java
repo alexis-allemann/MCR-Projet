@@ -1,6 +1,9 @@
 package views;
 
 import controllers.Controller;
+import fighters.Fighter;
+
+import java.awt.Point;
 
 /**
  * Space invaders view to display gameplay
@@ -23,4 +26,10 @@ public interface View {
      * @param message to display
      */
     void displayMessage(String message);
+
+    /**
+     * Paint a fighter on the view at a given position
+     * @param fighter to paint
+     */
+    void paintFighter(Fighter fighter);
 }

@@ -1,12 +1,14 @@
 package controllers;
 
-import bullets.Bullet;
 import fighters.Fighter;
 import fighters.SpaceCraft;
 import views.View;
 
+import java.awt.*;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Space invaders gameplay management
@@ -15,9 +17,17 @@ import java.util.LinkedList;
  * @version 1.0
  */
 public class GamePlay implements Controller {
+    static final Logger LOG = Logger.getLogger(GamePlay.class.getName());
     private static GamePlay instance = new GamePlay();
+    private View view;
     private Collection<Fighter> monsters = new LinkedList<>();
     private Fighter spacecraft = new SpaceCraft();
+
+    /**
+     * Private constructor to implement Singleton pattern
+     */
+    private GamePlay() {
+    }
 
     /**
      * Get gameplay instance
@@ -30,7 +40,15 @@ public class GamePlay implements Controller {
 
     @Override
     public void start(View view) {
+        if (view == null)
+            throw new IllegalArgumentException("View can not be null");
+
+        LOG.log(Level.INFO, "Game started");
+
+        spacecraft.setPosition(new Point(50, 50));
+        this.view = view;
         view.startView(this);
+        view.paintFighter(spacecraft);
     }
 
     @Override
@@ -45,13 +63,19 @@ public class GamePlay implements Controller {
 
     @Override
     public void move(MoveDirection direction) {
+        Point position = spacecraft.getPosition();
         switch (direction) {
             case LEFT:
                 System.out.println("move left");
+                spacecraft.setPosition(new Point(position.x - 10, position.y));
                 break;
             case RIGHT:
                 System.out.println("move right");
+                spacecraft.setPosition(new Point(position.x + 10, position.y));
                 break;
         }
+        view.paintFighter(spacecraft);
     }
+
+
 }

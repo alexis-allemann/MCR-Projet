@@ -5,20 +5,21 @@
     <id>UMLNote</id>
     <coordinates>
       <x>0</x>
-      <y>0</y>
+      <y>48</y>
       <w>232</w>
       <h>120</h>
     </coordinates>
     <panel_attributes>Provenance des classes non affichées :
 --
-</panel_attributes>
+Point
+Logger</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>360</x>
-      <y>104</y>
+      <y>152</y>
       <w>256</w>
       <h>200</h>
     </coordinates>
@@ -36,8 +37,8 @@ Controller
     <id>UMLClass</id>
     <coordinates>
       <x>936</x>
-      <y>72</y>
-      <w>232</w>
+      <y>120</y>
+      <w>264</w>
       <h>120</h>
     </coordinates>
     <panel_attributes>&lt;&lt; interface &gt;&gt;
@@ -45,46 +46,53 @@ View
 --
 /+ startView(controller : Controller) : void/
 /+ displayMessage(message : String) : void/
-/+ updateScore() : void/</panel_attributes>
+/+ updateScore() : void/
+/+ paintFighter(fighter : Fighter, point : Point) : void/</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>392</x>
-      <y>944</y>
+      <y>992</y>
       <w>280</w>
       <h>168</h>
     </coordinates>
     <panel_attributes>SpaceCraft
 --
+_-LOG : Logger_
+_-image : Image_
 - nbLife : int
 --
++ SpaceCraft()
 + fight : void
 + getLife() : int
 + getBullet() : Bullet
-</panel_attributes>
++ getImage() : Image
++ getPosition() : Point</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>96</x>
-      <y>944</y>
+      <y>992</y>
       <w>280</w>
       <h>168</h>
     </coordinates>
     <panel_attributes>Monster
 --
 + fight : void
-+ getBullet() : Bullet</panel_attributes>
++ getBullet() : Bullet
++ getImage() : Image
++ getPosition() : Point</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>464</x>
-      <y>736</y>
+      <y>784</y>
       <w>280</w>
       <h>136</h>
     </coordinates>
@@ -93,28 +101,31 @@ Fighter
 --
 /+ fight() : void/
 /+ getBullet() : Bullet/
-</panel_attributes>
+/+ getImage() : Image/
+/+ getPosition() : Point/</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>808</x>
-      <y>944</y>
+      <y>992</y>
       <w>280</w>
       <h>168</h>
     </coordinates>
     <panel_attributes>/FighterDecorator/
 --
 + FighterDecorator(fighter : Fighter)
-+ fight() : void</panel_attributes>
++ fight() : void
++ getImage() : Image
++ getPosition() : Point</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>736</x>
-      <y>824</y>
+      <y>872</y>
       <w>392</w>
       <h>144</h>
     </coordinates>
@@ -126,21 +137,23 @@ m2=1</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>376</x>
-      <y>1208</y>
+      <y>1256</y>
       <w>272</w>
       <h>88</h>
     </coordinates>
     <panel_attributes>Shield
 --
 + Shield(fighter : Fighter)
-+ fight : void</panel_attributes>
++ fight : void
++ getImage() : Image
++ getPosition() : Point</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>664</x>
-      <y>1208</y>
+      <y>1256</y>
       <w>272</w>
       <h>88</h>
     </coordinates>
@@ -148,14 +161,16 @@ m2=1</panel_attributes>
 --
 + LaserGun(fighter : Fighter)
 + fight : void
-+ getBullet() : Bullet</panel_attributes>
++ getBullet() : Bullet
++ getImage() : Image
++ getPosition() : Point</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>952</x>
-      <y>1208</y>
+      <y>1256</y>
       <w>272</w>
       <h>88</h>
     </coordinates>
@@ -168,7 +183,7 @@ m2=1</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1240</x>
-      <y>1208</y>
+      <y>1256</y>
       <w>272</w>
       <h>88</h>
     </coordinates>
@@ -181,7 +196,7 @@ m2=1</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>944</x>
-      <y>1104</y>
+      <y>1152</y>
       <w>448</w>
       <h>120</h>
     </coordinates>
@@ -192,7 +207,7 @@ m2=1</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>944</x>
-      <y>1104</y>
+      <y>1152</y>
       <w>160</w>
       <h>120</h>
     </coordinates>
@@ -203,7 +218,7 @@ m2=1</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>792</x>
-      <y>1104</y>
+      <y>1152</y>
       <w>176</w>
       <h>120</h>
     </coordinates>
@@ -214,7 +229,7 @@ m2=1</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>504</x>
-      <y>1104</y>
+      <y>1152</y>
       <w>464</w>
       <h>120</h>
     </coordinates>
@@ -225,7 +240,7 @@ m2=1</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>216</x>
-      <y>864</y>
+      <y>912</y>
       <w>408</w>
       <h>96</h>
     </coordinates>
@@ -236,7 +251,7 @@ m2=1</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>520</x>
-      <y>864</y>
+      <y>912</y>
       <w>104</w>
       <h>96</h>
     </coordinates>
@@ -247,7 +262,7 @@ m2=1</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>600</x>
-      <y>864</y>
+      <y>912</y>
       <w>360</w>
       <h>96</h>
     </coordinates>
@@ -258,12 +273,13 @@ m2=1</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>400</x>
-      <y>424</y>
+      <y>472</y>
       <w>400</w>
       <h>208</h>
     </coordinates>
     <panel_attributes>GamePlay
 --
+_-LOG : Logger_
 _- instance : GamePlay_
 - score : int
 --
@@ -280,7 +296,7 @@ _+ getInstance() : GamePlay_
     <id>Relation</id>
     <coordinates>
       <x>528</x>
-      <y>624</y>
+      <y>672</y>
       <w>88</w>
       <h>128</h>
     </coordinates>
@@ -294,7 +310,7 @@ creates</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>656</x>
-      <y>624</y>
+      <y>672</y>
       <w>88</w>
       <h>128</h>
     </coordinates>
@@ -308,7 +324,7 @@ manage</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1248</x>
-      <y>504</y>
+      <y>552</y>
       <w>272</w>
       <h>88</h>
     </coordinates>
@@ -323,7 +339,7 @@ manage</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>792</x>
-      <y>504</y>
+      <y>552</y>
       <w>472</w>
       <h>24</h>
     </coordinates>
@@ -334,7 +350,7 @@ manage</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>984</x>
-      <y>664</y>
+      <y>712</y>
       <w>160</w>
       <h>72</h>
     </coordinates>
@@ -349,7 +365,7 @@ manage</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1152</x>
-      <y>664</y>
+      <y>712</y>
       <w>160</w>
       <h>72</h>
     </coordinates>
@@ -364,7 +380,7 @@ manage</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1320</x>
-      <y>664</y>
+      <y>712</y>
       <w>160</w>
       <h>72</h>
     </coordinates>
@@ -379,7 +395,7 @@ manage</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1488</x>
-      <y>664</y>
+      <y>712</y>
       <w>160</w>
       <h>72</h>
     </coordinates>
@@ -394,7 +410,7 @@ manage</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1656</x>
-      <y>664</y>
+      <y>712</y>
       <w>160</w>
       <h>72</h>
     </coordinates>
@@ -409,7 +425,7 @@ manage</panel_attributes>
     <id>UMLNote</id>
     <coordinates>
       <x>1272</x>
-      <y>784</y>
+      <y>832</y>
       <w>264</w>
       <h>128</h>
     </coordinates>
@@ -427,7 +443,7 @@ bg=yellow</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1056</x>
-      <y>584</y>
+      <y>632</y>
       <w>360</w>
       <h>96</h>
     </coordinates>
@@ -438,7 +454,7 @@ bg=yellow</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1224</x>
-      <y>584</y>
+      <y>632</y>
       <w>192</w>
       <h>96</h>
     </coordinates>
@@ -449,7 +465,7 @@ bg=yellow</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1392</x>
-      <y>584</y>
+      <y>632</y>
       <w>24</w>
       <h>96</h>
     </coordinates>
@@ -460,7 +476,7 @@ bg=yellow</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1392</x>
-      <y>584</y>
+      <y>632</y>
       <w>192</w>
       <h>96</h>
     </coordinates>
@@ -471,7 +487,7 @@ bg=yellow</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1392</x>
-      <y>584</y>
+      <y>632</y>
       <w>360</w>
       <h>96</h>
     </coordinates>
@@ -482,7 +498,7 @@ bg=yellow</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>480</x>
-      <y>296</y>
+      <y>344</y>
       <w>24</w>
       <h>144</h>
     </coordinates>
@@ -493,7 +509,7 @@ bg=yellow</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>704</x>
-      <y>128</y>
+      <y>176</y>
       <w>248</w>
       <h>312</h>
     </coordinates>
@@ -506,7 +522,7 @@ m2=0</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1280</x>
-      <y>72</y>
+      <y>120</y>
       <w>152</w>
       <h>48</h>
     </coordinates>
@@ -519,22 +535,23 @@ m2=0</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>936</x>
-      <y>296</y>
-      <w>232</w>
+      <y>344</y>
+      <w>272</w>
       <h>120</h>
     </coordinates>
     <panel_attributes>GUIView
 --
 + startView(controller : Controller) : void
 + displayMessage(message : String) : void
-+ updateScore() : void</panel_attributes>
++ updateScore() : void
++ paintFighter(fighter : Fighter, point : Point) : void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1040</x>
-      <y>184</y>
+      <x>1064</x>
+      <y>232</y>
       <w>24</w>
       <h>128</h>
     </coordinates>
@@ -545,7 +562,7 @@ m2=0</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1512</x>
-      <y>216</y>
+      <y>264</y>
       <w>136</w>
       <h>72</h>
     </coordinates>
@@ -560,7 +577,7 @@ Bullet
     <id>UMLClass</id>
     <coordinates>
       <x>1344</x>
-      <y>336</y>
+      <y>384</y>
       <w>144</w>
       <h>72</h>
     </coordinates>
@@ -574,7 +591,7 @@ Bullet
     <id>UMLClass</id>
     <coordinates>
       <x>1504</x>
-      <y>336</y>
+      <y>384</y>
       <w>144</w>
       <h>72</h>
     </coordinates>
@@ -588,7 +605,7 @@ Bullet
     <id>Relation</id>
     <coordinates>
       <x>1408</x>
-      <y>280</y>
+      <y>328</y>
       <w>184</w>
       <h>72</h>
     </coordinates>
@@ -599,7 +616,7 @@ Bullet
     <id>Relation</id>
     <coordinates>
       <x>1568</x>
-      <y>280</y>
+      <y>328</y>
       <w>24</w>
       <h>72</h>
     </coordinates>
@@ -610,7 +627,7 @@ Bullet
     <id>UMLClass</id>
     <coordinates>
       <x>1560</x>
-      <y>80</y>
+      <y>128</y>
       <w>144</w>
       <h>72</h>
     </coordinates>
@@ -625,7 +642,7 @@ RIGHT</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1664</x>
-      <y>336</y>
+      <y>384</y>
       <w>144</w>
       <h>72</h>
     </coordinates>
@@ -639,7 +656,7 @@ RIGHT</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1568</x>
-      <y>280</y>
+      <y>328</y>
       <w>184</w>
       <h>72</h>
     </coordinates>

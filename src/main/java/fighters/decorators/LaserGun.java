@@ -4,6 +4,8 @@ import bullets.Bullet;
 import bullets.LaserBullet;
 import fighters.Fighter;
 
+import java.awt.Image;
+
 /**
  * Laser gun to shoot laser bullets
  *
@@ -24,5 +26,10 @@ public class LaserGun extends FighterDecorator {
     @Override
     public Bullet getBullet() {
         return new LaserBullet();
+    }
+
+    @Override
+    public Image getImage() {
+        return null;
     }
 }

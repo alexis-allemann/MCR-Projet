@@ -15,7 +15,6 @@ public class SpaceInvaders {
      * @param args no args required
      */
     public static void main(String[] args) {
-        System.out.println("Welcome");
-        new GamePlay().start(new GUIView());
+        GamePlay.getInstance().start(new GUIView());
     }
 }

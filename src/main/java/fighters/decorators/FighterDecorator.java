@@ -3,6 +3,8 @@ package fighters.decorators;
 import bullets.Bullet;
 import fighters.Fighter;
 
+import java.awt.*;
+
 /**
  * Space invaders fighters decorators
  *
@@ -29,5 +31,20 @@ public abstract class FighterDecorator implements Fighter {
     @Override
     public Bullet getBullet() {
         return fighter.getBullet();
+    }
+
+    @Override
+    public Image getImage() {
+        return fighter.getImage();
+    }
+
+    @Override
+    public Point getPosition() {
+        return fighter.getPosition();
+    }
+
+    @Override
+    public void setPosition(Point point) {
+        fighter.setPosition(point);
     }
 }

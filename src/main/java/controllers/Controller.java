@@ -14,6 +14,7 @@ public interface Controller {
      * Start the gameplay in a new view
      *
      * @param view to start gameplay into
+     * @throws IllegalArgumentException if the view is null
      */
     void start(View view);
 

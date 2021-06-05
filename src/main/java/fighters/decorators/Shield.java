@@ -2,6 +2,8 @@ package fighters.decorators;
 
 import fighters.Fighter;
 
+import java.awt.Image;
+
 /**
  * Shield to protect fighters
  *
@@ -17,5 +19,10 @@ public class Shield extends FighterDecorator {
      */
     public Shield(Fighter fighter) {
         super(fighter);
+    }
+
+    @Override
+    public Image getImage() {
+        return null;
     }
 }
