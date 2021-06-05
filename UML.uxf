@@ -312,7 +312,7 @@ manage</panel_attributes>
       <w>272</w>
       <h>88</h>
     </coordinates>
-    <panel_attributes>Level
+    <panel_attributes>/Level/
 --
 /+ getMonstersSpeed() : int/
 /+ generateMonster() : Fighter/</panel_attributes>
