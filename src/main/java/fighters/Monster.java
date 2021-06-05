@@ -4,6 +4,7 @@ import bullets.Bomb;
 import bullets.Bullet;
 
 import java.awt.*;
+import java.util.logging.Logger;
 
 /**
  * Monsters used to fight against space craft
@@ -11,8 +12,10 @@ import java.awt.*;
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public class Monster implements Fighter {
-
+public class Monster extends Fighter {
+    private static final Logger LOG = Logger.getLogger(SpaceCraft.class.getName());
+    private static Image image;
+    private Point point;
     @Override
     public void fight() {
 
@@ -25,16 +28,16 @@ public class Monster implements Fighter {
 
     @Override
     public Image getImage() {
-        return null;
+        return image;
     }
 
     @Override
     public Point getPosition() {
-        return null;
+        return point;
     }
 
     @Override
     public void setPosition(Point point) {
-
+        this.point = point;
     }
 }

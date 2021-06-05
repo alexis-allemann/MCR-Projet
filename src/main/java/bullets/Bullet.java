@@ -1,5 +1,7 @@
 package bullets;
 
+import java.awt.*;
+
 /**
  * Bullets used on fighters.spacecraft shoots
  *
@@ -7,7 +9,12 @@ package bullets;
  * @version 1.0
  */
 public interface Bullet {
-
+    /**
+     * Get image
+     *
+     * @return the image
+     */
+    Image getImage();
     /**
      * Get bullet speed
      *
@@ -21,4 +28,17 @@ public interface Bullet {
      * @return the power
      */
     int getPower();
+
+    /**
+     * Get position
+     *
+     * @return the position
+     */
+    Point getPosition();
+
+    /**
+     * Set position
+     * @param point
+     */
+    void setPosition(Point point);
 }

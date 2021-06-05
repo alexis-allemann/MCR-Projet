@@ -7,5 +7,5 @@ package controllers;
  * @version 1.0
  */
 public enum MoveDirection {
-    LEFT, RIGHT
+    LEFT, RIGHT, TOP, DOWN;
 }

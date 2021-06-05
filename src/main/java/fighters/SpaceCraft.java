@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public class SpaceCraft implements Fighter {
+public class SpaceCraft extends Fighter {
     private static final Logger LOG = Logger.getLogger(SpaceCraft.class.getName());
     private static Image image;
     private Point point;
@@ -39,7 +39,8 @@ public class SpaceCraft implements Fighter {
 
     @Override
     public Bullet getBullet() {
-        return new StandardBullet();
+        //La bullet part depuis où le vaisseau se situe
+        return new StandardBullet(this.point);
     }
 
     @Override

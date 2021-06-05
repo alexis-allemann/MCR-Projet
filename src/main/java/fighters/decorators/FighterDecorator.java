@@ -3,6 +3,7 @@ package fighters.decorators;
 import bullets.Bullet;
 import fighters.Fighter;
 
+
 import java.awt.*;
 
 /**
@@ -11,7 +12,7 @@ import java.awt.*;
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public abstract class FighterDecorator implements Fighter {
+public abstract class FighterDecorator extends Fighter {
     private Fighter fighter;
 
     /**

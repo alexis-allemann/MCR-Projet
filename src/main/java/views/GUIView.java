@@ -1,5 +1,6 @@
 package views;
 
+import bullets.Bullet;
 import controllers.Controller;
 import controllers.MoveDirection;
 import fighters.Fighter;
@@ -29,10 +30,10 @@ public class GUIView implements View {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setLocation(dim.width / 2 - this.WIDTH / 2, dim.height / 2 - HEIGHT / 2);
         frame.setResizable(false);
-        frame.setVisible(true);
         panel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         panel.setBackground(Color.BLACK);
         frame.getContentPane().add(panel);
+        frame.setVisible(true);
         frame.pack();
 
         // Listen keys pressed
@@ -60,6 +61,14 @@ public class GUIView implements View {
 
                             case KeyEvent.VK_W:
                             case KeyEvent.VK_UP:
+                                controller.move(MoveDirection.TOP);
+                                break;
+
+                            case KeyEvent.VK_S:
+                            case KeyEvent.VK_DOWN:
+                                controller.move(MoveDirection.DOWN);
+                                break;
+
                             case KeyEvent.VK_SPACE:
                                 controller.shoot();
                                 break;
@@ -82,5 +91,27 @@ public class GUIView implements View {
     public void paintFighter(Fighter fighter) {
         Point point = fighter.getPosition();
         panel.getGraphics().drawImage(fighter.getImage(), point.x, point.y, null);
+    }
+
+    @Override
+    public void removeFighter(Fighter spacecraft) {
+        //récuperer le point
+        //redessiner par dessus
+        Point point = spacecraft.getPosition();
+        panel.getGraphics().drawRect(point.x, point.y, 100, 100);
+        panel.getGraphics().fillRect(point.x, point.y, 100, 100);
+    }
+
+    @Override
+    public void removeBullet(Bullet bullet) {
+        Point point = bullet.getPosition();
+        panel.getGraphics().drawRect(point.x, point.y, 100, 100);
+        panel.getGraphics().fillRect(point.x, point.y, 100, 100);
+    }
+
+    @Override
+    public void paintBullet(Bullet bullet){
+        Point point = bullet.getPosition();
+        panel.getGraphics().drawImage(bullet.getImage(), point.x, point.y, null);
     }
 }

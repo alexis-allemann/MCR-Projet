@@ -10,38 +10,40 @@ import java.awt.*;
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public interface Fighter {
+public abstract class Fighter {
+
+    private int health;
 
     /**
      * Fight action
      */
-    void fight();
+    public abstract void fight();
 
     /**
      * Get a new bullet
      *
      * @return bullet ready to be shot
      */
-    Bullet getBullet();
+    public abstract Bullet getBullet();
 
     /**
      * Get fighter image
      *
      * @return fighter image
      */
-    Image getImage();
+    public abstract Image getImage();
 
     /**
      * Get fighter position
      *
      * @return where the fighter is drawn
      */
-    Point getPosition();
+    public abstract Point getPosition();
 
     /**
      * Set fighter position
      *
      * @param point where the fighter is drawn
      */
-    void setPosition(Point point);
+    public abstract void setPosition(Point point);
 }

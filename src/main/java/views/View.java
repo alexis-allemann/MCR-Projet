@@ -1,5 +1,6 @@
 package views;
 
+import bullets.Bullet;
 import controllers.Controller;
 import fighters.Fighter;
 
@@ -32,4 +33,10 @@ public interface View {
      * @param fighter to paint
      */
     void paintFighter(Fighter fighter);
+
+    void removeFighter(Fighter spacecraft);
+
+    void removeBullet(Bullet bullet);
+
+    void paintBullet(Bullet bullet);
 }
