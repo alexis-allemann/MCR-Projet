@@ -498,7 +498,8 @@ bg=yellow</panel_attributes>
       <h>312</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-m1=0..n</panel_attributes>
+m1=1
+m2=0</panel_attributes>
     <additional_attributes>290.0;10.0;10.0;10.0;10.0;370.0</additional_attributes>
   </element>
   <element>
