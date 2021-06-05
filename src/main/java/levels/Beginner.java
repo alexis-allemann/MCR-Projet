@@ -15,6 +15,6 @@ public class Beginner extends Level{
 
     @Override
     public void checkLevelChanged() {
-        
+
     }
 }
