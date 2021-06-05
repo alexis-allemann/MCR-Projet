@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>136</x>
+      <y>256</y>
+      <w>232</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>Provenance des attributs non affichés :
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
