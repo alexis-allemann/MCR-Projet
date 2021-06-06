@@ -71,4 +71,6 @@ public abstract class GameComponent {
     public void setLocation(Point point) {
         this.location = point;
     }
+
+    public abstract boolean nextLocation();
 }

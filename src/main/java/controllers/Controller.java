@@ -34,4 +34,6 @@ public interface Controller {
      * @param direction where to move
      */
     void move(MoveDirection direction);
+
+    boolean isRunning();
 }

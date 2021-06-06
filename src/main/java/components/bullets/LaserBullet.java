@@ -1,5 +1,7 @@
 package components.bullets;
 
+import components.fighters.Fighter;
+
 import java.awt.Point;
 
 /**
@@ -21,11 +23,21 @@ public class LaserBullet extends Bullet {
 
     @Override
     public int getSpeed() {
-        return 0;
+        return SPEED_BASE + getLevel().getMonstersSpeed();
     }
 
     @Override
     public int getPower() {
-        return 0;
+        return POWER_BASE;
+    }
+
+    @Override
+    public void hit(Fighter fighter) {
+
+    }
+
+    @Override
+    public void move() {
+
     }
 }
