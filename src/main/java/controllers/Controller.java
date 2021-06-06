@@ -29,7 +29,7 @@ public interface Controller {
     void shoot();
 
     /**
-     * Move fighters.spacecraft
+     * Move components.fighters.spacecraft
      *
      * @param direction where to move
      */

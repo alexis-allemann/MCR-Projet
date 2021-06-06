@@ -1,13 +1,12 @@
-package fighters.decorators;
+package components.fighters.decorators;
 
-import bullets.Bullet;
-import bullets.LaserBullet;
-import fighters.Fighter;
+import components.bullets.Bullet;
+import components.fighters.Fighter;
 
 import java.awt.Image;
 
 /**
- * Laser gun to shoot laser bullets
+ * Laser gun to shoot laser components.bullets
  *
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
@@ -25,7 +24,7 @@ public class LaserGun extends FighterDecorator {
 
     @Override
     public Bullet getBullet() {
-        return new LaserBullet();
+        return null;
     }
 
     @Override

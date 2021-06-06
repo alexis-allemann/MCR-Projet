@@ -1,7 +1,13 @@
 package levels;
 
-import fighters.Fighter;
+import components.fighters.Fighter;
 
+/**
+ * Hard level
+ *
+ * @author Allemann, Balestrieri, Christen, Mottier, Zeller
+ * @version 1.0
+ */
 public class Hard extends Level{
     @Override
     public int getMonstersSpeed() {

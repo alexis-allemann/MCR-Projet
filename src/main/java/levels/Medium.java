@@ -1,7 +1,13 @@
 package levels;
 
-import fighters.Fighter;
+import components.fighters.Fighter;
 
+/**
+ * Medium level
+ *
+ * @author Allemann, Balestrieri, Christen, Mottier, Zeller
+ * @version 1.0
+ */
 public class Medium extends Level{
     @Override
     public int getMonstersSpeed() {

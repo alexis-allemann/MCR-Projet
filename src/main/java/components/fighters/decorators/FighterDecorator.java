@@ -1,13 +1,13 @@
-package fighters.decorators;
+package components.fighters.decorators;
 
-import bullets.Bullet;
-import fighters.Fighter;
+import components.bullets.Bullet;
+import components.fighters.Fighter;
 
-
-import java.awt.*;
+import java.awt.Image;
+import java.awt.Point;
 
 /**
- * Space invaders fighters decorators
+ * Space invaders components.fighters decorators
  *
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
@@ -21,6 +21,7 @@ public abstract class FighterDecorator extends Fighter {
      * @param fighter to decorate
      */
     public FighterDecorator(Fighter fighter) {
+        super(fighter);
         this.fighter = fighter;
     }
 
@@ -32,20 +33,5 @@ public abstract class FighterDecorator extends Fighter {
     @Override
     public Bullet getBullet() {
         return fighter.getBullet();
-    }
-
-    @Override
-    public Image getImage() {
-        return fighter.getImage();
-    }
-
-    @Override
-    public Point getPosition() {
-        return fighter.getPosition();
-    }
-
-    @Override
-    public void setPosition(Point point) {
-        fighter.setPosition(point);
     }
 }

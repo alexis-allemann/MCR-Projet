@@ -1,7 +1,13 @@
 package levels;
 
-import fighters.Fighter;
+import components.fighters.Fighter;
 
+/**
+ * Easy level
+ *
+ * @author Allemann, Balestrieri, Christen, Mottier, Zeller
+ * @version 1.0
+ */
 public class Easy extends Level{
     @Override
     public int getMonstersSpeed() {

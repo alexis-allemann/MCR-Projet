@@ -1,8 +1,14 @@
 package levels;
 
-import fighters.Fighter;
+import components.fighters.Fighter;
 
-public class Beginner extends Level{
+/**
+ * Beginner level
+ *
+ * @author Allemann, Balestrieri, Christen, Mottier, Zeller
+ * @version 1.0
+ */
+public class Beginner extends Level {
     @Override
     public int getMonstersSpeed() {
         return 0;

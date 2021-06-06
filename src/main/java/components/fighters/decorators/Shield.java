@@ -1,11 +1,11 @@
-package fighters.decorators;
+package components.fighters.decorators;
 
-import fighters.Fighter;
+import components.fighters.Fighter;
 
 import java.awt.Image;
 
 /**
- * Shield to protect fighters
+ * Shield to protect components.fighters
  *
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0

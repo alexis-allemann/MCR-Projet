@@ -1,6 +1,6 @@
 package levels;
 
-import fighters.Fighter;
+import components.fighters.Fighter;
 
 /**
  * Space invaders game levels

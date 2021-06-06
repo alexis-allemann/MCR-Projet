@@ -1,7 +1,13 @@
 package levels;
 
-import fighters.Fighter;
+import components.fighters.Fighter;
 
+/**
+ * Expert level
+ *
+ * @author Allemann, Balestrieri, Christen, Mottier, Zeller
+ * @version 1.0
+ */
 public class Expert extends Level{
     @Override
     public int getMonstersSpeed() {

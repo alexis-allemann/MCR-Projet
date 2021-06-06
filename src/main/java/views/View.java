@@ -1,10 +1,8 @@
 package views;
 
-import bullets.Bullet;
+import components.bullets.Bullet;
 import controllers.Controller;
-import fighters.Fighter;
-
-import java.awt.Point;
+import components.fighters.Fighter;
 
 /**
  * Space invaders view to display gameplay
@@ -30,6 +28,7 @@ public interface View {
 
     /**
      * Paint a fighter on the view at a given position
+     *
      * @param fighter to paint
      */
     void paintFighter(Fighter fighter);
