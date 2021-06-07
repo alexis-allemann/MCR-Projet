@@ -9,6 +9,18 @@ import components.fighters.Fighter;
  * @version 1.0
  */
 public abstract class Level {
+    private int score;
+    private int nbMonstersKilled;
+    // Tem
+
+    /**
+     *
+     * @param oldLevel
+     */
+    public Level(Level oldLevel) {
+        score = oldLevel.score;
+        nbMonstersKilled = oldLevel.nbMonstersKilled;
+    }
 
     /**
      * Get monsters speed

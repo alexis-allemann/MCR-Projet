@@ -26,7 +26,12 @@ public class FighterManager implements Runnable{
     @Override
     public void run(){
         while(gamePlay.isRunning()){
-
+            // 1. Pour chaque fighter
+            try {
+                Thread.sleep(GamePlay.FRAMERATE);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

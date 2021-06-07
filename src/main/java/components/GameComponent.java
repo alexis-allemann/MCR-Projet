@@ -72,5 +72,9 @@ public abstract class GameComponent {
         this.location = point;
     }
 
+    /**
+     * Get the next location point
+     * @return the next location
+     */
     public abstract boolean nextLocation();
 }

@@ -11,6 +11,7 @@ import views.View;
 import java.awt.Point;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,6 +30,8 @@ public class GamePlay implements Controller {
     private Fighter spacecraft;
     private static final int WIDTH = 1000;
     private static final int HEIGHT = 800;
+    // A voir mdr
+    public static final int FRAMERATE = 30;
     private int score = 0;
     private boolean isRunning;
 
@@ -57,6 +60,7 @@ public class GamePlay implements Controller {
         new Thread(BulletManager.getInstance(this)).start();
         new Thread(FighterManager.getInstance(this)).start();
         new Thread(ViewManager.getInstance(this)).start();
+
         this.spacecraft = new SpaceCraft(new Point(100, 100));
         this.view = view;
         view.startView(this);
@@ -101,6 +105,8 @@ public class GamePlay implements Controller {
     }
 
     private boolean isInBounds(Point position) {
+        Properties properties = new Properties();
+
         return position.x <= WIDTH && position.y <= HEIGHT && position.x >= 0 && position.y >= 0;
     }
 

@@ -14,6 +14,7 @@ public class BulletManager implements Runnable{
     private static BulletManager instance;
     private GamePlay gamePlay;
 
+
     private BulletManager(GamePlay gamePlay){
         this.gamePlay = gamePlay;
     }
@@ -32,6 +33,11 @@ public class BulletManager implements Runnable{
                 if(fighter != null)
                     bullet.hit(fighter);
                 bullet.move();
+            }
+            try {
+                Thread.sleep(gamePlay.FRAMERATE);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }
