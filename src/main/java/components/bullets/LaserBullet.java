@@ -23,7 +23,7 @@ public class LaserBullet extends Bullet {
 
     @Override
     public int getSpeed() {
-        return SPEED_BASE + getLevel().getMonstersSpeed();
+        return SPEED_BASE;
     }
 
     @Override

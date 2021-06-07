@@ -2,7 +2,7 @@ package components;
 
 import javax.imageio.ImageIO;
 import java.awt.Image;
-import java.awt.Point;
+import components.physics.Location;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,8 +15,8 @@ import java.util.logging.Logger;
  */
 public abstract class GameComponent {
     private static final Logger LOG = Logger.getLogger(GameComponent.class.getName());
-    private Point location;
-    private Image image;
+    protected Location location;
+    protected Image image;
 
     /**
      * Instantiation of a new game component
@@ -24,7 +24,7 @@ public abstract class GameComponent {
      * @param location where component is located
      * @param filename of the image to display
      */
-    public GameComponent(Point location, String filename) {
+    public GameComponent(Location location, String filename) {
         this.location = location;
         try {
             ClassLoader classloader = Thread.currentThread().getContextClassLoader();
@@ -40,7 +40,7 @@ public abstract class GameComponent {
      * @param location where component is located
      * @param image    image to display
      */
-    public GameComponent(Point location, Image image) {
+    public GameComponent(Location location, Image image) {
         this.location = location;
         this.image = image;
     }
@@ -59,22 +59,21 @@ public abstract class GameComponent {
      *
      * @return the location
      */
-    public Point getLocation() {
+    public Location getLocation() {
         return location;
     }
 
     /**
      * Set position
      *
-     * @param point where the bullet is
+     * @param location where the bullet is
      */
-    public void setLocation(Point point) {
-        this.location = point;
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     /**
-     * Get the next location point
-     * @return the next location
+     * @return if the component still exist in the game
      */
-    public abstract boolean nextLocation();
+    public abstract boolean exist();
 }

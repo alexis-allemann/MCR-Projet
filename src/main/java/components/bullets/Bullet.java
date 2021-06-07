@@ -2,9 +2,8 @@ package components.bullets;
 
 import components.GameComponent;
 import components.fighters.Fighter;
-import levels.Level;
-
-import java.awt.Point;
+import components.physics.Speed;
+import components.physics.Location;
 
 /**
  * Bullets used on components.fighters.spacecraft shoots
@@ -14,19 +13,22 @@ import java.awt.Point;
  */
 public abstract class Bullet extends GameComponent {
 
-    final int SPEED_BASE = 1;
+    static final Speed SPEED_BASE = new Speed(1.f, 0.f);
     final int POWER_BASE = 1;
-    private Level level;
+    protected boolean alive = true;
+    protected Speed speed;
+
     /**
      * Instantiation of a new bullet
      *
      * @param location point where the shoot is located
      * @param image    filename of the bullet image
      */
-    public Bullet(Point location, String image, Level level) {
+    public Bullet(Location location, String image) {
         super(location, image);
-        this.level = level;
+        this.speed = SPEED_BASE;
     }
+
 
     /**
      * Get bullet speed
@@ -34,15 +36,6 @@ public abstract class Bullet extends GameComponent {
      * @return the speed
      */
     abstract int getSpeed();
-
-    /**
-     * Get bullet level
-     *
-     * @return the level
-     */
-    public Level getLevel() {
-        return level;
-    }
 
     /**
      * Get bullet power
@@ -61,7 +54,9 @@ public abstract class Bullet extends GameComponent {
     /**
      * Move bullet with as speed base added with speed of the bullet
      */
-    public abstract void move();
+    public void move(){
+        this.location.translate(speed.getX(), speed.getY());
+    };
 
     /**
      * Check if fighter has the position where the bullet will be
@@ -69,6 +64,12 @@ public abstract class Bullet extends GameComponent {
      * @return True if there's a fighter to next location
      */
     public boolean checkNextLocation(Fighter fighter){
-        return fighter.getLocation().equals(new Point(getLocation().x, getLocation().y + getSpeed()));
+        // TODO mettre une hitbox
+        return fighter.getLocation().equals(new Location(getLocation().x, getLocation().y + getSpeed()));
+    }
+
+    @Override
+    public boolean exist() {
+        return alive;
     }
 }

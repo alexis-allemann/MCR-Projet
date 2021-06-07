@@ -28,7 +28,7 @@ public class SpaceCraft extends Fighter {
     }
 
     @Override
-    public void fight() {
+    public void shoot() {
 
     }
 

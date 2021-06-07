@@ -1,6 +1,7 @@
 package components.bullets;
 
-import java.awt.Point;
+import components.fighters.Fighter;
+import components.physics.Location;
 
 /**
  * Bomb used by monsters
@@ -15,7 +16,7 @@ public class Bomb extends Bullet {
      *
      * @param shootLocation point where the shoot is located
      */
-    public Bomb(Point shootLocation) {
+    public Bomb(Location shootLocation) {
         super(shootLocation, "bomb.png");
     }
 
@@ -27,5 +28,10 @@ public class Bomb extends Bullet {
     @Override
     public int getPower() {
         return 0;
+    }
+
+    @Override
+    public void hit(Fighter fighter) {
+
     }
 }

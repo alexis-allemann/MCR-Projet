@@ -9,10 +9,6 @@ import components.fighters.Fighter;
  * @version 1.0
  */
 public class Beginner extends Level {
-    @Override
-    public int getMonstersSpeed() {
-        return 0;
-    }
 
     @Override
     public Fighter generateMonster() {
@@ -21,6 +17,7 @@ public class Beginner extends Level {
 
     @Override
     public void checkLevelChanged() {
-        if()
+        if(nbMonstersKilled > 2 || getTime() > 20)
+            new Easy(this);
     }
 }

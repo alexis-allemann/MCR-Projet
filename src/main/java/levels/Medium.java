@@ -8,10 +8,10 @@ import components.fighters.Fighter;
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public class Medium extends Level{
-    @Override
-    public int getMonstersSpeed() {
-        return 0;
+public class Medium extends Level {
+
+    public Medium(Level oldLevel) {
+        super(oldLevel);
     }
 
     @Override
@@ -21,6 +21,7 @@ public class Medium extends Level{
 
     @Override
     public void checkLevelChanged() {
-
+        if (nbMonstersKilled > 15 || getTime() > 90)
+            new Hard(this);
     }
 }

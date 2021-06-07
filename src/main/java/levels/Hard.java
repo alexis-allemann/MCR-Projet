@@ -8,10 +8,15 @@ import components.fighters.Fighter;
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public class Hard extends Level{
-    @Override
-    public int getMonstersSpeed() {
-        return 0;
+public class Hard extends Level {
+
+    /**
+     * Change level to hard
+     *
+     * @param oldLevel to retrieve attributes
+     */
+    public Hard(Level oldLevel) {
+        super(oldLevel);
     }
 
     @Override
@@ -21,6 +26,7 @@ public class Hard extends Level{
 
     @Override
     public void checkLevelChanged() {
-
+        if (nbMonstersKilled > 30 || getTime() > 120)
+            new Expert(this);
     }
 }

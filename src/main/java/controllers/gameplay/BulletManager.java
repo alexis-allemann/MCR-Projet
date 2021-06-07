@@ -32,7 +32,8 @@ public class BulletManager implements Runnable{
                 Fighter fighter = checkFighterOnNextLocation(bullet);
                 if(fighter != null)
                     bullet.hit(fighter);
-                bullet.move();
+                else
+                    bullet.move();
             }
             try {
                 Thread.sleep(gamePlay.FRAMERATE);

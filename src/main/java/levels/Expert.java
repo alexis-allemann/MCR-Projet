@@ -9,9 +9,14 @@ import components.fighters.Fighter;
  * @version 1.0
  */
 public class Expert extends Level{
-    @Override
-    public int getMonstersSpeed() {
-        return 0;
+
+    /**
+     * Change level to expert
+     *
+     * @param oldLevel to retrieve attributes
+     */
+    public Expert(Level oldLevel) {
+        super(oldLevel);
     }
 
     @Override
@@ -21,6 +26,6 @@ public class Expert extends Level{
 
     @Override
     public void checkLevelChanged() {
-
+        return;
     }
 }

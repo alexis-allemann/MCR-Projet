@@ -8,10 +8,15 @@ import components.fighters.Fighter;
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public class Easy extends Level{
-    @Override
-    public int getMonstersSpeed() {
-        return 0;
+public class Easy extends Level {
+
+    /**
+     * Change level to easy
+     *
+     * @param oldLevel to retrieve attributes
+     */
+    public Easy(Level oldLevel) {
+        super(oldLevel);
     }
 
     @Override
@@ -21,6 +26,7 @@ public class Easy extends Level{
 
     @Override
     public void checkLevelChanged() {
-
+        if(nbMonstersKilled > 5 || getTime() > 40)
+            new Medium(this);
     }
 }

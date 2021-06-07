@@ -1,6 +1,7 @@
 package components.fighters;
 
 import components.bullets.Bullet;
+import components.physics.Location;
 
 import java.awt.*;
 
@@ -17,12 +18,19 @@ public class Monster extends Fighter {
      *
      * @param location where monster is located
      */
-    public Monster(Point location) {
+    public Monster(Location location) {
         super(location, "monster-green.png");
     }
 
     @Override
-    public void fight() {
+    public void shoot() {
+        // crée une nouvelle balle
+
+        // l'ajoute dans le vector du gameplay
+    }
+
+    @Override
+    public void move() {
 
     }
 
@@ -30,4 +38,10 @@ public class Monster extends Fighter {
     public Bullet getBullet() {
         return null;
     }
+
+    @Override
+    public boolean exist(){
+        return alive;
+    }
+
 }

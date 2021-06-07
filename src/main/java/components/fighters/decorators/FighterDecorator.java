@@ -3,9 +3,6 @@ package components.fighters.decorators;
 import components.bullets.Bullet;
 import components.fighters.Fighter;
 
-import java.awt.Image;
-import java.awt.Point;
-
 /**
  * Space invaders components.fighters decorators
  *
@@ -26,8 +23,8 @@ public abstract class FighterDecorator extends Fighter {
     }
 
     @Override
-    public void fight() {
-        fighter.fight();
+    public void shoot() {
+        fighter.shoot();
     }
 
     @Override

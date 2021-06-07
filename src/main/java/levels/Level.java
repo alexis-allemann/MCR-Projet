@@ -9,25 +9,27 @@ import components.fighters.Fighter;
  * @version 1.0
  */
 public abstract class Level {
-    private int score;
-    private int nbMonstersKilled;
-    // Tem
+    int score;
+    int nbMonstersKilled;
+    long start;
 
     /**
+     * Instantiation of a new level (Beginner by default)
+     */
+    public Level() {
+        start = System.currentTimeMillis();
+    }
+
+    /**
+     * Instantiation of a new level
      *
-     * @param oldLevel
+     * @param oldLevel to retrieve old attributes
      */
     public Level(Level oldLevel) {
         score = oldLevel.score;
         nbMonstersKilled = oldLevel.nbMonstersKilled;
+        start = oldLevel.start;
     }
-
-    /**
-     * Get monsters speed
-     *
-     * @return speed of the monsters
-     */
-    public abstract int getMonstersSpeed();
 
     /**
      * Generate a new monster
@@ -40,4 +42,13 @@ public abstract class Level {
      * Check if level has changed
      */
     public abstract void checkLevelChanged();
+
+    /**
+     * Get the time up
+     * @return time in seconds
+     */
+    public int getTime() {
+        long current = System.currentTimeMillis();
+        return (int) (start - current) / 1000;
+    }
 }
