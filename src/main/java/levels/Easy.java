@@ -29,4 +29,9 @@ public class Easy extends Level {
         if(nbMonstersKilled > 5 || getTime() > 40)
             new Medium(this);
     }
+
+    @Override
+    public int getNbMonsterByWave() {
+        return 20;
+    }
 }

@@ -1,6 +1,6 @@
 package controllers.gameplay;
 
-import components.bullets.Bullet;
+import components.weapon.bullets.Bullet;
 import components.fighters.Fighter;
 import controllers.GamePlay;
 

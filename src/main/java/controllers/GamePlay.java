@@ -1,15 +1,17 @@
 package controllers;
 
 import components.physics.Location;
+import components.weapon.StandardWeapon;
 import controllers.gameplay.BulletManager;
 import components.fighters.Fighter;
 import components.fighters.SpaceCraft;
 import controllers.gameplay.FighterManager;
 import controllers.gameplay.ViewManager;
+import levels.Level;
 import views.View;
 
 import java.util.Properties;
-import java.util.logging.Level;
+
 import java.util.logging.Logger;
 
 /**
@@ -19,6 +21,7 @@ import java.util.logging.Logger;
  * @version 1.0
  */
 public class GamePlay implements Controller {
+    public static final float SPAWN_HEIGHT = 100;
     public static int HEIGHT;
     public static int WIDTH;
     public static int FRAMERATE;
@@ -26,7 +29,6 @@ public class GamePlay implements Controller {
     private static final Logger LOG = Logger.getLogger(GamePlay.class.getName());
     private Fighter spacecraft;
     private Level level;
-    private long lastBulletShotTime = System.currentTimeMillis();
 
     /**
      * Private constructor to implement Singleton pattern
@@ -46,7 +48,7 @@ public class GamePlay implements Controller {
     @Override
     public void start(View view, Properties properties) {
 
-        LOG.log(Level.INFO, "Reading properties");
+        LOG.info("Reading properties");
 
         if (!properties.containsKey("FRAMERATE"))
             throw new IllegalArgumentException("Property FRAMERATE missing in");
@@ -61,35 +63,33 @@ public class GamePlay implements Controller {
         HEIGHT = Integer.parseInt(properties.getProperty("HEIGHT"));
         WIDTH = Integer.parseInt(properties.getProperty("WIDTH"));
 
-        LOG.log(Level.INFO, "Starting game");
+        LOG.info("Starting game");
         new Thread(BulletManager.getInstance()).start();
         new Thread(FighterManager.getInstance()).start();
         new Thread(ViewManager.getInstance(view)).start();
 
-        LOG.log(Level.INFO, "Starting view");
+        LOG.info("Starting view");
         view.startView(this);
 
         spacecraft = new SpaceCraft(new Location(0, 0));
+        spacecraft.setWeapon(new StandardWeapon());
+
         ViewManager.getInstance().resetSpaceCraftLocation(spacecraft);
         view.paintComponent(spacecraft);
     }
 
     @Override
+    public void shoot() {
+        spacecraft.getWeapon().shoot();
+    }
+
+    @Override
     public void newGame() {
-        LOG.log(Level.INFO, "New game started");
+        LOG.info("New game started");
     }
 
     @Override
-    public synchronized void shoot() {
-        long current = System.currentTimeMillis();
-        if (current - lastBulletShotTime >= 500) { // TODO le temps de rechargement vient de l'arme utilisée
-            BulletManager.getInstance().addBullet(spacecraft.getBullet());
-            lastBulletShotTime = System.currentTimeMillis();
-        }
-    }
-
-    @Override
-    public void move(MoveDirection direction) {
+    public void move(Direction direction) {
         ViewManager.getInstance().move(direction, spacecraft);
     }
 
@@ -97,4 +97,17 @@ public class GamePlay implements Controller {
     public boolean isRunning() {
         return true;
     }
+
+    /**
+     * @return The spacecraft of the game
+     */
+    public Fighter getSpacecraft(){
+        return spacecraft;
+    }
+
+    /**
+     * @return the current level
+     */
+    public Level getLevel(){ return level; }
+
 }

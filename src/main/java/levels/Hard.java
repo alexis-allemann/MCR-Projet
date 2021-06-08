@@ -29,4 +29,9 @@ public class Hard extends Level {
         if (nbMonstersKilled > 30 || getTime() > 120)
             new Expert(this);
     }
+
+    @Override
+    public int getNbMonsterByWave() {
+        return 40;
+    }
 }

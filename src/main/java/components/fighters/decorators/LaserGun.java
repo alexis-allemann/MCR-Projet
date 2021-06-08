@@ -3,7 +3,7 @@ package components.fighters.decorators;
 import components.fighters.Fighter;
 
 /**
- * Laser gun to shoot laser components.bullets
+ * Laser gun to shoot laser components.weapon.bullets
  *
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0

@@ -20,4 +20,9 @@ public class Beginner extends Level {
         if(nbMonstersKilled > 2 || getTime() > 20)
             new Easy(this);
     }
+
+    @Override
+    public int getNbMonsterByWave() {
+        return 10;
+    }
 }

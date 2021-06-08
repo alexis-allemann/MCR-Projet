@@ -36,7 +36,7 @@ public interface Controller {
      *
      * @param direction where to move
      */
-    void move(MoveDirection direction);
+    void move(Direction direction);
 
     /**
      * Know if the game is running

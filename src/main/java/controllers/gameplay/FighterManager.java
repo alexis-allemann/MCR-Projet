@@ -6,6 +6,7 @@ import components.fighters.Fighter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Thread that manage fighters actions (movements and shootings)
@@ -15,7 +16,7 @@ import java.util.LinkedList;
  */
 public class FighterManager implements Runnable {
     private static FighterManager instance = new FighterManager();
-    private Collection<Fighter> monsters = new LinkedList<>();
+    private List<Fighter> monsters = new LinkedList<>();
 
     /**
      * Instantiation of the fighter manager
@@ -35,8 +36,12 @@ public class FighterManager implements Runnable {
     @Override
     public void run() {
         while (GamePlay.getInstance().isRunning()) {
+            // 1. check if we can generate monsters (every 5s i.e.)
+            // 1.1 get Y coordinate of highest monsters
+            checkMonsterGeneration();
             for (Fighter fighter : monsters) {
-                // TODO move and shoot
+                // 3. make all monsters shoots (existing and newly generated)
+                // 4. move all monsters to down
             }
             try {
                 Thread.sleep(GamePlay.FRAMERATE);
@@ -55,4 +60,17 @@ public class FighterManager implements Runnable {
         // Need to return a copy to avoid concurrences errors
         return new ArrayList<>(monsters);
     }
+
+    /**
+     * Generate a new wave of monster if possible
+     */
+     private void checkMonsterGeneration(){
+         boolean canGenerate = !monsters.isEmpty() && monsters.get(monsters.size() -1).getLocation().y < GamePlay.SPAWN_HEIGHT;
+         // 2. if yes generate from level
+         if(canGenerate) {
+             for(int i = 0; i < GamePlay.getInstance().getLevel().getNbMonsterByWave(); ++i) {
+                 monsters.push_back(GamePlay.getInstance().getLevel().generateMonster());
+             }
+         }
+     }
 }

@@ -24,4 +24,9 @@ public class Medium extends Level {
         if (nbMonstersKilled > 15 || getTime() > 90)
             new Hard(this);
     }
+
+    @Override
+    public int getNbMonsterByWave() {
+        return 30;
+    }
 }

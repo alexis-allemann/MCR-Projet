@@ -1,7 +1,7 @@
 package views;
 
 import controllers.Controller;
-import controllers.MoveDirection;
+import controllers.Direction;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -36,12 +36,12 @@ class MultiKeyPressListener implements KeyListener {
                 switch (it.next()) {
                     case KeyEvent.VK_A:
                     case KeyEvent.VK_LEFT:
-                        controller.move(MoveDirection.LEFT);
+                        controller.move(Direction.LEFT);
                         break;
 
                     case KeyEvent.VK_D:
                     case KeyEvent.VK_RIGHT:
-                        controller.move(MoveDirection.RIGHT);
+                        controller.move(Direction.RIGHT);
                         break;
 
                     case KeyEvent.VK_W:

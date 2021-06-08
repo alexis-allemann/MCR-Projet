@@ -1,6 +1,6 @@
 package components.fighters.decorators;
 
-import components.bullets.Bullet;
+import components.weapon.bullets.Bullet;
 import components.fighters.Fighter;
 
 /**
@@ -20,11 +20,6 @@ public abstract class FighterDecorator extends Fighter {
     public FighterDecorator(Fighter fighter) {
         super(fighter);
         this.fighter = fighter;
-    }
-
-    @Override
-    public Bullet getBullet() {
-        return fighter.getBullet();
     }
 
     @Override

@@ -1,9 +1,10 @@
 package components.fighters;
 
 import components.GameComponent;
-import components.bullets.Bullet;
-import components.physics.Speed;
+import components.weapon.Weapon;
+import components.physics.Vector2D;
 import components.physics.Location;
+import controllers.Direction;
 
 /**
  * Space invaders fighter
@@ -12,10 +13,11 @@ import components.physics.Location;
  * @version 1.0
  */
 public abstract class Fighter extends GameComponent {
-    private final Speed SPEED_BASE = new Speed(1.f, 0.f);
+    private final Vector2D SPEED_BASE = new Vector2D(1.f, 0.f);
     private final int POWER_BASE = 1;
     protected boolean alive = true;
-    protected Speed speed;
+    protected Vector2D speed;
+    private Weapon weapon;
 
     /**
      * Instantiation of a new fighter
@@ -45,9 +47,27 @@ public abstract class Fighter extends GameComponent {
     }
 
     /**
-     * Get a new bullet
+     * Get the fighter's weapon
      *
-     * @return new bullet to shoot
+     * @return fighter's weapon
      */
-    public abstract Bullet getBullet();
+    public Weapon getWeapon() {
+        return weapon;
+    }
+
+    /**
+     * Set the fighter's weapon
+     *
+     * @param weapon Weapon to set
+     */
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
+    }
+
+    /**
+     * Get shoot direction
+     *
+     * @return the shoot direction
+     */
+    public abstract Direction getDirection();
 }

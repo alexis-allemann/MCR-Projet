@@ -4,7 +4,7 @@ import components.GameComponent;
 import components.fighters.Fighter;
 import components.physics.Location;
 import controllers.GamePlay;
-import controllers.MoveDirection;
+import controllers.Direction;
 import views.View;
 
 /**
@@ -64,7 +64,7 @@ public class ViewManager implements Runnable {
      * @param direction  to move spacecraft
      * @param spacecraft to move
      */
-    public void move(MoveDirection direction, Fighter spacecraft) {
+    public void move(Direction direction, Fighter spacecraft) {
         Location location = spacecraft.getLocation();
         int moveOnX = 0;
         switch (direction) {

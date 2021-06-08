@@ -28,4 +28,9 @@ public class Expert extends Level{
     public void checkLevelChanged() {
         return;
     }
+
+    @Override
+    public int getNbMonsterByWave() {
+        return 50;
+    }
 }

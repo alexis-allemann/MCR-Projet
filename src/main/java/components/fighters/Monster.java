@@ -1,7 +1,8 @@
 package components.fighters;
 
-import components.bullets.Bullet;
+import components.weapon.bullets.Bullet;
 import components.physics.Location;
+import controllers.Direction;
 
 /**
  * Monsters used to fight against space craft
@@ -26,8 +27,8 @@ public class Monster extends Fighter {
     }
 
     @Override
-    public Bullet getBullet() {
-        return null;
+    Direction getDirection() {
+        return Direction.DOWN;
     }
 
     @Override

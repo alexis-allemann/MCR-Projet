@@ -34,7 +34,7 @@ public abstract class Level {
     /**
      * Generate a new monster
      *
-     * @return generated
+     * @return generated monster
      */
     public abstract Fighter generateMonster();
 
@@ -51,4 +51,11 @@ public abstract class Level {
         long current = System.currentTimeMillis();
         return (int) (start - current) / 1000;
     }
+
+    /**
+     * define number of monsters
+     *
+     * @return number of monsters for each wave
+     */
+    public abstract int getNbMonsterByWave();
 }
