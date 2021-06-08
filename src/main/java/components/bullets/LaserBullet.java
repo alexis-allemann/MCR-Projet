@@ -33,11 +33,9 @@ public class LaserBullet extends Bullet {
 
     @Override
     public void hit(Fighter fighter) {
-
     }
 
     @Override
     public void move() {
-
     }
 }

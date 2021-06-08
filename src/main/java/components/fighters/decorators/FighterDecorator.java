@@ -26,4 +26,9 @@ public abstract class FighterDecorator extends Fighter {
     public Bullet getBullet() {
         return fighter.getBullet();
     }
+
+    @Override
+    public boolean exist() {
+        return true;
+    }
 }

@@ -23,7 +23,7 @@ public class Bomb extends Bullet {
 
     @Override
     public Speed getSpeed() {
-        return new Speed(1,1);
+        return new Speed(1, 1);
     }
 
     @Override
@@ -33,6 +33,5 @@ public class Bomb extends Bullet {
 
     @Override
     public void hit(Fighter fighter) {
-
     }
 }

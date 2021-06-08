@@ -21,6 +21,7 @@ public class SpaceCraft extends Fighter {
         super(location, "spacecraft.png");
     }
 
+    @Override
     public Bullet getBullet() {
         StandardBullet bullet = new StandardBullet(getLocation());
         bullet.setLocation(new Location(getLocation().x + (getImageWidth() / 2) - (bullet.getImageWidth() / 2), getLocation().y - bullet.getImageHeight()));

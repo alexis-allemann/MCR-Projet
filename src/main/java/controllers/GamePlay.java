@@ -1,6 +1,5 @@
 package controllers;
 
-import components.bullets.Bullet;
 import components.physics.Location;
 import controllers.gameplay.BulletManager;
 import components.fighters.Fighter;
@@ -9,8 +8,6 @@ import controllers.gameplay.FighterManager;
 import controllers.gameplay.ViewManager;
 import views.View;
 
-import java.util.Collection;
-import java.util.LinkedList;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,13 +22,11 @@ public class GamePlay implements Controller {
     public static int HEIGHT;
     public static int WIDTH;
     public static int FRAMERATE;
-    private static final Logger LOG = Logger.getLogger(GamePlay.class.getName());
     private static GamePlay instance = new GamePlay();
-    private View view;
-    private Collection<Fighter> monsters = new LinkedList<>();
+    private static final Logger LOG = Logger.getLogger(GamePlay.class.getName());
     private Fighter spacecraft;
-    private Collection<Bullet> bullets = new LinkedList<>();
     private Level level;
+    private long lastBulletShotTime = System.currentTimeMillis();
 
     /**
      * Private constructor to implement Singleton pattern
@@ -67,16 +62,15 @@ public class GamePlay implements Controller {
         WIDTH = Integer.parseInt(properties.getProperty("WIDTH"));
 
         LOG.log(Level.INFO, "Starting game");
-        new Thread(BulletManager.getInstance(this)).start();
-        new Thread(FighterManager.getInstance(this)).start();
-        new Thread(ViewManager.getInstance(this)).start();
+        new Thread(BulletManager.getInstance()).start();
+        new Thread(FighterManager.getInstance()).start();
+        new Thread(ViewManager.getInstance(view)).start();
 
         LOG.log(Level.INFO, "Starting view");
-        this.view = view;
         view.startView(this);
 
         spacecraft = new SpaceCraft(new Location(0, 0));
-        resetSpaceCraftLocation();
+        ViewManager.getInstance().resetSpaceCraftLocation(spacecraft);
         view.paintComponent(spacecraft);
     }
 
@@ -87,64 +81,20 @@ public class GamePlay implements Controller {
 
     @Override
     public synchronized void shoot() {
-        bullets.add(spacecraft.getBullet());
+        long current = System.currentTimeMillis();
+        if (current - lastBulletShotTime >= 500) { // TODO le temps de rechargement vient de l'arme utilisée
+            BulletManager.getInstance().addBullet(spacecraft.getBullet());
+            lastBulletShotTime = System.currentTimeMillis();
+        }
     }
 
     @Override
     public void move(MoveDirection direction) {
-        Location location = spacecraft.getLocation();
-        int moveOnX = 0;
-        switch (direction) {
-            case LEFT:
-                moveOnX = -10;
-                break;
-            case RIGHT:
-                moveOnX = 10;
-                break;
-        }
-        if (isInBounds(new Location(location.x + moveOnX, location.y), spacecraft))
-            spacecraft.setLocation(new Location(location.x + moveOnX, location.y));
-        view.removeComponent(spacecraft);
-        view.paintComponent(spacecraft);
+        ViewManager.getInstance().move(direction, spacecraft);
     }
 
     @Override
     public boolean isRunning() {
         return true;
-    }
-
-
-    public synchronized Collection<Bullet> getBullets() {
-        return bullets;
-    }
-
-
-    public Collection<Fighter> getMonsters() {
-        return monsters;
-    }
-
-    public View getView() {
-        return view;
-    }
-
-    /**
-     * Check if a location of a fighter is in view bounds
-     *
-     * @param location of the fighter
-     * @param fighter  to get image width and height
-     * @return boolean if it is in bounds
-     */
-    private boolean isInBounds(Location location, Fighter fighter) {
-        return location.x + fighter.getImageWidth() <= WIDTH &&
-                location.y + fighter.getImageHeight() <= HEIGHT &&
-                location.x >= 0 &&
-                location.y >= 0;
-    }
-
-    /**
-     * Reset default location of the spacecraft
-     */
-    private void resetSpaceCraftLocation() {
-        spacecraft.setLocation(new Location((WIDTH - spacecraft.getImageWidth()) / 2, HEIGHT - spacecraft.getImageHeight()));
     }
 }

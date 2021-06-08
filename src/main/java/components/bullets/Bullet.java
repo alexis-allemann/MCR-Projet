@@ -12,7 +12,6 @@ import components.physics.Location;
  * @version 1.0
  */
 public abstract class Bullet extends GameComponent {
-
     static final Speed BASE_SPEED = new Speed(0.f, -10.f);
     final int BASE_POWER = 1;
     protected boolean alive = true;
@@ -53,18 +52,19 @@ public abstract class Bullet extends GameComponent {
     /**
      * Move bullet with as speed base added with speed of the bullet
      */
-    public void move(){
+    public void move() {
         this.location.translate(speed.getX(), speed.getY());
-    };
+    }
 
     /**
      * Check if fighter has the position where the bullet will be
+     *
      * @param fighter Fighter Fighter to check position
      * @return True if there's a fighter to next location
      */
-    public boolean checkNextLocation(Fighter fighter){
+    public boolean checkNextLocation(Fighter fighter) {
         // TODO mettre une hitbox
-        return fighter.getLocation().equals(new Location(getLocation().x +getSpeed().getX(), getLocation().y + getSpeed().getY()));
+        return fighter.getLocation().equals(new Location(getLocation().x + getSpeed().getX(), getLocation().y + getSpeed().getY()));
     }
 
     @Override

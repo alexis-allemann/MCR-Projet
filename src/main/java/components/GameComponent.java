@@ -1,10 +1,9 @@
 package components;
 
-import javax.imageio.ImageIO;
-import java.awt.Image;
-
 import components.physics.Location;
 
+import javax.imageio.ImageIO;
+import java.awt.Image;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

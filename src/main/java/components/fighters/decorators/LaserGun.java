@@ -1,9 +1,6 @@
 package components.fighters.decorators;
 
-import components.bullets.Bullet;
 import components.fighters.Fighter;
-
-import java.awt.Image;
 
 /**
  * Laser gun to shoot laser components.bullets
@@ -20,20 +17,5 @@ public class LaserGun extends FighterDecorator {
      */
     public LaserGun(Fighter fighter) {
         super(fighter);
-    }
-
-    @Override
-    public Bullet getBullet() {
-        return null;
-    }
-
-    @Override
-    public Image getImage() {
-        return null;
-    }
-
-    @Override
-    public boolean exist() {
-        return true;
     }
 }

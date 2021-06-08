@@ -2,8 +2,6 @@ package components.fighters.decorators;
 
 import components.fighters.Fighter;
 
-import java.awt.Image;
-
 /**
  * Shield to protect components.fighters
  *
@@ -19,15 +17,5 @@ public class Shield extends FighterDecorator {
      */
     public Shield(Fighter fighter) {
         super(fighter);
-    }
-
-    @Override
-    public Image getImage() {
-        return null;
-    }
-
-    @Override
-    public boolean exist() {
-        return true;
     }
 }

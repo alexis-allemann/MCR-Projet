@@ -5,7 +5,6 @@ import components.bullets.Bullet;
 import components.physics.Speed;
 import components.physics.Location;
 
-
 /**
  * Space invaders fighter
  *
@@ -13,9 +12,8 @@ import components.physics.Location;
  * @version 1.0
  */
 public abstract class Fighter extends GameComponent {
-
-    final private Speed SPEED_BASE = new Speed(1.f, 0.f);
-    final int POWER_BASE = 1;
+    private final Speed SPEED_BASE = new Speed(1.f, 0.f);
+    private final int POWER_BASE = 1;
     protected boolean alive = true;
     protected Speed speed;
 
@@ -42,9 +40,14 @@ public abstract class Fighter extends GameComponent {
     /**
      * Move action
      */
-    public void move(){
+    public void move() {
         location.translate(speed.getX(), speed.getY());
     }
 
+    /**
+     * Get a new bullet
+     *
+     * @return new bullet to shoot
+     */
     public abstract Bullet getBullet();
 }

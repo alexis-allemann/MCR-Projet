@@ -3,7 +3,6 @@ package views;
 import components.GameComponent;
 import components.physics.Location;
 import controllers.Controller;
-import components.fighters.Fighter;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -36,8 +35,6 @@ public class GUIView implements View {
         frame.getContentPane().add(panel);
         frame.setVisible(true);
         frame.pack();
-
-        // Listen keys pressed
         frame.addKeyListener(new MultiKeyPressListener(controller));
     }
 
