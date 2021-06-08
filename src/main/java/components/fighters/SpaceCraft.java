@@ -2,6 +2,7 @@ package components.fighters;
 
 import components.bullets.Bullet;
 import components.bullets.StandardBullet;
+import components.physics.Location;
 
 import javax.imageio.ImageIO;
 import java.awt.Image;
@@ -23,7 +24,7 @@ public class SpaceCraft extends Fighter {
      *
      * @param location where spacecraft is located
      */
-    public SpaceCraft(Point location) {
+    public SpaceCraft(Location location) {
         super(location, "spacecraft.png");
     }
 
@@ -35,5 +36,10 @@ public class SpaceCraft extends Fighter {
     @Override
     public Bullet getBullet() {
         return new StandardBullet(getLocation());
+    }
+
+    @Override
+    public boolean exist() {
+        return true;
     }
 }

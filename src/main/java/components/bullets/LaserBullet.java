@@ -1,8 +1,8 @@
 package components.bullets;
 
 import components.fighters.Fighter;
-
-import java.awt.Point;
+import components.physics.Location;
+import components.physics.Speed;
 
 /**
  * Laser bullet
@@ -17,12 +17,12 @@ public class LaserBullet extends Bullet {
      *
      * @param shootLocation point where the shoot is located
      */
-    public LaserBullet(Point shootLocation) {
+    public LaserBullet(Location shootLocation) {
         super(shootLocation, "laser.svg");
     }
 
     @Override
-    public int getSpeed() {
+    public Speed getSpeed() {
         return SPEED_BASE;
     }
 

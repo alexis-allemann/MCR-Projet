@@ -29,11 +29,9 @@ public class GamePlay implements Controller {
     private Collection<Fighter> fighters = new LinkedList<>();
     private Collection<Bullet> bullets = new LinkedList<>();
     private Fighter spacecraft;
-    /* private static final int WIDTH = 1000;
-     private static final int HEIGHT = 800;
-     // A voir mdr
-     public static final int FRAMERATE = 30;*/
-    public final static int FRAMERATE = Integer.parseInt(new Properties().getProperty("FRAMERATE"));
+    public static int HEIGHT;
+    public static int WIDTH;
+    public static int FRAMERATE;
     private int score = 0;
     private boolean isRunning;
 
@@ -53,9 +51,25 @@ public class GamePlay implements Controller {
     }
 
     @Override
-    public void start(View view) {
+    public void start(View view, Properties properties) {
         if (view == null)
             throw new IllegalArgumentException("View can not be null");
+
+        if (properties == null)
+            throw new IllegalArgumentException("Properites can not be null");
+
+        if (!properties.containsKey("FRAMERATE"))
+            throw new RuntimeException("Property FRAMERATE missing");
+
+        if (!properties.containsKey("HEIGHT"))
+            throw new RuntimeException("Property HEIGHT missing");
+
+        if (!properties.containsKey("WIDTH"))
+            throw new RuntimeException("Property WIDTH missing");
+
+        FRAMERATE = Integer.parseInt(properties.getProperty("FRAMERATE"));
+        HEIGHT = Integer.parseInt(properties.getProperty("HEIGHT"));
+        WIDTH = Integer.parseInt(properties.getProperty("WIDTH"));
 
         LOG.log(Level.INFO, "Game started");
 
@@ -63,7 +77,7 @@ public class GamePlay implements Controller {
         new Thread(FighterManager.getInstance(this)).start();
         new Thread(ViewManager.getInstance(this)).start();
 
-        this.spacecraft = new SpaceCraft(new Point(100, 100));
+        this.spacecraft = new SpaceCraft(new Location(100, 100));
         this.view = view;
         view.startView(this);
         view.paintFighter(spacecraft);

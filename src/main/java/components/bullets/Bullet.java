@@ -35,7 +35,7 @@ public abstract class Bullet extends GameComponent {
      *
      * @return the speed
      */
-    abstract int getSpeed();
+    abstract Speed getSpeed();
 
     /**
      * Get bullet power
@@ -65,7 +65,7 @@ public abstract class Bullet extends GameComponent {
      */
     public boolean checkNextLocation(Fighter fighter){
         // TODO mettre une hitbox
-        return fighter.getLocation().equals(new Location(getLocation().x, getLocation().y + getSpeed()));
+        return fighter.getLocation().equals(new Location(getLocation().x +getSpeed().getX(), getLocation().y + getSpeed().getY()));
     }
 
     @Override

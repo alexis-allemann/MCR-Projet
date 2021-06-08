@@ -2,6 +2,7 @@ package components.bullets;
 
 import components.fighters.Fighter;
 import components.physics.Location;
+import components.physics.Speed;
 
 /**
  * Bomb used by monsters
@@ -21,8 +22,8 @@ public class Bomb extends Bullet {
     }
 
     @Override
-    public int getSpeed() {
-        return 0;
+    public Speed getSpeed() {
+        return new Speed(1,1);
     }
 
     @Override

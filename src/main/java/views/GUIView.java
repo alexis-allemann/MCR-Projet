@@ -1,6 +1,7 @@
 package views;
 
 import components.bullets.Bullet;
+import components.physics.Location;
 import controllers.Controller;
 import controllers.MoveDirection;
 import components.fighters.Fighter;
@@ -85,27 +86,27 @@ public class GUIView implements View {
 
     @Override
     public void paintFighter(Fighter fighter) {
-        Point point = fighter.getLocation();
-        panel.getGraphics().drawImage(fighter.getImage(), point.x, point.y, null);
+        Location point = fighter.getLocation();
+        panel.getGraphics().drawImage(fighter.getImage(), (int) point.getX(), (int) point.getY(), null);
     }
 
     @Override
     public void removeFighter(Fighter spacecraft) {
-        Point point = spacecraft.getLocation();
-        panel.getGraphics().drawRect(point.x, point.y, 100, 100);
-        panel.getGraphics().fillRect(point.x, point.y, 100, 100);
+        Location point = spacecraft.getLocation();
+        panel.getGraphics().drawRect((int) point.x, (int) point.y, 100, 100);
+        panel.getGraphics().fillRect((int) point.x, (int) point.y, 100, 100);
     }
 
     @Override
     public void removeBullet(Bullet bullet) {
-        Point point = bullet.getLocation();
-        panel.getGraphics().drawRect(point.x, point.y, 100, 100);
-        panel.getGraphics().fillRect(point.x, point.y, 100, 100);
+        Location point = bullet.getLocation();
+        panel.getGraphics().drawRect((int) point.x, (int) point.y, 100, 100);
+        panel.getGraphics().fillRect((int) point.x, (int) point.y, 100, 100);
     }
 
     @Override
     public void paintBullet(Bullet bullet) {
-        Point point = bullet.getLocation();
-        panel.getGraphics().drawImage(bullet.getImage(), point.x, point.y, null);
+        Location point = bullet.getLocation();
+        panel.getGraphics().drawImage(bullet.getImage(), (int) point.x, (int) point.y, null);
     }
 }

@@ -2,6 +2,8 @@ package controllers;
 
 import views.View;
 
+import java.util.Properties;
+
 /**
  * Space invaders controller to manage gameplay
  *
@@ -13,10 +15,11 @@ public interface Controller {
     /**
      * Start the gameplay in a new view
      *
-     * @param view to start gameplay into
+     * @param view       to start gameplay into
+     * @param properties used in the game
      * @throws IllegalArgumentException if the view is null
      */
-    void start(View view);
+    void start(View view, Properties properties);
 
     /**
      * Start a new game

@@ -1,6 +1,8 @@
 package components.bullets;
 
-import java.awt.Point;
+import components.fighters.Fighter;
+import components.physics.Location;
+import components.physics.Speed;
 
 /**
  * Standard bullet
@@ -15,17 +17,22 @@ public class StandardBullet extends Bullet {
      *
      * @param shootLocation point where the shoot is located
      */
-    public StandardBullet(Point shootLocation) {
+    public StandardBullet(Location shootLocation) {
         super(shootLocation, "bullet.png");
     }
 
     @Override
-    public int getSpeed() {
-        return 0;
+    public Speed getSpeed() {
+        return new Speed(1,1);
     }
 
     @Override
     public int getPower() {
         return 0;
+    }
+
+    @Override
+    public void hit(Fighter fighter) {
+
     }
 }

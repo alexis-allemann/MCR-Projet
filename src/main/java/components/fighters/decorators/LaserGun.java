@@ -31,4 +31,9 @@ public class LaserGun extends FighterDecorator {
     public Image getImage() {
         return null;
     }
+
+    @Override
+    public boolean exist() {
+        return true;
+    }
 }
