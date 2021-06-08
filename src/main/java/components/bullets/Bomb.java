@@ -1,6 +1,6 @@
 package components.bullets;
 
-import components.fighters.GameComponent;
+import components.fighters.Fighter;
 import components.physics.Location;
 import components.physics.Speed;
 
@@ -32,7 +32,7 @@ public class Bomb extends Bullet {
     }
 
     @Override
-    public void hit(GameComponent fighter) {
+    public void hit(Fighter fighter) {
 
     }
 }

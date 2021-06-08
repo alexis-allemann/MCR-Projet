@@ -9,7 +9,7 @@ import components.physics.Location;
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public class Monster extends GameComponent {
+public class Monster extends Fighter {
 
     /**
      * Instantiation of a new monster
@@ -18,13 +18,6 @@ public class Monster extends GameComponent {
      */
     public Monster(Location location) {
         super(location, "monster-green.png");
-    }
-
-    @Override
-    public void shoot() {
-        // crée une nouvelle balle
-
-        // l'ajoute dans le vector du gameplay
     }
 
     @Override

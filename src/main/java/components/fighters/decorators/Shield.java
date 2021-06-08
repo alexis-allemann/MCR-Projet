@@ -1,6 +1,6 @@
 package components.fighters.decorators;
 
-import components.fighters.GameComponent;
+import components.fighters.Fighter;
 
 import java.awt.Image;
 
@@ -17,7 +17,7 @@ public class Shield extends FighterDecorator {
      *
      * @param fighter to decorate
      */
-    public Shield(GameComponent fighter) {
+    public Shield(Fighter fighter) {
         super(fighter);
     }
 

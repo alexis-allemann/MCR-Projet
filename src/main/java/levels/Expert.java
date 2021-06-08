@@ -1,6 +1,6 @@
 package levels;
 
-import components.fighters.GameComponent;
+import components.fighters.Fighter;
 
 /**
  * Expert level
@@ -20,7 +20,7 @@ public class Expert extends Level{
     }
 
     @Override
-    public GameComponent generateMonster() {
+    public Fighter generateMonster() {
         return null;
     }
 

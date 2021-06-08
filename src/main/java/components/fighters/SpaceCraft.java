@@ -10,7 +10,7 @@ import components.physics.Location;
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public class SpaceCraft extends GameComponent {
+public class SpaceCraft extends Fighter {
 
     /**
      * Instantiation of a new spacecraft
@@ -21,14 +21,10 @@ public class SpaceCraft extends GameComponent {
         super(location, "spacecraft.png");
     }
 
-    @Override
-    public void shoot() {
-
-    }
-
-    @Override
     public Bullet getBullet() {
-        return new StandardBullet(getLocation());
+        StandardBullet bullet = new StandardBullet(getLocation());
+        bullet.setLocation(new Location(getLocation().x + (getImageWidth() / 2) - (bullet.getImageWidth() / 2), getLocation().y - bullet.getImageHeight()));
+        return bullet;
     }
 
     @Override

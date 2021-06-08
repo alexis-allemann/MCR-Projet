@@ -3,7 +3,7 @@ package controllers;
 import components.bullets.Bullet;
 import components.physics.Location;
 import controllers.gameplay.BulletManager;
-import components.fighters.GameComponent;
+import components.fighters.Fighter;
 import components.fighters.SpaceCraft;
 import controllers.gameplay.FighterManager;
 import controllers.gameplay.ViewManager;
@@ -28,9 +28,9 @@ public class GamePlay implements Controller {
     private static final Logger LOG = Logger.getLogger(GamePlay.class.getName());
     private static GamePlay instance = new GamePlay();
     private View view;
-    private Collection<GameComponent> fighters = new LinkedList<>();
+    private Collection<Fighter> monsters = new LinkedList<>();
+    private Fighter spacecraft;
     private Collection<Bullet> bullets = new LinkedList<>();
-    private GameComponent spacecraft;
     private Level level;
 
     /**
@@ -86,13 +86,13 @@ public class GamePlay implements Controller {
     }
 
     @Override
-    public void shoot() {
-        // appel le spacecraft pour shoot
+    public synchronized void shoot() {
+        bullets.add(spacecraft.getBullet());
     }
 
     @Override
     public void move(MoveDirection direction) {
-        Location position = spacecraft.getLocation();
+        Location location = spacecraft.getLocation();
         int moveOnX = 0;
         switch (direction) {
             case LEFT:
@@ -102,8 +102,8 @@ public class GamePlay implements Controller {
                 moveOnX = 10;
                 break;
         }
-        if (isInBounds(new Location(position.x + moveOnX, position.y), spacecraft))
-            spacecraft.setLocation(new Location(position.x + moveOnX, position.y));
+        if (isInBounds(new Location(location.x + moveOnX, location.y), spacecraft))
+            spacecraft.setLocation(new Location(location.x + moveOnX, location.y));
         view.removeComponent(spacecraft);
         view.paintComponent(spacecraft);
     }
@@ -114,16 +114,17 @@ public class GamePlay implements Controller {
     }
 
 
-    public Collection<Bullet> getBullets() {
+    public synchronized Collection<Bullet> getBullets() {
         return bullets;
     }
 
-    public void setBullets(Collection<Bullet> bullets) {
-        this.bullets = bullets;
+
+    public Collection<Fighter> getMonsters() {
+        return monsters;
     }
 
-    public Collection<GameComponent> getFighters() {
-        return fighters;
+    public View getView() {
+        return view;
     }
 
     /**
@@ -133,7 +134,7 @@ public class GamePlay implements Controller {
      * @param fighter  to get image width and height
      * @return boolean if it is in bounds
      */
-    private boolean isInBounds(Location location, GameComponent fighter) {
+    private boolean isInBounds(Location location, Fighter fighter) {
         return location.x + fighter.getImageWidth() <= WIDTH &&
                 location.y + fighter.getImageHeight() <= HEIGHT &&
                 location.x >= 0 &&

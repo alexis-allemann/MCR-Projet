@@ -1,8 +1,8 @@
 package views;
 
-import components.bullets.Bullet;
+import components.GameComponent;
 import controllers.Controller;
-import components.fighters.GameComponent;
+import components.fighters.Fighter;
 
 /**
  * Space invaders view to display gameplay

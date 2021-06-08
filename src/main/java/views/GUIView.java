@@ -1,17 +1,15 @@
 package views;
 
+import components.GameComponent;
 import components.physics.Location;
 import controllers.Controller;
-import controllers.MoveDirection;
-import components.fighters.GameComponent;
+import components.fighters.Fighter;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.Color;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 /**
  * GUI view to display gameplay
@@ -40,40 +38,7 @@ public class GUIView implements View {
         frame.pack();
 
         // Listen keys pressed
-        frame.addKeyListener(
-                new KeyAdapter() {
-
-                    /**
-                     * A key is pressed
-                     *
-                     * @param keyEvent the event data
-                     */
-                    @Override
-                    public void keyPressed(KeyEvent keyEvent) {
-
-                        switch (keyEvent.getKeyCode()) {
-                            case KeyEvent.VK_A:
-                            case KeyEvent.VK_LEFT:
-                                controller.move(MoveDirection.LEFT);
-                                break;
-
-                            case KeyEvent.VK_D:
-                            case KeyEvent.VK_RIGHT:
-                                controller.move(MoveDirection.RIGHT);
-                                break;
-
-                            case KeyEvent.VK_W:
-                            case KeyEvent.VK_UP:
-                            case KeyEvent.VK_SPACE:
-                                controller.shoot();
-                                break;
-
-                            case KeyEvent.VK_R:
-                            case KeyEvent.VK_N:
-                                controller.newGame();
-                        }
-                    }
-                });
+        frame.addKeyListener(new MultiKeyPressListener(controller));
     }
 
     @Override
@@ -85,7 +50,7 @@ public class GUIView implements View {
     @Override
     public void paintComponent(GameComponent component) {
         Location point = component.getLocation();
-        panel.getGraphics().drawImage(component.getImage(), (int) point.getX(), (int) point.getY(), null);
+        panel.getGraphics().drawImage(component.getImage(), (int) point.x, (int) point.y, null);
     }
 
     @Override

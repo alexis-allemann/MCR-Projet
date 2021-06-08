@@ -1,5 +1,6 @@
 package components.fighters;
 
+import components.GameComponent;
 import components.bullets.Bullet;
 import components.physics.Speed;
 import components.physics.Location;
@@ -11,7 +12,7 @@ import components.physics.Location;
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public abstract class GameComponent extends components.GameComponent {
+public abstract class Fighter extends GameComponent {
 
     final private Speed SPEED_BASE = new Speed(1.f, 0.f);
     final int POWER_BASE = 1;
@@ -24,7 +25,7 @@ public abstract class GameComponent extends components.GameComponent {
      * @param location where fighter is located
      * @param image    filename of the fighter to display
      */
-    public GameComponent(Location location, String image) {
+    public Fighter(Location location, String image) {
         super(location, image);
         speed = SPEED_BASE;
     }
@@ -34,26 +35,16 @@ public abstract class GameComponent extends components.GameComponent {
      *
      * @param fighter to encompass
      */
-    public GameComponent(GameComponent fighter) {
+    public Fighter(Fighter fighter) {
         super(fighter.getLocation(), fighter.getImage());
     }
-
-    /**
-     * Shoot action
-     */
-    public abstract void shoot();
 
     /**
      * Move action
      */
     public void move(){
-        this.location.translate(speed.getX(), speed.getY());
+        location.translate(speed.getX(), speed.getY());
     }
 
-    /**
-     * Get a new bullet
-     *
-     * @return bullet ready to be shot
-     */
     public abstract Bullet getBullet();
 }

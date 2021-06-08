@@ -1,6 +1,6 @@
 package components.bullets;
 
-import components.fighters.GameComponent;
+import components.fighters.Fighter;
 import components.physics.Location;
 import components.physics.Speed;
 
@@ -18,21 +18,21 @@ public class LaserBullet extends Bullet {
      * @param shootLocation point where the shoot is located
      */
     public LaserBullet(Location shootLocation) {
-        super(shootLocation, "laser.svg");
+        super(shootLocation, "laser.png");
     }
 
     @Override
     public Speed getSpeed() {
-        return SPEED_BASE;
+        return BASE_SPEED;
     }
 
     @Override
     public int getPower() {
-        return POWER_BASE;
+        return BASE_POWER;
     }
 
     @Override
-    public void hit(GameComponent fighter) {
+    public void hit(Fighter fighter) {
 
     }
 

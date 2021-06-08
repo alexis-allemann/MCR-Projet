@@ -1,7 +1,7 @@
 package components.fighters.decorators;
 
 import components.bullets.Bullet;
-import components.fighters.GameComponent;
+import components.fighters.Fighter;
 
 import java.awt.Image;
 
@@ -18,7 +18,7 @@ public class LaserGun extends FighterDecorator {
      *
      * @param fighter to decorate
      */
-    public LaserGun(GameComponent fighter) {
+    public LaserGun(Fighter fighter) {
         super(fighter);
     }
 

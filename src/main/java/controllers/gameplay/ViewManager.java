@@ -1,5 +1,7 @@
 package controllers.gameplay;
 
+import components.GameComponent;
+import components.bullets.Bullet;
 import controllers.GamePlay;
 
 /**
@@ -26,7 +28,11 @@ public class ViewManager implements Runnable {
     @Override
     public void run() {
         while(gamePlay.isRunning()){
-
+            try {
+                Thread.sleep(gamePlay.FRAMERATE);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
