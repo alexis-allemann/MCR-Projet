@@ -1,10 +1,13 @@
 package components.fighters;
 
 import components.GameComponent;
+import components.Health;
 import components.weapon.Weapon;
 import components.physics.Vector2D;
 import components.physics.Location;
 import controllers.Direction;
+import controllers.GamePlay;
+import controllers.gameplay.FighterManager;
 
 /**
  * Space invaders fighter
@@ -18,6 +21,7 @@ public abstract class Fighter extends GameComponent {
     protected boolean alive = true;
     protected Vector2D speed;
     private Weapon weapon;
+    private Health health;
 
     /**
      * Instantiation of a new fighter
@@ -70,4 +74,19 @@ public abstract class Fighter extends GameComponent {
      * @return the shoot direction
      */
     public abstract Direction getDirection();
+
+    /**
+     * Get fighter's health
+     * @return fighter's health
+     */
+    public Health getHealth() {
+        return health;
+    }
+
+    /**
+     * Death action
+     */
+    public void die(){
+        FighterManager.getInstance().removeMonster(this);
+    }
 }

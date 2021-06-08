@@ -21,6 +21,7 @@ public class Expert extends Level{
 
     @Override
     public Fighter generateMonster() {
+        //TODO use FighterManager.getInstance().addMonster(%newly created monster%)
         return null;
     }
 

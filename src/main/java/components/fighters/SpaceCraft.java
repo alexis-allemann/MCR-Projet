@@ -29,4 +29,9 @@ public class SpaceCraft extends Fighter {
     public Direction getDirection() {
         return Direction.TOP;
     }
+
+    @Override
+    public void die(){
+        System.out.println("Game is over !");
+    }
 }

@@ -64,7 +64,6 @@ public class BulletManager implements Runnable {
      * @param bullet to add
      */
     public void addBullet(Bullet bullet) {
-
         this.bullets.add(bullet);
     }
 

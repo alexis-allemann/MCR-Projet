@@ -61,6 +61,18 @@ public class FighterManager implements Runnable {
         return new ArrayList<>(monsters);
     }
 
+    public void addMonster(Fighter monster){
+        monsters.add(monster);
+    }
+
+    /**
+     * Remove monster from the list
+     * @param fighter Fighter to remove
+     */
+    public void removeMonster(Fighter fighter) {
+        monsters.remove(fighter);
+    }
+
     /**
      * Generate a new wave of monster if possible
      */
@@ -73,4 +85,6 @@ public class FighterManager implements Runnable {
              }
          }
      }
+
+
 }

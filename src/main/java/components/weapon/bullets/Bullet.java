@@ -52,7 +52,9 @@ public abstract class Bullet extends GameComponent {
      * @param fighter fighter to remove health
      */
     public void hit(Fighter fighter) {
-
+        fighter.getHealth().removeHealth(getPower());
+        if(fighter.getHealth().getHP() <= 0)
+            fighter.die();
     }
 
     /**

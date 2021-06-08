@@ -1,7 +1,7 @@
 package components.physics;
 
 /**
- * Speed vector on game
+ * Vector 2D on game
  *
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
@@ -11,10 +11,10 @@ public class Vector2D {
     private float y;
 
     /**
-     * Instantiation of a new speed vector
+     * Instantiation of a new 2D vector
      *
-     * @param x move on x axis
-     * @param y move on y axis
+     * @param x value on x axis
+     * @param y value on y axis
      */
     public Vector2D(float x, float y) {
         this.x = x;
@@ -22,7 +22,7 @@ public class Vector2D {
     }
 
     /**
-     * Get move on x axis
+     * Get value on x axis
      *
      * @return move on x axis
      */
@@ -31,9 +31,9 @@ public class Vector2D {
     }
 
     /**
-     * Get move on y axis
+     * Get value on y axis
      *
-     * @return move on y axis
+     * @return value on y axis
      */
     public float getY() {
         return y;
