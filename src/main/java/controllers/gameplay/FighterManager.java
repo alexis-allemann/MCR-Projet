@@ -1,7 +1,7 @@
 package controllers.gameplay;
 
 import controllers.GamePlay;
-import components.fighters.Fighter;
+import components.fighters.GameComponent;
 
 /**
  * Thread that manage fighters actions (movement and shouting)
@@ -27,7 +27,7 @@ public class FighterManager implements Runnable{
     @Override
     public void run(){
         while(gamePlay.isRunning()){
-            for(Fighter fighter : gamePlay.getFighters()){
+            for(GameComponent fighter : gamePlay.getFighters()){
                 fighter.move();
                 fighter.shoot();
             }

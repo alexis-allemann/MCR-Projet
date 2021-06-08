@@ -2,7 +2,9 @@ package components;
 
 import javax.imageio.ImageIO;
 import java.awt.Image;
+
 import components.physics.Location;
+
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,6 +54,24 @@ public abstract class GameComponent {
      */
     public Image getImage() {
         return image;
+    }
+
+    /**
+     * Get image width of the fighter
+     *
+     * @return width of the image
+     */
+    public int getImageWidth() {
+        return getImage().getWidth(null);
+    }
+
+    /**
+     * Get image height of the fighter
+     *
+     * @return height of the image
+     */
+    public int getImageHeight() {
+        return getImage().getHeight(null);
     }
 
     /**

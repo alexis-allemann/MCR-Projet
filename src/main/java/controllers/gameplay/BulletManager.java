@@ -1,7 +1,7 @@
 package controllers.gameplay;
 
 import components.bullets.Bullet;
-import components.fighters.Fighter;
+import components.fighters.GameComponent;
 import controllers.GamePlay;
 
 /**
@@ -29,7 +29,7 @@ public class BulletManager implements Runnable{
     public void run(){
         while(gamePlay.isRunning()){
             for(Bullet bullet : gamePlay.getBullets()){
-                Fighter fighter = checkFighterOnNextLocation(bullet);
+                GameComponent fighter = checkFighterOnNextLocation(bullet);
                 if(fighter != null)
                     bullet.hit(fighter);
                 else
@@ -48,8 +48,8 @@ public class BulletManager implements Runnable{
      * @param bullet Bullet to check path
      * @return null if there's no fighter
      */
-    private Fighter checkFighterOnNextLocation(Bullet bullet) {
-        for(Fighter fighter : gamePlay.getFighters()){
+    private GameComponent checkFighterOnNextLocation(Bullet bullet) {
+        for(GameComponent fighter : gamePlay.getFighters()){
             if(bullet.checkNextLocation(fighter)){
                 return fighter;
             }

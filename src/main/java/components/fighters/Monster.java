@@ -3,15 +3,13 @@ package components.fighters;
 import components.bullets.Bullet;
 import components.physics.Location;
 
-import java.awt.*;
-
 /**
  * Monsters used to fight against space craft
  *
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public class Monster extends Fighter {
+public class Monster extends GameComponent {
 
     /**
      * Instantiation of a new monster

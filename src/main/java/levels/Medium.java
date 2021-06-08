@@ -1,6 +1,6 @@
 package levels;
 
-import components.fighters.Fighter;
+import components.fighters.GameComponent;
 
 /**
  * Medium level
@@ -15,7 +15,7 @@ public class Medium extends Level {
     }
 
     @Override
-    public Fighter generateMonster() {
+    public GameComponent generateMonster() {
         return null;
     }
 

@@ -19,13 +19,12 @@ public class SpaceInvaders {
      * @param args no args required
      */
     public static void main(String[] args) {
-        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-        try (InputStream input = classloader.getResourceAsStream("config.properties")) {
-            Properties prop = new Properties();
+        try (InputStream input = SpaceInvaders.class.getResourceAsStream("config.properties")) {
             if (input == null) {
                 System.out.println("Sorry, unable to find config.properties");
                 return;
             }
+            Properties prop = new Properties();
             prop.load(input);
             GamePlay.getInstance().start(new GUIView(), prop);
         } catch (IOException ex) {

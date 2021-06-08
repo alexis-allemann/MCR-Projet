@@ -2,7 +2,7 @@ package views;
 
 import components.bullets.Bullet;
 import controllers.Controller;
-import components.fighters.Fighter;
+import components.fighters.GameComponent;
 
 /**
  * Space invaders view to display gameplay
@@ -27,15 +27,16 @@ public interface View {
     void displayMessage(String message);
 
     /**
-     * Paint a fighter on the view at a given position
+     * Paint a component on the view at a given position
      *
-     * @param fighter to paint
+     * @param component to paint
      */
-    void paintFighter(Fighter fighter);
+    void paintComponent(GameComponent component);
 
-    void removeFighter(Fighter spacecraft);
-
-    void removeBullet(Bullet bullet);
-
-    void paintBullet(Bullet bullet);
+    /**
+     * Remove a component on the view at a given position
+     *
+     * @param component to remove
+     */
+    void removeComponent(GameComponent component);
 }

@@ -38,5 +38,10 @@ public interface Controller {
      */
     void move(MoveDirection direction);
 
+    /**
+     * Know if the game is running
+     *
+     * @return boolean if the game is running
+     */
     boolean isRunning();
 }

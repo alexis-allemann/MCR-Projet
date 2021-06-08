@@ -1,6 +1,6 @@
 package levels;
 
-import components.fighters.Fighter;
+import components.fighters.GameComponent;
 
 /**
  * Beginner level
@@ -11,7 +11,7 @@ import components.fighters.Fighter;
 public class Beginner extends Level {
 
     @Override
-    public Fighter generateMonster() {
+    public GameComponent generateMonster() {
         return null;
     }
 

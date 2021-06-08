@@ -1,6 +1,6 @@
 package levels;
 
-import components.fighters.Fighter;
+import components.fighters.GameComponent;
 
 /**
  * Space invaders game levels
@@ -36,7 +36,7 @@ public abstract class Level {
      *
      * @return generated
      */
-    public abstract Fighter generateMonster();
+    public abstract GameComponent generateMonster();
 
     /**
      * Check if level has changed

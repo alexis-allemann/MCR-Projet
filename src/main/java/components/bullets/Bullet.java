@@ -1,7 +1,6 @@
 package components.bullets;
 
-import components.GameComponent;
-import components.fighters.Fighter;
+import components.fighters.GameComponent;
 import components.physics.Speed;
 import components.physics.Location;
 
@@ -11,7 +10,7 @@ import components.physics.Location;
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public abstract class Bullet extends GameComponent {
+public abstract class Bullet extends components.GameComponent {
 
     static final Speed SPEED_BASE = new Speed(1.f, 0.f);
     final int POWER_BASE = 1;
@@ -49,7 +48,7 @@ public abstract class Bullet extends GameComponent {
      *
      * @param fighter fighter to remove health
      */
-    public abstract void hit(Fighter fighter);
+    public abstract void hit(GameComponent fighter);
 
     /**
      * Move bullet with as speed base added with speed of the bullet
@@ -63,7 +62,7 @@ public abstract class Bullet extends GameComponent {
      * @param fighter Fighter Fighter to check position
      * @return True if there's a fighter to next location
      */
-    public boolean checkNextLocation(Fighter fighter){
+    public boolean checkNextLocation(GameComponent fighter){
         // TODO mettre une hitbox
         return fighter.getLocation().equals(new Location(getLocation().x +getSpeed().getX(), getLocation().y + getSpeed().getY()));
     }

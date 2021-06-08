@@ -3,13 +3,12 @@ package controllers;
 import components.bullets.Bullet;
 import components.physics.Location;
 import controllers.gameplay.BulletManager;
-import components.fighters.Fighter;
+import components.fighters.GameComponent;
 import components.fighters.SpaceCraft;
 import controllers.gameplay.FighterManager;
 import controllers.gameplay.ViewManager;
 import views.View;
 
-import java.awt.Point;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Properties;
@@ -23,17 +22,16 @@ import java.util.logging.Logger;
  * @version 1.0
  */
 public class GamePlay implements Controller {
-    static final Logger LOG = Logger.getLogger(GamePlay.class.getName());
-    private static GamePlay instance = new GamePlay();
-    private View view;
-    private Collection<Fighter> fighters = new LinkedList<>();
-    private Collection<Bullet> bullets = new LinkedList<>();
-    private Fighter spacecraft;
     public static int HEIGHT;
     public static int WIDTH;
     public static int FRAMERATE;
-    private int score = 0;
-    private boolean isRunning;
+    private static final Logger LOG = Logger.getLogger(GamePlay.class.getName());
+    private static GamePlay instance = new GamePlay();
+    private View view;
+    private Collection<GameComponent> fighters = new LinkedList<>();
+    private Collection<Bullet> bullets = new LinkedList<>();
+    private GameComponent spacecraft;
+    private Level level;
 
     /**
      * Private constructor to implement Singleton pattern
@@ -52,40 +50,39 @@ public class GamePlay implements Controller {
 
     @Override
     public void start(View view, Properties properties) {
-        if (view == null)
-            throw new IllegalArgumentException("View can not be null");
 
-        if (properties == null)
-            throw new IllegalArgumentException("Properites can not be null");
+        LOG.log(Level.INFO, "Reading properties");
 
         if (!properties.containsKey("FRAMERATE"))
-            throw new RuntimeException("Property FRAMERATE missing");
+            throw new IllegalArgumentException("Property FRAMERATE missing in");
 
         if (!properties.containsKey("HEIGHT"))
-            throw new RuntimeException("Property HEIGHT missing");
+            throw new IllegalArgumentException("Property HEIGHT missing");
 
         if (!properties.containsKey("WIDTH"))
-            throw new RuntimeException("Property WIDTH missing");
+            throw new IllegalArgumentException("Property WIDTH missing");
 
         FRAMERATE = Integer.parseInt(properties.getProperty("FRAMERATE"));
         HEIGHT = Integer.parseInt(properties.getProperty("HEIGHT"));
         WIDTH = Integer.parseInt(properties.getProperty("WIDTH"));
 
-        LOG.log(Level.INFO, "Game started");
-
+        LOG.log(Level.INFO, "Starting game");
         new Thread(BulletManager.getInstance(this)).start();
         new Thread(FighterManager.getInstance(this)).start();
         new Thread(ViewManager.getInstance(this)).start();
 
-        this.spacecraft = new SpaceCraft(new Location(100, 100));
+        LOG.log(Level.INFO, "Starting view");
         this.view = view;
         view.startView(this);
-        view.paintFighter(spacecraft);
+
+        spacecraft = new SpaceCraft(new Location(0, 0));
+        resetSpaceCraftLocation();
+        view.paintComponent(spacecraft);
     }
 
     @Override
     public void newGame() {
-        System.out.println("new game");
+        LOG.log(Level.INFO, "New game started");
     }
 
     @Override
@@ -96,31 +93,26 @@ public class GamePlay implements Controller {
     @Override
     public void move(MoveDirection direction) {
         Location position = spacecraft.getLocation();
+        int moveOnX = 0;
         switch (direction) {
             case LEFT:
-                System.out.println("move left");
-                spacecraft.setLocation(new Location(position.x - 10, position.y));
+                moveOnX = -10;
                 break;
             case RIGHT:
-                System.out.println("move right");
-                spacecraft.setLocation(new Location(position.x + 10, position.y));
+                moveOnX = 10;
                 break;
         }
-        view.removeFighter(spacecraft);
-        view.paintFighter(spacecraft);
+        if (isInBounds(new Location(position.x + moveOnX, position.y), spacecraft))
+            spacecraft.setLocation(new Location(position.x + moveOnX, position.y));
+        view.removeComponent(spacecraft);
+        view.paintComponent(spacecraft);
     }
 
     @Override
     public boolean isRunning() {
-        return isRunning;
+        return true;
     }
 
-    private boolean isInBounds(Point position) {
-        Properties properties = new Properties();
-        final int WIDTH = Integer.parseInt(properties.getProperty("WIDTH"));
-        final int HEIGHT = Integer.parseInt(properties.getProperty("HEIGHT"));
-        return position.x <= WIDTH && position.y <= HEIGHT && position.x >= 0 && position.y >= 0;
-    }
 
     public Collection<Bullet> getBullets() {
         return bullets;
@@ -130,7 +122,28 @@ public class GamePlay implements Controller {
         this.bullets = bullets;
     }
 
-    public Collection<Fighter> getFighters() {
+    public Collection<GameComponent> getFighters() {
         return fighters;
+    }
+
+    /**
+     * Check if a location of a fighter is in view bounds
+     *
+     * @param location of the fighter
+     * @param fighter  to get image width and height
+     * @return boolean if it is in bounds
+     */
+    private boolean isInBounds(Location location, GameComponent fighter) {
+        return location.x + fighter.getImageWidth() <= WIDTH &&
+                location.y + fighter.getImageHeight() <= HEIGHT &&
+                location.x >= 0 &&
+                location.y >= 0;
+    }
+
+    /**
+     * Reset default location of the spacecraft
+     */
+    private void resetSpaceCraftLocation() {
+        spacecraft.setLocation(new Location((WIDTH - spacecraft.getImageWidth()) / 2, HEIGHT - spacecraft.getImageHeight()));
     }
 }

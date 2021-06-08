@@ -1,17 +1,15 @@
 package views;
 
-import components.bullets.Bullet;
 import components.physics.Location;
 import controllers.Controller;
 import controllers.MoveDirection;
-import components.fighters.Fighter;
+import components.fighters.GameComponent;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.Color;
-import java.awt.Point;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -85,28 +83,15 @@ public class GUIView implements View {
     }
 
     @Override
-    public void paintFighter(Fighter fighter) {
-        Location point = fighter.getLocation();
-        panel.getGraphics().drawImage(fighter.getImage(), (int) point.getX(), (int) point.getY(), null);
+    public void paintComponent(GameComponent component) {
+        Location point = component.getLocation();
+        panel.getGraphics().drawImage(component.getImage(), (int) point.getX(), (int) point.getY(), null);
     }
 
     @Override
-    public void removeFighter(Fighter spacecraft) {
-        Location point = spacecraft.getLocation();
-        panel.getGraphics().drawRect((int) point.x, (int) point.y, 100, 100);
-        panel.getGraphics().fillRect((int) point.x, (int) point.y, 100, 100);
-    }
-
-    @Override
-    public void removeBullet(Bullet bullet) {
-        Location point = bullet.getLocation();
-        panel.getGraphics().drawRect((int) point.x, (int) point.y, 100, 100);
-        panel.getGraphics().fillRect((int) point.x, (int) point.y, 100, 100);
-    }
-
-    @Override
-    public void paintBullet(Bullet bullet) {
-        Location point = bullet.getLocation();
-        panel.getGraphics().drawImage(bullet.getImage(), (int) point.x, (int) point.y, null);
+    public void removeComponent(GameComponent component) {
+        Location point = component.getLocation();
+        panel.getGraphics().drawRect((int) point.x, (int) point.y, component.getImageWidth(), component.getImageHeight());
+        panel.getGraphics().fillRect((int) point.x, (int) point.y, component.getImageWidth(), component.getImageHeight());
     }
 }
