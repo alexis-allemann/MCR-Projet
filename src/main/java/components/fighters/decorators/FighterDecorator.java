@@ -1,7 +1,7 @@
 package components.fighters.decorators;
 
-import components.weapon.bullets.Bullet;
 import components.fighters.Fighter;
+import controllers.Direction;
 
 /**
  * Space invaders components.fighters decorators
@@ -25,5 +25,10 @@ public abstract class FighterDecorator extends Fighter {
     @Override
     public boolean exist() {
         return true;
+    }
+
+    @Override
+    public Direction getDirection() {
+        return fighter.getDirection();
     }
 }

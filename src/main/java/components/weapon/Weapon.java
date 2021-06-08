@@ -17,7 +17,7 @@ public abstract class Weapon {
 
     /**
      * Shoot a new bullet
-     * @fighter the fighter shooting with the weapon
+     * @param fighter the fighter shooting with the weapon
      */
     public void shoot(Fighter fighter) {
         long current = System.currentTimeMillis();

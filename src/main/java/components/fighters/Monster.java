@@ -1,6 +1,5 @@
 package components.fighters;
 
-import components.weapon.bullets.Bullet;
 import components.physics.Location;
 import controllers.Direction;
 
@@ -27,7 +26,7 @@ public class Monster extends Fighter {
     }
 
     @Override
-    Direction getDirection() {
+    public Direction getDirection() {
         return Direction.DOWN;
     }
 

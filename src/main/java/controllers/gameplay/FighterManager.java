@@ -69,7 +69,7 @@ public class FighterManager implements Runnable {
          // 2. if yes generate from level
          if(canGenerate) {
              for(int i = 0; i < GamePlay.getInstance().getLevel().getNbMonsterByWave(); ++i) {
-                 monsters.push_back(GamePlay.getInstance().getLevel().generateMonster());
+                 monsters.add(GamePlay.getInstance().getLevel().generateMonster());
              }
          }
      }

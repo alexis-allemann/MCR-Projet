@@ -80,7 +80,7 @@ public class GamePlay implements Controller {
 
     @Override
     public void shoot() {
-        spacecraft.getWeapon().shoot();
+        spacecraft.getWeapon().shoot(spacecraft);
     }
 
     @Override

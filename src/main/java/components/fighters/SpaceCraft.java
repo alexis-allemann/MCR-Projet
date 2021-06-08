@@ -1,8 +1,5 @@
 package components.fighters;
 
-import components.weapon.Weapon;
-import components.weapon.bullets.Bullet;
-import components.weapon.bullets.StandardBullet;
 import components.physics.Location;
 import controllers.Direction;
 
@@ -23,15 +20,13 @@ public class SpaceCraft extends Fighter {
         super(location, "spacecraft.png");
     }
 
-
-
     @Override
     public boolean exist() {
         return true;
     }
 
     @Override
-    Direction getDirection() {
+    public Direction getDirection() {
         return Direction.TOP;
     }
 }
