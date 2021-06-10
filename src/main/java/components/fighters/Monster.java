@@ -21,18 +21,8 @@ public class Monster extends Fighter {
     }
 
     @Override
-    public void move() {
-
-    }
-
-    @Override
     public Direction getDirection() {
         return Direction.DOWN;
-    }
-
-    @Override
-    public boolean exist(){
-        return alive;
     }
 
 }

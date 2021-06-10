@@ -5,6 +5,7 @@ import components.physics.Location;
 import components.physics.Vector2D;
 import components.weapon.bullets.Bullet;
 import components.weapon.bullets.StandardBullet;
+import controllers.Direction;
 
 /**
  * Standard weapon (by default used by spacecraft)
@@ -14,20 +15,26 @@ import components.weapon.bullets.StandardBullet;
  */
 public class StandardWeapon extends Weapon{
 
+    /**
+     * Time between reloads for standard weapon
+     */
+    private final static int RELOAD_TIME_STANDARD = 500;
+
     @Override
-    Bullet getBullet() {
-        return new StandardBullet(new Vector2D(0, -1));
+    Bullet getBullet(Direction direction) {
+        float y = direction == Direction.TOP ? -1.f : 1.f;
+        return new StandardBullet(new Vector2D(0, y));
     }
 
     @Override
     int reloadTime() {
-        return 500;
+        return RELOAD_TIME_STANDARD;
     }
 
     @Override
     Location getStartingBulletLocation(Fighter fighter) {
         float x = fighter.getLocation().x + fighter.getImageWidth() / 2.f;
-        float y = fighter.getLocation().y;
+        float y = fighter.getLocation().y + (fighter.getDirection() == Direction.TOP ? -1.f : 1.f);
         return new Location(x,y);
     }
 }

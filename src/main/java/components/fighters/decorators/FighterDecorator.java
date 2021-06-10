@@ -23,11 +23,6 @@ public abstract class FighterDecorator extends Fighter {
     }
 
     @Override
-    public boolean exist() {
-        return true;
-    }
-
-    @Override
     public Direction getDirection() {
         return fighter.getDirection();
     }

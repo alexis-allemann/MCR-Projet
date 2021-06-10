@@ -40,15 +40,13 @@ public class BulletManager implements Runnable {
             Collection<Bullet> bulletsList = new ArrayList<>(bullets);
             for (Bullet bullet : bulletsList) {
                 Fighter fighter = checkFighterOnNextLocation(bullet);
-                if (fighter != null) {
+                if (fighter != null)
                     bullet.hit(fighter);
-                    return;
-                } else {
-                    ViewManager.getInstance().removeComponent(bullet);
+                else {
+                    // TODO : Check si bullet hors de la fenêtre
                     bullet.move();
-                    ViewManager.getInstance().paintComponent(bullet);
                 }
-                // TODO : Check si bullet hors de la fenêtre
+
             }
             try {
                 Thread.sleep(GamePlay.FRAMERATE);
@@ -80,5 +78,14 @@ public class BulletManager implements Runnable {
             }
         }
         return null;
+    }
+
+    /**
+     * Get bullets in the game
+     *
+     * @return collection of bullets
+     */
+    public Collection<Bullet> getBullets() {
+        return bullets;
     }
 }

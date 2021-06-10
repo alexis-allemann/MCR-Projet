@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.image.ImageObserver;
 
 /**
  * GUI view to display gameplay
@@ -45,15 +47,12 @@ public class GUIView implements View {
     }
 
     @Override
-    public void paintComponent(GameComponent component) {
-        Location point = component.getLocation();
-        panel.getGraphics().drawImage(component.getImage(), (int) point.x, (int) point.y, null);
+    public void paintImage(Image image){
+        panel.getGraphics().drawImage(image, 0,0, panel);
     }
 
     @Override
-    public void removeComponent(GameComponent component) {
-        Location point = component.getLocation();
-        panel.getGraphics().drawRect((int) point.x, (int) point.y, component.getImageWidth(), component.getImageHeight());
-        panel.getGraphics().fillRect((int) point.x, (int) point.y, component.getImageWidth(), component.getImageHeight());
+    public Image getBufferedImage(){
+        return panel.createImage(WIDTH, HEIGHT);
     }
 }

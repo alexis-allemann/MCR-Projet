@@ -2,11 +2,9 @@ package controllers.gameplay;
 
 import controllers.GamePlay;
 import components.fighters.Fighter;
+import components.physics.Location;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Thread that manage fighters actions (movements and shootings)
@@ -39,9 +37,16 @@ public class FighterManager implements Runnable {
             // 1. check if we can generate monsters (every 5s i.e.)
             // 1.1 get Y coordinate of highest monsters
             checkMonsterGeneration();
-            for (Fighter fighter : monsters) {
-                // 3. make all monsters shoots (existing and newly generated)
-                // 4. move all monsters to down
+            List<Fighter> monstersCopy = new LinkedList<>(getMonsters());
+            for(Fighter monster : monstersCopy){
+                if(!monster.alive()) {
+                    monster.die();
+                }
+                else {
+                    monster.shoot();
+                    monster.move();
+                }
+
             }
             try {
                 Thread.sleep(GamePlay.FRAMERATE);
@@ -56,13 +61,9 @@ public class FighterManager implements Runnable {
      *
      * @return copy of the list of monsters int the game
      */
-    public Collection<Fighter> getMonsters() {
+    public synchronized Collection<Fighter> getMonsters() {
         // Need to return a copy to avoid concurrences errors
         return new ArrayList<>(monsters);
-    }
-
-    public void addMonster(Fighter monster){
-        monsters.add(monster);
     }
 
     /**
@@ -75,13 +76,17 @@ public class FighterManager implements Runnable {
 
     /**
      * Generate a new wave of monster if possible
+     * @details check that the highest monster is below the spawn line
      */
      private void checkMonsterGeneration(){
-         boolean canGenerate = !monsters.isEmpty() && monsters.get(monsters.size() -1).getLocation().y < GamePlay.SPAWN_HEIGHT;
+         boolean canGenerate = monsters.isEmpty() || monsters.get(monsters.size() -1).getLocation().y < GamePlay.SPAWN_HEIGHT;
          // 2. if yes generate from level
          if(canGenerate) {
              for(int i = 0; i < GamePlay.getInstance().getLevel().getNbMonsterByWave(); ++i) {
-                 monsters.add(GamePlay.getInstance().getLevel().generateMonster());
+                 // TODO : Generate proper location for the monster
+                 Location monsterLocation = new Location(50.f * i, GamePlay.SPAWN_HEIGHT - 20.f);
+                 Fighter newMonster = GamePlay.getInstance().getLevel().generateMonster(monsterLocation);
+                 monsters.add(newMonster);
              }
          }
      }

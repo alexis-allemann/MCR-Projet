@@ -1,6 +1,7 @@
 package levels;
 
 import components.fighters.Fighter;
+import components.physics.Location;
 
 /**
  * Space invaders game levels
@@ -34,9 +35,10 @@ public abstract class Level {
     /**
      * Generate a new monster
      *
+     * @param location Location where the monster should spawn
      * @return generated monster
      */
-    public abstract Fighter generateMonster();
+    public abstract Fighter generateMonster(Location location);
 
     /**
      * Check if level has changed

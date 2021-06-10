@@ -7,6 +7,7 @@ import components.fighters.Fighter;
 import components.fighters.SpaceCraft;
 import controllers.gameplay.FighterManager;
 import controllers.gameplay.ViewManager;
+import levels.Beginner;
 import levels.Level;
 import views.View;
 
@@ -64,18 +65,17 @@ public class GamePlay implements Controller {
         WIDTH = Integer.parseInt(properties.getProperty("WIDTH"));
 
         LOG.info("Starting game");
-        new Thread(BulletManager.getInstance()).start();
-        new Thread(FighterManager.getInstance()).start();
-        new Thread(ViewManager.getInstance(view)).start();
+        this.level = new Beginner();
+        spacecraft = new SpaceCraft(new Location(0, 0));
+        spacecraft.setWeapon(new StandardWeapon());
+        resetSpaceCraftLocation();
 
         LOG.info("Starting view");
         view.startView(this);
 
-        spacecraft = new SpaceCraft(new Location(0, 0));
-        spacecraft.setWeapon(new StandardWeapon());
-
-        ViewManager.getInstance().resetSpaceCraftLocation(spacecraft);
-        view.paintComponent(spacecraft);
+        new Thread(BulletManager.getInstance()).start();
+        new Thread(FighterManager.getInstance()).start();
+        new Thread(ViewManager.getInstance(view)).start();
     }
 
     @Override
@@ -86,11 +86,23 @@ public class GamePlay implements Controller {
     @Override
     public void newGame() {
         LOG.info("New game started");
+
     }
 
     @Override
     public void move(Direction direction) {
-        ViewManager.getInstance().move(direction, spacecraft);
+        Location location = spacecraft.getLocation();
+        int moveOnX = 0;
+        switch (direction) {
+            case LEFT:
+                moveOnX = -10;
+                break;
+            case RIGHT:
+                moveOnX = 10;
+                break;
+        }
+        if (isInBounds(new Location(location.x + moveOnX, location.y), spacecraft))
+            spacecraft.getLocation().translate(moveOnX, 0);
     }
 
     @Override
@@ -110,4 +122,24 @@ public class GamePlay implements Controller {
      */
     public Level getLevel(){ return level; }
 
+    /**
+     * Reset default location of the spacecraft
+     */
+    private void resetSpaceCraftLocation() {
+        spacecraft.setLocation(new Location((GamePlay.WIDTH - spacecraft.getImageWidth()) / 2, GamePlay.HEIGHT - spacecraft.getImageHeight()));
+    }
+
+    /**
+     * Check if a location of a fighter is in view bounds
+     *
+     * @param location of the fighter
+     * @param fighter  to get image width and height
+     * @return boolean if it is in bounds
+     */
+    private boolean isInBounds(Location location, Fighter fighter) {
+        return location.x + fighter.getImageWidth() <= WIDTH &&
+                location.y + fighter.getImageHeight() <= HEIGHT &&
+                location.x >= 0 &&
+                location.y >= 0;
+    }
 }

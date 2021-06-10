@@ -30,4 +30,18 @@ public class Location extends Point2D.Float {
         this.x += dx;
         this.y += dy;
     }
+
+    /**
+     * @return the x value as an int
+     */
+    public int getIntX(){
+        return (int) x;
+    }
+
+    /**
+     * @return the y value as an int
+     */
+    public int getIntY(){
+        return (int) x;
+    }
 }

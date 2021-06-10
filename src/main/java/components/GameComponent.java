@@ -91,8 +91,6 @@ public abstract class GameComponent {
         this.location = location;
     }
 
-    /**
-     * @return if the component still exist in the game
-     */
-    public abstract boolean exist();
+
+
 }

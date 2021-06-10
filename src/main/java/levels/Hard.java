@@ -1,6 +1,8 @@
 package levels;
 
 import components.fighters.Fighter;
+import components.fighters.Monster;
+import components.physics.Location;
 
 /**
  * Hard level
@@ -20,9 +22,9 @@ public class Hard extends Level {
     }
 
     @Override
-    public Fighter generateMonster() {
-        //TODO use FighterManager.getInstance().addMonster(%newly created monster%)
-        return null;
+    public Fighter generateMonster(Location location) {
+        // TODO : ajout d'un décorateur
+        return new Monster(location);
     }
 
     @Override

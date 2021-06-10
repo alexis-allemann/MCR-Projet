@@ -5,6 +5,7 @@ import components.physics.Location;
 import components.physics.Vector2D;
 import components.weapon.bullets.Bullet;
 import components.weapon.bullets.LaserBullet;
+import controllers.Direction;
 
 /**
  * Laser weapon
@@ -14,8 +15,9 @@ import components.weapon.bullets.LaserBullet;
  */
 public class LaserWeapon extends Weapon{
     @Override
-    Bullet getBullet() {
-        return new LaserBullet(new Vector2D(0, 1));
+    Bullet getBullet(Direction direction) {
+        float y = direction == Direction.TOP ? -1.f : 1.f;
+        return new LaserBullet(new Vector2D(0, y));
     }
 
     @Override
@@ -25,7 +27,9 @@ public class LaserWeapon extends Weapon{
 
     @Override
     Location getStartingBulletLocation(Fighter fighter) {
-        return new Location(fighter.getLocation().x,fighter.getLocation().y);
+        float x = fighter.getLocation().x + fighter.getImageWidth() / 2.f;
+        float y = fighter.getLocation().y + (fighter.getDirection() == Direction.TOP ? -1.f : 1.f);
+        return new Location(x,y);
     }
 
 }

@@ -4,6 +4,7 @@ import components.fighters.Fighter;
 import components.physics.Location;
 import components.weapon.bullets.Bullet;
 
+import controllers.Direction;
 import controllers.gameplay.BulletManager;
 
 /**
@@ -22,7 +23,7 @@ public abstract class Weapon {
     public void shoot(Fighter fighter) {
         long current = System.currentTimeMillis();
         if (current - lastBulletShotTime >= reloadTime()) {
-            Bullet bullet = getBullet();
+            Bullet bullet = getBullet(fighter.getDirection());
             bullet.setLocation(
                     getStartingBulletLocation(fighter)
             );
@@ -34,9 +35,11 @@ public abstract class Weapon {
     /**
      * Get a new bullet
      *
+     * @param direction direction the fighter is facing
      * @return bullet to shoot
+     *
      */
-    abstract Bullet getBullet();
+    abstract Bullet getBullet(Direction direction);
 
     /**
      * Reload time between shoots

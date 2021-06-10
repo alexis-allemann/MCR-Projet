@@ -2,6 +2,7 @@ package views;
 
 import components.GameComponent;
 import controllers.Controller;
+import java.awt.Image;
 
 /**
  * Space invaders view to display gameplay
@@ -26,16 +27,14 @@ public interface View {
     void displayMessage(String message);
 
     /**
-     * Paint a component on the view at a given position
-     *
-     * @param component to paint
+     * Repaint the view with the image
+     * @param image the image to paint
      */
-    void paintComponent(GameComponent component);
+    public void paintImage(Image image);
 
     /**
-     * Remove a component on the view at a given position
-     *
-     * @param component to remove
+     * Return an empty image of the view
+     * @return an empty image with the right size
      */
-    void removeComponent(GameComponent component);
+    public Image getBufferedImage();
 }

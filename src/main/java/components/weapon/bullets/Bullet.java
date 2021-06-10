@@ -1,6 +1,6 @@
 package components.weapon.bullets;
 
-import components.GameComponent;
+import components.GameComponentWithHitbox;
 import components.fighters.Fighter;
 import components.physics.Vector2D;
 import components.physics.Location;
@@ -11,10 +11,9 @@ import components.physics.Location;
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public abstract class Bullet extends GameComponent {
+public abstract class Bullet extends GameComponentWithHitbox {
     static final int BASE_SPEED = 10;
     final int BASE_POWER = 1;
-    protected boolean alive = true;
     protected Vector2D speed;
 
     /**
@@ -52,9 +51,7 @@ public abstract class Bullet extends GameComponent {
      * @param fighter fighter to remove health
      */
     public void hit(Fighter fighter) {
-        fighter.getHealth().removeHealth(getPower());
-        if(fighter.getHealth().getHP() <= 0)
-            fighter.die();
+        fighter.removeHealth(getPower());
     }
 
     /**
@@ -71,12 +68,6 @@ public abstract class Bullet extends GameComponent {
      * @return True if there's a fighter to next location
      */
     public boolean checkNextLocation(Fighter fighter) {
-        // TODO mettre une hitbox
-        return fighter.getLocation().equals(new Location(getLocation().x + speed.getX(), getLocation().y + speed.getY()));
-    }
-
-    @Override
-    public boolean exist() {
-        return alive;
+        return checkHitbox(speed, fighter);
     }
 }

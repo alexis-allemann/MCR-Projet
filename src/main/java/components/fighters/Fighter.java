@@ -1,13 +1,13 @@
 package components.fighters;
 
 import components.GameComponent;
-import components.Health;
+import components.GameComponentWithHitbox;
 import components.weapon.Weapon;
 import components.physics.Vector2D;
 import components.physics.Location;
 import controllers.Direction;
-import controllers.GamePlay;
 import controllers.gameplay.FighterManager;
+import controllers.gameplay.ViewManager;
 
 /**
  * Space invaders fighter
@@ -15,13 +15,12 @@ import controllers.gameplay.FighterManager;
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public abstract class Fighter extends GameComponent {
+public abstract class Fighter extends GameComponentWithHitbox {
     private final Vector2D SPEED_BASE = new Vector2D(1.f, 0.f);
     private final int POWER_BASE = 1;
-    protected boolean alive = true;
     protected Vector2D speed;
     private Weapon weapon;
-    private Health health;
+    private int health;
 
     /**
      * Instantiation of a new fighter
@@ -79,8 +78,31 @@ public abstract class Fighter extends GameComponent {
      * Get fighter's health
      * @return fighter's health
      */
-    public Health getHealth() {
+    public int getHealth() {
         return health;
+    }
+
+    /**
+     * Check if fighter is still alive
+     * @return true if fighter is alive
+     */
+    public boolean alive(){
+        return getHealth() > 0;
+    }
+
+    /**
+     * Removing healing points to the fighter's health
+     * @param hp healing points to remove
+     */
+    public void removeHealth(int hp){
+        health -= hp;
+    }
+
+    /**
+     * shoot with weapon
+     */
+    public void shoot(){
+        getWeapon().shoot(this);
     }
 
     /**

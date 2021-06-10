@@ -20,10 +20,6 @@ public class SpaceCraft extends Fighter {
         super(location, "spacecraft.png");
     }
 
-    @Override
-    public boolean exist() {
-        return true;
-    }
 
     @Override
     public Direction getDirection() {
@@ -32,6 +28,7 @@ public class SpaceCraft extends Fighter {
 
     @Override
     public void die(){
-        System.out.println("Game is over !");
+        // TODO: trigger game stop here/restart
+        System.out.println("Game over !");
     }
 }

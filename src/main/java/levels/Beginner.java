@@ -1,6 +1,8 @@
 package levels;
 
 import components.fighters.Fighter;
+import components.fighters.Monster;
+import components.physics.Location;
 
 /**
  * Beginner level
@@ -11,9 +13,8 @@ import components.fighters.Fighter;
 public class Beginner extends Level {
 
     @Override
-    public Fighter generateMonster() {
-        //TODO use FighterManager.getInstance().addMonster(%newly created monster%)
-        return null;
+    public Fighter generateMonster(Location location) {
+        return new Monster(location);
     }
 
     @Override

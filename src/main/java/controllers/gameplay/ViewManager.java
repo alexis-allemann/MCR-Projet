@@ -7,6 +7,11 @@ import controllers.GamePlay;
 import controllers.Direction;
 import views.View;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import java.awt.Image;
+
 /**
  * Thread that manage the view
  *
@@ -50,6 +55,12 @@ public class ViewManager implements Runnable {
     @Override
     public void run() {
         while (GamePlay.getInstance().isRunning()) {
+            List<GameComponent> components = getAllComponents();
+            Image nextImage = view.getBufferedImage();
+            for(GameComponent component : components){
+                nextImage.getGraphics().drawImage(component.getImage(), component.getLocation().getIntX(), component.getLocation().getIntY(), null);
+            }
+            view.paintImage(nextImage);
             try {
                 Thread.sleep(GamePlay.FRAMERATE);
             } catch (InterruptedException e) {
@@ -59,66 +70,15 @@ public class ViewManager implements Runnable {
     }
 
     /**
-     * Move spacecraft according to given direction
+     * Get all components to paint
      *
-     * @param direction  to move spacecraft
-     * @param spacecraft to move
+     * @return all components that have to be painted
      */
-    public void move(Direction direction, Fighter spacecraft) {
-        Location location = spacecraft.getLocation();
-        int moveOnX = 0;
-        switch (direction) {
-            case LEFT:
-                moveOnX = -10;
-                break;
-            case RIGHT:
-                moveOnX = 10;
-                break;
-        }
-        if (isInBounds(new Location(location.x + moveOnX, location.y), spacecraft))
-            spacecraft.setLocation(new Location(location.x + moveOnX, location.y));
-        view.removeComponent(spacecraft);
-        view.paintComponent(spacecraft);
-    }
-
-    /**
-     * Reset default location of the spacecraft
-     *
-     * @param spacecraft to reset location
-     */
-    public void resetSpaceCraftLocation(Fighter spacecraft) {
-        spacecraft.setLocation(new Location((GamePlay.WIDTH - spacecraft.getImageWidth()) / 2, GamePlay.HEIGHT - spacecraft.getImageHeight()));
-    }
-
-    /**
-     * Paint component on view
-     *
-     * @param component to paint
-     */
-    public void paintComponent(GameComponent component) {
-        view.paintComponent(component);
-    }
-
-    /**
-     * Remove component from view
-     *
-     * @param component to remove
-     */
-    public void removeComponent(GameComponent component) {
-        view.removeComponent(component);
-    }
-
-    /**
-     * Check if a location of a fighter is in view bounds
-     *
-     * @param location of the fighter
-     * @param fighter  to get image width and height
-     * @return boolean if it is in bounds
-     */
-    private boolean isInBounds(Location location, Fighter fighter) {
-        return location.x + fighter.getImageWidth() <= GamePlay.WIDTH &&
-                location.y + fighter.getImageHeight() <= GamePlay.HEIGHT &&
-                location.x >= 0 &&
-                location.y >= 0;
+    List<GameComponent> getAllComponents(){
+        List<GameComponent> components = new ArrayList<>();
+        components.addAll(FighterManager.getInstance().getMonsters());
+        components.addAll(BulletManager.getInstance().getBullets());
+        components.add(GamePlay.getInstance().getSpacecraft());
+        return components;
     }
 }

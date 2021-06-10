@@ -5,10 +5,12 @@ Entetes de classes
 
 Entetes des méthodes / constructeurs
 
-Test des paramètres nulls
+Test des paramètres nulls (pas nécessaire si une runtime exception peut etre levée)
 
 Commentaire @throws si une exception est levée
 
 Visibilité des attributs et des méthodes
 
 Imports : pas de *
+
+Enlever les this inutiles
