@@ -1,10 +1,11 @@
 package controllers;
 
-import components.physics.Location;
-import components.weapon.StandardWeapon;
+import model.World;
+import model.components.physics.Location;
+import model.components.weapon.StandardWeapon;
 import controllers.gameplay.BulletManager;
-import components.fighters.Fighter;
-import components.fighters.SpaceCraft;
+import model.components.fighters.Fighter;
+import model.components.fighters.SpaceCraft;
 import controllers.gameplay.FighterManager;
 import controllers.gameplay.ViewManager;
 import levels.Beginner;
@@ -28,8 +29,6 @@ public class GamePlay implements Controller {
     public static int FRAMERATE;
     private static GamePlay instance = new GamePlay();
     private static final Logger LOG = Logger.getLogger(GamePlay.class.getName());
-    private Fighter spacecraft;
-    private Level level;
 
     /**
      * Private constructor to implement Singleton pattern
@@ -64,13 +63,7 @@ public class GamePlay implements Controller {
         HEIGHT = Integer.parseInt(properties.getProperty("HEIGHT"));
         WIDTH = Integer.parseInt(properties.getProperty("WIDTH"));
 
-        LOG.info("Starting game");
-        this.level = new Beginner();
-        spacecraft = new SpaceCraft(new Location(0, 0));
-        spacecraft.setWeapon(new StandardWeapon());
         resetSpaceCraftLocation();
-
-        LOG.info("Starting view");
         view.startView(this);
 
         new Thread(BulletManager.getInstance()).start();
@@ -80,18 +73,18 @@ public class GamePlay implements Controller {
 
     @Override
     public void shoot() {
-        spacecraft.getWeapon().shoot(spacecraft);
+        Fighter sp = World.getInstance().getSpacecraft();
+        sp.getWeapon().shoot(sp);
     }
 
     @Override
     public void newGame() {
         LOG.info("New game started");
-
     }
 
     @Override
     public void move(Direction direction) {
-        Location location = spacecraft.getLocation();
+        Location location = World.getInstance().getSpacecraft().getLocation();
         int moveOnX = 0;
         switch (direction) {
             case LEFT:
@@ -101,8 +94,8 @@ public class GamePlay implements Controller {
                 moveOnX = 10;
                 break;
         }
-        if (isInBounds(new Location(location.x + moveOnX, location.y), spacecraft))
-            spacecraft.getLocation().translate(moveOnX, 0);
+        if (isInBounds(new Location(location.x + moveOnX, location.y), World.getInstance().getSpacecraft()))
+            World.getInstance().getSpacecraft().getLocation().translate(moveOnX, 0);
     }
 
     @Override
@@ -111,22 +104,13 @@ public class GamePlay implements Controller {
     }
 
     /**
-     * @return The spacecraft of the game
-     */
-    public Fighter getSpacecraft(){
-        return spacecraft;
-    }
-
-    /**
-     * @return the current level
-     */
-    public Level getLevel(){ return level; }
-
-    /**
      * Reset default location of the spacecraft
      */
     private void resetSpaceCraftLocation() {
-        spacecraft.setLocation(new Location((GamePlay.WIDTH - spacecraft.getImageWidth()) / 2, GamePlay.HEIGHT - spacecraft.getImageHeight()));
+        retrieveSpacecraft().setLocation(new Location(
+                (GamePlay.WIDTH - retrieveSpacecraft().getImageWidth()) / 2.f,
+                GamePlay.HEIGHT - retrieveSpacecraft().getImageHeight()
+        ));
     }
 
     /**
@@ -141,5 +125,9 @@ public class GamePlay implements Controller {
                 location.y + fighter.getImageHeight() <= HEIGHT &&
                 location.x >= 0 &&
                 location.y >= 0;
+    }
+
+    private Fighter retrieveSpacecraft(){
+        return World.getInstance().getSpacecraft();
     }
 }

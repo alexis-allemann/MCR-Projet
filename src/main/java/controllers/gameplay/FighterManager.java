@@ -1,8 +1,10 @@
 package controllers.gameplay;
 
 import controllers.GamePlay;
-import components.fighters.Fighter;
-import components.physics.Location;
+import model.World;
+import model.components.fighters.Fighter;
+import model.components.physics.Location;
+import model.components.weapon.bullets.Bullet;
 
 import java.util.*;
 
@@ -14,7 +16,6 @@ import java.util.*;
  */
 public class FighterManager implements Runnable {
     private static FighterManager instance = new FighterManager();
-    private List<Fighter> monsters = new LinkedList<>();
 
     /**
      * Instantiation of the fighter manager
@@ -37,17 +38,22 @@ public class FighterManager implements Runnable {
             // 1. check if we can generate monsters (every 5s i.e.)
             // 1.1 get Y coordinate of highest monsters
             checkMonsterGeneration();
-            List<Fighter> monstersCopy = new LinkedList<>(getMonsters());
-            for(Fighter monster : monstersCopy){
-                if(!monster.alive()) {
-                    monster.die();
-                }
-                else {
+            List<Fighter> monsters = retrieveMonsters();
+            List<Fighter> toRemove = new LinkedList<>();
+            for (Fighter monster : monsters) {
+                if (!monster.alive()) {
+                    // Add dead monster to list
+                    toRemove.add(monster);
+                } else {
                     monster.shoot();
                     monster.move();
                 }
-
             }
+            // Remove monster after iteration, else big exception occurs
+            for(Fighter monster : toRemove){
+                monster.die();
+            }
+
             try {
                 Thread.sleep(GamePlay.FRAMERATE);
             } catch (InterruptedException e) {
@@ -57,39 +63,30 @@ public class FighterManager implements Runnable {
     }
 
     /**
-     * Get monsters in the game
-     *
-     * @return copy of the list of monsters int the game
-     */
-    public synchronized Collection<Fighter> getMonsters() {
-        // Need to return a copy to avoid concurrences errors
-        return new ArrayList<>(monsters);
-    }
-
-    /**
-     * Remove monster from the list
-     * @param fighter Fighter to remove
-     */
-    public void removeMonster(Fighter fighter) {
-        monsters.remove(fighter);
-    }
-
-    /**
      * Generate a new wave of monster if possible
+     *
      * @details check that the highest monster is below the spawn line
      */
-     private void checkMonsterGeneration(){
-         boolean canGenerate = monsters.isEmpty() || monsters.get(monsters.size() -1).getLocation().y < GamePlay.SPAWN_HEIGHT;
-         // 2. if yes generate from level
-         if(canGenerate) {
-             for(int i = 0; i < GamePlay.getInstance().getLevel().getNbMonsterByWave(); ++i) {
-                 // TODO : Generate proper location for the monster
-                 Location monsterLocation = new Location(50.f * i, GamePlay.SPAWN_HEIGHT - 20.f);
-                 Fighter newMonster = GamePlay.getInstance().getLevel().generateMonster(monsterLocation);
-                 monsters.add(newMonster);
-             }
-         }
-     }
+    private void checkMonsterGeneration() {
+        List<Fighter> monsters = retrieveMonsters();
+        boolean canGenerate = monsters.isEmpty() || monsters.get(monsters.size() - 1).getLocation().y < GamePlay.SPAWN_HEIGHT;
+        if (canGenerate) {
+            float first_one = 15.f;
+            for (int i = 0; i < World.getInstance().getLevel().getNbMonsterByWave(); ++i) {
+                // TODO : Generate proper location for the monster
+                Location monsterLocation = new Location(95.f * i + first_one, GamePlay.SPAWN_HEIGHT);
+                Fighter newMonster = World.getInstance().getLevel().generateMonster(monsterLocation);
+                World.getInstance().addMonster(newMonster);
+            }
+        }
+    }
 
-
+    /**
+     * Get monsters in the game
+     *
+     * @return list of fighters in the game
+     */
+    private List<Fighter> retrieveMonsters() {
+        return World.getInstance().getMonsters();
+    }
 }

@@ -1,10 +1,8 @@
 package levels;
 
-import components.fighters.Fighter;
-import components.fighters.Monster;
-import components.physics.Location;
-import controllers.Direction;
-import controllers.gameplay.FighterManager;
+import model.components.fighters.Fighter;
+import model.components.fighters.Monster;
+import model.components.physics.Location;
 
 /**
  * Easy level

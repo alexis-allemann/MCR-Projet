@@ -1,6 +1,5 @@
 package views;
 
-import components.GameComponent;
 import controllers.Controller;
 import java.awt.Image;
 

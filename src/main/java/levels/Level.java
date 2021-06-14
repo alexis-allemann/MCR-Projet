@@ -1,7 +1,7 @@
 package levels;
 
-import components.fighters.Fighter;
-import components.physics.Location;
+import model.components.fighters.Fighter;
+import model.components.physics.Location;
 
 /**
  * Space invaders game levels

@@ -1,12 +1,14 @@
 package controllers.gameplay;
 
-import components.weapon.bullets.Bullet;
-import components.fighters.Fighter;
+import model.World;
+import model.components.weapon.bullets.Bullet;
+import model.components.fighters.Fighter;
 import controllers.GamePlay;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Thread that manage bullets actions (movement and hiting something)
@@ -16,7 +18,6 @@ import java.util.LinkedList;
  */
 public class BulletManager implements Runnable {
     private static BulletManager instance = new BulletManager();
-    private Collection<Bullet> bullets = new LinkedList<>();
 
     /**
      * Instantiation of the bullet manager
@@ -36,17 +37,24 @@ public class BulletManager implements Runnable {
     @Override
     public void run() {
         while (GamePlay.getInstance().isRunning()) {
-            // Need to get a copy to avoid concurrences errors
-            Collection<Bullet> bulletsList = new ArrayList<>(bullets);
-            for (Bullet bullet : bulletsList) {
-                Fighter fighter = checkFighterOnNextLocation(bullet);
-                if (fighter != null)
-                    bullet.hit(fighter);
-                else {
-                    // TODO : Check si bullet hors de la fenêtre
-                    bullet.move();
-                }
+            synchronized (retrieveBullets()) {
+                List<Bullet> bulletsToRemove = new LinkedList();
+                for (Bullet bullet : retrieveBullets()) {
+                    Fighter fighter = checkFighterOnNextLocation(bullet);
+                    if (fighter != null) {
+                        bullet.hit(fighter);
+                        bulletsToRemove.add(bullet);
+                    } else {
+                        bullet.move();
+                        if(!bullet.isInBounds()){
+                            bulletsToRemove.add(bullet);
+                        }
+                    }
 
+                }
+                for(Bullet bullet : bulletsToRemove){
+                    World.getInstance().removeBullet(bullet);
+                }
             }
             try {
                 Thread.sleep(GamePlay.FRAMERATE);
@@ -62,7 +70,7 @@ public class BulletManager implements Runnable {
      * @param bullet to add
      */
     public void addBullet(Bullet bullet) {
-        this.bullets.add(bullet);
+        retrieveBullets().add(bullet);
     }
 
     /**
@@ -72,20 +80,18 @@ public class BulletManager implements Runnable {
      * @return the fighter or null if there's no fighter
      */
     private Fighter checkFighterOnNextLocation(Bullet bullet) {
-        for (Fighter fighter : FighterManager.getInstance().getMonsters()) {
-            if (bullet.checkNextLocation(fighter)) {
-                return fighter;
+        if(bullet.checkNextLocation(World.getInstance().getSpacecraft())){
+            return World.getInstance().getSpacecraft();
+        }
+        for (Fighter monster : retrieveMonsters()) {
+            if (bullet.checkNextLocation(monster)) {
+                System.out.println("Hit monster " + monster.getLocation().x );
+                return monster;
             }
         }
         return null;
     }
 
-    /**
-     * Get bullets in the game
-     *
-     * @return collection of bullets
-     */
-    public Collection<Bullet> getBullets() {
-        return bullets;
-    }
+    private List<Bullet> retrieveBullets(){ return World.getInstance().getBullets();}
+    private List<Fighter> retrieveMonsters(){ return World.getInstance().getMonsters();}
 }

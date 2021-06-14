@@ -53,6 +53,7 @@ class MultiKeyPressListener implements KeyListener {
                     case KeyEvent.VK_R:
                     case KeyEvent.VK_N:
                         controller.newGame();
+                        break;
                 }
             }
         }

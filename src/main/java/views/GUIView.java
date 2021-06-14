@@ -1,7 +1,5 @@
 package views;
 
-import components.GameComponent;
-import components.physics.Location;
 import controllers.Controller;
 
 import javax.swing.JFrame;
@@ -10,7 +8,6 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.Color;
 import java.awt.Image;
-import java.awt.image.ImageObserver;
 
 /**
  * GUI view to display gameplay

@@ -1,16 +1,14 @@
 package controllers.gameplay;
 
-import components.GameComponent;
-import components.fighters.Fighter;
-import components.physics.Location;
+import model.World;
+import model.components.GameComponent;
 import controllers.GamePlay;
-import controllers.Direction;
+import model.components.GameComponentWithHitbox;
+import model.components.fighters.Fighter;
 import views.View;
 
-import java.util.ArrayList;
+import java.awt.*;
 import java.util.List;
-
-import java.awt.Image;
 
 /**
  * Thread that manage the view
@@ -55,10 +53,27 @@ public class ViewManager implements Runnable {
     @Override
     public void run() {
         while (GamePlay.getInstance().isRunning()) {
-            List<GameComponent> components = getAllComponents();
             Image nextImage = view.getBufferedImage();
-            for(GameComponent component : components){
+            nextImage.getGraphics().setColor(Color.RED);
+            Rectangle rec;
+
+            GameComponentWithHitbox spacecraft = World.getInstance().getSpacecraft();
+            rec = spacecraft.getHitBoxLocation();
+            nextImage.getGraphics().fillRect(rec.x, rec.y, rec.width, rec.height);
+            nextImage.getGraphics().drawImage(spacecraft.getImage(), spacecraft.getLocation().getIntX(), spacecraft.getLocation().getIntY(), null);
+
+            for (GameComponentWithHitbox component : World.getInstance().getMonsters()) {
                 nextImage.getGraphics().drawImage(component.getImage(), component.getLocation().getIntX(), component.getLocation().getIntY(), null);
+                rec = component.getHitBoxLocation();
+                nextImage.getGraphics().fillRect(rec.x, rec.y, rec.width, rec.height);
+            }
+
+
+            for (GameComponentWithHitbox component : World.getInstance().getBullets()) {
+                nextImage.getGraphics().drawImage(component.getImage(), component.getLocation().getIntX(), component.getLocation().getIntY(), null);
+                rec = component.getHitBoxLocation();
+
+                nextImage.getGraphics().fillRect(rec.x, rec.y, rec.width, rec.height);
             }
             view.paintImage(nextImage);
             try {
@@ -67,18 +82,5 @@ public class ViewManager implements Runnable {
                 e.printStackTrace();
             }
         }
-    }
-
-    /**
-     * Get all components to paint
-     *
-     * @return all components that have to be painted
-     */
-    List<GameComponent> getAllComponents(){
-        List<GameComponent> components = new ArrayList<>();
-        components.addAll(FighterManager.getInstance().getMonsters());
-        components.addAll(BulletManager.getInstance().getBullets());
-        components.add(GamePlay.getInstance().getSpacecraft());
-        return components;
     }
 }

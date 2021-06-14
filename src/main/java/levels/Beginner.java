@@ -1,8 +1,8 @@
 package levels;
 
-import components.fighters.Fighter;
-import components.fighters.Monster;
-import components.physics.Location;
+import model.components.fighters.Fighter;
+import model.components.fighters.Monster;
+import model.components.physics.Location;
 
 /**
  * Beginner level
