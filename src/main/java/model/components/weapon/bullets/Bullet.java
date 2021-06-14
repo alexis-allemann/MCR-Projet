@@ -1,12 +1,12 @@
-package components.weapon.bullets;
+package model.components.weapon.bullets;
 
-import components.GameComponentWithHitbox;
-import components.fighters.Fighter;
-import components.physics.Vector2D;
-import components.physics.Location;
+import model.components.GameComponentWithHitbox;
+import model.components.fighters.Fighter;
+import model.components.physics.Vector2D;
+import model.components.physics.Location;
 
 /**
- * Bullets used on components.fighters.spacecraft shoots
+ * Bullets used on model.components.fighters.spacecraft shoots
  *
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0

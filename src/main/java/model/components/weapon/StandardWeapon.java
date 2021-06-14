@@ -1,10 +1,10 @@
-package components.weapon;
+package model.components.weapon;
 
-import components.fighters.Fighter;
-import components.physics.Location;
-import components.physics.Vector2D;
-import components.weapon.bullets.Bullet;
-import components.weapon.bullets.StandardBullet;
+import model.components.fighters.Fighter;
+import model.components.physics.Location;
+import model.components.physics.Vector2D;
+import model.components.weapon.bullets.Bullet;
+import model.components.weapon.bullets.StandardBullet;
 import controllers.Direction;
 
 /**
@@ -31,10 +31,4 @@ public class StandardWeapon extends Weapon{
         return RELOAD_TIME_STANDARD;
     }
 
-    @Override
-    Location getStartingBulletLocation(Fighter fighter) {
-        float x = fighter.getLocation().x + fighter.getImageWidth() / 2.f;
-        float y = fighter.getLocation().y + (fighter.getDirection() == Direction.TOP ? -1.f : 1.f);
-        return new Location(x,y);
-    }
 }

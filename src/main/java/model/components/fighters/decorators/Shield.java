@@ -1,9 +1,9 @@
-package components.fighters.decorators;
+package model.components.fighters.decorators;
 
-import components.fighters.Fighter;
+import model.components.fighters.Fighter;
 
 /**
- * Shield to protect components.fighters
+ * Shield to protect model.components.fighters
  *
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0

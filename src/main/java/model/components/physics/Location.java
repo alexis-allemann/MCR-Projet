@@ -1,4 +1,4 @@
-package components.physics;
+package model.components.physics;
 
 import java.awt.geom.Point2D;
 

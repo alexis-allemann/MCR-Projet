@@ -1,8 +1,9 @@
-package components.weapon;
+package model.components.weapon;
 
-import components.fighters.Fighter;
-import components.physics.Location;
-import components.weapon.bullets.Bullet;
+import model.World;
+import model.components.fighters.Fighter;
+import model.components.physics.Location;
+import model.components.weapon.bullets.Bullet;
 
 import controllers.Direction;
 import controllers.gameplay.BulletManager;
@@ -18,6 +19,7 @@ public abstract class Weapon {
 
     /**
      * Shoot a new bullet
+     *
      * @param fighter the fighter shooting with the weapon
      */
     public void shoot(Fighter fighter) {
@@ -25,9 +27,9 @@ public abstract class Weapon {
         if (current - lastBulletShotTime >= reloadTime()) {
             Bullet bullet = getBullet(fighter.getDirection());
             bullet.setLocation(
-                    getStartingBulletLocation(fighter)
+                    getStartingBulletLocation(fighter, bullet)
             );
-            BulletManager.getInstance().addBullet(bullet);
+            World.getInstance().addBullet(bullet);
             lastBulletShotTime = System.currentTimeMillis();
         }
     }
@@ -37,7 +39,6 @@ public abstract class Weapon {
      *
      * @param direction direction the fighter is facing
      * @return bullet to shoot
-     *
      */
     abstract Bullet getBullet(Direction direction);
 
@@ -53,5 +54,9 @@ public abstract class Weapon {
      *
      * @return the starting location of the bullet
      */
-     abstract Location getStartingBulletLocation(Fighter fighter);
+    Location getStartingBulletLocation(Fighter fighter, Bullet bullet) {
+        float x = fighter.getLocation().x + fighter.getImageWidth() / 2.f;
+        float y = fighter.getLocation().y + (fighter.getDirection() == Direction.TOP ? -1.5f : 1.5f) * bullet.getImageHeight();
+        return new Location(x,y);
+    }
 }

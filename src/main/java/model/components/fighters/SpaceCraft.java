@@ -1,6 +1,6 @@
-package components.fighters;
+package model.components.fighters;
 
-import components.physics.Location;
+import model.components.physics.Location;
 import controllers.Direction;
 
 /**

@@ -1,6 +1,6 @@
-package components.weapon.bullets;
+package model.components.weapon.bullets;
 
-import components.physics.Vector2D;
+import model.components.physics.Vector2D;
 
 /**
  * Laser bullet

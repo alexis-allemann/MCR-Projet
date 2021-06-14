@@ -1,10 +1,10 @@
-package components.fighters.decorators;
+package model.components.fighters.decorators;
 
-import components.fighters.Fighter;
+import model.components.fighters.Fighter;
 import controllers.Direction;
 
 /**
- * Space invaders components.fighters decorators
+ * Space invaders model.components.fighters decorators
  *
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0

@@ -1,6 +1,6 @@
-package components;
+package model.components;
 
-import components.physics.Location;
+import model.components.physics.Location;
 
 import javax.imageio.ImageIO;
 import java.awt.Image;

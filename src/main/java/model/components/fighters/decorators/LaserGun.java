@@ -1,9 +1,9 @@
-package components.fighters.decorators;
+package model.components.fighters.decorators;
 
-import components.fighters.Fighter;
+import model.components.fighters.Fighter;
 
 /**
- * Laser gun to shoot laser components.weapon.bullets
+ * Laser gun to shoot laser model.components.weapon.bullets
  *
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0

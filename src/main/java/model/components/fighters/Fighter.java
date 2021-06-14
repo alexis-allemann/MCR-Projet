@@ -1,13 +1,12 @@
-package components.fighters;
+package model.components.fighters;
 
-import components.GameComponent;
-import components.GameComponentWithHitbox;
-import components.weapon.Weapon;
-import components.physics.Vector2D;
-import components.physics.Location;
+import model.World;
+import model.components.GameComponentWithHitbox;
+import model.components.weapon.Weapon;
+import model.components.physics.Vector2D;
+import model.components.physics.Location;
 import controllers.Direction;
 import controllers.gameplay.FighterManager;
-import controllers.gameplay.ViewManager;
 
 /**
  * Space invaders fighter
@@ -31,7 +30,7 @@ public abstract class Fighter extends GameComponentWithHitbox {
     public Fighter(Location location, String image) {
         super(location, image);
         speed = SPEED_BASE;
-        health = 5;
+        health = 1;
     }
 
     /**
@@ -103,13 +102,14 @@ public abstract class Fighter extends GameComponentWithHitbox {
      * shoot with weapon
      */
     public void shoot(){
-//        getWeapon().shoot(this);
+        if(getWeapon() != null)
+        getWeapon().shoot(this);
     }
 
     /**
      * Death action
      */
     public void die(){
-        FighterManager.getInstance().removeMonster(this);
+       World.getInstance().removeMonster(this);
     }
 }
