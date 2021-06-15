@@ -31,4 +31,9 @@ public abstract class FighterDecorator extends Fighter {
     public int getDefaultHealth() {
         return fighter.getDefaultHealth();
     }
+
+    @Override
+    public boolean isMonsterTeam() {
+        return fighter.isMonsterTeam();
+    }
 }

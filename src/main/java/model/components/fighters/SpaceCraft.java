@@ -36,4 +36,9 @@ public class SpaceCraft extends Fighter {
         // TODO: trigger game stop here/restart
         System.out.println("Game over !");
     }
+
+    @Override
+    public boolean isMonsterTeam() {
+        return false;
+    }
 }

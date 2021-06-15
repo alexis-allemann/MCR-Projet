@@ -9,8 +9,6 @@ import model.components.physics.Vector2D;
 
 import java.util.List;
 import java.util.LinkedList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Thread that manage fighters actions (movements and shootings)
@@ -18,7 +16,7 @@ import java.util.TimerTask;
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public class FighterManager implements Runnable {
+public class FighterManager {
     private static final FighterManager INSTANCE = new FighterManager();
     private static final int SECONDS_BEFORE_DOWN_MOVE = 2;
     private static final int NB_MOVES_BEFORE_INVERT = 80;
@@ -40,71 +38,62 @@ public class FighterManager implements Runnable {
         return INSTANCE;
     }
 
-    @Override
-    public void run() {
+    /**
+     * Manage fighters actions
+     */
+    public void manage() {
         World world = World.getInstance();
-        Timer timer = new Timer();
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                // Check if game is still running
-                if (!GamePlay.getInstance().isRunning()) {
-                    cancel();
-                    timer.cancel();
-                }
 
-                // Check if level has changed
-                world.getLevel().checkLevelChanged();
+        // Check if level has changed
+        world.getLevel().checkLevelChanged();
 
-                // Check if new monsters can be generated
-                checkMonsterGeneration();
+        // Check if new monsters can be generated
+        checkMonsterGeneration();
 
-                // Lock monsters list instance to prevent concurrences errors
-                synchronized (world.getMonsters()) {
+        // Lock monsters list instance to prevent concurrences errors
+        synchronized (world.getMonsters()) {
 
-                    // Check if monsters should move down or invert speed
-                    boolean downMove = System.currentTimeMillis() - lastMonstersDownMove > SECONDS_BEFORE_DOWN_MOVE * 1000;
-                    boolean invertSpeed = nbMoveInSameDirection > NB_MOVES_BEFORE_INVERT;
+            // Check if monsters should move down or invert speed
+            boolean downMove = System.currentTimeMillis() - lastMonstersDownMove > SECONDS_BEFORE_DOWN_MOVE * 1000;
+            boolean invertSpeed = nbMoveInSameDirection > NB_MOVES_BEFORE_INVERT;
 
-                    List<Fighter> monsters = world.getMonsters();
-                    List<Fighter> toRemove = new LinkedList<>();
-                    for (Fighter monster : monsters) {
-                        if (!monster.alive()) {
-                            toRemove.add(monster);
-                            world.getLevel().addMonsterKilled();
-                        } else {
-                            // Calculate speed on X axis
-                            float speedOnX = monster.getSpeed().getX();
-                            if (invertSpeed)
-                                speedOnX *= -1;
+            List<Fighter> monsters = world.getMonsters();
+            List<Fighter> toRemove = new LinkedList<>();
+            for (Fighter monster : monsters) {
+                if (!monster.alive()) {
+                    toRemove.add(monster);
+                    world.getLevel().addMonsterKilled();
+                } else {
+                    // Calculate speed on X axis
+                    float speedOnX = monster.getSpeed().getX();
+                    if (invertSpeed)
+                        speedOnX *= -1;
 
-                            // Change monster speed
-                            if (downMove) {
-                                monster.setSpeed(new Vector2D(speedOnX, 10.0f));
-                                lastMonstersDownMove = System.currentTimeMillis();
-                            } else {
-                                monster.setSpeed(new Vector2D(speedOnX, 0f));
-                            }
-
-                            // monster.shoot();
-                            monster.move();
-                        }
+                    // Change monster speed
+                    if (downMove) {
+                        monster.setSpeed(new Vector2D(speedOnX, 10.0f));
+                        lastMonstersDownMove = System.currentTimeMillis();
+                    } else {
+                        monster.setSpeed(new Vector2D(speedOnX, 0f));
                     }
 
-                    // Remove monster after iteration to handle concurrence in synchronised list
-                    for (Fighter monster : toRemove)
-                        monster.die();
-
-                    // Update nb moves in the same direction
-                    if (invertSpeed)
-                        nbMoveInSameDirection = 0;
-                    else
-                        nbMoveInSameDirection++;
+                    monster.shoot();
+                    monster.move();
                 }
             }
-        };
-        timer.scheduleAtFixedRate(task, 0, GamePlay.FRAME_RATE);
+
+            // Remove monster after iteration to handle concurrence in synchronised list
+            for (Fighter monster : toRemove)
+                monster.die();
+
+            // Update nb moves in the same direction
+            if (invertSpeed)
+                nbMoveInSameDirection = 0;
+            else
+                nbMoveInSameDirection++;
+        }
     }
+
 
     /**
      * Generate a new wave of monster if possible

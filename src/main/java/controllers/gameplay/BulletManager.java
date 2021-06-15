@@ -3,11 +3,8 @@ package controllers.gameplay;
 import model.World;
 import model.components.weapon.bullets.Bullet;
 import model.components.fighters.Fighter;
-import controllers.GamePlay;
 
 import java.util.LinkedList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Thread that manage bullets actions (movement and hitting something)
@@ -15,7 +12,7 @@ import java.util.TimerTask;
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public class BulletManager implements Runnable {
+public class BulletManager {
     private static final BulletManager INSTANCE = new BulletManager();
 
     /**
@@ -33,43 +30,32 @@ public class BulletManager implements Runnable {
         return INSTANCE;
     }
 
-    @Override
-    public void run() {
-        Timer timer = new Timer();
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                // Check if game is still running
-                if (!GamePlay.getInstance().isRunning()) {
-                    cancel();
-                    timer.cancel();
-                }
+    /**
+     * Manage bullets actions
+     */
+    public void manage() {
+        // Lock bullets list instance to prevent concurrences errors
+        synchronized (World.getInstance().getBullets()) {
+            LinkedList<Bullet> bulletsToRemove = new LinkedList<>();
+            for (Bullet bullet : World.getInstance().getBullets()) {
 
-                // Lock bullets list instance to prevent concurrences errors
-                synchronized (World.getInstance().getBullets()) {
-                    LinkedList<Bullet> bulletsToRemove = new LinkedList<>();
-                    for (Bullet bullet : World.getInstance().getBullets()) {
-
-                        // Check if a fighter has been touched by bullet
-                        Fighter fighter = checkFighterOnNextLocation(bullet);
-                        if (fighter != null) {
-                            bullet.hit(fighter);
-                            bulletsToRemove.add(bullet);
-                        } else {
-                            bullet.move();
-                            if (!bullet.isInBounds()) {
-                                bulletsToRemove.add(bullet);
-                            }
-                        }
+                // Check if a fighter has been touched by bullet
+                Fighter fighter = checkFighterOnNextLocation(bullet);
+                if (fighter != null) {
+                    bullet.hit(fighter);
+                    bulletsToRemove.add(bullet);
+                } else {
+                    bullet.move();
+                    if (!bullet.isInBounds()) {
+                        bulletsToRemove.add(bullet);
                     }
-
-                    // Remove monster after iteration to handle concurrence in synchronised list
-                    for (Bullet bullet : bulletsToRemove)
-                        World.getInstance().removeBullet(bullet);
                 }
             }
-        };
-        timer.scheduleAtFixedRate(task, 0, GamePlay.FRAME_RATE);
+
+            // Remove monster after iteration to handle concurrence in synchronised list
+            for (Bullet bullet : bulletsToRemove)
+                World.getInstance().removeBullet(bullet);
+        }
     }
 
     /**

@@ -15,13 +15,11 @@ public class LaserWeapon extends Weapon{
     @Override
     Bullet getBullet(Direction direction) {
         float y = direction == Direction.TOP ? -5.f : 5.f;
-        return new LaserBullet(new Vector2D(0, y));
+        return new LaserBullet(new Vector2D(0, y), getFighter().isMonsterTeam());
     }
 
     @Override
     int reloadTime() {
         return 500;
     }
-
-
 }

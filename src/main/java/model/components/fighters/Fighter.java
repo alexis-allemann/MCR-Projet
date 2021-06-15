@@ -66,6 +66,7 @@ public abstract class Fighter extends GameComponentWithHitBox {
      */
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
+        this.weapon.setFighter(this);
     }
 
     /**
@@ -95,6 +96,7 @@ public abstract class Fighter extends GameComponentWithHitBox {
 
     /**
      * Get default health
+     *
      * @return default health
      */
     public abstract int getDefaultHealth();
@@ -131,7 +133,7 @@ public abstract class Fighter extends GameComponentWithHitBox {
      */
     public void shoot() {
         if (getWeapon() != null)
-            getWeapon().shoot(this);
+            getWeapon().shoot();
     }
 
     /**

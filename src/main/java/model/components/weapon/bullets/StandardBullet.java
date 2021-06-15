@@ -14,8 +14,9 @@ public class StandardBullet extends Bullet {
      * Instantiation of a new standard bullet
      *
      * @param direction of the bullet
+     * @param isMonsterTeam if bullet is shot by a monster
      */
-    public StandardBullet(Vector2D direction) {
-        super("bullet.png", direction);
+    public StandardBullet(Vector2D direction, boolean isMonsterTeam) {
+        super("bullet.png", direction, isMonsterTeam);
     }
 }

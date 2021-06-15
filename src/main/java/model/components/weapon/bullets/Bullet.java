@@ -12,19 +12,22 @@ import model.components.physics.Location;
  * @version 1.0
  */
 public abstract class Bullet extends GameComponentWithHitBox {
-    static final int BASE_SPEED = 10;
-    final int BASE_POWER = 1;
+    protected static final int BASE_SPEED = 10;
+    protected final int BASE_POWER = 1;
     protected final Vector2D speed;
+    private boolean isMonsterTeam;
 
     /**
      * Instantiation of a new bullet
      *
      * @param image filename of the bullet image
      * @param direction of the bullet
+     * @param isMonsterTeam if bullet is shot by a monster
      */
-    public Bullet(String image, Vector2D direction) {
+    public Bullet(String image, Vector2D direction, boolean isMonsterTeam) {
         super(new Location(0, 0), image);
         this.speed = new Vector2D(direction.getX() * getBaseSpeed(), direction.getY() * getBaseSpeed());
+        this.isMonsterTeam = isMonsterTeam;
     }
 
     /**
@@ -68,6 +71,13 @@ public abstract class Bullet extends GameComponentWithHitBox {
      * @return True if there's a fighter to next location
      */
     public boolean checkNextLocation(Fighter fighter) {
+        if(fighter.isMonsterTeam() == this.isMonsterTeam)
+            return false;
         return checkHitBox(speed, fighter);
+    }
+
+    @Override
+    public boolean isMonsterTeam() {
+        return isMonsterTeam;
     }
 }

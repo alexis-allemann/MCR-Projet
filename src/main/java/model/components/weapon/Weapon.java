@@ -15,22 +15,39 @@ import controllers.Direction;
  */
 public abstract class Weapon {
     private long lastBulletShotTime = System.currentTimeMillis();
+    private Fighter fighter;
+
+    /**
+     * Set weapon's owner
+     *
+     * @param fighter who owns the weapon
+     */
+    public void setFighter(Fighter fighter) {
+        this.fighter = fighter;
+    }
 
     /**
      * Shoot a new bullet
-     *
-     * @param fighter the fighter shooting with the weapon
      */
-    public void shoot(Fighter fighter) {
+    public void shoot() {
         long current = System.currentTimeMillis();
         if (current - lastBulletShotTime >= reloadTime()) {
             Bullet bullet = getBullet(fighter.getDirection());
             bullet.setLocation(
-                    getStartingBulletLocation(fighter, bullet)
+                    getStartingBulletLocation(bullet)
             );
             World.getInstance().addBullet(bullet);
             lastBulletShotTime = System.currentTimeMillis();
         }
+    }
+
+    /**
+     * Fighter who owns the weapon
+     *
+     * @return who owns the weapon
+     */
+    public Fighter getFighter() {
+        return fighter;
     }
 
     /**
@@ -53,9 +70,9 @@ public abstract class Weapon {
      *
      * @return the starting location of the bullet
      */
-    Location getStartingBulletLocation(Fighter fighter, Bullet bullet) {
+    Location getStartingBulletLocation(Bullet bullet) {
         float x = fighter.getLocation().x + fighter.getImageWidth() / 2.f;
-        float y = fighter.getLocation().y + (fighter.getDirection() == Direction.TOP ? -1.5f : 1.5f) * bullet.getImageHeight();
-        return new Location(x,y);
+        float y = fighter.getLocation().y + (fighter.getDirection() == Direction.TOP ? -1.5f : 1.5f) * fighter.getImageHeight();
+        return new Location(x, y);
     }
 }

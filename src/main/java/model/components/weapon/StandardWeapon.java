@@ -21,7 +21,7 @@ public class StandardWeapon extends Weapon{
     @Override
     Bullet getBullet(Direction direction) {
         float y = direction == Direction.TOP ? -1.f : 1.f;
-        return new StandardBullet(new Vector2D(0, y));
+        return new StandardBullet(new Vector2D(0, y), getFighter().isMonsterTeam());
     }
 
     @Override

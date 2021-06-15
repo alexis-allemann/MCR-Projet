@@ -1,5 +1,6 @@
 package controllers;
 
+import controllers.gameplay.ComponentManager;
 import model.World;
 import model.components.physics.Location;
 import controllers.gameplay.BulletManager;
@@ -66,15 +67,14 @@ public class GamePlay implements Controller {
         resetSpaceCraftLocation();
         view.startView(this);
 
-        new Thread(BulletManager.getInstance()).start();
-        new Thread(FighterManager.getInstance()).start();
+        new Thread(ComponentManager.getInstance()).start();
         new Thread(ViewManager.getInstance(view)).start();
     }
 
     @Override
     public void shoot() {
         Fighter sp = World.getInstance().getSpacecraft();
-        sp.getWeapon().shoot(sp);
+        sp.getWeapon().shoot();
     }
 
     @Override

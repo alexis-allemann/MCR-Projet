@@ -13,9 +13,10 @@ public class Bomb extends Bullet {
     /**
      * Instantiation of a new bomb
      *
-     * @param direction of the bomb
+     * @param direction     of the bomb
+     * @param isMonsterTeam if bullet is shot by a monster
      */
-    public Bomb(Vector2D direction) {
-        super("bomb.png", direction);
+    public Bomb(Vector2D direction, boolean isMonsterTeam) {
+        super("bomb.png", direction, isMonsterTeam);
     }
 }

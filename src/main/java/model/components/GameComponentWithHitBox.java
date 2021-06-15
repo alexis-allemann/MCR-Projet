@@ -10,6 +10,13 @@ import java.awt.Rectangle;
 public abstract class GameComponentWithHitBox extends GameComponent {
 
     /**
+     * Method to know if a fighter is a monster
+     *
+     * @return if the fighter is a monster
+     */
+    public abstract boolean isMonsterTeam();
+
+    /**
      * Instantiation of a new game component with a hit box
      *
      * @param location where component is

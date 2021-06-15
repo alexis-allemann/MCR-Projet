@@ -4,6 +4,7 @@ import model.World;
 import model.components.fighters.Fighter;
 import model.components.fighters.Monster;
 import model.components.physics.Location;
+import model.components.weapon.LaserWeapon;
 
 /**
  * Beginner level
@@ -21,7 +22,9 @@ public class Beginner extends Level {
 
     @Override
     public Fighter generateMonster(Location location) {
-        return new Monster(location);
+        Monster newMonster = new Monster(location);
+        newMonster.setWeapon(new LaserWeapon());
+        return newMonster;
     }
 
     @Override

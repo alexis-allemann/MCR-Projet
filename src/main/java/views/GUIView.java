@@ -34,11 +34,9 @@ public class GUIView extends JFrame implements View {
     private final JPanel MAIN_PANEL = new JPanel();
     private final JPanel GAME_PANEL = new JPanel();
     private final JPanel INFO_PANEL = new JPanel();
-    private final JPanel HEALTH_PANEL = new JPanel();
     private final JLabel SCORE_LABEL = new JLabel();
     private final JLabel LEVEL_LABEL = new JLabel();
-    private final JLabel HEALTH_LABEL = new JLabel();
-    private final JPanel HEALTH_RECTANGLE = new JPanel();
+    private final JPanel HEALTH_BAR = new HealthBar();
 
     @Override
     public void startView(Controller controller) {
@@ -53,8 +51,6 @@ public class GUIView extends JFrame implements View {
 
         SCORE_LABEL.setForeground(Color.green);
         LEVEL_LABEL.setForeground(Color.green);
-        HEALTH_LABEL.setForeground(Color.green);
-        HEALTH_LABEL.setHorizontalAlignment(SwingConstants.CENTER);
 
         INFO_PANEL.setLocation(new Point(0, 0));
         INFO_PANEL.setPreferredSize(new Dimension(GamePlay.WIDTH, GamePlay.INFO_PANEL_HEIGHT));
@@ -63,16 +59,8 @@ public class GUIView extends JFrame implements View {
         INFO_PANEL.setBorder(new EmptyBorder(10, 10, 10, 10));
         INFO_PANEL.add(LEVEL_LABEL, BorderLayout.LINE_START);
         INFO_PANEL.add(SCORE_LABEL, BorderLayout.LINE_END);
-        INFO_PANEL.add(HEALTH_PANEL, BorderLayout.CENTER);
+        INFO_PANEL.add(HEALTH_BAR, BorderLayout.CENTER);
         MAIN_PANEL.add(INFO_PANEL);
-
-        HEALTH_PANEL.setBackground(Color.black);
-        HEALTH_PANEL.setLayout(new FlowLayout());
-        HEALTH_PANEL.add(HEALTH_LABEL);
-        HEALTH_PANEL.add(HEALTH_RECTANGLE);
-
-        HEALTH_RECTANGLE.setBackground(Color.green);
-        HEALTH_RECTANGLE.setPreferredSize(new Dimension(getHealthWidth(), 20));
 
         GAME_PANEL.setLocation(new Point(0, GamePlay.INFO_PANEL_HEIGHT));
         GAME_PANEL.setPreferredSize(new Dimension(GamePlay.WIDTH, GamePlay.HEIGHT - GamePlay.INFO_PANEL_HEIGHT));
@@ -124,8 +112,7 @@ public class GUIView extends JFrame implements View {
         World world = World.getInstance();
         LEVEL_LABEL.setText("Level : " + world.getLevel());
         SCORE_LABEL.setText("Score : " + world.getLevel().getScore());
-        HEALTH_LABEL.setText("Health : " + world.getSpacecraft().getHealth());
-        HEALTH_RECTANGLE.setPreferredSize(new Dimension(getHealthWidth(), 20));
+//        getContentPane().repaint();
         GAME_PANEL.getGraphics().drawImage(image, 0, 0, GAME_PANEL);
     }
 
@@ -135,14 +122,5 @@ public class GUIView extends JFrame implements View {
         image.getGraphics().fillRect(0, 0, GamePlay.WIDTH, GamePlay.HEIGHT);
         image.getGraphics().setColor(Color.BLACK);
         return image;
-    }
-
-    /**
-     * Get health panel width
-     *
-     * @return health panel width
-     */
-    private int getHealthWidth() {
-        return (GamePlay.WIDTH / 3) / (SpaceCraft.MAX_HEALTH / World.getInstance().getSpacecraft().getHealth());
     }
 }
