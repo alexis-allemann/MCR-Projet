@@ -1,4 +1,4 @@
-package controllers.gameplay;
+package controllers.managers;
 
 import controllers.GamePlay;
 import model.levels.Level;

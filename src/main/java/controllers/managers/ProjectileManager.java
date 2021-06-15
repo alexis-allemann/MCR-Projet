@@ -1,4 +1,4 @@
-package controllers.gameplay;
+package controllers.managers;
 
 import model.World;
 import model.components.weapon.Projectile;

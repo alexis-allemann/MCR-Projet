@@ -1,10 +1,10 @@
 package controllers;
 
-import controllers.gameplay.ComponentManager;
+import controllers.managers.ComponentManager;
 import model.World;
 import utils.physics.Location;
 import model.components.fighters.Fighter;
-import controllers.gameplay.ViewManager;
+import controllers.managers.ViewManager;
 import views.View;
 
 import java.util.Properties;
