@@ -7,8 +7,8 @@ package model.components.physics;
  * @version 1.0
  */
 public class Vector2D {
-    private final float x;
-    private final float y;
+    private final float X;
+    private final float Y;
 
     /**
      * Instantiation of a new 2D vector
@@ -17,8 +17,8 @@ public class Vector2D {
      * @param y value on y axis
      */
     public Vector2D(float x, float y) {
-        this.x = x;
-        this.y = y;
+        this.X = x;
+        this.Y = y;
     }
 
     /**
@@ -27,7 +27,7 @@ public class Vector2D {
      * @return move on x axis
      */
     public float getX() {
-        return x;
+        return X;
     }
 
     /**
@@ -36,6 +36,6 @@ public class Vector2D {
      * @return value on y axis
      */
     public float getY() {
-        return y;
+        return Y;
     }
 }

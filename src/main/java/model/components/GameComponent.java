@@ -7,8 +7,6 @@ import java.awt.Image;
 import java.awt.Graphics2D;
 import java.io.IOException;
 import java.util.Objects;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Displayable game component
@@ -17,7 +15,6 @@ import java.util.logging.Logger;
  * @version 1.0
  */
 public abstract class GameComponent {
-    private static final Logger LOG = Logger.getLogger(GameComponent.class.getName());
     protected Location location;
     protected Image image;
 
@@ -33,7 +30,7 @@ public abstract class GameComponent {
             ClassLoader classloader = Thread.currentThread().getContextClassLoader();
             image = ImageIO.read(Objects.requireNonNull(classloader.getResource(filename)));
         } catch (IOException e) {
-            LOG.log(Level.SEVERE, "Component image has not been found in resources");
+            System.out.println("Component image has not been found in resources");
         }
     }
 
