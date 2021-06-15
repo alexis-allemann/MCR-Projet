@@ -34,8 +34,6 @@ public class Shield extends FighterDecorator {
         world.setSpacecraft(world.getSpacecraft().removeDecorator(this));
     }
 
-}
-
     @Override
     public void draw(Graphics2D graphics2D) {
         super.draw(graphics2D);
