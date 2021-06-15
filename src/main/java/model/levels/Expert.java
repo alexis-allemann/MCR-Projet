@@ -1,51 +1,48 @@
-package levels;
+package model.levels;
 
-import model.World;
 import model.components.fighters.Fighter;
 import model.components.fighters.Monster;
 import utils.physics.Location;
 
 /**
- * Medium level
+ * Expert level
  *
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public class Medium extends Level {
+public class Expert extends Level{
 
     /**
-     * Change level to medium
+     * Change level to expert
      *
      * @param oldLevel to retrieve attributes
      */
-    public Medium(Level oldLevel) {
+    public Expert(Level oldLevel) {
         super(oldLevel);
     }
 
     @Override
     public void checkLevelChanged() {
-        if (nbMonstersKilled >= 15 || getTime() > 90)
-            World.getInstance().setLevel(new Hard(this));
     }
 
     @Override
     public Fighter generateMonster(Location location) {
         // TODO : ajout d'un décorateur
-        return new Monster(location, 1.3f);
+        return new Monster(location, 1.1f);
     }
 
     @Override
     public float probabilityToGenerateDecoration() {
-        return 0.15f;
+        return 0.5f;
     }
 
     @Override
     public int getNbMonsterByWave() {
-        return 6;
+        return 8;
     }
 
     @Override
     public String toString() {
-        return "Medium";
+        return "Expert";
     }
 }

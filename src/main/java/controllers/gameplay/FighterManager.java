@@ -1,7 +1,7 @@
 package controllers.gameplay;
 
 import controllers.GamePlay;
-import levels.Level;
+import model.levels.Level;
 import model.World;
 import model.components.fighters.Fighter;
 import utils.physics.Location;

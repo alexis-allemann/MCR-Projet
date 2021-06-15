@@ -1,4 +1,4 @@
-package levels;
+package model.levels;
 
 import model.World;
 import model.components.fighters.Fighter;

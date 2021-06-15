@@ -1,4 +1,4 @@
-package levels;
+package model.levels;
 
 import model.components.fighters.Fighter;
 import model.components.weapon.decorators.BulletSizeEnhancer;
@@ -10,7 +10,7 @@ import utils.physics.Location;
 import java.util.ArrayList;
 
 /**
- * Space invaders game levels
+ * Space invaders game model.levels
  *
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0

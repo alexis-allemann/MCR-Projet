@@ -1,7 +1,7 @@
 package model;
 
-import levels.Beginner;
-import levels.Level;
+import model.levels.Beginner;
+import model.levels.Level;
 import model.components.fighters.Fighter;
 import model.components.fighters.SpaceCraft;
 import model.components.weapon.Projectile;
