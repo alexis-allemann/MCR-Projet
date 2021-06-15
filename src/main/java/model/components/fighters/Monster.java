@@ -14,6 +14,7 @@ import model.components.weapon.BombWeapon;
 public class Monster extends Fighter {
     private float timingRange;
     private long lastMonstersDownMove = System.currentTimeMillis();
+    private final int  POINTS_MONSTER = 50;
 
     /**
      * Instantiation of a new monster
@@ -52,5 +53,10 @@ public class Monster extends Fighter {
         float randomNumber = Utils.getInstance().randomFloat(1);
         if (randomNumber <= timingRange)
             super.shoot();
+    }
+
+    @Override
+    public int getPoints() {
+        return POINTS_MONSTER;
     }
 }

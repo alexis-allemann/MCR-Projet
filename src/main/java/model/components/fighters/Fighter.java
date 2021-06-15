@@ -154,6 +154,7 @@ public abstract class Fighter extends GameComponentWithHitBox {
     public void die() {
         World world = World.getInstance();
         world.removeMonster(this);
+        world.getLevel().addScore(getPoints());
         float random = Utils.getInstance().randomFloat(1);
         if (random <= world.getLevel().probabilityToGenerateDecoration()) {
             world.addBullet(new Projectile(new Location(super.location), "monster-blue.png", new Vector2D(0, 5), true) {
@@ -164,6 +165,14 @@ public abstract class Fighter extends GameComponentWithHitBox {
                 }
             });
         }
+    }
+
+    /**
+     * Value of the fighter for the score
+     * @return Number of points that represent the fighter's value
+     */
+    public int getPoints(){
+        return 0;
     }
 
     /**

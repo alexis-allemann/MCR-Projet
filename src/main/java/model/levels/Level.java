@@ -104,4 +104,12 @@ public abstract class Level {
     public int getScore() {
         return score;
     }
+
+    /**
+     * Add point to the score
+     * @param points points to add
+     */
+    public void addScore(int points) {
+        score += points;
+    }
 }
