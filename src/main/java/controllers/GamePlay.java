@@ -107,9 +107,10 @@ public class GamePlay implements Controller {
      * Reset default location of the spacecraft
      */
     private void resetSpaceCraftLocation() {
-        retrieveSpacecraft().setLocation(new Location(
-                (GamePlay.WIDTH - retrieveSpacecraft().getImageWidth()) / 2.f,
-                GamePlay.HEIGHT - retrieveSpacecraft().getImageHeight() - GamePlay.INFO_PANEL_HEIGHT
+        Fighter spacecraft = World.getInstance().getSpacecraft();
+        spacecraft.setLocation(new Location(
+                (GamePlay.WIDTH - spacecraft.getImageWidth()) / 2.f,
+                GamePlay.HEIGHT - spacecraft.getImageHeight() - GamePlay.INFO_PANEL_HEIGHT
         ));
     }
 
@@ -125,9 +126,5 @@ public class GamePlay implements Controller {
                 location.y + fighter.getImageHeight() <= HEIGHT &&
                 location.x >= 0 &&
                 location.y >= 0;
-    }
-
-    private Fighter retrieveSpacecraft() {
-        return World.getInstance().getSpacecraft();
     }
 }

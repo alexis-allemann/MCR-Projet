@@ -23,15 +23,15 @@ public class Hard extends Level {
     }
 
     @Override
-    public Fighter generateMonster(Location location) {
-        // TODO : ajout d'un décorateur
-        return new Monster(location);
-    }
-
-    @Override
     public void checkLevelChanged() {
         if (nbMonstersKilled >= 30 || getTime() > 120)
             World.getInstance().setLevel(new Expert(this));
+    }
+
+    @Override
+    public Fighter generateMonster(Location location) {
+        // TODO : ajout d'un décorateur
+        return new Monster(location);
     }
 
     @Override

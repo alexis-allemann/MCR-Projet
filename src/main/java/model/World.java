@@ -19,7 +19,7 @@ import java.util.List;
  * @version 1.0
  */
 public class World {
-    private static final World instance = new World();
+    private static final World INSTANCE = new World();
     private final List<Fighter> monsters = Collections.synchronizedList(new ArrayList<>());
     private final List<Bullet> bullets = Collections.synchronizedList(new ArrayList<>());
     private final Fighter spacecraft = new SpaceCraft(new Location(0, 0));
@@ -39,7 +39,7 @@ public class World {
      * @return the instance of the world
      */
     public static World getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     /**

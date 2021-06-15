@@ -16,7 +16,7 @@ import java.util.TimerTask;
  * @version 1.0
  */
 public class BulletManager implements Runnable {
-    private static final BulletManager instance = new BulletManager();
+    private static final BulletManager INSTANCE = new BulletManager();
 
     /**
      * Instantiation of the bullet manager
@@ -30,7 +30,7 @@ public class BulletManager implements Runnable {
      * @return the instance of the bullet manager
      */
     public static BulletManager getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

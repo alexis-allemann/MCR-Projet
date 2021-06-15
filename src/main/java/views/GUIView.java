@@ -31,14 +31,14 @@ import java.util.TimerTask;
  * @version 1.0
  */
 public class GUIView extends JFrame implements View {
-    private final JPanel mainPanel = new JPanel();
-    private final JPanel gamePanel = new JPanel();
-    private final JPanel infoPanel = new JPanel();
-    private final JPanel healthPanel = new JPanel();
-    private final JLabel scoreLabel = new JLabel();
-    private final JLabel levelLabel = new JLabel();
-    private final JLabel healthLabel = new JLabel();
-    private final JPanel healthRectangle = new JPanel();
+    private final JPanel MAIN_PANEL = new JPanel();
+    private final JPanel GAME_PANEL = new JPanel();
+    private final JPanel INFO_PANEL = new JPanel();
+    private final JPanel HEALTH_PANEL = new JPanel();
+    private final JLabel SCORE_LABEL = new JLabel();
+    private final JLabel LEVEL_LABEL = new JLabel();
+    private final JLabel HEALTH_LABEL = new JLabel();
+    private final JPanel HEALTH_RECTANGLE = new JPanel();
 
     @Override
     public void startView(Controller controller) {
@@ -48,36 +48,36 @@ public class GUIView extends JFrame implements View {
         setLocation(dim.width / 2 - GamePlay.WIDTH / 2, dim.height / 2 - GamePlay.HEIGHT / 2);
         setResizable(false);
 
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-        getContentPane().add(mainPanel);
+        MAIN_PANEL.setLayout(new BoxLayout(MAIN_PANEL, BoxLayout.Y_AXIS));
+        getContentPane().add(MAIN_PANEL);
 
-        scoreLabel.setForeground(Color.green);
-        levelLabel.setForeground(Color.green);
-        healthLabel.setForeground(Color.green);
-        healthLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        SCORE_LABEL.setForeground(Color.green);
+        LEVEL_LABEL.setForeground(Color.green);
+        HEALTH_LABEL.setForeground(Color.green);
+        HEALTH_LABEL.setHorizontalAlignment(SwingConstants.CENTER);
 
-        infoPanel.setLocation(new Point(0, 0));
-        infoPanel.setPreferredSize(new Dimension(GamePlay.WIDTH, GamePlay.INFO_PANEL_HEIGHT));
-        infoPanel.setBackground(Color.BLACK);
-        infoPanel.setLayout(new BorderLayout());
-        infoPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
-        infoPanel.add(levelLabel, BorderLayout.LINE_START);
-        infoPanel.add(scoreLabel, BorderLayout.LINE_END);
-        infoPanel.add(healthPanel, BorderLayout.CENTER);
-        mainPanel.add(infoPanel);
+        INFO_PANEL.setLocation(new Point(0, 0));
+        INFO_PANEL.setPreferredSize(new Dimension(GamePlay.WIDTH, GamePlay.INFO_PANEL_HEIGHT));
+        INFO_PANEL.setBackground(Color.BLACK);
+        INFO_PANEL.setLayout(new BorderLayout());
+        INFO_PANEL.setBorder(new EmptyBorder(10, 10, 10, 10));
+        INFO_PANEL.add(LEVEL_LABEL, BorderLayout.LINE_START);
+        INFO_PANEL.add(SCORE_LABEL, BorderLayout.LINE_END);
+        INFO_PANEL.add(HEALTH_PANEL, BorderLayout.CENTER);
+        MAIN_PANEL.add(INFO_PANEL);
 
-        healthPanel.setBackground(Color.black);
-        healthPanel.setLayout(new FlowLayout());
-        healthPanel.add(healthLabel);
-        healthPanel.add(healthRectangle);
+        HEALTH_PANEL.setBackground(Color.black);
+        HEALTH_PANEL.setLayout(new FlowLayout());
+        HEALTH_PANEL.add(HEALTH_LABEL);
+        HEALTH_PANEL.add(HEALTH_RECTANGLE);
 
-        healthRectangle.setBackground(Color.green);
-        healthRectangle.setPreferredSize(new Dimension(getHealthWidth(), 20));
+        HEALTH_RECTANGLE.setBackground(Color.green);
+        HEALTH_RECTANGLE.setPreferredSize(new Dimension(getHealthWidth(), 20));
 
-        gamePanel.setLocation(new Point(0, GamePlay.INFO_PANEL_HEIGHT));
-        gamePanel.setPreferredSize(new Dimension(GamePlay.WIDTH, GamePlay.HEIGHT - GamePlay.INFO_PANEL_HEIGHT));
-        gamePanel.setBackground(Color.BLACK);
-        mainPanel.add(gamePanel);
+        GAME_PANEL.setLocation(new Point(0, GamePlay.INFO_PANEL_HEIGHT));
+        GAME_PANEL.setPreferredSize(new Dimension(GamePlay.WIDTH, GamePlay.HEIGHT - GamePlay.INFO_PANEL_HEIGHT));
+        GAME_PANEL.setBackground(Color.BLACK);
+        MAIN_PANEL.add(GAME_PANEL);
 
         setVisible(true);
         pack();
@@ -122,16 +122,16 @@ public class GUIView extends JFrame implements View {
     @Override
     public void paintImage(Image image) {
         World world = World.getInstance();
-        levelLabel.setText("Level : " + world.getLevel());
-        scoreLabel.setText("Score : " + world.getLevel().getScore());
-        healthLabel.setText("Health : " + world.getSpacecraft().getHealth());
-        healthRectangle.setPreferredSize(new Dimension(getHealthWidth(), 20));
-        gamePanel.getGraphics().drawImage(image, 0, 0, gamePanel);
+        LEVEL_LABEL.setText("Level : " + world.getLevel());
+        SCORE_LABEL.setText("Score : " + world.getLevel().getScore());
+        HEALTH_LABEL.setText("Health : " + world.getSpacecraft().getHealth());
+        HEALTH_RECTANGLE.setPreferredSize(new Dimension(getHealthWidth(), 20));
+        GAME_PANEL.getGraphics().drawImage(image, 0, 0, GAME_PANEL);
     }
 
     @Override
     public Image getBufferedImage() {
-        Image image = gamePanel.createImage(GamePlay.WIDTH, GamePlay.HEIGHT);
+        Image image = GAME_PANEL.createImage(GamePlay.WIDTH, GamePlay.HEIGHT);
         image.getGraphics().fillRect(0, 0, GamePlay.WIDTH, GamePlay.HEIGHT);
         image.getGraphics().setColor(Color.BLACK);
         return image;

@@ -19,7 +19,7 @@ import java.util.TimerTask;
  * @version 1.0
  */
 public class FighterManager implements Runnable {
-    private static final FighterManager instance = new FighterManager();
+    private static final FighterManager INSTANCE = new FighterManager();
     private static final int SECONDS_BEFORE_DOWN_MOVE = 2;
     private static final int NB_MOVES_BEFORE_INVERT = 80;
     private long lastMonstersDownMove = System.currentTimeMillis();
@@ -37,7 +37,7 @@ public class FighterManager implements Runnable {
      * @return the instance of the fighter manager
      */
     public static FighterManager getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

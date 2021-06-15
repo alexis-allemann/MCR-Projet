@@ -22,13 +22,13 @@ public class Expert extends Level{
     }
 
     @Override
-    public Fighter generateMonster(Location location) {
-        // TODO : ajout d'un décorateur
-        return new Monster(location);
+    public void checkLevelChanged() {
     }
 
     @Override
-    public void checkLevelChanged() {
+    public Fighter generateMonster(Location location) {
+        // TODO : ajout d'un décorateur
+        return new Monster(location);
     }
 
     @Override

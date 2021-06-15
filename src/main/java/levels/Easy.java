@@ -23,15 +23,15 @@ public class Easy extends Level {
     }
 
     @Override
-    public Fighter generateMonster(Location location){
-        // TODO : ajout d'un décorateur
-        return new Monster(location);
-    }
-
-    @Override
     public void checkLevelChanged() {
         if(nbMonstersKilled >= 5 || getTime() > 40)
             World.getInstance().setLevel(new Medium(this));
+    }
+
+    @Override
+    public Fighter generateMonster(Location location){
+        // TODO : ajout d'un décorateur
+        return new Monster(location);
     }
 
     @Override

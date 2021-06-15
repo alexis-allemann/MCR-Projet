@@ -13,20 +13,25 @@ import model.components.physics.Location;
  */
 public class Medium extends Level {
 
+    /**
+     * Change level to medium
+     *
+     * @param oldLevel to retrieve attributes
+     */
     public Medium(Level oldLevel) {
         super(oldLevel);
-    }
-
-    @Override
-    public Fighter generateMonster(Location location) {
-        // TODO : ajout d'un décorateur
-        return new Monster(location);
     }
 
     @Override
     public void checkLevelChanged() {
         if (nbMonstersKilled >= 15 || getTime() > 90)
             World.getInstance().setLevel(new Hard(this));
+    }
+
+    @Override
+    public Fighter generateMonster(Location location) {
+        // TODO : ajout d'un décorateur
+        return new Monster(location);
     }
 
     @Override

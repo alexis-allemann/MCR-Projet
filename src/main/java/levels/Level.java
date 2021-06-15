@@ -10,15 +10,15 @@ import model.components.physics.Location;
  * @version 1.0
  */
 public abstract class Level {
-    int score;
-    int nbMonstersKilled;
-    final long start;
+    protected int score;
+    protected int nbMonstersKilled;
+    private final long START;
 
     /**
      * Instantiation of a new level (Beginner by default)
      */
     public Level() {
-        start = System.currentTimeMillis();
+        START = System.currentTimeMillis();
     }
 
     /**
@@ -29,15 +29,20 @@ public abstract class Level {
     public Level(Level oldLevel) {
         score = oldLevel.score;
         nbMonstersKilled = oldLevel.nbMonstersKilled;
-        start = oldLevel.start;
+        START = oldLevel.START;
     }
 
     /**
-     * Notify the level that a new monster has been killed
+     * Check if level has changed
      */
-    public void addMonsterKilled() {
-        nbMonstersKilled++;
-    }
+    public abstract void checkLevelChanged();
+
+    /**
+     * define number of monsters
+     *
+     * @return number of monsters for each wave
+     */
+    public abstract int getNbMonsterByWave();
 
     /**
      * Generate a new monster
@@ -48,9 +53,11 @@ public abstract class Level {
     public abstract Fighter generateMonster(Location location);
 
     /**
-     * Check if level has changed
+     * Notify the level that a new monster has been killed
      */
-    public abstract void checkLevelChanged();
+    public void addMonsterKilled() {
+        nbMonstersKilled++;
+    }
 
     /**
      * Get the time up
@@ -59,7 +66,7 @@ public abstract class Level {
      */
     public int getTime() {
         long current = System.currentTimeMillis();
-        return (int) (start - current) / 1000;
+        return (int) (START - current) / 1000;
     }
 
     /**
@@ -70,11 +77,4 @@ public abstract class Level {
     public int getScore() {
         return score;
     }
-
-    /**
-     * define number of monsters
-     *
-     * @return number of monsters for each wave
-     */
-    public abstract int getNbMonsterByWave();
 }
