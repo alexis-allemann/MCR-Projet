@@ -21,6 +21,15 @@ public class Location extends Point2D.Float {
     }
 
     /**
+     * Instantiation of a new location
+     *
+     * @param location location we want to copy
+     */
+    public Location(Location location) {
+        super(location.x, location.y);
+    }
+
+    /**
      * Move location according to given deltas
      *
      * @param dx move delta on x axis

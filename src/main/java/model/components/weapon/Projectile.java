@@ -21,6 +21,20 @@ public abstract class Projectile extends GameComponentWithHitBox {
     /**
      * Instantiation of a new bullet
      *
+     * @param location      location of the projectile
+     * @param image         filename of the bullet image
+     * @param direction     of the bullet
+     * @param isMonsterTeam if bullet is shot by a monster
+     */
+    public Projectile(Location location, String image, Vector2D direction, boolean isMonsterTeam) {
+        super(location, image);
+        this.speed = new Vector2D(direction.getX(), direction.getY());
+        this.isMonsterTeam = isMonsterTeam;
+    }
+
+    /**
+     * Instantiation of a new bullet
+     *
      * @param image         filename of the bullet image
      * @param direction     of the bullet
      * @param isMonsterTeam if bullet is shot by a monster
