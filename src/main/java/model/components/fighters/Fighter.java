@@ -2,6 +2,7 @@ package model.components.fighters;
 
 import model.World;
 import model.components.GameComponentWithHitBox;
+import model.components.fighters.decorators.FighterDecorator;
 import model.components.weapon.Projectile;
 import model.components.weapon.Weapon;
 import model.components.weapon.decorators.BulletSizeEnhancer;
@@ -163,5 +164,15 @@ public abstract class Fighter extends GameComponentWithHitBox {
                 }
             });
         }
+    }
+
+    /**
+     * Remove decorator
+     *
+     * @param decorator to remove
+     * @return chain of decorator
+     */
+    public Fighter removeDecorator(FighterDecorator decorator){
+        return this;
     }
 }

@@ -1,5 +1,6 @@
 package model;
 
+import model.components.fighters.decorators.Shield;
 import model.levels.Beginner;
 import model.levels.Level;
 import model.components.fighters.Fighter;
@@ -22,7 +23,7 @@ public class World {
     private static final World INSTANCE = new World();
     private final List<Fighter> monsters = Collections.synchronizedList(new ArrayList<>());
     private final List<Projectile> projectiles = Collections.synchronizedList(new ArrayList<>());
-    private final Fighter spacecraft = new SpaceCraft(new Location(0, 0));
+    private Fighter spacecraft = new Shield(new SpaceCraft(new Location(0, 0)), 5);
     private Level level;
 
     /**
@@ -121,5 +122,14 @@ public class World {
      */
     public void setLevel(Level level) {
         this.level = level;
+    }
+
+    /**
+     * Set spacecraft
+     *
+     * @param spacecraft to set
+     */
+    public void setSpacecraft(Fighter spacecraft) {
+        this.spacecraft = spacecraft;
     }
 }

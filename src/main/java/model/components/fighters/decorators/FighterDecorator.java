@@ -2,6 +2,8 @@ package model.components.fighters.decorators;
 
 import model.components.fighters.Fighter;
 import controllers.Direction;
+import model.components.weapon.Weapon;
+import utils.physics.Location;
 
 /**
  * Space invaders model.components.fighters decorators
@@ -10,7 +12,7 @@ import controllers.Direction;
  * @version 1.0
  */
 public abstract class FighterDecorator extends Fighter {
-    private final Fighter fighter;
+    protected Fighter fighter;
 
     /**
      * Instantiation of a new decoration
@@ -42,5 +44,33 @@ public abstract class FighterDecorator extends Fighter {
         return fighter.getNextTimingModifier();
     }
 
+    @Override
+    public Location getLocation() {
+        return fighter.getLocation();
+    }
 
+    @Override
+    public void setLocation(Location location) {
+        fighter.setLocation(location);
+    }
+
+    @Override
+    public Weapon getWeapon() {
+        return fighter.getWeapon();
+    }
+
+    @Override
+    public void setWeapon(Weapon weapon) {
+        fighter.setWeapon(weapon);
+    }
+
+    @Override
+    public Fighter removeDecorator(FighterDecorator decorator) {
+        if (this == decorator) {
+            return fighter;
+        } else if (fighter instanceof FighterDecorator) {
+            fighter = fighter.removeDecorator(decorator);
+        }
+        return this;
+    }
 }
