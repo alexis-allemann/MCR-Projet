@@ -14,7 +14,7 @@ import model.components.physics.Location;
 public abstract class Bullet extends GameComponentWithHitBox {
     static final int BASE_SPEED = 10;
     final int BASE_POWER = 1;
-    protected Vector2D speed;
+    protected final Vector2D speed;
 
     /**
      * Instantiation of a new bullet

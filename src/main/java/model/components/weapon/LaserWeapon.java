@@ -1,7 +1,5 @@
 package model.components.weapon;
 
-import model.components.fighters.Fighter;
-import model.components.physics.Location;
 import model.components.physics.Vector2D;
 import model.components.weapon.bullets.Bullet;
 import model.components.weapon.bullets.LaserBullet;

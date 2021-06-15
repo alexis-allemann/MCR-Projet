@@ -7,8 +7,8 @@ package model.components.physics;
  * @version 1.0
  */
 public class Vector2D {
-    private float x;
-    private float y;
+    private final float x;
+    private final float y;
 
     /**
      * Instantiation of a new 2D vector

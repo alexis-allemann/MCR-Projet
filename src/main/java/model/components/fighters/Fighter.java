@@ -38,6 +38,9 @@ public abstract class Fighter extends GameComponentWithHitBox {
      */
     public Fighter(Fighter fighter) {
         super(fighter.getLocation(), fighter.getImage());
+        speed = fighter.speed;
+        weapon = fighter.weapon;
+        health = fighter.health;
     }
 
     /**

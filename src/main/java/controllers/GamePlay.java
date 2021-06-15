@@ -23,7 +23,7 @@ public class GamePlay implements Controller {
     public static int HEIGHT;
     public static int WIDTH;
     public static int FRAME_RATE;
-    private static GamePlay instance = new GamePlay();
+    private static final GamePlay instance = new GamePlay();
     private static final Logger LOG = Logger.getLogger(GamePlay.class.getName());
 
     /**

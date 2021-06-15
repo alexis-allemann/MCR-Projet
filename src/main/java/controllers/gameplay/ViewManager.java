@@ -18,7 +18,7 @@ import java.util.TimerTask;
  */
 public class ViewManager implements Runnable {
     private static ViewManager instance;
-    private View view;
+    private final View view;
 
     /**
      * Instantiation of the view manager

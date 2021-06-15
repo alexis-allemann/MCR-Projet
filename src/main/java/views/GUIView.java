@@ -6,14 +6,23 @@ import controllers.GamePlay;
 import model.World;
 import model.components.fighters.SpaceCraft;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JFrame;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
+import javax.swing.BoxLayout;
+import javax.swing.SwingConstants;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.Point;
+import java.awt.Color;
+import java.awt.Image;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.event.KeyEvent;
 import java.util.Collection;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.Iterator;
 
 /**
  * GUI view to display gameplay
@@ -22,14 +31,14 @@ import java.util.Iterator;
  * @version 1.0
  */
 public class GUIView extends JFrame implements View {
-    private JPanel mainPanel = new JPanel();
-    private JPanel gamePanel = new JPanel();
-    private JPanel infoPanel = new JPanel();
-    private JPanel healthPanel = new JPanel();
-    private JLabel scoreLabel = new JLabel();
-    private JLabel levelLabel = new JLabel();
-    private JLabel healthLabel = new JLabel();
-    private JPanel healthRectangle = new JPanel();
+    private final JPanel mainPanel = new JPanel();
+    private final JPanel gamePanel = new JPanel();
+    private final JPanel infoPanel = new JPanel();
+    private final JPanel healthPanel = new JPanel();
+    private final JLabel scoreLabel = new JLabel();
+    private final JLabel levelLabel = new JLabel();
+    private final JLabel healthLabel = new JLabel();
+    private final JPanel healthRectangle = new JPanel();
 
     @Override
     public void startView(Controller controller) {
@@ -83,8 +92,8 @@ public class GUIView extends JFrame implements View {
                 synchronized (keyListener.getPressedKeys()) {
                     Collection<Integer> pressedKeys = keyListener.getPressedKeys();
                     if (!pressedKeys.isEmpty()) {
-                        for (Iterator<Integer> it = pressedKeys.iterator(); it.hasNext(); ) {
-                            switch (it.next()) {
+                        for (Integer pressedKey : pressedKeys) {
+                            switch (pressedKey) {
                                 case KeyEvent.VK_LEFT:
                                     controller.move(Direction.LEFT);
                                     break;

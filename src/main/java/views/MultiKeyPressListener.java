@@ -36,6 +36,5 @@ class MultiKeyPressListener implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        return;
     }
 }

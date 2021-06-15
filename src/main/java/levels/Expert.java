@@ -29,7 +29,6 @@ public class Expert extends Level{
 
     @Override
     public void checkLevelChanged() {
-        return;
     }
 
     @Override

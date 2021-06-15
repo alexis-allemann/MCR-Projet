@@ -6,7 +6,6 @@ import model.components.physics.Location;
 import model.components.weapon.bullets.Bullet;
 
 import controllers.Direction;
-import controllers.gameplay.BulletManager;
 
 /**
  * Weapon to shoot bullets

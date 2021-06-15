@@ -10,7 +10,7 @@ import controllers.Direction;
  * @version 1.0
  */
 public abstract class FighterDecorator extends Fighter {
-    private Fighter fighter;
+    private final Fighter fighter;
 
     /**
      * Instantiation of a new decoration

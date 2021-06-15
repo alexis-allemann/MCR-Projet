@@ -53,12 +53,12 @@ public abstract class GameComponentWithHitBox extends GameComponent {
         int xAbsolutSpeed = Math.abs(xSpeed);
         int yAbsolutSpeed = Math.abs(ySpeed);
         hitBoxWithMovement.grow(xAbsolutSpeed, yAbsolutSpeed);
-        if (xSpeed < 0) {
+        if (xSpeed < 0)
             hitBoxWithMovement.translate(xSpeed, 0);
-        }
-        if (ySpeed < 0) {
+
+        if (ySpeed < 0)
             hitBoxWithMovement.translate(0, ySpeed);
-        }
+
         Rectangle intersection = hitBoxWithMovement.intersection(otherHitBox);
         return !intersection.isEmpty();
     }

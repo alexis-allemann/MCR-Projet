@@ -12,7 +12,7 @@ import model.components.physics.Location;
 public abstract class Level {
     int score;
     int nbMonstersKilled;
-    long start;
+    final long start;
 
     /**
      * Instantiation of a new level (Beginner by default)

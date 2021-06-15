@@ -71,6 +71,8 @@ public class World {
 
     /**
      * Remove a monster from the world
+     *
+     * @param monster to remove
      */
     public void removeMonster(Fighter monster) {
         monsters.remove(monster);
@@ -96,12 +98,16 @@ public class World {
 
     /**
      * Remove a bullet from the world
+     *
+     * @param bullet to remove
      */
     public void removeBullet(Bullet bullet) {
         bullets.remove(bullet);
     }
 
     /**
+     * Get the current level
+     *
      * @return the current level
      */
     public Level getLevel() {

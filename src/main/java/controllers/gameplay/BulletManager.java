@@ -6,18 +6,17 @@ import model.components.fighters.Fighter;
 import controllers.GamePlay;
 
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Thread that manage bullets actions (movement and hiting something)
+ * Thread that manage bullets actions (movement and hitting something)
  *
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
 public class BulletManager implements Runnable {
-    private static BulletManager instance = new BulletManager();
+    private static final BulletManager instance = new BulletManager();
 
     /**
      * Instantiation of the bullet manager
@@ -48,7 +47,7 @@ public class BulletManager implements Runnable {
 
                 // Lock bullets list instance to prevent concurrences errors
                 synchronized (World.getInstance().getBullets()) {
-                    List<Bullet> bulletsToRemove = new LinkedList();
+                    LinkedList<Bullet> bulletsToRemove = new LinkedList<>();
                     for (Bullet bullet : World.getInstance().getBullets()) {
 
                         // Check if a fighter has been touched by bullet
