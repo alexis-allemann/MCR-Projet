@@ -157,7 +157,7 @@ public abstract class Fighter extends GameComponentWithHitBox {
         world.getLevel().addScore(getPoints());
         float random = Utils.getInstance().randomFloat(1);
         if (random <= world.getLevel().probabilityToGenerateDecoration()) {
-            world.addBullet(new Projectile(new Location(super.location), "monster-blue.png", new Vector2D(0, 5), true) {
+            world.addBullet(new Projectile(new Location(super.location), "star.png", new Vector2D(0, 5), true) {
                 @Override
                 public void hit(Fighter fighter) {
                     fighter.setWeapon(world.getLevel().getWeaponDecoration(fighter.getWeapon()));
