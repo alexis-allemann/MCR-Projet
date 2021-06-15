@@ -28,4 +28,9 @@ public class Beginner extends Level {
     public int getNbMonsterByWave() {
         return 4;
     }
+
+    @Override
+    public String toString() {
+        return "Beginner";
+    }
 }

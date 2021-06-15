@@ -36,4 +36,9 @@ public class Expert extends Level{
     public int getNbMonsterByWave() {
         return 8;
     }
+
+    @Override
+    public String toString() {
+        return "Expert";
+    }
 }

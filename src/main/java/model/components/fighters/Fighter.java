@@ -14,8 +14,7 @@ import controllers.Direction;
  * @version 1.0
  */
 public abstract class Fighter extends GameComponentWithHitBox {
-    private final Vector2D SPEED_BASE = new Vector2D(1.f, 0.f);
-    private final int POWER_BASE = 1;
+    private static final Vector2D SPEED_BASE = new Vector2D(1.f, 0.f);
     protected Vector2D speed;
     private Weapon weapon;
     private int health;
@@ -29,7 +28,7 @@ public abstract class Fighter extends GameComponentWithHitBox {
     public Fighter(Location location, String image) {
         super(location, image);
         speed = SPEED_BASE;
-        health = 1;
+        health = getDefaultHealth();
     }
 
     /**
@@ -90,6 +89,12 @@ public abstract class Fighter extends GameComponentWithHitBox {
      * @return the shoot direction
      */
     public abstract Direction getDirection();
+
+    /**
+     * Get default health
+     * @return default health
+     */
+    public abstract int getDefaultHealth();
 
     /**
      * Get fighter's health

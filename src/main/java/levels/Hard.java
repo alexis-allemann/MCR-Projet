@@ -38,4 +38,9 @@ public class Hard extends Level {
     public int getNbMonsterByWave() {
         return 7;
     }
+
+    @Override
+    public String toString() {
+        return "Hard";
+    }
 }

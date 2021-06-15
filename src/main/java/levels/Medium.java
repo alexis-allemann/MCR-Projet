@@ -33,4 +33,9 @@ public class Medium extends Level {
     public int getNbMonsterByWave() {
         return 6;
     }
+
+    @Override
+    public String toString() {
+        return "Medium";
+    }
 }

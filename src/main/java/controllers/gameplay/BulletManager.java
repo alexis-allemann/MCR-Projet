@@ -86,9 +86,11 @@ public class BulletManager implements Runnable {
             return World.getInstance().getSpacecraft();
 
         // Check if a monster has been touched
-        for (Fighter monster : World.getInstance().getMonsters())
-            if (bullet.checkNextLocation(monster))
-                return monster;
+        synchronized (World.getInstance().getMonsters()) {
+            for (Fighter monster : World.getInstance().getMonsters())
+                if (bullet.checkNextLocation(monster))
+                    return monster;
+        }
 
         return null;
     }

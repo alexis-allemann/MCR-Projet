@@ -10,6 +10,7 @@ import controllers.Direction;
  * @version 1.0
  */
 public class SpaceCraft extends Fighter {
+    public static final int MAX_HEALTH = 1000;
 
     /**
      * Instantiation of a new spacecraft
@@ -20,10 +21,14 @@ public class SpaceCraft extends Fighter {
         super(location, "spacecraft.png");
     }
 
-
     @Override
     public Direction getDirection() {
         return Direction.TOP;
+    }
+
+    @Override
+    public int getDefaultHealth() {
+        return MAX_HEALTH;
     }
 
     @Override

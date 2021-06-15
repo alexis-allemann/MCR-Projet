@@ -4,16 +4,16 @@ import controllers.Controller;
 import controllers.Direction;
 import controllers.GamePlay;
 import model.World;
-import model.components.GameComponentWithHitBox;
+import model.components.fighters.SpaceCraft;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.Collection;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.Iterator;
 
 /**
  * GUI view to display gameplay
@@ -21,56 +21,87 @@ import java.util.TimerTask;
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public class GUIView implements View {
-    private static final int WIDTH = 1000;
-    private static final int HEIGHT = 800;
-    private JFrame frame = new JFrame();
-    private JPanel panel = new JPanel();
+public class GUIView extends JFrame implements View {
+    private JPanel mainPanel = new JPanel();
+    private JPanel gamePanel = new JPanel();
+    private JPanel infoPanel = new JPanel();
+    private JPanel healthPanel = new JPanel();
+    private JLabel scoreLabel = new JLabel();
+    private JLabel levelLabel = new JLabel();
+    private JLabel healthLabel = new JLabel();
+    private JPanel healthRectangle = new JPanel();
 
     @Override
     public void startView(Controller controller) {
-        frame = new JFrame();
-        frame.setTitle("Space Invaders");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("Space Invaders");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        frame.setLocation(dim.width / 2 - this.WIDTH / 2, dim.height / 2 - HEIGHT / 2);
-        frame.setResizable(false);
-        panel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        panel.setBackground(Color.BLACK);
-        frame.getContentPane().add(panel);
-        frame.setVisible(true);
-        frame.pack();
+        setLocation(dim.width / 2 - GamePlay.WIDTH / 2, dim.height / 2 - GamePlay.HEIGHT / 2);
+        setResizable(false);
+
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        getContentPane().add(mainPanel);
+
+        scoreLabel.setForeground(Color.green);
+        levelLabel.setForeground(Color.green);
+        healthLabel.setForeground(Color.green);
+        healthLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+        infoPanel.setLocation(new Point(0, 0));
+        infoPanel.setPreferredSize(new Dimension(GamePlay.WIDTH, GamePlay.INFO_PANEL_HEIGHT));
+        infoPanel.setBackground(Color.BLACK);
+        infoPanel.setLayout(new BorderLayout());
+        infoPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+        infoPanel.add(levelLabel, BorderLayout.LINE_START);
+        infoPanel.add(scoreLabel, BorderLayout.LINE_END);
+        infoPanel.add(healthPanel, BorderLayout.CENTER);
+        mainPanel.add(infoPanel);
+
+        healthPanel.setBackground(Color.black);
+        healthPanel.setLayout(new FlowLayout());
+        healthPanel.add(healthLabel);
+        healthPanel.add(healthRectangle);
+
+        healthRectangle.setBackground(Color.green);
+        healthRectangle.setPreferredSize(new Dimension(getHealthWidth(), 20));
+
+        gamePanel.setLocation(new Point(0, GamePlay.INFO_PANEL_HEIGHT));
+        gamePanel.setPreferredSize(new Dimension(GamePlay.WIDTH, GamePlay.HEIGHT - GamePlay.INFO_PANEL_HEIGHT));
+        gamePanel.setBackground(Color.BLACK);
+        mainPanel.add(gamePanel);
+
+        setVisible(true);
+        pack();
+
         MultiKeyPressListener keyListener = new MultiKeyPressListener();
-        frame.addKeyListener(keyListener);
+        addKeyListener(keyListener);
 
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                Set<Integer> pressedKeys = keyListener.getPressedKeys();
-                if (!pressedKeys.isEmpty()) {
-                    for (Iterator<Integer> it = pressedKeys.iterator(); it.hasNext(); ) {
-                        switch (it.next()) {
-                            case KeyEvent.VK_A:
-                            case KeyEvent.VK_LEFT:
-                                controller.move(Direction.LEFT);
-                                break;
+                synchronized (keyListener.getPressedKeys()) {
+                    Collection<Integer> pressedKeys = keyListener.getPressedKeys();
+                    if (!pressedKeys.isEmpty()) {
+                        for (Iterator<Integer> it = pressedKeys.iterator(); it.hasNext(); ) {
+                            switch (it.next()) {
+                                case KeyEvent.VK_LEFT:
+                                    controller.move(Direction.LEFT);
+                                    break;
 
-                            case KeyEvent.VK_D:
-                            case KeyEvent.VK_RIGHT:
-                                controller.move(Direction.RIGHT);
-                                break;
+                                case KeyEvent.VK_RIGHT:
+                                    controller.move(Direction.RIGHT);
+                                    break;
 
-                            case KeyEvent.VK_W:
-                            case KeyEvent.VK_UP:
-                            case KeyEvent.VK_SPACE:
-                                controller.shoot();
-                                break;
+                                case KeyEvent.VK_UP:
+                                case KeyEvent.VK_SPACE:
+                                    controller.shoot();
+                                    break;
 
-                            case KeyEvent.VK_R:
-                            case KeyEvent.VK_N:
-                                controller.newGame();
-                                break;
+                                case KeyEvent.VK_R:
+                                    controller.newGame();
+                                    break;
+                            }
                         }
                     }
                 }
@@ -81,11 +112,28 @@ public class GUIView implements View {
 
     @Override
     public void paintImage(Image image) {
-        panel.getGraphics().drawImage(image, 0, 0, panel);
+        World world = World.getInstance();
+        levelLabel.setText("Level : " + world.getLevel());
+        scoreLabel.setText("Score : " + world.getLevel().getScore());
+        healthLabel.setText("Health : " + world.getSpacecraft().getHealth());
+        healthRectangle.setPreferredSize(new Dimension(getHealthWidth(), 20));
+        gamePanel.getGraphics().drawImage(image, 0, 0, gamePanel);
     }
 
     @Override
     public Image getBufferedImage() {
-        return panel.createImage(WIDTH, HEIGHT);
+        Image image = gamePanel.createImage(GamePlay.WIDTH, GamePlay.HEIGHT);
+        image.getGraphics().fillRect(0, 0, GamePlay.WIDTH, GamePlay.HEIGHT);
+        image.getGraphics().setColor(Color.BLACK);
+        return image;
+    }
+
+    /**
+     * Get health panel width
+     *
+     * @return health panel width
+     */
+    private int getHealthWidth() {
+        return (GamePlay.WIDTH / 3) / (SpaceCraft.MAX_HEALTH / World.getInstance().getSpacecraft().getHealth());
     }
 }

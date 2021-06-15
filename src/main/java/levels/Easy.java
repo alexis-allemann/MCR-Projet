@@ -38,4 +38,9 @@ public class Easy extends Level {
     public int getNbMonsterByWave() {
         return 5;
     }
+
+    @Override
+    public String toString() {
+        return "Easy";
+    }
 }

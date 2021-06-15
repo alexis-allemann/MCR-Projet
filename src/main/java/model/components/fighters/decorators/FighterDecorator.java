@@ -26,4 +26,9 @@ public abstract class FighterDecorator extends Fighter {
     public Direction getDirection() {
         return fighter.getDirection();
     }
+
+    @Override
+    public int getDefaultHealth() {
+        return fighter.getDefaultHealth();
+    }
 }

@@ -20,8 +20,8 @@ import java.util.TimerTask;
  */
 public class FighterManager implements Runnable {
     private static FighterManager instance = new FighterManager();
-    private static final int SECONDS_BEFORE_DOWN_MOVE = 5;
-    private static final int NB_MOVES_BEFORE_INVERT = 40;
+    private static final int SECONDS_BEFORE_DOWN_MOVE = 2;
+    private static final int NB_MOVES_BEFORE_INVERT = 80;
     private long lastMonstersDownMove = System.currentTimeMillis();
     private int nbMoveInSameDirection = 0;
 
@@ -122,7 +122,7 @@ public class FighterManager implements Runnable {
                 canGenerate = true;
             else {
                 Fighter last = monsters.get(monsters.size() - 1);
-                canGenerate = last.getLocation().y > GamePlay.SPAWN_HEIGHT + last.getImageHeight();
+                canGenerate = last.getLocation().y > last.getImageHeight();
             }
 
             // Generate new monsters
@@ -132,7 +132,7 @@ public class FighterManager implements Runnable {
                 for (int i = 1; i <= level.getNbMonsterByWave(); ++i) {
                     Fighter newMonster = level.generateMonster(new Location(0, 0));
                     int xAxisValue = (margin * i) - (margin / 2) - (newMonster.getImageWidth() / 2) + nbMoveInSameDirection;
-                    newMonster.setLocation(new Location(xAxisValue, GamePlay.SPAWN_HEIGHT));
+                    newMonster.setLocation(new Location(xAxisValue, 0));
                     world.addMonster(newMonster);
                 }
             }

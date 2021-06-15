@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  * @version 1.0
  */
 public class GamePlay implements Controller {
-    public static int SPAWN_HEIGHT;
+    public static int INFO_PANEL_HEIGHT;
     public static int HEIGHT;
     public static int WIDTH;
     public static int FRAME_RATE;
@@ -55,13 +55,13 @@ public class GamePlay implements Controller {
         if (!properties.containsKey("WIDTH"))
             throw new IllegalArgumentException("Property WIDTH missing");
 
-        if (!properties.containsKey("SPAWN_HEIGHT"))
+        if (!properties.containsKey("INFO_PANEL_HEIGHT"))
             throw new IllegalArgumentException("Property SPAWN_HEIGHT missing");
 
         FRAME_RATE = Integer.parseInt(properties.getProperty("FRAME_RATE"));
         HEIGHT = Integer.parseInt(properties.getProperty("HEIGHT"));
         WIDTH = Integer.parseInt(properties.getProperty("WIDTH"));
-        SPAWN_HEIGHT = Integer.parseInt(properties.getProperty("SPAWN_HEIGHT"));
+        INFO_PANEL_HEIGHT = Integer.parseInt(properties.getProperty("INFO_PANEL_HEIGHT"));
 
         resetSpaceCraftLocation();
         view.startView(this);
@@ -109,7 +109,7 @@ public class GamePlay implements Controller {
     private void resetSpaceCraftLocation() {
         retrieveSpacecraft().setLocation(new Location(
                 (GamePlay.WIDTH - retrieveSpacecraft().getImageWidth()) / 2.f,
-                GamePlay.HEIGHT - retrieveSpacecraft().getImageHeight()
+                GamePlay.HEIGHT - retrieveSpacecraft().getImageHeight() - GamePlay.INFO_PANEL_HEIGHT
         ));
     }
 

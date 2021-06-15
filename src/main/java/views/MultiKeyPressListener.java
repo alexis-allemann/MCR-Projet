@@ -1,13 +1,10 @@
 package views;
 
-import controllers.Controller;
-import controllers.Direction;
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Collections;
+import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
 
 /**
  * Multi key press listener
@@ -16,14 +13,14 @@ import java.util.Set;
  * @version 1.0
  */
 class MultiKeyPressListener implements KeyListener {
-    private final Set<Integer> pressedKeys = new HashSet<>();
+    private final Collection<Integer> pressedKeys = Collections.synchronizedCollection(new HashSet<>());
 
     /**
      * Get pressed keys
      *
      * @return set of pressed keys
      */
-    public Set<Integer> getPressedKeys() {
+    public Collection<Integer> getPressedKeys() {
         return pressedKeys;
     }
 

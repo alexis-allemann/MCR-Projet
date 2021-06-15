@@ -25,4 +25,9 @@ public class Monster extends Fighter {
         return Direction.DOWN;
     }
 
+    @Override
+    public int getDefaultHealth() {
+        return 1;
+    }
+
 }

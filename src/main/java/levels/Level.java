@@ -63,6 +63,15 @@ public abstract class Level {
     }
 
     /**
+     * Get current score
+     *
+     * @return current score
+     */
+    public int getScore() {
+        return score;
+    }
+
+    /**
      * define number of monsters
      *
      * @return number of monsters for each wave
