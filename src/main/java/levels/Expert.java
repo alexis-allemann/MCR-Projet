@@ -32,6 +32,11 @@ public class Expert extends Level{
     }
 
     @Override
+    public float probabilityToGenerateDecoration() {
+        return 0.5f;
+    }
+
+    @Override
     public int getNbMonsterByWave() {
         return 8;
     }

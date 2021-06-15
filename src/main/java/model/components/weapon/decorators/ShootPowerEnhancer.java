@@ -1,8 +1,7 @@
 package model.components.weapon.decorators;
 
 import controllers.Direction;
-import model.components.weapon.Weapon;
-import model.components.weapon.bullets.Bullet;
+import model.components.weapon.Projectile;
 
 /**
  * Shoot power enhancer
@@ -18,15 +17,15 @@ public class ShootPowerEnhancer extends WeaponDecorator {
      *
      * @param ratio of the power to increment
      */
-    public ShootPowerEnhancer(Weapon weapon, float ratio) {
+    public ShootPowerEnhancer(model.components.weapon.Weapon weapon, float ratio) {
         super(weapon);
         this.ratio = ratio;
     }
 
     @Override
-    public Bullet getBullet(Direction direction) {
-        Bullet oldBullet = super.getBullet(direction);
-        return new Bullet(oldBullet.getImage(), oldBullet.getSpeed(), oldBullet.isMonsterTeam()) {
+    public Projectile getBullet(Direction direction) {
+        Projectile oldProjectile = super.getBullet(direction);
+        return new Projectile(oldProjectile.getImage(), oldProjectile.getSpeed(), oldProjectile.isMonsterTeam()) {
             @Override
             public int getPower() {
                 return (int) (super.getPower() * ratio);

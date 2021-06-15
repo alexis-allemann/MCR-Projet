@@ -35,6 +35,11 @@ public class Medium extends Level {
     }
 
     @Override
+    public float probabilityToGenerateDecoration() {
+        return 0.15f;
+    }
+
+    @Override
     public int getNbMonsterByWave() {
         return 6;
     }

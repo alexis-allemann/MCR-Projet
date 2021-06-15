@@ -1,8 +1,7 @@
 package model.components.weapon.decorators;
 
 import controllers.Direction;
-import model.components.weapon.Weapon;
-import model.components.weapon.bullets.Bullet;
+import model.components.weapon.Projectile;
 
 import java.awt.Image;
 
@@ -20,17 +19,17 @@ public class BulletSizeEnhancer extends WeaponDecorator {
      *
      * @param ratio of the reload speed increment
      */
-    public BulletSizeEnhancer(Weapon weapon, float ratio) {
+    public BulletSizeEnhancer(model.components.weapon.Weapon weapon, float ratio) {
         super(weapon);
         this.ratio = ratio;
     }
 
     @Override
-    public Bullet getBullet(Direction direction) {
-        Bullet oldBullet = super.getBullet(direction);
-        Image oldImage = oldBullet.getImage();
+    public Projectile getBullet(Direction direction) {
+        Projectile oldProjectile = super.getBullet(direction);
+        Image oldImage = oldProjectile.getImage();
         Image newImage = oldImage.getScaledInstance((int) (oldImage.getWidth(null) * ratio), (int) (oldImage.getHeight(null) * ratio), Image.SCALE_DEFAULT);
-        return new Bullet(newImage, oldBullet.getSpeed(), oldBullet.isMonsterTeam()) {
+        return new Projectile(newImage, oldProjectile.getSpeed(), oldProjectile.isMonsterTeam()) {
 
         };
     }

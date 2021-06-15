@@ -2,8 +2,8 @@ package model.components.weapon.decorators;
 
 import controllers.Direction;
 import model.components.fighters.Fighter;
+import model.components.weapon.Projectile;
 import model.components.weapon.Weapon;
-import model.components.weapon.bullets.Bullet;
 
 /**
  * Weapon decorator
@@ -12,19 +12,19 @@ import model.components.weapon.bullets.Bullet;
  * @version 1.0
  */
 public abstract class WeaponDecorator extends Weapon {
-    private final Weapon weapon;
+    private final model.components.weapon.Weapon weapon;
 
     /**
      * Instantiation of a new decoration
      *
      * @param weapon to decorate
      */
-    public WeaponDecorator(Weapon weapon) {
+    public WeaponDecorator(model.components.weapon.Weapon weapon) {
         this.weapon = weapon;
     }
 
     @Override
-    public Bullet getBullet(Direction direction) {
+    public Projectile getBullet(Direction direction) {
         return weapon.getBullet(direction);
     }
 

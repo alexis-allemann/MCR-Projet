@@ -4,9 +4,9 @@ import levels.Beginner;
 import levels.Level;
 import model.components.fighters.Fighter;
 import model.components.fighters.SpaceCraft;
+import model.components.weapon.Projectile;
 import utils.physics.Location;
 import model.components.weapon.StandardWeapon;
-import model.components.weapon.bullets.Bullet;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,7 +21,7 @@ import java.util.List;
 public class World {
     private static final World INSTANCE = new World();
     private final List<Fighter> monsters = Collections.synchronizedList(new ArrayList<>());
-    private final List<Bullet> bullets = Collections.synchronizedList(new ArrayList<>());
+    private final List<Projectile> projectiles = Collections.synchronizedList(new ArrayList<>());
     private final Fighter spacecraft = new SpaceCraft(new Location(0, 0));
     private Level level;
 
@@ -83,26 +83,26 @@ public class World {
      *
      * @return the list of all monsters
      */
-    public List<Bullet> getBullets() {
-        return bullets;
+    public List<Projectile> getBullets() {
+        return projectiles;
     }
 
     /**
      * Add a bullet to the world
      *
-     * @param bullet the monster to add
+     * @param projectile the monster to add
      */
-    public void addBullet(Bullet bullet) {
-        bullets.add(bullet);
+    public void addBullet(Projectile projectile) {
+        projectiles.add(projectile);
     }
 
     /**
      * Remove a bullet from the world
      *
-     * @param bullet to remove
+     * @param projectile to remove
      */
-    public void removeBullet(Bullet bullet) {
-        bullets.remove(bullet);
+    public void removeBullet(Projectile projectile) {
+        projectiles.remove(projectile);
     }
 
     /**

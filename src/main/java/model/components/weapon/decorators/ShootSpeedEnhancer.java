@@ -1,8 +1,7 @@
 package model.components.weapon.decorators;
 
 import controllers.Direction;
-import model.components.weapon.Weapon;
-import model.components.weapon.bullets.Bullet;
+import model.components.weapon.Projectile;
 import utils.physics.Vector2D;
 
 /**
@@ -19,16 +18,16 @@ public class ShootSpeedEnhancer extends WeaponDecorator {
      *
      * @param ratio of the shoot speed increment
      */
-    public ShootSpeedEnhancer(Weapon weapon, float ratio) {
+    public ShootSpeedEnhancer(model.components.weapon.Weapon weapon, float ratio) {
         super(weapon);
         this.ratio = ratio;
     }
 
     @Override
-    public Bullet getBullet(Direction direction) {
-        Bullet oldBullet = super.getBullet(direction);
-        Vector2D newSpeed = new Vector2D(oldBullet.getSpeed().getX() * ratio, oldBullet.getSpeed().getY() * ratio);
-        return new Bullet(oldBullet.getImage(), newSpeed, oldBullet.isMonsterTeam()) {
+    public Projectile getBullet(Direction direction) {
+        Projectile oldProjectile = super.getBullet(direction);
+        Vector2D newSpeed = new Vector2D(oldProjectile.getSpeed().getX() * ratio, oldProjectile.getSpeed().getY() * ratio);
+        return new Projectile(oldProjectile.getImage(), newSpeed, oldProjectile.isMonsterTeam()) {
         };
     }
 }

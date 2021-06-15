@@ -1,7 +1,6 @@
 package model.components.weapon;
 
 import utils.physics.Vector2D;
-import model.components.weapon.bullets.Bullet;
 import controllers.Direction;
 
 /**
@@ -13,9 +12,9 @@ import controllers.Direction;
 public class StandardWeapon extends Weapon{
 
     @Override
-    public Bullet getBullet(Direction direction) {
+    public Projectile getBullet(Direction direction) {
         float y = direction == Direction.TOP ? -5f : 5f;
-        return new Bullet("bullet.png", new Vector2D(0, y), getFighter().isMonsterTeam()) {
+        return new Projectile("bullet.png", new Vector2D(0, y), getFighter().isMonsterTeam()) {
             @Override
             public int getPower() {
                 return super.getPower();

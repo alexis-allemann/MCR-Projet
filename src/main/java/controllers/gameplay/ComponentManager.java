@@ -32,7 +32,7 @@ public class ComponentManager implements Runnable {
     @Override
     public void run() {
         FighterManager fighterManager = FighterManager.getInstance();
-        BulletManager bulletManager = BulletManager.getInstance();
+        ProjectileManager projectileManager = ProjectileManager.getInstance();
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
@@ -44,7 +44,7 @@ public class ComponentManager implements Runnable {
                 }
 
                 fighterManager.manage();
-                bulletManager.manage();
+                projectileManager.manage();
             }
         };
         timer.scheduleAtFixedRate(task, 0, GamePlay.FRAME_RATE);

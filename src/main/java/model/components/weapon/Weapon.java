@@ -3,7 +3,6 @@ package model.components.weapon;
 import model.World;
 import model.components.fighters.Fighter;
 import utils.physics.Location;
-import model.components.weapon.bullets.Bullet;
 
 import controllers.Direction;
 
@@ -34,11 +33,11 @@ public abstract class Weapon {
     public void shoot() {
         long current = System.currentTimeMillis();
         if (current - lastBulletShotTime >= nextShootReloadTime) {
-            Bullet bullet = fighter.getWeapon().getBullet(fighter.getDirection());
-            bullet.setLocation(
-                    getStartingBulletLocation(bullet)
+            Projectile projectile = fighter.getWeapon().getBullet(fighter.getDirection());
+            projectile.setLocation(
+                    getStartingBulletLocation(projectile)
             );
-            World.getInstance().addBullet(bullet);
+            World.getInstance().addBullet(projectile);
             lastBulletShotTime = System.currentTimeMillis();
             setNextShootReloadTime();
         }
@@ -59,7 +58,7 @@ public abstract class Weapon {
      * @param direction direction the fighter is facing
      * @return bullet to shoot
      */
-    public abstract Bullet getBullet(Direction direction);
+    public abstract Projectile getBullet(Direction direction);
 
     /**
      * Reload time between shoots
@@ -73,7 +72,7 @@ public abstract class Weapon {
      *
      * @return the starting location of the bullet
      */
-    Location getStartingBulletLocation(Bullet bullet) {
+    Location getStartingBulletLocation(Projectile projectile) {
         float x = fighter.getLocation().x + fighter.getImageWidth() / 2.f;
         float y = fighter.getLocation().y + (fighter.getDirection() == Direction.TOP ? -1.5f : 1.5f) * fighter.getImageHeight();
         return new Location(x, y);

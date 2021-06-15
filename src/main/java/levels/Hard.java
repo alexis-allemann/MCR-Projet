@@ -35,6 +35,11 @@ public class Hard extends Level {
     }
 
     @Override
+    public float probabilityToGenerateDecoration() {
+        return 0.1f;
+    }
+
+    @Override
     public int getNbMonsterByWave() {
         return 7;
     }

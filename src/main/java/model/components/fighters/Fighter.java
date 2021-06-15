@@ -2,7 +2,11 @@ package model.components.fighters;
 
 import model.World;
 import model.components.GameComponentWithHitBox;
+import model.components.weapon.Projectile;
 import model.components.weapon.Weapon;
+import model.components.weapon.decorators.BulletSizeEnhancer;
+import model.components.weapon.decorators.ShootSpeedEnhancer;
+import utils.Utils;
 import utils.physics.Vector2D;
 import utils.physics.Location;
 import controllers.Direction;
@@ -147,6 +151,17 @@ public abstract class Fighter extends GameComponentWithHitBox {
      * Death action
      */
     public void die() {
-        World.getInstance().removeMonster(this);
+        World world = World.getInstance();
+        world.removeMonster(this);
+        float random = Utils.getInstance().randomFloat(1);
+        if (random <= world.getLevel().probabilityToGenerateDecoration()) {
+            world.addBullet(new Projectile("monster-blue.png", new Vector2D(0, 5), true) {
+                @Override
+                public void hit(Fighter fighter) {
+                    fighter.setWeapon(world.getLevel().getWeaponDecoration(fighter.getWeapon()));
+                    super.hit(fighter);
+                }
+            });
+        }
     }
 }

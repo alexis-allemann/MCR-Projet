@@ -1,4 +1,4 @@
-package model.components.weapon.bullets;
+package model.components.weapon;
 
 import model.components.GameComponentWithHitBox;
 import model.components.fighters.Fighter;
@@ -13,7 +13,7 @@ import java.awt.Image;
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public abstract class Bullet extends GameComponentWithHitBox {
+public abstract class Projectile extends GameComponentWithHitBox {
     protected final int BASE_POWER = 1;
     protected final Vector2D speed;
     private boolean isMonsterTeam;
@@ -25,7 +25,7 @@ public abstract class Bullet extends GameComponentWithHitBox {
      * @param direction     of the bullet
      * @param isMonsterTeam if bullet is shot by a monster
      */
-    public Bullet(String image, Vector2D direction, boolean isMonsterTeam) {
+    public Projectile(String image, Vector2D direction, boolean isMonsterTeam) {
         super(new Location(0, 0), image);
         this.speed = new Vector2D(direction.getX(), direction.getY());
         this.isMonsterTeam = isMonsterTeam;
@@ -38,7 +38,7 @@ public abstract class Bullet extends GameComponentWithHitBox {
      * @param direction     of the bullet
      * @param isMonsterTeam if bullet is shot by a monster
      */
-    public Bullet(Image image, Vector2D direction, boolean isMonsterTeam) {
+    public Projectile(Image image, Vector2D direction, boolean isMonsterTeam) {
         super(new Location(0, 0), image);
         this.speed = new Vector2D(direction.getX(), direction.getY());
         this.isMonsterTeam = isMonsterTeam;

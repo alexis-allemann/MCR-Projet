@@ -29,6 +29,11 @@ public class Beginner extends Level {
     }
 
     @Override
+    public float probabilityToGenerateDecoration() {
+        return 0.3f;
+    }
+
+    @Override
     public int getNbMonsterByWave() {
         return 4;
     }

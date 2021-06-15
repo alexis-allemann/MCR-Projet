@@ -239,7 +239,7 @@ _- INSTANCE : BulletManager_
 - BulletManager()
 _+ getInstance() : BulletManager_
 + run() : void
-- checkFighterOnNextLocation(bullet : Bullet) : Fighter
+- checkFighterOnNextLocation(projectile : Bullet) : Fighter
 
 </panel_attributes>
     <additional_attributes/>

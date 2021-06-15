@@ -545,8 +545,8 @@ _+ getInstance() : World_
 + addMonster(monster : Monster) : void
 + removeMonster(monster : Monster) : void
 + getBullets() : List&lt;Bullet&gt;
-+ addBullet(bullet : Bullets) : void
-+ removeBullet(bullet : Bullets) : void
++ addBullet(projectile : Bullets) : void
++ removeBullet(projectile : Bullets) : void
 + getLevel() : Level
 + setLevel(level : Level) : void</panel_attributes>
     <additional_attributes/>

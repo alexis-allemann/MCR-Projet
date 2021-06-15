@@ -1,7 +1,7 @@
 package controllers.gameplay;
 
 import model.World;
-import model.components.weapon.bullets.Bullet;
+import model.components.weapon.Projectile;
 import model.components.fighters.Fighter;
 
 import java.util.LinkedList;
@@ -12,13 +12,13 @@ import java.util.LinkedList;
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public class BulletManager {
-    private static final BulletManager INSTANCE = new BulletManager();
+public class ProjectileManager {
+    private static final ProjectileManager INSTANCE = new ProjectileManager();
 
     /**
      * Instantiation of the bullet manager
      */
-    private BulletManager() {
+    private ProjectileManager() {
     }
 
     /**
@@ -26,7 +26,7 @@ public class BulletManager {
      *
      * @return the instance of the bullet manager
      */
-    public static BulletManager getInstance() {
+    public static ProjectileManager getInstance() {
         return INSTANCE;
     }
 
@@ -36,44 +36,44 @@ public class BulletManager {
     public void manage() {
         // Lock bullets list instance to prevent concurrences errors
         synchronized (World.getInstance().getBullets()) {
-            LinkedList<Bullet> bulletsToRemove = new LinkedList<>();
-            for (Bullet bullet : World.getInstance().getBullets()) {
+            LinkedList<Projectile> bulletsToRemove = new LinkedList<>();
+            for (Projectile projectile : World.getInstance().getBullets()) {
 
                 // Check if a fighter has been touched by bullet
-                Fighter fighter = checkFighterOnNextLocation(bullet);
+                Fighter fighter = checkFighterOnNextLocation(projectile);
                 if (fighter != null) {
-                    bullet.hit(fighter);
-                    bulletsToRemove.add(bullet);
+                    projectile.hit(fighter);
+                    bulletsToRemove.add(projectile);
                 } else {
-                    bullet.move();
-                    if (!bullet.isInBounds()) {
-                        bulletsToRemove.add(bullet);
+                    projectile.move();
+                    if (!projectile.isInBounds()) {
+                        bulletsToRemove.add(projectile);
                     }
                 }
             }
 
             // Remove monster after iteration to handle concurrence in synchronised list
-            for (Bullet bullet : bulletsToRemove)
-                World.getInstance().removeBullet(bullet);
+            for (Projectile projectile : bulletsToRemove)
+                World.getInstance().removeBullet(projectile);
         }
     }
 
     /**
      * Check if there's a fighter on the path of the bullet
      *
-     * @param bullet Bullet to check path
+     * @param projectile Bullet to check path
      * @return the fighter or null if there's no fighter
      */
-    private Fighter checkFighterOnNextLocation(Bullet bullet) {
+    private Fighter checkFighterOnNextLocation(Projectile projectile) {
 
         // Check if the spacecraft has been touched
-        if (bullet.checkNextLocation(World.getInstance().getSpacecraft()))
+        if (projectile.checkNextLocation(World.getInstance().getSpacecraft()))
             return World.getInstance().getSpacecraft();
 
         // Check if a monster has been touched
         synchronized (World.getInstance().getMonsters()) {
             for (Fighter monster : World.getInstance().getMonsters())
-                if (bullet.checkNextLocation(monster))
+                if (projectile.checkNextLocation(monster))
                     return monster;
         }
 

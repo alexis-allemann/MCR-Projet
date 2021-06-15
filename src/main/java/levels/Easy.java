@@ -35,6 +35,11 @@ public class Easy extends Level {
     }
 
     @Override
+    public float probabilityToGenerateDecoration() {
+        return 0.2f;
+    }
+
+    @Override
     public int getNbMonsterByWave() {
         return 5;
     }

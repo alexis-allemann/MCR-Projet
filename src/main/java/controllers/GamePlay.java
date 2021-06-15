@@ -120,9 +120,9 @@ public class GamePlay implements Controller {
      * @return boolean if it is in bounds
      */
     private boolean isInBounds(Location location, Fighter fighter) {
-        return location.x + fighter.getImageWidth() <= WIDTH &&
-                location.y + fighter.getImageHeight() <= HEIGHT &&
-                location.x >= 0 &&
-                location.y >= 0;
+        return location.x <= WIDTH &&
+                location.y <= HEIGHT &&
+                location.x + fighter.getImageWidth() >= 0 &&
+                location.y + fighter.getImageHeight() >= 0;
     }
 }
