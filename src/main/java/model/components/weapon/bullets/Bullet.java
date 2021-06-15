@@ -5,6 +5,8 @@ import model.components.fighters.Fighter;
 import utils.physics.Vector2D;
 import utils.physics.Location;
 
+import java.awt.Image;
+
 /**
  * Bullets used on model.components.fighters.spacecraft shoots
  *
@@ -12,7 +14,6 @@ import utils.physics.Location;
  * @version 1.0
  */
 public abstract class Bullet extends GameComponentWithHitBox {
-    protected static final int BASE_SPEED = 10;
     protected final int BASE_POWER = 1;
     protected final Vector2D speed;
     private boolean isMonsterTeam;
@@ -20,23 +21,27 @@ public abstract class Bullet extends GameComponentWithHitBox {
     /**
      * Instantiation of a new bullet
      *
-     * @param image filename of the bullet image
-     * @param direction of the bullet
+     * @param image         filename of the bullet image
+     * @param direction     of the bullet
      * @param isMonsterTeam if bullet is shot by a monster
      */
     public Bullet(String image, Vector2D direction, boolean isMonsterTeam) {
         super(new Location(0, 0), image);
-        this.speed = new Vector2D(direction.getX() * getBaseSpeed(), direction.getY() * getBaseSpeed());
+        this.speed = new Vector2D(direction.getX(), direction.getY());
         this.isMonsterTeam = isMonsterTeam;
     }
 
     /**
-     * Get default bullet speed
+     * Instantiation of a new bullet
      *
-     * @return the speed
+     * @param image         filename of the bullet image
+     * @param direction     of the bullet
+     * @param isMonsterTeam if bullet is shot by a monster
      */
-    public int getBaseSpeed() {
-        return BASE_SPEED;
+    public Bullet(Image image, Vector2D direction, boolean isMonsterTeam) {
+        super(new Location(0, 0), image);
+        this.speed = new Vector2D(direction.getX(), direction.getY());
+        this.isMonsterTeam = isMonsterTeam;
     }
 
     /**
@@ -46,6 +51,15 @@ public abstract class Bullet extends GameComponentWithHitBox {
      */
     public int getPower() {
         return BASE_POWER;
+    }
+
+    /**
+     * Get speed
+     *
+     * @return speed of the bullet
+     */
+    public Vector2D getSpeed() {
+        return speed;
     }
 
     /**
@@ -71,7 +85,7 @@ public abstract class Bullet extends GameComponentWithHitBox {
      * @return True if there's a fighter to next location
      */
     public boolean checkNextLocation(Fighter fighter) {
-        if(fighter.isMonsterTeam() == this.isMonsterTeam)
+        if (fighter.isMonsterTeam() == this.isMonsterTeam)
             return false;
         return checkHitBox(speed, fighter);
     }

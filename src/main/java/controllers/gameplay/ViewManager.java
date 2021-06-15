@@ -62,12 +62,16 @@ public class ViewManager implements Runnable {
                 spacecraft.draw(graphics);
 
                 // Add monsters images
-                for (GameComponentWithHitBox component : World.getInstance().getMonsters())
-                    component.draw(graphics);
+                synchronized (World.getInstance().getMonsters()) {
+                    for (GameComponentWithHitBox component : World.getInstance().getMonsters())
+                        component.draw(graphics);
+                }
 
                 // Add bullets images
-                for (GameComponentWithHitBox component : World.getInstance().getBullets())
-                    component.draw(graphics);
+                synchronized (World.getInstance().getBullets()) {
+                    for (GameComponentWithHitBox component : World.getInstance().getBullets())
+                        component.draw(graphics);
+                }
 
                 view.paintImage(nextImage);
             }

@@ -2,7 +2,6 @@ package model.components.weapon;
 
 import model.World;
 import model.components.fighters.Fighter;
-import utils.Utils;
 import utils.physics.Location;
 import model.components.weapon.bullets.Bullet;
 
@@ -35,7 +34,7 @@ public abstract class Weapon {
     public void shoot() {
         long current = System.currentTimeMillis();
         if (current - lastBulletShotTime >= nextShootReloadTime) {
-            Bullet bullet = getBullet(fighter.getDirection());
+            Bullet bullet = fighter.getWeapon().getBullet(fighter.getDirection());
             bullet.setLocation(
                     getStartingBulletLocation(bullet)
             );
@@ -60,14 +59,14 @@ public abstract class Weapon {
      * @param direction direction the fighter is facing
      * @return bullet to shoot
      */
-    abstract Bullet getBullet(Direction direction);
+    public abstract Bullet getBullet(Direction direction);
 
     /**
      * Reload time between shoots
      *
      * @return time between shoots
      */
-    abstract int reloadTimeInMilliSeconds();
+    public abstract int reloadTimeInMilliSeconds();
 
     /**
      * Compute the starting location of the bullet

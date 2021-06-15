@@ -41,4 +41,6 @@ public abstract class FighterDecorator extends Fighter {
     public float getNextTimingModifier() {
         return fighter.getNextTimingModifier();
     }
+
+
 }

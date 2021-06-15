@@ -5,15 +5,17 @@ import utils.Utils;
 import utils.physics.Vector2D;
 import model.components.weapon.bullets.Bullet;
 
+/**
+ * Bomb weapon
+ *
+ * @author Allemann, Balestrieri, Christen, Mottier, Zeller
+ * @version 1.0
+ */
 public class BombWeapon extends Weapon {
     @Override
-    Bullet getBullet(Direction direction) {
-        return new Bullet("bomb.png", new Vector2D(Utils.getInstance().randomFloat(-1, 1), 0.8f), getFighter().isMonsterTeam()) {
-            @Override
-            public int getBaseSpeed() {
-                return super.getBaseSpeed();
-            }
-
+    public Bullet getBullet(Direction direction) {
+        float y = direction == Direction.TOP ? -4f : 4f;
+        return new Bullet("bomb.png", new Vector2D(Utils.getInstance().randomFloat(-1, 1), y), getFighter().isMonsterTeam()) {
             @Override
             public int getPower() {
                 return super.getPower();
@@ -22,7 +24,7 @@ public class BombWeapon extends Weapon {
     }
 
     @Override
-    int reloadTimeInMilliSeconds() {
+    public int reloadTimeInMilliSeconds() {
         return 5000;
     }
 }

@@ -12,14 +12,9 @@ import controllers.Direction;
  */
 public class LaserWeapon extends Weapon{
     @Override
-    Bullet getBullet(Direction direction) {
-        float y = direction == Direction.TOP ? -2.5f : 2.5f;
+    public Bullet getBullet(Direction direction) {
+        float y = direction == Direction.TOP ? -10f : 10f;
         return new Bullet("laser.png", new Vector2D(0, y), getFighter().isMonsterTeam()) {
-            @Override
-            public int getBaseSpeed() {
-                return 5;
-            }
-
             @Override
             public int getPower() {
                 return 100;
@@ -28,7 +23,7 @@ public class LaserWeapon extends Weapon{
     }
 
     @Override
-    int reloadTimeInMilliSeconds() {
-        return 500;
+    public int reloadTimeInMilliSeconds() {
+        return 5000;
     }
 }
