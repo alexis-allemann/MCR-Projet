@@ -1,5 +1,6 @@
 package levels;
 
+import model.World;
 import model.components.fighters.Fighter;
 import model.components.fighters.Monster;
 import model.components.physics.Location;
@@ -19,12 +20,12 @@ public class Beginner extends Level {
 
     @Override
     public void checkLevelChanged() {
-        if(nbMonstersKilled > 2 || getTime() > 20)
-            new Easy(this);
+        if(nbMonstersKilled >= 2 || getTime() > 20)
+            World.getInstance().setLevel(new Easy(this));
     }
 
     @Override
     public int getNbMonsterByWave() {
-        return 10;
+        return 4;
     }
 }

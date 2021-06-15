@@ -8,8 +8,8 @@ import model.components.physics.Location;
 import model.components.weapon.StandardWeapon;
 import model.components.weapon.bullets.Bullet;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -20,15 +20,15 @@ import java.util.List;
  */
 public class World {
     private static final World instance = new World();
-    private final List<Fighter> monsters = Collections.synchronizedList(new LinkedList<>());
-    private final List<Bullet> bullets = Collections.synchronizedList(new LinkedList<>());
+    private final List<Fighter> monsters = Collections.synchronizedList(new ArrayList<>());
+    private final List<Bullet> bullets = Collections.synchronizedList(new ArrayList<>());
     private final Fighter spacecraft = new SpaceCraft(new Location(0, 0));
     private Level level;
 
     /**
      * Instantiation of the world (private to apply Singleton pattern)
      */
-    private World(){
+    private World() {
         spacecraft.setWeapon(new StandardWeapon());
         this.level = new Beginner();
     }
@@ -44,60 +44,76 @@ public class World {
 
     /**
      * Get the spacecraft
+     *
      * @return the spacecraft
      */
-    public Fighter getSpacecraft(){
+    public Fighter getSpacecraft() {
         return spacecraft;
     }
 
     /**
      * Get all monsters
+     *
      * @return the list of all monsters
      */
-    public List<Fighter> getMonsters(){
+    public List<Fighter> getMonsters() {
         return monsters;
     }
 
     /**
      * Add a monster to the world
+     *
      * @param monster the monster to add
      */
-    public void addMonster(Fighter monster){
+    public void addMonster(Fighter monster) {
         monsters.add(monster);
     }
 
     /**
      * Remove a monster from the world
      */
-    public void removeMonster(Fighter monster){
+    public void removeMonster(Fighter monster) {
         monsters.remove(monster);
     }
 
     /**
      * Get all monsters
+     *
      * @return the list of all monsters
      */
-    public List<Bullet> getBullets(){
+    public List<Bullet> getBullets() {
         return bullets;
     }
 
     /**
      * Add a bullet to the world
+     *
      * @param bullet the monster to add
      */
-    public void addBullet(Bullet bullet){
+    public void addBullet(Bullet bullet) {
         bullets.add(bullet);
     }
 
     /**
      * Remove a bullet from the world
      */
-    public void removeBullet(Bullet bullet){
+    public void removeBullet(Bullet bullet) {
         bullets.remove(bullet);
     }
 
     /**
      * @return the current level
      */
-    public Level getLevel(){ return level; }
+    public Level getLevel() {
+        return level;
+    }
+
+    /**
+     * Set the level of the world
+     *
+     * @param level to set
+     */
+    public void setLevel(Level level) {
+        this.level = level;
+    }
 }

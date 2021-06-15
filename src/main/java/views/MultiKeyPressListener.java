@@ -17,46 +17,19 @@ import java.util.Set;
  */
 class MultiKeyPressListener implements KeyListener {
     private final Set<Integer> pressedKeys = new HashSet<>();
-    private Controller controller;
 
     /**
-     * Instantiation of the multi key press listener
+     * Get pressed keys
      *
-     * @param controller to manipulate on keys pressed
+     * @return set of pressed keys
      */
-    public MultiKeyPressListener(Controller controller) {
-        this.controller = controller;
+    public Set<Integer> getPressedKeys() {
+        return pressedKeys;
     }
 
     @Override
     public synchronized void keyPressed(KeyEvent e) {
         pressedKeys.add(e.getKeyCode());
-        if (!pressedKeys.isEmpty()) {
-            for (Iterator<Integer> it = pressedKeys.iterator(); it.hasNext(); ) {
-                switch (it.next()) {
-                    case KeyEvent.VK_A:
-                    case KeyEvent.VK_LEFT:
-                        controller.move(Direction.LEFT);
-                        break;
-
-                    case KeyEvent.VK_D:
-                    case KeyEvent.VK_RIGHT:
-                        controller.move(Direction.RIGHT);
-                        break;
-
-                    case KeyEvent.VK_W:
-                    case KeyEvent.VK_UP:
-                    case KeyEvent.VK_SPACE:
-                        controller.shoot();
-                        break;
-
-                    case KeyEvent.VK_R:
-                    case KeyEvent.VK_N:
-                        controller.newGame();
-                        break;
-                }
-            }
-        }
     }
 
     @Override

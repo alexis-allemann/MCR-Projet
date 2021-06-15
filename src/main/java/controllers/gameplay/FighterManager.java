@@ -1,12 +1,16 @@
 package controllers.gameplay;
 
 import controllers.GamePlay;
+import levels.Level;
 import model.World;
 import model.components.fighters.Fighter;
 import model.components.physics.Location;
-import model.components.weapon.bullets.Bullet;
+import model.components.physics.Vector2D;
 
-import java.util.*;
+import java.util.List;
+import java.util.LinkedList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Thread that manage fighters actions (movements and shootings)
@@ -16,6 +20,10 @@ import java.util.*;
  */
 public class FighterManager implements Runnable {
     private static FighterManager instance = new FighterManager();
+    private static final int SECONDS_BEFORE_DOWN_MOVE = 5;
+    private static final int NB_MOVES_BEFORE_INVERT = 40;
+    private long lastMonstersDownMove = System.currentTimeMillis();
+    private int nbMoveInSameDirection = 0;
 
     /**
      * Instantiation of the fighter manager
@@ -34,32 +42,68 @@ public class FighterManager implements Runnable {
 
     @Override
     public void run() {
-        while (GamePlay.getInstance().isRunning()) {
-            // 1. check if we can generate monsters (every 5s i.e.)
-            // 1.1 get Y coordinate of highest monsters
-            checkMonsterGeneration();
-            List<Fighter> monsters = retrieveMonsters();
-            List<Fighter> toRemove = new LinkedList<>();
-            for (Fighter monster : monsters) {
-                if (!monster.alive()) {
-                    // Add dead monster to list
-                    toRemove.add(monster);
-                } else {
-                    monster.shoot();
-                    monster.move();
+        World world = World.getInstance();
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                // Check if game is still running
+                if (!GamePlay.getInstance().isRunning()) {
+                    cancel();
+                    timer.cancel();
+                }
+
+                // Check if level has changed
+                world.getLevel().checkLevelChanged();
+
+                // Check if new monsters can be generated
+                checkMonsterGeneration();
+
+                // Lock monsters list instance to prevent concurrences errors
+                synchronized (world.getMonsters()) {
+
+                    // Check if monsters should move down or invert speed
+                    boolean downMove = System.currentTimeMillis() - lastMonstersDownMove > SECONDS_BEFORE_DOWN_MOVE * 1000;
+                    boolean invertSpeed = nbMoveInSameDirection > NB_MOVES_BEFORE_INVERT;
+
+                    List<Fighter> monsters = world.getMonsters();
+                    List<Fighter> toRemove = new LinkedList<>();
+                    for (Fighter monster : monsters) {
+                        if (!monster.alive()) {
+                            toRemove.add(monster);
+                            world.getLevel().addMonsterKilled();
+                        } else {
+                            // Calculate speed on X axis
+                            float speedOnX = monster.getSpeed().getX();
+                            if (invertSpeed)
+                                speedOnX *= -1;
+
+                            // Change monster speed
+                            if (downMove) {
+                                monster.setSpeed(new Vector2D(speedOnX, 10.0f));
+                                lastMonstersDownMove = System.currentTimeMillis();
+                            } else {
+                                monster.setSpeed(new Vector2D(speedOnX, 0f));
+                            }
+
+                            // monster.shoot();
+                            monster.move();
+                        }
+                    }
+
+                    // Remove monster after iteration to handle concurrence in synchronised list
+                    for (Fighter monster : toRemove)
+                        monster.die();
+
+                    // Update nb moves in the same direction
+                    if (invertSpeed)
+                        nbMoveInSameDirection = 0;
+                    else
+                        nbMoveInSameDirection++;
                 }
             }
-            // Remove monster after iteration, else big exception occurs
-            for(Fighter monster : toRemove){
-                monster.die();
-            }
-
-            try {
-                Thread.sleep(GamePlay.FRAMERATE);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+        };
+        timer.scheduleAtFixedRate(task, 0, GamePlay.FRAME_RATE);
     }
 
     /**
@@ -68,25 +112,30 @@ public class FighterManager implements Runnable {
      * @details check that the highest monster is below the spawn line
      */
     private void checkMonsterGeneration() {
-        List<Fighter> monsters = retrieveMonsters();
-        boolean canGenerate = monsters.isEmpty() || monsters.get(monsters.size() - 1).getLocation().y < GamePlay.SPAWN_HEIGHT;
-        if (canGenerate) {
-            float first_one = 15.f;
-            for (int i = 0; i < World.getInstance().getLevel().getNbMonsterByWave(); ++i) {
-                // TODO : Generate proper location for the monster
-                Location monsterLocation = new Location(95.f * i + first_one, GamePlay.SPAWN_HEIGHT);
-                Fighter newMonster = World.getInstance().getLevel().generateMonster(monsterLocation);
-                World.getInstance().addMonster(newMonster);
+        World world = World.getInstance();
+        synchronized (world.getMonsters()) {
+            List<Fighter> monsters = world.getMonsters();
+
+            // Check if a new generation should happen
+            boolean canGenerate;
+            if (monsters.isEmpty())
+                canGenerate = true;
+            else {
+                Fighter last = monsters.get(monsters.size() - 1);
+                canGenerate = last.getLocation().y > GamePlay.SPAWN_HEIGHT + last.getImageHeight();
+            }
+
+            // Generate new monsters
+            if (canGenerate) {
+                Level level = world.getLevel();
+                int margin = ((GamePlay.WIDTH - NB_MOVES_BEFORE_INVERT) / (level.getNbMonsterByWave()));
+                for (int i = 1; i <= level.getNbMonsterByWave(); ++i) {
+                    Fighter newMonster = level.generateMonster(new Location(0, 0));
+                    int xAxisValue = (margin * i) - (margin / 2) - (newMonster.getImageWidth() / 2) + nbMoveInSameDirection;
+                    newMonster.setLocation(new Location(xAxisValue, GamePlay.SPAWN_HEIGHT));
+                    world.addMonster(newMonster);
+                }
             }
         }
-    }
-
-    /**
-     * Get monsters in the game
-     *
-     * @return list of fighters in the game
-     */
-    private List<Fighter> retrieveMonsters() {
-        return World.getInstance().getMonsters();
     }
 }

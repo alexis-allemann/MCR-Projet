@@ -1,12 +1,11 @@
 package model.components.fighters;
 
 import model.World;
-import model.components.GameComponentWithHitbox;
+import model.components.GameComponentWithHitBox;
 import model.components.weapon.Weapon;
 import model.components.physics.Vector2D;
 import model.components.physics.Location;
 import controllers.Direction;
-import controllers.gameplay.FighterManager;
 
 /**
  * Space invaders fighter
@@ -14,7 +13,7 @@ import controllers.gameplay.FighterManager;
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public abstract class Fighter extends GameComponentWithHitbox {
+public abstract class Fighter extends GameComponentWithHitBox {
     private final Vector2D SPEED_BASE = new Vector2D(1.f, 0.f);
     private final int POWER_BASE = 1;
     protected Vector2D speed;
@@ -68,6 +67,24 @@ public abstract class Fighter extends GameComponentWithHitbox {
     }
 
     /**
+     * Get fighter speed
+     *
+     * @return vector 2d of the speed
+     */
+    public Vector2D getSpeed() {
+        return speed;
+    }
+
+    /**
+     * Set the fighter speed vector
+     *
+     * @param speed vector
+     */
+    public void setSpeed(Vector2D speed) {
+        this.speed = speed;
+    }
+
+    /**
      * Get shoot direction
      *
      * @return the shoot direction
@@ -76,6 +93,7 @@ public abstract class Fighter extends GameComponentWithHitbox {
 
     /**
      * Get fighter's health
+     *
      * @return fighter's health
      */
     public int getHealth() {
@@ -84,32 +102,34 @@ public abstract class Fighter extends GameComponentWithHitbox {
 
     /**
      * Check if fighter is still alive
+     *
      * @return true if fighter is alive
      */
-    public boolean alive(){
+    public boolean alive() {
         return getHealth() > 0;
     }
 
     /**
      * Removing healing points to the fighter's health
+     *
      * @param hp healing points to remove
      */
-    public void removeHealth(int hp){
+    public void removeHealth(int hp) {
         health -= hp;
     }
 
     /**
      * shoot with weapon
      */
-    public void shoot(){
-        if(getWeapon() != null)
-        getWeapon().shoot(this);
+    public void shoot() {
+        if (getWeapon() != null)
+            getWeapon().shoot(this);
     }
 
     /**
      * Death action
      */
-    public void die(){
-       World.getInstance().removeMonster(this);
+    public void die() {
+        World.getInstance().removeMonster(this);
     }
 }

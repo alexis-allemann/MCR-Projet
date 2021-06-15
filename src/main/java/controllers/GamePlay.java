@@ -2,14 +2,10 @@ package controllers;
 
 import model.World;
 import model.components.physics.Location;
-import model.components.weapon.StandardWeapon;
 import controllers.gameplay.BulletManager;
 import model.components.fighters.Fighter;
-import model.components.fighters.SpaceCraft;
 import controllers.gameplay.FighterManager;
 import controllers.gameplay.ViewManager;
-import levels.Beginner;
-import levels.Level;
 import views.View;
 
 import java.util.Properties;
@@ -23,10 +19,10 @@ import java.util.logging.Logger;
  * @version 1.0
  */
 public class GamePlay implements Controller {
-    public static final float SPAWN_HEIGHT = 100;
+    public static int SPAWN_HEIGHT;
     public static int HEIGHT;
     public static int WIDTH;
-    public static int FRAMERATE;
+    public static int FRAME_RATE;
     private static GamePlay instance = new GamePlay();
     private static final Logger LOG = Logger.getLogger(GamePlay.class.getName());
 
@@ -50,8 +46,8 @@ public class GamePlay implements Controller {
 
         LOG.info("Reading properties");
 
-        if (!properties.containsKey("FRAMERATE"))
-            throw new IllegalArgumentException("Property FRAMERATE missing in");
+        if (!properties.containsKey("FRAME_RATE"))
+            throw new IllegalArgumentException("Property FRAME_RATE missing in");
 
         if (!properties.containsKey("HEIGHT"))
             throw new IllegalArgumentException("Property HEIGHT missing");
@@ -59,9 +55,13 @@ public class GamePlay implements Controller {
         if (!properties.containsKey("WIDTH"))
             throw new IllegalArgumentException("Property WIDTH missing");
 
-        FRAMERATE = Integer.parseInt(properties.getProperty("FRAMERATE"));
+        if (!properties.containsKey("SPAWN_HEIGHT"))
+            throw new IllegalArgumentException("Property SPAWN_HEIGHT missing");
+
+        FRAME_RATE = Integer.parseInt(properties.getProperty("FRAME_RATE"));
         HEIGHT = Integer.parseInt(properties.getProperty("HEIGHT"));
         WIDTH = Integer.parseInt(properties.getProperty("WIDTH"));
+        SPAWN_HEIGHT = Integer.parseInt(properties.getProperty("SPAWN_HEIGHT"));
 
         resetSpaceCraftLocation();
         view.startView(this);
@@ -127,7 +127,7 @@ public class GamePlay implements Controller {
                 location.y >= 0;
     }
 
-    private Fighter retrieveSpacecraft(){
+    private Fighter retrieveSpacecraft() {
         return World.getInstance().getSpacecraft();
     }
 }

@@ -33,6 +33,13 @@ public abstract class Level {
     }
 
     /**
+     * Notify the level that a new monster has been killed
+     */
+    public void addMonsterKilled() {
+        nbMonstersKilled++;
+    }
+
+    /**
      * Generate a new monster
      *
      * @param location Location where the monster should spawn
@@ -47,6 +54,7 @@ public abstract class Level {
 
     /**
      * Get the time up
+     *
      * @return time in seconds
      */
     public int getTime() {

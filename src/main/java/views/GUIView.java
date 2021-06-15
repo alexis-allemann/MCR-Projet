@@ -1,13 +1,19 @@
 package views;
 
 import controllers.Controller;
+import controllers.Direction;
+import controllers.GamePlay;
+import model.World;
+import model.components.GameComponentWithHitBox;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.awt.Color;
-import java.awt.Image;
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * GUI view to display gameplay
@@ -34,22 +40,52 @@ public class GUIView implements View {
         frame.getContentPane().add(panel);
         frame.setVisible(true);
         frame.pack();
-        frame.addKeyListener(new MultiKeyPressListener(controller));
+        MultiKeyPressListener keyListener = new MultiKeyPressListener();
+        frame.addKeyListener(keyListener);
+
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                Set<Integer> pressedKeys = keyListener.getPressedKeys();
+                if (!pressedKeys.isEmpty()) {
+                    for (Iterator<Integer> it = pressedKeys.iterator(); it.hasNext(); ) {
+                        switch (it.next()) {
+                            case KeyEvent.VK_A:
+                            case KeyEvent.VK_LEFT:
+                                controller.move(Direction.LEFT);
+                                break;
+
+                            case KeyEvent.VK_D:
+                            case KeyEvent.VK_RIGHT:
+                                controller.move(Direction.RIGHT);
+                                break;
+
+                            case KeyEvent.VK_W:
+                            case KeyEvent.VK_UP:
+                            case KeyEvent.VK_SPACE:
+                                controller.shoot();
+                                break;
+
+                            case KeyEvent.VK_R:
+                            case KeyEvent.VK_N:
+                                controller.newGame();
+                                break;
+                        }
+                    }
+                }
+            }
+        };
+        timer.scheduleAtFixedRate(task, 0, GamePlay.FRAME_RATE);
     }
 
     @Override
-    public void displayMessage(String message) {
-        System.out.println(message);
-        // TODO : Display in logs panel the new message
+    public void paintImage(Image image) {
+        panel.getGraphics().drawImage(image, 0, 0, panel);
     }
 
     @Override
-    public void paintImage(Image image){
-        panel.getGraphics().drawImage(image, 0,0, panel);
-    }
-
-    @Override
-    public Image getBufferedImage(){
+    public Image getBufferedImage() {
         return panel.createImage(WIDTH, HEIGHT);
     }
 }

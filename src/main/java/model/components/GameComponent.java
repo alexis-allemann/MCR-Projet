@@ -4,6 +4,7 @@ import model.components.physics.Location;
 
 import javax.imageio.ImageIO;
 import java.awt.Image;
+import java.awt.Graphics2D;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -91,6 +92,12 @@ public abstract class GameComponent {
         this.location = location;
     }
 
-
-
+    /**
+     * Draw component on given graphics
+     *
+     * @param graphics2D to paint component into
+     */
+    public void draw(Graphics2D graphics2D) {
+        graphics2D.drawImage(getImage(), getLocation().getIntX(), getLocation().getIntY(), null);
+    }
 }

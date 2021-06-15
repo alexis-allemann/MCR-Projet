@@ -1,6 +1,6 @@
 package model.components.weapon.bullets;
 
-import model.components.GameComponentWithHitbox;
+import model.components.GameComponentWithHitBox;
 import model.components.fighters.Fighter;
 import model.components.physics.Vector2D;
 import model.components.physics.Location;
@@ -11,7 +11,7 @@ import model.components.physics.Location;
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public abstract class Bullet extends GameComponentWithHitbox {
+public abstract class Bullet extends GameComponentWithHitBox {
     static final int BASE_SPEED = 10;
     final int BASE_POWER = 1;
     protected Vector2D speed;
@@ -68,6 +68,6 @@ public abstract class Bullet extends GameComponentWithHitbox {
      * @return True if there's a fighter to next location
      */
     public boolean checkNextLocation(Fighter fighter) {
-        return checkHitbox(speed, fighter);
+        return checkHitBox(speed, fighter);
     }
 }
