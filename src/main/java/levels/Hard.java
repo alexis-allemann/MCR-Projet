@@ -3,7 +3,7 @@ package levels;
 import model.World;
 import model.components.fighters.Fighter;
 import model.components.fighters.Monster;
-import model.components.physics.Location;
+import utils.physics.Location;
 
 /**
  * Hard level
@@ -31,7 +31,7 @@ public class Hard extends Level {
     @Override
     public Fighter generateMonster(Location location) {
         // TODO : ajout d'un décorateur
-        return new Monster(location);
+        return new Monster(location, 1.2f);
     }
 
     @Override

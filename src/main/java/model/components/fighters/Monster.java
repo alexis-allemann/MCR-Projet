@@ -1,9 +1,9 @@
 package model.components.fighters;
 
-import model.components.physics.Location;
+import utils.Utils;
+import utils.physics.Location;
 import controllers.Direction;
-import model.components.weapon.LaserWeapon;
-import model.components.weapon.Weapon;
+import model.components.weapon.BombWeapon;
 
 /**
  * Monsters used to fight against space craft
@@ -12,15 +12,19 @@ import model.components.weapon.Weapon;
  * @version 1.0
  */
 public class Monster extends Fighter {
+    private float timingRange;
+    private long lastMonstersDownMove = System.currentTimeMillis();
 
     /**
      * Instantiation of a new monster
      *
-     * @param location where monster is located
+     * @param location          where monster is located
+     * @param maxTimingModifier timing modifier to shoot a new bullet
      */
-    public Monster(Location location) {
+    public Monster(Location location, float maxTimingModifier) {
         super(location, "monster-green.png");
-        setWeapon(new LaserWeapon());
+        setWeapon(new BombWeapon());
+        this.timingRange = maxTimingModifier;
     }
 
     @Override
@@ -34,7 +38,19 @@ public class Monster extends Fighter {
     }
 
     @Override
+    public float getNextTimingModifier() {
+        return Utils.getInstance().randomFloat(1, timingRange);
+    }
+
+    @Override
     public boolean isMonsterTeam() {
         return true;
+    }
+
+    @Override
+    public void shoot() {
+        float randomNumber = Utils.getInstance().randomFloat(1);
+        if (randomNumber <= timingRange)
+            super.shoot();
     }
 }

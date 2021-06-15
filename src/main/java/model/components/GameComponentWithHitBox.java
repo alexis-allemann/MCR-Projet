@@ -1,8 +1,8 @@
 package model.components;
 
 import controllers.GamePlay;
-import model.components.physics.Location;
-import model.components.physics.Vector2D;
+import utils.physics.Location;
+import utils.physics.Vector2D;
 
 import java.awt.Image;
 import java.awt.Rectangle;

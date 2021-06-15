@@ -1,8 +1,7 @@
 package model.components.weapon;
 
-import model.components.physics.Vector2D;
+import utils.physics.Vector2D;
 import model.components.weapon.bullets.Bullet;
-import model.components.weapon.bullets.StandardBullet;
 import controllers.Direction;
 
 /**
@@ -13,20 +12,25 @@ import controllers.Direction;
  */
 public class StandardWeapon extends Weapon{
 
-    /**
-     * Time between reloads for standard weapon
-     */
-    private final static int RELOAD_TIME_STANDARD = 500;
-
     @Override
     Bullet getBullet(Direction direction) {
         float y = direction == Direction.TOP ? -1.f : 1.f;
-        return new StandardBullet(new Vector2D(0, y), getFighter().isMonsterTeam());
+        return new Bullet("bullet.png", new Vector2D(0, y), getFighter().isMonsterTeam()) {
+            @Override
+            public int getBaseSpeed() {
+                return super.getBaseSpeed();
+            }
+
+            @Override
+            public int getPower() {
+                return super.getPower();
+            }
+        };
     }
 
     @Override
-    int reloadTime() {
-        return RELOAD_TIME_STANDARD;
+    int reloadTimeInMilliSeconds() {
+        return 1000;
     }
 
 }

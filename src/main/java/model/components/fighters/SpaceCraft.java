@@ -1,6 +1,6 @@
 package model.components.fighters;
 
-import model.components.physics.Location;
+import utils.physics.Location;
 import controllers.Direction;
 
 /**
@@ -29,6 +29,11 @@ public class SpaceCraft extends Fighter {
     @Override
     public int getDefaultHealth() {
         return MAX_HEALTH;
+    }
+
+    @Override
+    public float getNextTimingModifier() {
+        return 1.f;
     }
 
     @Override

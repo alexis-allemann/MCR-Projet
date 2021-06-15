@@ -3,8 +3,8 @@ package model.components.fighters;
 import model.World;
 import model.components.GameComponentWithHitBox;
 import model.components.weapon.Weapon;
-import model.components.physics.Vector2D;
-import model.components.physics.Location;
+import utils.physics.Vector2D;
+import utils.physics.Location;
 import controllers.Direction;
 
 /**
@@ -100,6 +100,13 @@ public abstract class Fighter extends GameComponentWithHitBox {
      * @return default health
      */
     public abstract int getDefaultHealth();
+
+    /**
+     * Get next timing modifier
+     *
+     * @return next timing modifier
+     */
+    public abstract float getNextTimingModifier();
 
     /**
      * Get fighter's health

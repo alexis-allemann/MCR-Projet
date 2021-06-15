@@ -36,4 +36,9 @@ public abstract class FighterDecorator extends Fighter {
     public boolean isMonsterTeam() {
         return fighter.isMonsterTeam();
     }
+
+    @Override
+    public float getNextTimingModifier() {
+        return fighter.getNextTimingModifier();
+    }
 }

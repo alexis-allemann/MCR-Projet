@@ -1,8 +1,7 @@
 package model.components.weapon;
 
-import model.components.physics.Vector2D;
+import utils.physics.Vector2D;
 import model.components.weapon.bullets.Bullet;
-import model.components.weapon.bullets.LaserBullet;
 import controllers.Direction;
 
 /**
@@ -14,12 +13,22 @@ import controllers.Direction;
 public class LaserWeapon extends Weapon{
     @Override
     Bullet getBullet(Direction direction) {
-        float y = direction == Direction.TOP ? -5.f : 5.f;
-        return new LaserBullet(new Vector2D(0, y), getFighter().isMonsterTeam());
+        float y = direction == Direction.TOP ? -2.5f : 2.5f;
+        return new Bullet("laser.png", new Vector2D(0, y), getFighter().isMonsterTeam()) {
+            @Override
+            public int getBaseSpeed() {
+                return 5;
+            }
+
+            @Override
+            public int getPower() {
+                return 100;
+            }
+        };
     }
 
     @Override
-    int reloadTime() {
+    int reloadTimeInMilliSeconds() {
         return 500;
     }
 }

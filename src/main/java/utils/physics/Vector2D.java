@@ -1,4 +1,4 @@
-package model.components.physics;
+package utils.physics;
 
 /**
  * Vector 2D on game

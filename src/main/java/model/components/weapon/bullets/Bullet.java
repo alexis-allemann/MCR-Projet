@@ -2,8 +2,8 @@ package model.components.weapon.bullets;
 
 import model.components.GameComponentWithHitBox;
 import model.components.fighters.Fighter;
-import model.components.physics.Vector2D;
-import model.components.physics.Location;
+import utils.physics.Vector2D;
+import utils.physics.Location;
 
 /**
  * Bullets used on model.components.fighters.spacecraft shoots

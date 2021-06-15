@@ -2,7 +2,8 @@ package model.components.weapon;
 
 import model.World;
 import model.components.fighters.Fighter;
-import model.components.physics.Location;
+import utils.Utils;
+import utils.physics.Location;
 import model.components.weapon.bullets.Bullet;
 
 import controllers.Direction;
@@ -16,6 +17,7 @@ import controllers.Direction;
 public abstract class Weapon {
     private long lastBulletShotTime = System.currentTimeMillis();
     private Fighter fighter;
+    private long nextShootReloadTime;
 
     /**
      * Set weapon's owner
@@ -24,6 +26,7 @@ public abstract class Weapon {
      */
     public void setFighter(Fighter fighter) {
         this.fighter = fighter;
+        setNextShootReloadTime();
     }
 
     /**
@@ -31,13 +34,14 @@ public abstract class Weapon {
      */
     public void shoot() {
         long current = System.currentTimeMillis();
-        if (current - lastBulletShotTime >= reloadTime()) {
+        if (current - lastBulletShotTime >= nextShootReloadTime) {
             Bullet bullet = getBullet(fighter.getDirection());
             bullet.setLocation(
                     getStartingBulletLocation(bullet)
             );
             World.getInstance().addBullet(bullet);
             lastBulletShotTime = System.currentTimeMillis();
+            setNextShootReloadTime();
         }
     }
 
@@ -63,7 +67,7 @@ public abstract class Weapon {
      *
      * @return time between shoots
      */
-    abstract int reloadTime();
+    abstract int reloadTimeInMilliSeconds();
 
     /**
      * Compute the starting location of the bullet
@@ -74,5 +78,12 @@ public abstract class Weapon {
         float x = fighter.getLocation().x + fighter.getImageWidth() / 2.f;
         float y = fighter.getLocation().y + (fighter.getDirection() == Direction.TOP ? -1.5f : 1.5f) * fighter.getImageHeight();
         return new Location(x, y);
+    }
+
+    /**
+     * Set next shoot reload time
+     */
+    private void setNextShootReloadTime() {
+        nextShootReloadTime = (long) (getFighter().getNextTimingModifier() * reloadTimeInMilliSeconds());
     }
 }

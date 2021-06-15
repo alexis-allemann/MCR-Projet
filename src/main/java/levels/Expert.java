@@ -2,7 +2,7 @@ package levels;
 
 import model.components.fighters.Fighter;
 import model.components.fighters.Monster;
-import model.components.physics.Location;
+import utils.physics.Location;
 
 /**
  * Expert level
@@ -28,7 +28,7 @@ public class Expert extends Level{
     @Override
     public Fighter generateMonster(Location location) {
         // TODO : ajout d'un décorateur
-        return new Monster(location);
+        return new Monster(location, 1.1f);
     }
 
     @Override

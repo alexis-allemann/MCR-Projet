@@ -4,7 +4,7 @@ import levels.Beginner;
 import levels.Level;
 import model.components.fighters.Fighter;
 import model.components.fighters.SpaceCraft;
-import model.components.physics.Location;
+import utils.physics.Location;
 import model.components.weapon.StandardWeapon;
 import model.components.weapon.bullets.Bullet;
 

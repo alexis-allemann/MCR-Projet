@@ -2,10 +2,8 @@ package controllers;
 
 import controllers.gameplay.ComponentManager;
 import model.World;
-import model.components.physics.Location;
-import controllers.gameplay.BulletManager;
+import utils.physics.Location;
 import model.components.fighters.Fighter;
-import controllers.gameplay.FighterManager;
 import controllers.gameplay.ViewManager;
 import views.View;
 

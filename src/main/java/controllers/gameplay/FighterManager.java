@@ -4,8 +4,8 @@ import controllers.GamePlay;
 import levels.Level;
 import model.World;
 import model.components.fighters.Fighter;
-import model.components.physics.Location;
-import model.components.physics.Vector2D;
+import utils.physics.Location;
+import utils.physics.Vector2D;
 
 import java.util.List;
 import java.util.LinkedList;
