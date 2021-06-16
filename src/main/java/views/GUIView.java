@@ -9,16 +9,12 @@ import model.components.fighters.SpaceCraft;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JFrame;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.BoxLayout;
 import javax.swing.SwingConstants;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.awt.Point;
-import java.awt.Color;
-import java.awt.Image;
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import javax.swing.border.LineBorder;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.Collection;
 import java.util.Timer;
@@ -32,7 +28,7 @@ import java.util.TimerTask;
  */
 public class GUIView extends JFrame implements View {
     private final JPanel MAIN_PANEL = new JPanel();
-    private final JPanel GAME_PANEL = new JPanel();
+    private final GamePanel GAME_PANEL = new GamePanel();
     private final JPanel INFO_PANEL = new JPanel();
     private final JLabel SCORE_LABEL = new JLabel();
     private final JLabel LEVEL_LABEL = new JLabel();
@@ -50,16 +46,17 @@ public class GUIView extends JFrame implements View {
         getContentPane().add(MAIN_PANEL);
 
         SCORE_LABEL.setForeground(Color.green);
+        SCORE_LABEL.setHorizontalAlignment(SwingConstants.CENTER);
         LEVEL_LABEL.setForeground(Color.green);
 
         INFO_PANEL.setLocation(new Point(0, 0));
         INFO_PANEL.setPreferredSize(new Dimension(GamePlay.WIDTH, GamePlay.INFO_PANEL_HEIGHT));
         INFO_PANEL.setBackground(Color.BLACK);
-        INFO_PANEL.setLayout(new BorderLayout());
+        INFO_PANEL.setLayout(new GridLayout(1,3));
         INFO_PANEL.setBorder(new EmptyBorder(10, 10, 10, 10));
-        INFO_PANEL.add(LEVEL_LABEL, BorderLayout.LINE_START);
-        INFO_PANEL.add(SCORE_LABEL, BorderLayout.LINE_END);
-        INFO_PANEL.add(HEALTH_BAR, BorderLayout.CENTER);
+        INFO_PANEL.add(LEVEL_LABEL);
+        INFO_PANEL.add(HEALTH_BAR);
+        INFO_PANEL.add(SCORE_LABEL);
         MAIN_PANEL.add(INFO_PANEL);
 
         GAME_PANEL.setLocation(new Point(0, GamePlay.INFO_PANEL_HEIGHT));
@@ -109,11 +106,10 @@ public class GUIView extends JFrame implements View {
 
     @Override
     public void paintImage(Image image) {
-        World world = World.getInstance();
-        LEVEL_LABEL.setText("Level : " + world.getLevel());
-        SCORE_LABEL.setText("Score : " + world.getLevel().getScore());
-//        getContentPane().repaint();
-        GAME_PANEL.getGraphics().drawImage(image, 0, 0, GAME_PANEL);
+        LEVEL_LABEL.setText("Difficulty : " + World.getInstance().getLevel().toString());
+        SCORE_LABEL.setText("Score : " + World.getInstance().getLevel().getScore());
+        GAME_PANEL.setGameImage(image);
+        this.repaint();
     }
 
     @Override
