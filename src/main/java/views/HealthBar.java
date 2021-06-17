@@ -4,13 +4,26 @@ import controllers.GamePlay;
 import model.World;
 import model.components.fighters.SpaceCraft;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import java.awt.GridLayout;
+import java.awt.Graphics;
+import java.awt.Color;
 
+/**
+ * Health bar of the game
+ *
+ * @author Allemann, Balestrieri, Christen, Mottier, Zeller
+ * @version 1.0
+ */
 public class HealthBar extends JPanel {
     private final JLabel HEALTH_LABEL = new JLabel();
     private JPanel BAR_PANEL;
 
+    /**
+     * Instantiation of the health bar
+     */
     public HealthBar() {
         setLayout(new GridLayout(2, 1));
         HEALTH_LABEL.setForeground(Color.green);

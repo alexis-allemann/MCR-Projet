@@ -1,7 +1,7 @@
 package utils;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
+import java.awt.Image;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;

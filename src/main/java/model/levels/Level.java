@@ -61,8 +61,17 @@ public abstract class Level implements IDecoratorFactory {
      * @return generated monster
      */
     public IFighter generateMonster(Location location) {
-        Monster newMonster = new Monster(location, 1.5f);
-        newMonster.setWeapon(new BombWeapon());
+        IFighter newMonster = new Monster(location, getMonsterShootTiming());
+
+        float random = Utils.getInstance().randomFloat(1);
+        if(random < getProbabilityOfMonstersToHaveDecorator()){
+            int shouldGenerateWeaponDecoration = Utils.getInstance().randomInt(1);
+            if(shouldGenerateWeaponDecoration == 0)
+                newMonster.setWeapon(createWeaponDecorator(newMonster.getWeapon()));
+            else
+                newMonster = createFighterDecorator(newMonster);
+        }
+
         return newMonster;
     };
 
@@ -128,13 +137,13 @@ public abstract class Level implements IDecoratorFactory {
      * Get monster timing for shoots
      * @return the timing ratio between shoots
      */
-    public abstract float getMonsterShootTiming();
+    abstract float getMonsterShootTiming();
 
     /**
      * Get probability to get a decorated monster
      * @return probability to get a decorated monster
      */
-    public abstract float getProbabilityOfMonstersToHaveDecorator();
+    abstract float getProbabilityOfMonstersToHaveDecorator();
 
     @Override
     public FighterDecorator createFighterDecorator(IFighter fighter) {
