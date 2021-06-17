@@ -2,6 +2,7 @@ package model.components.weapon;
 
 import model.World;
 import model.components.fighters.Fighter;
+import model.components.fighters.IFighter;
 import utils.physics.Location;
 
 import controllers.Direction;
@@ -12,24 +13,23 @@ import controllers.Direction;
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public abstract class Weapon {
+public abstract class Weapon implements IWeapon {
     private long lastBulletShotTime = System.currentTimeMillis();
-    private Fighter fighter;
+    private IFighter fighter;
     private long nextShootReloadTime;
 
-    /**
-     * Set weapon's owner
-     *
-     * @param fighter who owns the weapon
-     */
-    public void setFighter(Fighter fighter) {
+    @Override
+    public IFighter getFighter() {
+        return fighter;
+    }
+
+    @Override
+    public void setFighter(IFighter fighter) {
         this.fighter = fighter;
         setNextShootReloadTime();
     }
 
-    /**
-     * Shoot a new bullet
-     */
+    @Override
     public void shoot() {
         long current = System.currentTimeMillis();
         if (current - lastBulletShotTime >= nextShootReloadTime) {
@@ -44,35 +44,11 @@ public abstract class Weapon {
     }
 
     /**
-     * Fighter who owns the weapon
-     *
-     * @return who owns the weapon
-     */
-    public Fighter getFighter() {
-        return fighter;
-    }
-
-    /**
-     * Get a new bullet
-     *
-     * @param direction direction the fighter is facing
-     * @return bullet to shoot
-     */
-    public abstract Projectile getBullet(Direction direction);
-
-    /**
-     * Reload time between shoots
-     *
-     * @return time between shoots
-     */
-    public abstract int reloadTimeInMilliSeconds();
-
-    /**
      * Compute the starting location of the bullet
      *
      * @return the starting location of the bullet
      */
-    Location getStartingBulletLocation(Projectile projectile) {
+    private Location getStartingBulletLocation(Projectile projectile) {
         float x = fighter.getLocation().x + fighter.getImageWidth() / 2.f;
         float y = fighter.getLocation().y + (fighter.getDirection() == Direction.TOP ? -1.5f : 1.5f) * fighter.getImageHeight();
         return new Location(x, y);

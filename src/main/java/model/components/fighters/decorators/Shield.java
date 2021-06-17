@@ -1,9 +1,13 @@
 package model.components.fighters.decorators;
 
 import model.World;
-import model.components.fighters.Fighter;
+import model.components.fighters.IFighter;
+import utils.Utils;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.io.IOException;
+import java.util.Objects;
 
 /**
  * Shield to protect model.components.fighters
@@ -20,7 +24,7 @@ public class Shield extends FighterDecorator {
      * @param fighter     to decorate
      * @param shieldPower power of the shield
      */
-    public Shield(Fighter fighter, int shieldPower) {
+    public Shield(IFighter fighter, int shieldPower) {
         super(fighter);
         this.shieldPower = shieldPower;
     }
@@ -37,7 +41,7 @@ public class Shield extends FighterDecorator {
     @Override
     public void draw(Graphics2D graphics2D) {
         super.draw(graphics2D);
-        graphics2D.setColor(Color.red);
-        graphics2D.fillRect(fighter.getLocation().getIntX(), fighter.getLocation().getIntY(), 20, 20);
+        Image image = Utils.getInstance().getImageFromResources("Shield.png");
+        graphics2D.drawImage(image, fighter.getLocation().getIntX(), fighter.getLocation().getIntY(), null);
     }
 }

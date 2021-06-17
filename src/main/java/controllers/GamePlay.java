@@ -2,8 +2,8 @@ package controllers;
 
 import controllers.managers.ComponentManager;
 import model.World;
+import model.components.fighters.IFighter;
 import utils.physics.Location;
-import model.components.fighters.Fighter;
 import controllers.managers.ViewManager;
 import views.View;
 
@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public class GamePlay implements Controller {
+public class GamePlay implements IController {
     public static int INFO_PANEL_HEIGHT;
     public static int HEIGHT;
     public static int WIDTH;
@@ -71,7 +71,7 @@ public class GamePlay implements Controller {
 
     @Override
     public void shoot() {
-        Fighter sp = World.getInstance().getSpacecraft();
+        IFighter sp = World.getInstance().getSpacecraft();
         sp.getWeapon().shoot();
     }
 
@@ -105,7 +105,7 @@ public class GamePlay implements Controller {
      * Reset default location of the spacecraft
      */
     private void resetSpaceCraftLocation() {
-        Fighter spacecraft = World.getInstance().getSpacecraft();
+        IFighter spacecraft = World.getInstance().getSpacecraft();
         spacecraft.setLocation(new Location(
                 (GamePlay.WIDTH - spacecraft.getImageWidth()) / 2.f,
                 GamePlay.HEIGHT - spacecraft.getImageHeight() - GamePlay.INFO_PANEL_HEIGHT
@@ -119,7 +119,7 @@ public class GamePlay implements Controller {
      * @param fighter  to get image width and height
      * @return boolean if it is in bounds
      */
-    private boolean isInBounds(Location location, Fighter fighter) {
+    private boolean isInBounds(Location location, IFighter fighter) {
         // TODO: est-ce que l'on peut considérer ca comme du code dupliqué ?
         return location.x <= WIDTH &&
                 location.y <= HEIGHT &&

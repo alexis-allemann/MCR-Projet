@@ -13,14 +13,8 @@ import java.awt.Rectangle;
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public abstract class GameComponentWithHitBox extends GameComponent {
+public abstract class GameComponentWithHitBox extends GameComponent implements IGameComponentWithHitBox  {
 
-    /**
-     * Method to know if a fighter is a monster
-     *
-     * @return if the fighter is a monster
-     */
-    public abstract boolean isMonsterTeam();
 
     /**
      * Instantiation of a new game component with a hit box
@@ -42,23 +36,13 @@ public abstract class GameComponentWithHitBox extends GameComponent {
         super(location, image);
     }
 
-    /**
-     * Get hit box location on screen
-     *
-     * @return hit box location on screen
-     */
+    @Override
     public Rectangle getHitBoxLocation() {
         return new Rectangle((int) getLocation().x, (int) getLocation().y, getImageWidth(), getImageHeight());
     }
 
-    /**
-     * Check if component has been touched
-     *
-     * @param speed of the component
-     * @param other other component to check collision
-     * @return if component has been touched
-     */
-    public boolean checkHitBox(Vector2D speed, GameComponentWithHitBox other) {
+    @Override
+    public boolean checkHitBox(Vector2D speed, IGameComponentWithHitBox other) {
         Rectangle otherHitBox = other.getHitBoxLocation();
         Rectangle hitBoxWithMovement = getHitBoxLocation();
         int xSpeed = (int) speed.getX();
@@ -76,11 +60,7 @@ public abstract class GameComponentWithHitBox extends GameComponent {
         return !intersection.isEmpty();
     }
 
-    /**
-     * Check if a location of a fighter is in view bounds
-     *
-     * @return boolean if it is in bounds of the view
-     */
+    @Override
     public boolean isInBounds() {
         return location.x + getImageWidth() <= GamePlay.WIDTH &&
                 location.y + getImageHeight() <= GamePlay.WIDTH &&

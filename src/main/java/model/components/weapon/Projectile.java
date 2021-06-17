@@ -2,13 +2,14 @@ package model.components.weapon;
 
 import model.components.GameComponentWithHitBox;
 import model.components.fighters.Fighter;
+import model.components.fighters.IFighter;
 import utils.physics.Vector2D;
 import utils.physics.Location;
 
 import java.awt.Image;
 
 /**
- * Bullets used on model.components.fighters.spacecraft shoots
+ * Projectiles used on spacecraft shoots
  *
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
@@ -81,7 +82,7 @@ public abstract class Projectile extends GameComponentWithHitBox {
      *
      * @param fighter fighter to remove health
      */
-    public void hit(Fighter fighter) {
+    public void hit(IFighter fighter) {
         fighter.removeHealth(getPower());
     }
 
@@ -98,7 +99,7 @@ public abstract class Projectile extends GameComponentWithHitBox {
      * @param fighter Fighter Fighter to check position
      * @return True if there's a fighter to next location
      */
-    public boolean checkNextLocation(Fighter fighter) {
+    public boolean checkNextLocation(IFighter fighter) {
         if (fighter.isMonsterTeam() == this.isMonsterTeam)
             return false;
         return checkHitBox(speed, fighter);

@@ -1,6 +1,7 @@
 package controllers.managers;
 
 import model.World;
+import model.components.fighters.IFighter;
 import model.components.weapon.Projectile;
 import model.components.fighters.Fighter;
 
@@ -40,7 +41,7 @@ public class ProjectileManager {
             for (Projectile projectile : World.getInstance().getBullets()) {
 
                 // Check if a fighter has been touched by bullet
-                Fighter fighter = checkFighterOnNextLocation(projectile);
+                IFighter fighter = checkFighterOnNextLocation(projectile);
                 if (fighter != null) {
                     projectile.hit(fighter);
                     bulletsToRemove.add(projectile);
@@ -64,7 +65,7 @@ public class ProjectileManager {
      * @param projectile Bullet to check path
      * @return the fighter or null if there's no fighter
      */
-    private Fighter checkFighterOnNextLocation(Projectile projectile) {
+    private IFighter checkFighterOnNextLocation(Projectile projectile) {
 
         // Check if the spacecraft has been touched
         if (projectile.checkNextLocation(World.getInstance().getSpacecraft()))
@@ -72,7 +73,7 @@ public class ProjectileManager {
 
         // Check if a monster has been touched
         synchronized (World.getInstance().getMonsters()) {
-            for (Fighter monster : World.getInstance().getMonsters())
+            for (IFighter monster : World.getInstance().getMonsters())
                 if (projectile.checkNextLocation(monster))
                     return monster;
         }

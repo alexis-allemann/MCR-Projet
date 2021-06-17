@@ -1,6 +1,6 @@
 package model.components.fighters.decorators;
 
-import model.components.fighters.Fighter;
+import model.components.fighters.IFighter;
 import utils.physics.Vector2D;
 
 /**
@@ -21,7 +21,7 @@ public class SpeedBoost extends FighterDecorator {
      * @param boostAmountX amount to add to x axis
      * @param boostAmountY amount to add to y axis
      */
-    public SpeedBoost(Fighter fighter, int boostAmountX, int boostAmountY) {
+    public SpeedBoost(IFighter fighter, int boostAmountX, int boostAmountY) {
         super(fighter);
         this.boostAmountX = boostAmountX;
         this.boostAmountY = boostAmountY;
