@@ -1,6 +1,7 @@
 package model.components.weapon.decorators;
 
 import controllers.Direction;
+import model.components.weapon.IWeapon;
 import model.components.weapon.Projectile;
 
 import java.awt.Image;
@@ -19,7 +20,7 @@ public class BulletSizeEnhancer extends WeaponDecorator {
      *
      * @param ratio of the reload speed increment
      */
-    public BulletSizeEnhancer(model.components.weapon.Weapon weapon, float ratio) {
+    public BulletSizeEnhancer(IWeapon weapon, float ratio) {
         super(weapon);
         this.ratio = ratio;
     }

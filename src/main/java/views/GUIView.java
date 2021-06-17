@@ -1,19 +1,16 @@
 package views;
 
-import controllers.Controller;
+import controllers.IController;
 import controllers.Direction;
 import controllers.GamePlay;
 import model.World;
-import model.components.fighters.SpaceCraft;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JFrame;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.BoxLayout;
 import javax.swing.SwingConstants;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.Collection;
@@ -35,7 +32,7 @@ public class GUIView extends JFrame implements View {
     private final JPanel HEALTH_BAR = new HealthBar();
 
     @Override
-    public void startView(final Controller controller) {
+    public void startView(final IController IController) {
         setTitle("Space Invaders");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -80,20 +77,20 @@ public class GUIView extends JFrame implements View {
                         for (Integer pressedKey : pressedKeys) {
                             switch (pressedKey) {
                                 case KeyEvent.VK_LEFT:
-                                    controller.move(Direction.LEFT);
+                                    IController.move(Direction.LEFT);
                                     break;
 
                                 case KeyEvent.VK_RIGHT:
-                                    controller.move(Direction.RIGHT);
+                                    IController.move(Direction.RIGHT);
                                     break;
 
                                 case KeyEvent.VK_UP:
                                 case KeyEvent.VK_SPACE:
-                                    controller.shoot();
+                                    IController.shoot();
                                     break;
 
                                 case KeyEvent.VK_R:
-                                    controller.newGame();
+                                    IController.newGame();
                                     break;
                             }
                         }

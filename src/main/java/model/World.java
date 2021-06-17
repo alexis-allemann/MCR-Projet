@@ -3,7 +3,7 @@ package model;
 import model.components.fighters.decorators.Shield;
 import model.levels.Beginner;
 import model.levels.Level;
-import model.components.fighters.Fighter;
+import model.components.fighters.IFighter;
 import model.components.fighters.SpaceCraft;
 import model.components.weapon.Projectile;
 import utils.physics.Location;
@@ -21,9 +21,9 @@ import java.util.List;
  */
 public class World {
     private static final World INSTANCE = new World();
-    private final List<Fighter> monsters = Collections.synchronizedList(new ArrayList<Fighter>());
+    private final List<IFighter> monsters = Collections.synchronizedList(new ArrayList<IFighter>());
     private final List<Projectile> projectiles = Collections.synchronizedList(new ArrayList<Projectile>());
-    private Fighter spacecraft = new Shield(new SpaceCraft(new Location(0, 0)), 5);
+    private IFighter spacecraft = new Shield(new SpaceCraft(new Location(0, 0)), 5);
     private Level level;
 
     /**
@@ -48,7 +48,7 @@ public class World {
      *
      * @return the spacecraft
      */
-    public Fighter getSpacecraft() {
+    public IFighter getSpacecraft() {
         return spacecraft;
     }
 
@@ -57,7 +57,7 @@ public class World {
      *
      * @return the list of all monsters
      */
-    public List<Fighter> getMonsters() {
+    public List<IFighter> getMonsters() {
         return monsters;
     }
 
@@ -66,7 +66,7 @@ public class World {
      *
      * @param monster the monster to add
      */
-    public void addMonster(Fighter monster) {
+    public void addMonster(IFighter monster) {
         monsters.add(monster);
     }
 
@@ -75,7 +75,7 @@ public class World {
      *
      * @param monster to remove
      */
-    public void removeMonster(Fighter monster) {
+    public void removeMonster(IFighter monster) {
         monsters.remove(monster);
     }
 
@@ -129,7 +129,7 @@ public class World {
      *
      * @param spacecraft to set
      */
-    public void setSpacecraft(Fighter spacecraft) {
+    public void setSpacecraft(IFighter spacecraft) {
         this.spacecraft = spacecraft;
     }
 }

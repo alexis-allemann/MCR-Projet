@@ -1,6 +1,7 @@
 package model.components.weapon.decorators;
 
 import controllers.Direction;
+import model.components.weapon.IWeapon;
 import model.components.weapon.Projectile;
 import utils.physics.Vector2D;
 
@@ -18,7 +19,7 @@ public class ShootSpeedEnhancer extends WeaponDecorator {
      *
      * @param ratio of the shoot speed increment
      */
-    public ShootSpeedEnhancer(model.components.weapon.Weapon weapon, float ratio) {
+    public ShootSpeedEnhancer(IWeapon weapon, float ratio) {
         super(weapon);
         this.ratio = ratio;
     }

@@ -1,10 +1,16 @@
 package model.components.fighters.decorators;
 
-import model.components.fighters.Fighter;
+import model.components.IGameComponentWithHitBox;
+import model.components.fighters.IFighter;
 import controllers.Direction;
+import model.components.weapon.IWeapon;
 import model.components.weapon.Weapon;
 import utils.physics.Location;
 import utils.physics.Vector2D;
+
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.Image;
 
 /**
  * Space invaders model.components.fighters decorators
@@ -12,16 +18,15 @@ import utils.physics.Vector2D;
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public abstract class FighterDecorator extends Fighter {
-    protected Fighter fighter;
+public abstract class FighterDecorator implements IFighter {
+    protected IFighter fighter;
 
     /**
      * Instantiation of a new decoration
      *
      * @param fighter to decorate
      */
-    public FighterDecorator(Fighter fighter) {
-        super(fighter);
+    public FighterDecorator(IFighter fighter) {
         this.fighter = fighter;
     }
 
@@ -56,12 +61,12 @@ public abstract class FighterDecorator extends Fighter {
     }
 
     @Override
-    public Weapon getWeapon() {
+    public IWeapon getWeapon() {
         return fighter.getWeapon();
     }
 
     @Override
-    public void setWeapon(Weapon weapon) {
+    public void setWeapon(IWeapon weapon) {
         fighter.setWeapon(weapon);
     }
 
@@ -71,18 +76,87 @@ public abstract class FighterDecorator extends Fighter {
     }
 
     @Override
+    public void setSpeed(Vector2D speed) {
+        fighter.setSpeed(speed);
+    }
+
+    @Override
     public void shoot() {
         fighter.shoot();
     }
 
+    @Override
+    public void draw(Graphics2D graphics2D) {
+        fighter.draw(graphics2D);
+    }
 
     @Override
-    public Fighter removeDecorator(FighterDecorator decorator) {
+    public int getHealth() {
+        return fighter.getHealth();
+    }
+
+    @Override
+    public void removeHealth(int hp) {
+        fighter.removeHealth(hp);
+    }
+
+    @Override
+    public boolean alive() {
+        return fighter.alive();
+    }
+
+    @Override
+    public void die() {
+        fighter.die();
+    }
+
+    @Override
+    public int getPoints() {
+        return fighter.getPoints();
+    }
+
+    @Override
+    public boolean checkHitBox(Vector2D speed, IGameComponentWithHitBox other) {
+        return fighter.checkHitBox(speed, other);
+    }
+
+    @Override
+    public Rectangle getHitBoxLocation() {
+        return fighter.getHitBoxLocation();
+    }
+
+    @Override
+    public final boolean isInBounds() {
+        return fighter.isInBounds();
+    }
+
+    @Override
+    public Image getImage() {
+        return fighter.getImage();
+    }
+
+    @Override
+    public int getImageWidth() {
+        return fighter.getImageWidth();
+    }
+
+    @Override
+    public int getImageHeight() {
+        return fighter.getImageHeight();
+    }
+
+    @Override
+    public final IFighter removeDecorator(FighterDecorator decorator) {
         if (this == decorator) {
             return fighter;
-        } else if (fighter instanceof FighterDecorator) {
+        } else {
             fighter = fighter.removeDecorator(decorator);
         }
         return this;
+    }
+
+    @Override
+    public void move() {
+        fighter.move();
     }
 }

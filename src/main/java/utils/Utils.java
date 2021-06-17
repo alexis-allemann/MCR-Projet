@@ -1,5 +1,6 @@
 package utils;
 
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -64,5 +65,16 @@ public class Utils {
      */
     public float randomFloat(float max) {
         return randomFloat(0, max);
+    }
+
+    /**
+     * Choose random object in list
+     *
+     * @param objectList to choose an object
+     * @return object choosen
+     */
+    public <T> T chooseRandom(List<T> objectList) {
+        int index = randomInt(objectList.size() - 1);
+        return objectList.get(index);
     }
 }

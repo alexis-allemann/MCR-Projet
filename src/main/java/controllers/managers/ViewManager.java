@@ -3,6 +3,7 @@ package controllers.managers;
 import controllers.GamePlay;
 import model.World;
 import model.components.GameComponentWithHitBox;
+import model.components.IGameComponentWithHitBox;
 import views.View;
 
 import java.awt.Image;
@@ -58,12 +59,12 @@ public class ViewManager implements Runnable {
                 Graphics2D graphics = (Graphics2D) nextImage.getGraphics();
 
                 // Add spacecraft image
-                GameComponentWithHitBox spacecraft = World.getInstance().getSpacecraft();
+                IGameComponentWithHitBox spacecraft = World.getInstance().getSpacecraft();
                 spacecraft.draw(graphics);
 
                 // Add monsters images
                 synchronized (World.getInstance().getMonsters()) {
-                    for (GameComponentWithHitBox component : World.getInstance().getMonsters())
+                    for (IGameComponentWithHitBox component : World.getInstance().getMonsters())
                         component.draw(graphics);
                 }
 

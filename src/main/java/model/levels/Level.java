@@ -1,17 +1,17 @@
 package model.levels;
 
+import model.components.IDecoratorFactory;
 import model.components.fighters.Fighter;
+import model.components.fighters.IFighter;
+import model.components.fighters.Monster;
 import model.components.fighters.decorators.FighterDecorator;
-import model.components.fighters.decorators.MultipleShoot;
-import model.components.fighters.decorators.Shield;
-import model.components.fighters.decorators.SpeedBoost;
-import model.components.weapon.decorators.BulletSizeEnhancer;
-import model.components.weapon.decorators.ShootSpeedEnhancer;
+import model.components.weapon.BombWeapon;
+import model.components.weapon.IWeapon;
 import model.components.weapon.decorators.WeaponDecorator;
 import utils.Utils;
 import utils.physics.Location;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Space invaders game model.levels
@@ -19,7 +19,7 @@ import java.util.ArrayList;
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public abstract class Level {
+public abstract class Level implements IDecoratorFactory {
     protected int score;
     protected int nbMonstersKilled;
     private final long START;
@@ -60,7 +60,11 @@ public abstract class Level {
      * @param location Location where the monster should spawn
      * @return generated monster
      */
-    public abstract Fighter generateMonster(Location location);
+    public IFighter generateMonster(Location location) {
+        Monster newMonster = new Monster(location, 1.5f);
+        newMonster.setWeapon(new BombWeapon());
+        return newMonster;
+    };
 
     /**
      * Get probability to generate a decoration when a monster dies
@@ -68,32 +72,6 @@ public abstract class Level {
      * @return probability to generate a decoration when a monster dies
      */
     public abstract float probabilityToGenerateDecoration();
-
-    public WeaponDecorator getWeaponDecoration(final model.components.weapon.Weapon weapon) {
-        ArrayList<WeaponDecorator> list = new ArrayList<WeaponDecorator>() {{
-            add(new BulletSizeEnhancer(weapon, 2));
-            add(new BulletSizeEnhancer(weapon, 1.5f));
-            add(new BulletSizeEnhancer(weapon, 2.5f));
-            add(new ShootSpeedEnhancer(weapon, 2));
-            add(new ShootSpeedEnhancer(weapon, 1.5f));
-            add(new ShootSpeedEnhancer(weapon, 2.5f));
-        }};
-
-        int index = Utils.getInstance().randomInt(list.size() - 1);
-        return list.get(index);
-    }
-
-    public FighterDecorator getFighterDecoration(final Fighter fighter) {
-        ArrayList<FighterDecorator> list = new ArrayList<FighterDecorator>() {{
-            add(new MultipleShoot(fighter, 2));
-            add(new Shield(fighter, 2));
-            add(new SpeedBoost(fighter, 2, 0));
-        }};
-
-        int index = Utils.getInstance().randomInt(list.size() - 1);
-        return list.get(index);
-    }
-
 
     /**
      * Notify the level that a new monster has been killed
@@ -128,5 +106,43 @@ public abstract class Level {
      */
     public void addScore(int points) {
         score += points;
+    }
+
+    /**
+     * Get list of fighters decorators available
+     *
+     * @param fighter to decorate
+     * @return list of fighters decorators
+     */
+    public abstract List<FighterDecorator> getFighterDecorators(final IFighter fighter);
+
+    /**
+     * Get list of weapon decorators available
+     *
+     * @param weapon to decorate
+     * @return list of weapon decorators
+     */
+    public abstract List<WeaponDecorator> getWeaponDecorators(final IWeapon weapon);
+
+    /**
+     * Get monster timing for shoots
+     * @return the timing ratio between shoots
+     */
+    public abstract float getMonsterShootTiming();
+
+    /**
+     * Get probability to get a decorated monster
+     * @return probability to get a decorated monster
+     */
+    public abstract float getProbabilityOfMonstersToHaveDecorator();
+
+    @Override
+    public FighterDecorator createFighterDecorator(IFighter fighter) {
+        return Utils.getInstance().chooseRandom(getFighterDecorators(fighter));
+    }
+
+    @Override
+    public WeaponDecorator createWeaponDecorator(IWeapon weapon) {
+        return Utils.getInstance().chooseRandom(getWeaponDecorators(weapon));
     }
 }

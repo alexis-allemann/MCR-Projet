@@ -1,9 +1,9 @@
 package model.components.weapon.decorators;
 
 import controllers.Direction;
-import model.components.fighters.Fighter;
+import model.components.fighters.IFighter;
+import model.components.weapon.IWeapon;
 import model.components.weapon.Projectile;
-import model.components.weapon.Weapon;
 
 /**
  * Weapon decorator
@@ -11,15 +11,15 @@ import model.components.weapon.Weapon;
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public abstract class WeaponDecorator extends Weapon {
-    private final model.components.weapon.Weapon weapon;
+public abstract class WeaponDecorator implements IWeapon {
+    private final IWeapon weapon;
 
     /**
      * Instantiation of a new decoration
      *
      * @param weapon to decorate
      */
-    public WeaponDecorator(model.components.weapon.Weapon weapon) {
+    public WeaponDecorator(IWeapon weapon) {
         this.weapon = weapon;
     }
 
@@ -34,7 +34,7 @@ public abstract class WeaponDecorator extends Weapon {
     }
 
     @Override
-    public Fighter getFighter() {
+    public IFighter getFighter() {
         return weapon.getFighter();
     }
 
@@ -44,7 +44,7 @@ public abstract class WeaponDecorator extends Weapon {
     }
 
     @Override
-    public void setFighter(Fighter fighter) {
+    public void setFighter(IFighter fighter) {
         weapon.setFighter(fighter);
     }
 }

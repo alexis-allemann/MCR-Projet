@@ -10,7 +10,7 @@ import java.util.Properties;
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public interface Controller {
+public interface IController {
 
     /**
      * Start the gameplay in a new view

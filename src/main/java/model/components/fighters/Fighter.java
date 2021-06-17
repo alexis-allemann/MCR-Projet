@@ -3,14 +3,12 @@ package model.components.fighters;
 import model.World;
 import model.components.GameComponentWithHitBox;
 import model.components.fighters.decorators.FighterDecorator;
+import model.components.weapon.IWeapon;
 import model.components.weapon.Projectile;
 import model.components.weapon.Weapon;
-import model.components.weapon.decorators.BulletSizeEnhancer;
-import model.components.weapon.decorators.ShootSpeedEnhancer;
 import utils.Utils;
 import utils.physics.Vector2D;
 import utils.physics.Location;
-import controllers.Direction;
 
 /**
  * Space invaders fighter
@@ -18,9 +16,9 @@ import controllers.Direction;
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public abstract class Fighter extends GameComponentWithHitBox {
+public abstract class Fighter extends GameComponentWithHitBox implements IFighter {
     private static final Vector2D SPEED_BASE = new Vector2D(1.f, 0.f);
-    private Weapon weapon;
+    private IWeapon weapon;
     private int health;
     protected Vector2D speed;
 
@@ -48,110 +46,55 @@ public abstract class Fighter extends GameComponentWithHitBox {
         health = fighter.health;
     }
 
-    /**
-     * Move action
-     */
+    @Override
     public void move() {
         location.translate(speed.getX(), speed.getY());
     }
 
-    /**
-     * Get the fighter's weapon
-     *
-     * @return fighter's weapon
-     */
-    public Weapon getWeapon() {
+    @Override
+    public IWeapon getWeapon() {
         return weapon;
     }
 
-    /**
-     * Set the fighter's weapon
-     *
-     * @param weapon Weapon to set
-     */
-    public void setWeapon(Weapon weapon) {
+    @Override
+    public void setWeapon(IWeapon weapon) {
         this.weapon = weapon;
         this.weapon.setFighter(this);
     }
 
-    /**
-     * Get fighter speed
-     *
-     * @return vector 2d of the speed
-     */
+    @Override
     public Vector2D getSpeed() {
         return speed;
     }
 
-    /**
-     * Set the fighter speed vector
-     *
-     * @param speed vector
-     */
+    @Override
     public void setSpeed(Vector2D speed) {
         this.speed = speed;
     }
 
-    /**
-     * Get shoot direction
-     *
-     * @return the shoot direction
-     */
-    public abstract Direction getDirection();
-
-    /**
-     * Get default health
-     *
-     * @return default health
-     */
-    public abstract int getDefaultHealth();
-
-    /**
-     * Get next timing modifier
-     *
-     * @return next timing modifier
-     */
-    public abstract float getNextTimingModifier();
-
-    /**
-     * Get fighter's health
-     *
-     * @return fighter's health
-     */
+    @Override
     public int getHealth() {
         return health;
     }
 
-    /**
-     * Check if fighter is still alive
-     *
-     * @return true if fighter is alive
-     */
+    @Override
     public boolean alive() {
         return getHealth() > 0;
     }
 
-    /**
-     * Removing healing points to the fighter's health
-     *
-     * @param hp healing points to remove
-     */
+    @Override
     public void removeHealth(int hp) {
         health -= hp;
     }
 
-    /**
-     * shoot with weapon
-     */
+    @Override
     public void shoot() {
         if (getWeapon() != null) {
             getWeapon().shoot();
         }
     }
 
-    /**
-     * Death action
-     */
+    @Override
     public void die() {
         final World world = World.getInstance();
         world.removeMonster(this);
@@ -160,13 +103,13 @@ public abstract class Fighter extends GameComponentWithHitBox {
         if (random <= world.getLevel().probabilityToGenerateDecoration()) {
             world.addBullet(new Projectile(new Location(super.location), "star.png", new Vector2D(0, 5), true) {
                 @Override
-                public void hit(Fighter fighter) {
+                public void hit(IFighter fighter) {
                     int shouldGenerateWeaponDecoration = Utils.getInstance().randomInt(1);
                     if(shouldGenerateWeaponDecoration == 0){
-                        fighter.setWeapon(world.getLevel().getWeaponDecoration(fighter.getWeapon()));
+                        //fighter.setWeapon(world.getLevel().getWeaponDecoration(fighter.getWeapon()));
                     } else {
                         // TODO: applicate like that?
-                        fighter = world.getLevel().getFighterDecoration(fighter);
+                        // fighter = world.getLevel().getFighterDecoration(fighter);
                     }
                     // TODO: review unused line ?
                     //super.hit(fighter);
@@ -175,21 +118,12 @@ public abstract class Fighter extends GameComponentWithHitBox {
         }
     }
 
-    /**
-     * Value of the fighter for the score
-     *
-     * @return Number of points that represent the fighter's value
-     */
+    @Override
     public int getPoints() {
         return 0;
     }
 
-    /**
-     * Remove decorator
-     *
-     * @param decorator to remove
-     * @return chain of decorator
-     */
+    @Override
     public Fighter removeDecorator(FighterDecorator decorator) {
         return this;
     }

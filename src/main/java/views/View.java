@@ -1,6 +1,6 @@
 package views;
 
-import controllers.Controller;
+import controllers.IController;
 
 import java.awt.Image;
 
@@ -15,9 +15,9 @@ public interface View {
     /**
      * Start the view
      *
-     * @param controller to manage gameplay
+     * @param IController to manage gameplay
      */
-    void startView(Controller controller);
+    void startView(IController IController);
 
     /**
      * Repaint the view with the image

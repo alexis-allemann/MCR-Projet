@@ -1,6 +1,7 @@
 package controllers.managers;
 
 import controllers.GamePlay;
+import model.components.fighters.IFighter;
 import model.levels.Level;
 import model.World;
 import model.components.fighters.Fighter;
@@ -58,9 +59,9 @@ public class FighterManager {
             boolean downMove = System.currentTimeMillis() - lastMonstersDownMove > SECONDS_BEFORE_DOWN_MOVE * 1000;
             boolean invertSpeed = nbMoveInSameDirection > NB_MOVES_BEFORE_INVERT;
 
-            List<Fighter> monsters = world.getMonsters();
-            List<Fighter> toRemove = new LinkedList<>();
-            for (Fighter monster : monsters) {
+            List<IFighter> monsters = world.getMonsters();
+            List<IFighter> toRemove = new LinkedList<>();
+            for (IFighter monster : monsters) {
                 if (!monster.alive()) {
                     toRemove.add(monster);
                     world.getLevel().addMonsterKilled();
@@ -84,7 +85,7 @@ public class FighterManager {
             }
 
             // Remove monster after iteration to handle concurrence in synchronised list
-            for (Fighter monster : toRemove)
+            for (IFighter monster : toRemove)
                 monster.die();
 
             // Update nb moves in the same direction
@@ -104,14 +105,14 @@ public class FighterManager {
     private void checkMonsterGeneration() {
         World world = World.getInstance();
         synchronized (world.getMonsters()) {
-            List<Fighter> monsters = world.getMonsters();
+            List<IFighter> monsters = world.getMonsters();
 
             // Check if a new generation should happen
             boolean canGenerate;
             if (monsters.isEmpty()) {
                 canGenerate = true;
             } else {
-                Fighter last = monsters.get(monsters.size() - 1);
+                IFighter last = monsters.get(monsters.size() - 1);
                 canGenerate = last.getLocation().y > last.getImageHeight();
             }
 
@@ -120,7 +121,7 @@ public class FighterManager {
                 Level level = world.getLevel();
                 int margin = ((GamePlay.WIDTH - NB_MOVES_BEFORE_INVERT) / (level.getNbMonsterByWave()));
                 for (int i = 1; i <= level.getNbMonsterByWave(); ++i) {
-                    Fighter newMonster = level.generateMonster(new Location(0, 0));
+                    IFighter newMonster = level.generateMonster(new Location(0, 0));
                     int xAxisValue = (margin * i) - (margin / 2) - (newMonster.getImageWidth() / 2) + nbMoveInSameDirection;
                     newMonster.setLocation(new Location(xAxisValue, 0));
                     world.addMonster(newMonster);
