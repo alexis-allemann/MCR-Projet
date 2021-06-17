@@ -7,6 +7,12 @@ import utils.physics.Vector2D;
 import java.awt.Image;
 import java.awt.Rectangle;
 
+/**
+ * Displayable game component with a hitbox
+ *
+ * @author Allemann, Balestrieri, Christen, Mottier, Zeller
+ * @version 1.0
+ */
 public abstract class GameComponentWithHitBox extends GameComponent {
 
     /**
@@ -73,7 +79,7 @@ public abstract class GameComponentWithHitBox extends GameComponent {
     /**
      * Check if a location of a fighter is in view bounds
      *
-     * @return boolean if it is in bounds
+     * @return boolean if it is in bounds of the view
      */
     public boolean isInBounds() {
         return location.x + getImageWidth() <= GamePlay.WIDTH &&

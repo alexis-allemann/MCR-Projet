@@ -10,7 +10,7 @@ import utils.physics.Location;
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public class Expert extends Level{
+public class Expert extends Level {
 
     /**
      * Change level to expert

@@ -9,7 +9,7 @@ import controllers.Direction;
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public class LaserWeapon extends Weapon{
+public class LaserWeapon extends Weapon {
     @Override
     public Projectile getBullet(Direction direction) {
         float y = direction == Direction.TOP ? -10f : 10f;

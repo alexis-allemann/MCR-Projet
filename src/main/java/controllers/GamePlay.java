@@ -120,6 +120,7 @@ public class GamePlay implements Controller {
      * @return boolean if it is in bounds
      */
     private boolean isInBounds(Location location, Fighter fighter) {
+        // TODO: est-ce que l'on peut considérer ca comme du code dupliqué ?
         return location.x <= WIDTH &&
                 location.y <= HEIGHT &&
                 location.x + fighter.getImageWidth() >= 0 &&

@@ -21,8 +21,8 @@ import java.util.List;
  */
 public class World {
     private static final World INSTANCE = new World();
-    private final List<Fighter> monsters = Collections.synchronizedList(new ArrayList<>());
-    private final List<Projectile> projectiles = Collections.synchronizedList(new ArrayList<>());
+    private final List<Fighter> monsters = Collections.synchronizedList(new ArrayList<Fighter>());
+    private final List<Projectile> projectiles = Collections.synchronizedList(new ArrayList<Projectile>());
     private Fighter spacecraft = new Shield(new SpaceCraft(new Location(0, 0)), 5);
     private Level level;
 

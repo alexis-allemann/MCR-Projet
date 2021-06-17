@@ -12,9 +12,9 @@ import model.components.weapon.BombWeapon;
  * @version 1.0
  */
 public class Monster extends Fighter {
-    private float timingRange;
-    private long lastMonstersDownMove = System.currentTimeMillis();
-    private final int  POINTS_MONSTER = 50;
+    private final float timingRange;
+    private long lastMonstersDownMove = System.currentTimeMillis(); // TODO: check usage ? can be deleted safely ?
+    private final int POINTS_MONSTER = 50;
 
     /**
      * Instantiation of a new monster

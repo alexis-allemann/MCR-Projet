@@ -43,14 +43,14 @@ public class Location extends Point2D.Float {
     /**
      * @return the x value as an int
      */
-    public int getIntX(){
+    public int getIntX() {
         return (int) x;
     }
 
     /**
      * @return the y value as an int
      */
-    public int getIntY(){
+    public int getIntY() {
         return (int) y;
     }
 }

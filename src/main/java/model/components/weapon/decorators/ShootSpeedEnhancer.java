@@ -11,7 +11,7 @@ import utils.physics.Vector2D;
  * @version 1.0
  */
 public class ShootSpeedEnhancer extends WeaponDecorator {
-    private float ratio;
+    private final float ratio;
 
     /**
      * Instantiation of a new shoot speed enhancer decoration

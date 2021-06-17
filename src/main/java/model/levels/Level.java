@@ -65,7 +65,7 @@ public abstract class Level {
      */
     public abstract float probabilityToGenerateDecoration();
 
-    public WeaponDecorator getWeaponDecoration(model.components.weapon.Weapon weapon) {
+    public WeaponDecorator getWeaponDecoration(final model.components.weapon.Weapon weapon) {
         ArrayList<WeaponDecorator> list = new ArrayList<WeaponDecorator>() {{
             add(new BulletSizeEnhancer(weapon, 2));
             add(new BulletSizeEnhancer(weapon, 1.5f));
@@ -107,6 +107,7 @@ public abstract class Level {
 
     /**
      * Add point to the score
+     *
      * @param points points to add
      */
     public void addScore(int points) {

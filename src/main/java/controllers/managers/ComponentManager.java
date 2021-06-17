@@ -31,9 +31,9 @@ public class ComponentManager implements Runnable {
 
     @Override
     public void run() {
-        FighterManager fighterManager = FighterManager.getInstance();
-        ProjectileManager projectileManager = ProjectileManager.getInstance();
-        Timer timer = new Timer();
+        final FighterManager fighterManager = FighterManager.getInstance();
+        final ProjectileManager projectileManager = ProjectileManager.getInstance();
+        final Timer timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
             public void run() {

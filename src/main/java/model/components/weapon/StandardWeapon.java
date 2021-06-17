@@ -9,7 +9,7 @@ import controllers.Direction;
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public class StandardWeapon extends Weapon{
+public class StandardWeapon extends Weapon {
 
     @Override
     public Projectile getBullet(Direction direction) {

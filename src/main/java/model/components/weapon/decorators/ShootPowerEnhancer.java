@@ -10,7 +10,7 @@ import model.components.weapon.Projectile;
  * @version 1.0
  */
 public class ShootPowerEnhancer extends WeaponDecorator {
-    private float ratio;
+    private final float ratio;
 
     /**
      * Instantiation of a new shoot power enhancer decoration

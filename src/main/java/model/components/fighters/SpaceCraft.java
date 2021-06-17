@@ -37,7 +37,7 @@ public class SpaceCraft extends Fighter {
     }
 
     @Override
-    public void die(){
+    public void die() {
         // TODO: trigger game stop here/restart
         System.out.println("Game over !");
     }

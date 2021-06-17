@@ -6,8 +6,8 @@ import java.util.Random;
  * Application utils (singleton pattern used)
  */
 public class Utils {
-    private Random random = new Random();
-    private static Utils instance = new Utils();
+    private final Random random = new Random();
+    private static final Utils instance = new Utils();
 
     /**
      * Private constructor to apply pattern

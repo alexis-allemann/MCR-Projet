@@ -13,7 +13,7 @@ import java.util.HashSet;
  * @version 1.0
  */
 class MultiKeyPressListener implements KeyListener {
-    private final Collection<Integer> PRESSED_KEYS = Collections.synchronizedCollection(new HashSet<>());
+    private final Collection<Integer> PRESSED_KEYS = Collections.synchronizedCollection(new HashSet<Integer>());
 
     /**
      * Get pressed keys

@@ -19,6 +19,7 @@ public class SpaceInvaders {
      * @param args no args required
      */
     public static void main(String[] args) {
+        // TODO: est-ce que on vire les argument de main() ? -> il m'avait retiré des points pour ca en poo2
         try (InputStream input = SpaceInvaders.class.getResourceAsStream("config.properties")) {
             if (input == null) {
                 System.out.println("Sorry, unable to find config.properties");

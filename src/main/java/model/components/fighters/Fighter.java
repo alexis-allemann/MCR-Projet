@@ -20,9 +20,9 @@ import controllers.Direction;
  */
 public abstract class Fighter extends GameComponentWithHitBox {
     private static final Vector2D SPEED_BASE = new Vector2D(1.f, 0.f);
-    protected Vector2D speed;
     private Weapon weapon;
     private int health;
+    protected Vector2D speed;
 
     /**
      * Instantiation of a new fighter
@@ -144,15 +144,16 @@ public abstract class Fighter extends GameComponentWithHitBox {
      * shoot with weapon
      */
     public void shoot() {
-        if (getWeapon() != null)
+        if (getWeapon() != null) {
             getWeapon().shoot();
+        }
     }
 
     /**
      * Death action
      */
     public void die() {
-        World world = World.getInstance();
+        final World world = World.getInstance();
         world.removeMonster(this);
         world.getLevel().addScore(getPoints());
         float random = Utils.getInstance().randomFloat(1);
@@ -169,9 +170,10 @@ public abstract class Fighter extends GameComponentWithHitBox {
 
     /**
      * Value of the fighter for the score
+     *
      * @return Number of points that represent the fighter's value
      */
-    public int getPoints(){
+    public int getPoints() {
         return 0;
     }
 
@@ -181,7 +183,7 @@ public abstract class Fighter extends GameComponentWithHitBox {
      * @param decorator to remove
      * @return chain of decorator
      */
-    public Fighter removeDecorator(FighterDecorator decorator){
+    public Fighter removeDecorator(FighterDecorator decorator) {
         return this;
     }
 }

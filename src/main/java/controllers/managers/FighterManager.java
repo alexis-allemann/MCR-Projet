@@ -17,6 +17,7 @@ import java.util.LinkedList;
  * @version 1.0
  */
 public class FighterManager {
+    // TODO: est-ce que l'on mettrait pas les initialisation de valeur dans le constructeur plutot? (a débattre)
     private static final FighterManager INSTANCE = new FighterManager();
     private static final int SECONDS_BEFORE_DOWN_MOVE = 2;
     private static final int NB_MOVES_BEFORE_INVERT = 80;
@@ -107,9 +108,9 @@ public class FighterManager {
 
             // Check if a new generation should happen
             boolean canGenerate;
-            if (monsters.isEmpty())
+            if (monsters.isEmpty()) {
                 canGenerate = true;
-            else {
+            } else {
                 Fighter last = monsters.get(monsters.size() - 1);
                 canGenerate = last.getLocation().y > last.getImageHeight();
             }

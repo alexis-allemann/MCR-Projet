@@ -12,7 +12,7 @@ import java.awt.Image;
  * @version 1.0
  */
 public class BulletSizeEnhancer extends WeaponDecorator {
-    private float ratio;
+    private final float ratio;
 
     /**
      * Instantiation of a new bullet size enhancer decoration

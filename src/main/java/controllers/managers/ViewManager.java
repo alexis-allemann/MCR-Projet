@@ -43,7 +43,7 @@ public class ViewManager implements Runnable {
 
     @Override
     public void run() {
-        Timer timer = new Timer();
+        final Timer timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
             public void run() {

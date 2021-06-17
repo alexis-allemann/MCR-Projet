@@ -35,7 +35,7 @@ public class GUIView extends JFrame implements View {
     private final JPanel HEALTH_BAR = new HealthBar();
 
     @Override
-    public void startView(Controller controller) {
+    public void startView(final Controller controller) {
         setTitle("Space Invaders");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -52,7 +52,7 @@ public class GUIView extends JFrame implements View {
         INFO_PANEL.setLocation(new Point(0, 0));
         INFO_PANEL.setPreferredSize(new Dimension(GamePlay.WIDTH, GamePlay.INFO_PANEL_HEIGHT));
         INFO_PANEL.setBackground(Color.BLACK);
-        INFO_PANEL.setLayout(new GridLayout(1,3));
+        INFO_PANEL.setLayout(new GridLayout(1, 3));
         INFO_PANEL.setBorder(new EmptyBorder(10, 10, 10, 10));
         INFO_PANEL.add(LEVEL_LABEL);
         INFO_PANEL.add(HEALTH_BAR);
@@ -67,7 +67,7 @@ public class GUIView extends JFrame implements View {
         setVisible(true);
         pack();
 
-        MultiKeyPressListener keyListener = new MultiKeyPressListener();
+        final MultiKeyPressListener keyListener = new MultiKeyPressListener();
         addKeyListener(keyListener);
 
         Timer timer = new Timer();
