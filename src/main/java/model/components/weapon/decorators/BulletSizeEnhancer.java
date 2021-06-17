@@ -30,7 +30,10 @@ public class BulletSizeEnhancer extends WeaponDecorator {
         Image oldImage = oldProjectile.getImage();
         Image newImage = oldImage.getScaledInstance((int) (oldImage.getWidth(null) * ratio), (int) (oldImage.getHeight(null) * ratio), Image.SCALE_DEFAULT);
         return new Projectile(newImage, oldProjectile.getSpeed(), oldProjectile.isMonsterTeam()) {
-
+            @Override
+            public int getPower() {
+                return 100;
+            }
         };
     }
 }

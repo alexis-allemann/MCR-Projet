@@ -6,6 +6,7 @@ import model.components.fighters.decorators.MultipleShoot;
 import model.components.fighters.decorators.Shield;
 import model.components.fighters.decorators.SpeedBoost;
 import model.components.weapon.decorators.BulletSizeEnhancer;
+import model.components.weapon.decorators.ReloadSpeedEnhancer;
 import model.components.weapon.decorators.ShootSpeedEnhancer;
 import model.components.weapon.decorators.WeaponDecorator;
 import utils.Utils;
@@ -71,12 +72,15 @@ public abstract class Level {
 
     public WeaponDecorator getWeaponDecoration(final model.components.weapon.Weapon weapon) {
         ArrayList<WeaponDecorator> list = new ArrayList<WeaponDecorator>() {{
-            add(new BulletSizeEnhancer(weapon, 2));
-            add(new BulletSizeEnhancer(weapon, 1.5f));
-            add(new BulletSizeEnhancer(weapon, 2.5f));
-            add(new ShootSpeedEnhancer(weapon, 2));
-            add(new ShootSpeedEnhancer(weapon, 1.5f));
-            add(new ShootSpeedEnhancer(weapon, 2.5f));
+//            add(new BulletSizeEnhancer(weapon, 2));
+//            add(new BulletSizeEnhancer(weapon, 1.5f));
+//            add(new BulletSizeEnhancer(weapon, 2.5f));
+//            add(new ShootSpeedEnhancer(weapon, 2));
+//            add(new ShootSpeedEnhancer(weapon, 1.5f));
+//            add(new ShootSpeedEnhancer(weapon, 2.5f));
+            add(new ReloadSpeedEnhancer(weapon, 0.2f));
+            add(new ReloadSpeedEnhancer(weapon, 0.3f));
+            add(new ReloadSpeedEnhancer(weapon, 0.5f));
         }};
 
         int index = Utils.getInstance().randomInt(list.size() - 1);
