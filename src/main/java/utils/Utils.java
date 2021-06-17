@@ -47,7 +47,7 @@ public class Utils {
      * @return the random integer
      */
     public int randomInt(int max) {
-        return random.nextInt(max);
+        return random.nextInt(max + 1);
     }
 
     /**
@@ -75,9 +75,11 @@ public class Utils {
      * Choose random object in list
      *
      * @param objectList to choose an object
-     * @return object choosen
+     * @return object choosen or null if list is empty
      */
     public <T> T chooseRandom(List<T> objectList) {
+        if (objectList.isEmpty())
+            return null;
         int index = randomInt(objectList.size() - 1);
         return objectList.get(index);
     }

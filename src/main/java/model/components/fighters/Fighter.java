@@ -104,8 +104,8 @@ public abstract class Fighter extends GameComponentWithHitBox implements IFighte
             world.addBullet(new Projectile(new Location(super.location), "star.png", new Vector2D(0, 5), true) {
                 @Override
                 public void hit(IFighter fighter) {
-                    int shouldGenerateWeaponDecoration = Utils.getInstance().randomInt(1);
-                    if(shouldGenerateWeaponDecoration == 0)
+                    float shouldGenerateWeaponDecoration = Utils.getInstance().randomFloat(1);
+                    if(shouldGenerateWeaponDecoration < 0.5)
                         fighter.setWeapon(world.getLevel().createWeaponDecorator(fighter.getWeapon()));
                     else
                         world.setSpacecraft(world.getLevel().createFighterDecorator(fighter));
