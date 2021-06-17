@@ -161,7 +161,14 @@ public abstract class Fighter extends GameComponentWithHitBox {
             world.addBullet(new Projectile(new Location(super.location), "star.png", new Vector2D(0, 5), true) {
                 @Override
                 public void hit(Fighter fighter) {
-                    fighter.setWeapon(world.getLevel().getWeaponDecoration(fighter.getWeapon()));
+                    int shouldGenerateWeaponDecoration = Utils.getInstance().randomInt(1);
+                    if(shouldGenerateWeaponDecoration == 0){
+                        fighter.setWeapon(world.getLevel().getWeaponDecoration(fighter.getWeapon()));
+                    } else {
+                        // TODO: applicate like that?
+                        fighter = world.getLevel().getFighterDecoration(fighter);
+                    }
+                    // TODO: review unused line ?
                     //super.hit(fighter);
                 }
             });

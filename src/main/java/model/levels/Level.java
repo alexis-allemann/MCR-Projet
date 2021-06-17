@@ -1,6 +1,10 @@
 package model.levels;
 
 import model.components.fighters.Fighter;
+import model.components.fighters.decorators.FighterDecorator;
+import model.components.fighters.decorators.MultipleShoot;
+import model.components.fighters.decorators.Shield;
+import model.components.fighters.decorators.SpeedBoost;
 import model.components.weapon.decorators.BulletSizeEnhancer;
 import model.components.weapon.decorators.ShootSpeedEnhancer;
 import model.components.weapon.decorators.WeaponDecorator;
@@ -78,6 +82,18 @@ public abstract class Level {
         int index = Utils.getInstance().randomInt(list.size() - 1);
         return list.get(index);
     }
+
+    public FighterDecorator getFighterDecoration(final Fighter fighter) {
+        ArrayList<FighterDecorator> list = new ArrayList<FighterDecorator>() {{
+            add(new MultipleShoot(fighter, 2));
+            add(new Shield(fighter, 2));
+            add(new SpeedBoost(fighter, 2, 0));
+        }};
+
+        int index = Utils.getInstance().randomInt(list.size() - 1);
+        return list.get(index);
+    }
+
 
     /**
      * Notify the level that a new monster has been killed
