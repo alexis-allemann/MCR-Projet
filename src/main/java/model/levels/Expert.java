@@ -1,8 +1,6 @@
 package model.levels;
 
-import model.components.fighters.Fighter;
 import model.components.fighters.IFighter;
-import model.components.fighters.Monster;
 import model.components.fighters.decorators.FighterDecorator;
 import model.components.fighters.decorators.Shield;
 import model.components.fighters.decorators.SpeedBoost;
@@ -10,7 +8,6 @@ import model.components.weapon.IWeapon;
 import model.components.weapon.decorators.BulletSizeEnhancer;
 import model.components.weapon.decorators.ShootSpeedEnhancer;
 import model.components.weapon.decorators.WeaponDecorator;
-import utils.physics.Location;
 
 import java.util.ArrayList;
 import java.util.List;
