@@ -7,8 +7,8 @@ package utils.physics;
  * @version 1.0
  */
 public class Vector2D {
-    private final float X;
-    private final float Y;
+    private float X;
+    private float Y;
 
     /**
      * Instantiation of a new 2D vector
@@ -19,6 +19,14 @@ public class Vector2D {
     public Vector2D(float x, float y) {
         this.X = x;
         this.Y = y;
+    }
+
+    /**
+     * Instantiation of a new 2D vector with zeros as values for x and y axis
+     *
+     */
+    public Vector2D() {
+        this(0, 0);
     }
 
     /**
@@ -38,4 +46,23 @@ public class Vector2D {
     public float getY() {
         return Y;
     }
+
+    /**
+     * Set value on x axis
+     *
+     * @param x move on x axis
+     */
+    public void setX(float x) {
+        X = x;
+    }
+
+    /**
+     * Set value on y axis
+     *
+     * @param y move on y axis
+     */
+    public void setY(float y) {
+        Y = y;
+    }
+
 }

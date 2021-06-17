@@ -4,6 +4,7 @@ import model.components.fighters.Fighter;
 import controllers.Direction;
 import model.components.weapon.Weapon;
 import utils.physics.Location;
+import utils.physics.Vector2D;
 
 /**
  * Space invaders model.components.fighters decorators
@@ -63,6 +64,17 @@ public abstract class FighterDecorator extends Fighter {
     public void setWeapon(Weapon weapon) {
         fighter.setWeapon(weapon);
     }
+
+    @Override
+    public Vector2D getSpeed() {
+        return fighter.getSpeed();
+    }
+
+    @Override
+    public void shoot() {
+        fighter.shoot();
+    }
+
 
     @Override
     public Fighter removeDecorator(FighterDecorator decorator) {
