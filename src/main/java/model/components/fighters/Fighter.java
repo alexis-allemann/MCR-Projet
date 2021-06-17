@@ -105,14 +105,10 @@ public abstract class Fighter extends GameComponentWithHitBox implements IFighte
                 @Override
                 public void hit(IFighter fighter) {
                     int shouldGenerateWeaponDecoration = Utils.getInstance().randomInt(1);
-                    if(shouldGenerateWeaponDecoration == 0){
-                        //fighter.setWeapon(world.getLevel().getWeaponDecoration(fighter.getWeapon()));
-                    } else {
-                        // TODO: applicate like that?
-                        // fighter = world.getLevel().getFighterDecoration(fighter);
-                    }
-                    // TODO: review unused line ?
-                    //super.hit(fighter);
+                    if(shouldGenerateWeaponDecoration == 0)
+                        fighter.setWeapon(world.getLevel().createWeaponDecorator(fighter.getWeapon()));
+                    else
+                        world.setSpacecraft(world.getLevel().createFighterDecorator(fighter));
                 }
             });
         }

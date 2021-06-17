@@ -1,5 +1,6 @@
 package model.components;
 
+import utils.Utils;
 import utils.physics.Location;
 
 import javax.imageio.ImageIO;
@@ -26,12 +27,7 @@ public abstract class GameComponent implements IGameComponent{
      */
     public GameComponent(Location location, String filename) {
         this.location = location;
-        try {
-            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-            image = ImageIO.read(Objects.requireNonNull(classloader.getResource(filename)));
-        } catch (IOException e) {
-            System.out.println("Component image has not been found in resources");
-        }
+        image = Utils.getInstance().getImageFromResources(filename);
     }
 
     /**

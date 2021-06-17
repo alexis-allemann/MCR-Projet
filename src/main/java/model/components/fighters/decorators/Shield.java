@@ -2,6 +2,7 @@ package model.components.fighters.decorators;
 
 import model.World;
 import model.components.fighters.IFighter;
+import utils.Utils;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -40,12 +41,7 @@ public class Shield extends FighterDecorator {
     @Override
     public void draw(Graphics2D graphics2D) {
         super.draw(graphics2D);
-        try { // TODO : Fonction dans utils pour load une image
-            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-            Image image = ImageIO.read(Objects.requireNonNull(classloader.getResource("Shield.png")));
-            graphics2D.drawImage(image, fighter.getLocation().getIntX(), fighter.getLocation().getIntY(), null);
-        } catch (IOException e) {
-            System.out.println("Component image has not been found in resources");
-        }
+        Image image = Utils.getInstance().getImageFromResources("Shield.png");
+        graphics2D.drawImage(image, fighter.getLocation().getIntX(), fighter.getLocation().getIntY(), null);
     }
 }

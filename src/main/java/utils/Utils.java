@@ -1,6 +1,10 @@
 package utils;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -76,5 +80,21 @@ public class Utils {
     public <T> T chooseRandom(List<T> objectList) {
         int index = randomInt(objectList.size() - 1);
         return objectList.get(index);
+    }
+
+    /**
+     * Get image from resources with given filename
+     *
+     * @param filename of the image
+     * @return the image
+     */
+    public Image getImageFromResources(String filename) {
+        try {
+            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+            return ImageIO.read(Objects.requireNonNull(classloader.getResource(filename)));
+        } catch (IOException e) {
+            System.out.println("Component image has not been found in resources");
+        }
+        return null;
     }
 }

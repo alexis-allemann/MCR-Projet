@@ -114,7 +114,7 @@ public abstract class Level implements IDecoratorFactory {
      * @param fighter to decorate
      * @return list of fighters decorators
      */
-    public abstract List<FighterDecorator> getFighterDecorators(final IFighter fighter);
+    abstract List<FighterDecorator> getFighterDecorators(final IFighter fighter);
 
     /**
      * Get list of weapon decorators available
@@ -122,7 +122,7 @@ public abstract class Level implements IDecoratorFactory {
      * @param weapon to decorate
      * @return list of weapon decorators
      */
-    public abstract List<WeaponDecorator> getWeaponDecorators(final IWeapon weapon);
+    abstract List<WeaponDecorator> getWeaponDecorators(final IWeapon weapon);
 
     /**
      * Get monster timing for shoots
