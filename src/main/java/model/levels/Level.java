@@ -63,14 +63,14 @@ public abstract class Level implements IDecoratorFactory {
     public IFighter generateMonster(Location location) {
         IFighter newMonster = new Monster(location, getMonsterShootTiming());
 
-        float random = Utils.getInstance().randomFloat(1);
-        if (random < getProbabilityOfMonstersToHaveDecorator()) {
-            float shouldGenerateWeaponDecoration = Utils.getInstance().randomFloat(1);
-            if (shouldGenerateWeaponDecoration < 0.5)
-                newMonster.setWeapon(createWeaponDecorator(newMonster.getWeapon()));
-            else
+//        float random = Utils.getInstance().randomFloat(1);
+//        if (random < getProbabilityOfMonstersToHaveDecorator()) {
+//            float shouldGenerateWeaponDecoration = Utils.getInstance().randomFloat(1);
+//            if (shouldGenerateWeaponDecoration < 0.5)
+//                newMonster.setWeapon(createWeaponDecorator(newMonster.getWeapon()));
+//            else
                 newMonster = createFighterDecorator(newMonster);
-        }
+//        }
 
         return newMonster;
     }

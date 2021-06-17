@@ -49,19 +49,6 @@ public interface IFighter extends IGameComponentWithHitBox {
      */
     void setWeapon(IWeapon weapon);
 
-    /**
-     * Get fighter speed
-     *
-     * @return vector 2d of the speed
-     */
-    Vector2D getSpeed();
-
-    /**
-     * Set the fighter speed vector
-     *
-     * @param speed vector
-     */
-    void setSpeed(Vector2D speed);
 
     /**
      * Get fighter's health

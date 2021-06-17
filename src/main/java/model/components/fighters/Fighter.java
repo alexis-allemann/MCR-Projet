@@ -20,7 +20,6 @@ public abstract class Fighter extends GameComponentWithHitBox implements IFighte
     private static final Vector2D SPEED_BASE = new Vector2D(1.f, 0.f);
     private IWeapon weapon;
     private int health;
-    protected Vector2D speed;
 
     /**
      * Instantiation of a new fighter
@@ -47,11 +46,6 @@ public abstract class Fighter extends GameComponentWithHitBox implements IFighte
     }
 
     @Override
-    public void move() {
-        location.translate(speed.getX(), speed.getY());
-    }
-
-    @Override
     public IWeapon getWeapon() {
         return weapon;
     }
@@ -60,16 +54,6 @@ public abstract class Fighter extends GameComponentWithHitBox implements IFighte
     public void setWeapon(IWeapon weapon) {
         this.weapon = weapon;
         this.weapon.setFighter(this);
-    }
-
-    @Override
-    public Vector2D getSpeed() {
-        return speed;
-    }
-
-    @Override
-    public void setSpeed(Vector2D speed) {
-        this.speed = speed;
     }
 
     @Override
@@ -102,6 +86,7 @@ public abstract class Fighter extends GameComponentWithHitBox implements IFighte
         float random = Utils.getInstance().randomFloat(1);
         if (random <= world.getLevel().probabilityToGenerateDecoration()) {
             world.addBullet(new Projectile(new Location(super.location), "star.png", new Vector2D(0, 5), true) {
+
                 @Override
                 public void hit(IFighter fighter) {
                     float shouldGenerateWeaponDecoration = Utils.getInstance().randomFloat(1);

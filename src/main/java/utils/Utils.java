@@ -30,27 +30,6 @@ public class Utils {
     }
 
     /**
-     * Get a random integer between given min and max numbers
-     *
-     * @param min value
-     * @param max value
-     * @return the random integer
-     */
-    public int randomInt(int min, int max) {
-        return random.nextInt(max + 1 - min) + min;
-    }
-
-    /**
-     * Get a random integer between 0 and a given max numbers
-     *
-     * @param max value
-     * @return the random integer
-     */
-    public int randomInt(int max) {
-        return random.nextInt(max + 1);
-    }
-
-    /**
      * Get a random float between given min and max numbers
      *
      * @param min value
@@ -80,7 +59,7 @@ public class Utils {
     public <T> T chooseRandom(List<T> objectList) {
         if (objectList.isEmpty())
             return null;
-        int index = randomInt(objectList.size() - 1);
+        int index = random.nextInt(objectList.size());
         return objectList.get(index);
     }
 

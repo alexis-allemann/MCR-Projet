@@ -66,18 +66,6 @@ public class FighterManager {
                     toRemove.add(monster);
                     world.getLevel().addMonsterKilled();
                 } else {
-                    // Calculate speed on X axis
-                    float speedOnX = monster.getSpeed().getX();
-                    if (invertSpeed)
-                        speedOnX *= -1;
-
-                    // Change monster speed
-                    if (downMove) {
-                        monster.setSpeed(new Vector2D(speedOnX, 10.0f));
-                        lastMonstersDownMove = System.currentTimeMillis();
-                    } else {
-                        monster.setSpeed(new Vector2D(speedOnX, 0f));
-                    }
 
                     monster.shoot();
                     monster.move();

@@ -1,6 +1,7 @@
 package model.components;
 
 import utils.physics.Location;
+import utils.physics.Vector2D;
 
 import java.awt.Image;
 import java.awt.Graphics2D;
@@ -55,8 +56,4 @@ public interface IGameComponent {
      */
     void draw(Graphics2D graphics2D);
 
-    /**
-     * Move action
-     */
-    void move();
 }

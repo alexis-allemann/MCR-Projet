@@ -4,6 +4,7 @@ import utils.Utils;
 import utils.physics.Location;
 import controllers.Direction;
 import model.components.weapon.BombWeapon;
+import utils.physics.Vector2D;
 
 /**
  * Monsters used to fight against space craft
@@ -13,6 +14,8 @@ import model.components.weapon.BombWeapon;
  */
 public class Monster extends Fighter {
     private final float timingRange;
+    private final int DOWN_SPEED_TICK = 30;
+    private int down_speed_current_tick = 0;
     private final int POINTS_MONSTER = 50;
 
     /**
@@ -57,5 +60,17 @@ public class Monster extends Fighter {
     @Override
     public int getPoints() {
         return POINTS_MONSTER;
+    }
+
+    @Override
+    public Vector2D getSpeed() {
+        down_speed_current_tick++;
+        if(down_speed_current_tick == DOWN_SPEED_TICK){
+            down_speed_current_tick = 0;
+            speed.setX(-speed.getX());
+            return new Vector2D(0, 5f);
+        } else {
+            return speed;
+        }
     }
 }

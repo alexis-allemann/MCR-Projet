@@ -15,6 +15,7 @@ import java.awt.Rectangle;
  */
 public abstract class GameComponentWithHitBox extends GameComponent implements IGameComponentWithHitBox  {
 
+    protected Vector2D speed;
 
     /**
      * Instantiation of a new game component with a hit box
@@ -66,5 +67,25 @@ public abstract class GameComponentWithHitBox extends GameComponent implements I
                 location.y + getImageHeight() <= GamePlay.WIDTH &&
                 location.x >= 0 &&
                 location.y >= 0;
+    }
+
+    @Override
+    public Vector2D getSpeed() {
+        return speed;
+    }
+
+    @Override
+    public void setSpeed(Vector2D speed) {
+        this.speed = speed;
+    }
+
+    @Override
+    public void move() {
+        move(speed);
+    }
+
+    @Override
+    public void move(Vector2D speed){
+        location.translate(speed.getX(), speed.getX());
     }
 }

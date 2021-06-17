@@ -41,4 +41,30 @@ public interface IGameComponentWithHitBox extends IGameComponent{
      * @return boolean if it is in bounds of the view
      */
     boolean isInBounds();
+
+    /**
+     * Move action
+     */
+    void move();
+
+    /**
+     * Move with defined speed
+     *
+     * @param speed to move
+     */
+    void move(Vector2D speed);
+
+    /**
+     * Get component speed
+     *
+     * @return vector 2d of the speed
+     */
+    Vector2D getSpeed();
+
+    /**
+     * Set the component speed vector
+     *
+     * @param speed vector
+     */
+    void setSpeed(Vector2D speed);
 }
