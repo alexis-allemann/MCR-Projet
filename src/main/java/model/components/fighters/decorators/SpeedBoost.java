@@ -37,7 +37,7 @@ public class SpeedBoost extends FighterDecorator {
             resultingSpeed.setY(actualSpeed.getY() + boostAmountY);
 
             return resultingSpeed;
-        } else {
+        } else { // Speed boost not allowed on monsters because it's the fighter manager that is responsible of moving monsters
             removeDecoration();
             return super.getSpeed();
         }
