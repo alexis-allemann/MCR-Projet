@@ -130,4 +130,9 @@ public abstract class Fighter extends GameComponentWithHitBox implements IFighte
         super.draw(graphics2D);
         getWeapon().draw(graphics2D);
     }
+
+    @Override
+    public int countDecorator(Class decoratorClass){
+        return 0;
+    }
 }

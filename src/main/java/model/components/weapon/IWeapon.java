@@ -52,4 +52,12 @@ public interface IWeapon extends IGameComponent {
      * @return time between shoots
      */
     int reloadTimeInMilliSeconds();
+
+    /**
+     * Count decorators from a specific class down the chain
+     *
+     * @param decoratorClass the class to count the number of decorator from
+     * @return the number of decorator belonging to the class
+     */
+    int countDecorator(Class decoratorClass);
 }

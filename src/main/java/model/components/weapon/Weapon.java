@@ -108,4 +108,9 @@ public abstract class Weapon implements IWeapon {
         IWeapon weapon = (IWeapon) o;
         return id == weapon.getId();
     }
+
+    @Override
+    public int countDecorator(Class decoratorClass){
+        return 0;
+    }
 }

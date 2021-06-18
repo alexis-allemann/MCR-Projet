@@ -88,4 +88,13 @@ public abstract class WeaponDecorator implements IWeapon {
 
     @Override
     public boolean equals(Object o){ return weapon.equals(o);}
+
+    @Override
+    public int countDecorator(Class decoratorClass){
+        if(this.getClass() == decoratorClass){
+            return weapon.countDecorator(decoratorClass) + 1;
+        } else {
+            return weapon.countDecorator(decoratorClass);
+        }
+    }
 }

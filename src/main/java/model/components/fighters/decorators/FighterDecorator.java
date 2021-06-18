@@ -191,4 +191,13 @@ public abstract class FighterDecorator implements IFighter {
         else
             world.replaceOrAddMonster(fighter.removeDecorator(this));
     }
+
+    @Override
+    public int countDecorator(Class decoratorClass){
+        if(this.getClass() == decoratorClass) {
+            return fighter.countDecorator(decoratorClass) + 1;
+        } else {
+            return fighter.countDecorator(decoratorClass);
+        }
+    }
 }
