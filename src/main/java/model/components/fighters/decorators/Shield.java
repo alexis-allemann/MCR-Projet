@@ -29,7 +29,7 @@ public class Shield extends FighterDecorator {
     @Override
     public void removeHealth(int hp) {
         shieldPower -= hp;
-        if (shieldPower < 0) {
+        if (shieldPower <= 0) {
             fighter.removeHealth(shieldPower);
             World world = World.getInstance();
             if(fighter.equals(world.getSpacecraft()))

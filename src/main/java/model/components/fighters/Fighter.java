@@ -10,6 +10,8 @@ import utils.Utils;
 import utils.physics.Vector2D;
 import utils.physics.Location;
 
+import java.util.Objects;
+
 /**
  * Space invaders fighter
  *
@@ -107,5 +109,14 @@ public abstract class Fighter extends GameComponentWithHitBox implements IFighte
     @Override
     public Fighter removeDecorator(FighterDecorator decorator) {
         return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false;
+        IFighter fighter = (IFighter) o;
+        // TODO : voir si on peut améliorer la condition
+        return health == fighter.getHealth() && Objects.equals(weapon, fighter.getWeapon());
     }
 }
