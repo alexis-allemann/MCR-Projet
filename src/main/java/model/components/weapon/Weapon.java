@@ -7,6 +7,7 @@ import utils.physics.Location;
 
 import controllers.Direction;
 
+import java.awt.*;
 import java.util.Objects;
 
 /**
@@ -41,7 +42,7 @@ public abstract class Weapon implements IWeapon {
     @Override
     public void shoot() {
         long current = System.currentTimeMillis();
-        if (current - lastBulletShotTime >= nextShootReloadTime) {
+        if (current - lastBulletShotTime >= reloadTimeInMilliSeconds()) {
             Projectile projectile = fighter.getWeapon().getBullet(fighter.getDirection());
             projectile.setLocation(
                     getStartingBulletLocation(projectile)
@@ -68,6 +69,36 @@ public abstract class Weapon implements IWeapon {
      */
     private void setNextShootReloadTime() {
         nextShootReloadTime = (long) (getFighter().getNextTimingModifier() * reloadTimeInMilliSeconds());
+    }
+
+    @Override
+    public Image getImage() {
+        return null;
+    }
+
+    @Override
+    public int getImageWidth() {
+        return 0;
+    }
+
+    @Override
+    public int getImageHeight() {
+        return 0;
+    }
+
+    @Override
+    public Location getLocation() {
+        return fighter.getLocation();
+    }
+
+    @Override
+    public void setLocation(Location location) {
+        fighter.setLocation(location);
+    }
+
+    @Override
+    public void draw(Graphics2D graphics2D) {
+        return;
     }
 
     @Override

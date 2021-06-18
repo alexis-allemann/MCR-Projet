@@ -2,7 +2,10 @@ package model.components.fighters.decorators;
 
 import model.World;
 import model.components.fighters.IFighter;
+import utils.Utils;
 import utils.physics.Vector2D;
+
+import java.awt.*;
 
 /**
  * Boost applied on movement speed of model.components.fighters
@@ -46,5 +49,12 @@ public class SpeedBoost extends FighterDecorator {
     @Override
     public void move() {
         fighter.move(getSpeed());
+    }
+
+    @Override
+    public void draw(Graphics2D graphics2D) {
+        super.draw(graphics2D);
+        Image image = Utils.getInstance().getImageFromResources("speed.png");
+        graphics2D.drawImage(image, fighter.getLocation().getIntX(), fighter.getLocation().getIntY(), null);
     }
 }

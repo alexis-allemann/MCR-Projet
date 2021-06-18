@@ -4,6 +4,9 @@ import controllers.Direction;
 import model.components.fighters.IFighter;
 import model.components.weapon.IWeapon;
 import model.components.weapon.Projectile;
+import utils.physics.Location;
+
+import java.awt.*;
 
 /**
  * Weapon decorator
@@ -51,6 +54,36 @@ public abstract class WeaponDecorator implements IWeapon {
     @Override
     public void setFighter(IFighter fighter) {
         weapon.setFighter(fighter);
+    }
+
+    @Override
+    public Image getImage() {
+        return null;
+    }
+
+    @Override
+    public int getImageWidth() {
+        return 0;
+    }
+
+    @Override
+    public int getImageHeight() {
+        return 0;
+    }
+
+    @Override
+    public Location getLocation() {
+        return weapon.getLocation();
+    }
+
+    @Override
+    public void setLocation(Location location) {
+        weapon.setLocation(location);
+    }
+
+    @Override
+    public void draw(Graphics2D graphics2D) {
+        weapon.draw(graphics2D);
     }
 
     @Override

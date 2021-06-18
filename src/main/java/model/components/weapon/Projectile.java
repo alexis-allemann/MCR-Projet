@@ -15,7 +15,7 @@ import java.awt.Image;
  * @version 1.0
  */
 public abstract class Projectile extends GameComponentWithHitBox {
-    protected final int BASE_POWER = 1;
+    protected final int BASE_POWER = 50;
     private boolean isMonsterTeam;
 
     /**

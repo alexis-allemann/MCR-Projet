@@ -1,6 +1,7 @@
 package model.components.weapon;
 
 import controllers.Direction;
+import model.components.IGameComponent;
 import model.components.fighters.IFighter;
 
 /**
@@ -9,7 +10,7 @@ import model.components.fighters.IFighter;
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public interface IWeapon {
+public interface IWeapon extends IGameComponent {
 
     /**
      * Get id of the weapon

@@ -3,8 +3,10 @@ package model.components.fighters.decorators;
 import controllers.Direction;
 import model.components.fighters.IFighter;
 import model.components.weapon.*;
+import utils.Utils;
 import utils.physics.Vector2D;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,5 +72,12 @@ public class MultipleShoot extends FighterDecorator {
         if (++nbGet == weapons.size())
             nbGet = 0;
         return weapon;
+    }
+
+    @Override
+    public void draw(Graphics2D graphics2D) {
+        super.draw(graphics2D);
+        Image image = Utils.getInstance().getImageFromResources("multiple.png");
+        graphics2D.drawImage(image, fighter.getLocation().getIntX(), fighter.getLocation().getIntY(), null);
     }
 }

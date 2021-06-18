@@ -40,7 +40,7 @@ public class Monster extends Fighter {
 
     @Override
     public int getDefaultHealth() {
-        return 1;
+        return 10;
     }
 
     @Override

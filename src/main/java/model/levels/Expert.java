@@ -45,7 +45,6 @@ public class Expert extends Level {
     public List<WeaponDecorator> getWeaponDecorators(final IWeapon weapon) {
         return new ArrayList<WeaponDecorator>() {{
             add(new BulletSizeEnhancer(weapon, 2));
-            add(new ReloadSpeedEnhancer(weapon, 1.5f));
             add(new ShootPowerEnhancer(weapon, 1.5f));
             add(new ShootSpeedEnhancer(weapon, 1.5f));
         }};

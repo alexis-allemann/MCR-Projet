@@ -3,8 +3,9 @@ package model.components.weapon.decorators;
 import controllers.Direction;
 import model.components.weapon.IWeapon;
 import model.components.weapon.Projectile;
+import utils.Utils;
 
-import java.awt.Image;
+import java.awt.*;
 
 /**
  * Bullet size enhancer
@@ -33,5 +34,12 @@ public class BulletSizeEnhancer extends WeaponDecorator {
         return new Projectile(newImage, oldProjectile.getSpeed(), oldProjectile.isMonsterTeam()) {
 
         };
+    }
+
+    @Override
+    public void draw(Graphics2D graphics2D) {
+        super.draw(graphics2D);
+        Image image = Utils.getInstance().getImageFromResources("grow.png");
+        graphics2D.drawImage(image, getLocation().getIntX(), getLocation().getIntY(), null);
     }
 }

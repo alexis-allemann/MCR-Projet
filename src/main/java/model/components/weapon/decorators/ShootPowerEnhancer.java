@@ -3,6 +3,9 @@ package model.components.weapon.decorators;
 import controllers.Direction;
 import model.components.weapon.IWeapon;
 import model.components.weapon.Projectile;
+import utils.Utils;
+
+import java.awt.*;
 
 /**
  * Shoot power enhancer
@@ -32,5 +35,12 @@ public class ShootPowerEnhancer extends WeaponDecorator {
                 return (int) (super.getPower() * ratio);
             }
         };
+    }
+
+    @Override
+    public void draw(Graphics2D graphics2D) {
+        super.draw(graphics2D);
+        Image image = Utils.getInstance().getImageFromResources("power.png");
+        graphics2D.drawImage(image, getLocation().getIntX(), getLocation().getIntY(), null);
     }
 }

@@ -9,6 +9,8 @@ import utils.Utils;
 import utils.physics.Vector2D;
 import utils.physics.Location;
 
+import java.awt.*;
+
 /**
  * Space invaders fighter
  *
@@ -121,5 +123,11 @@ public abstract class Fighter extends GameComponentWithHitBox implements IFighte
         if (o == null) return false;
         IFighter fighter = (IFighter) o;
         return id == fighter.getId();
+    }
+
+    @Override
+    public void draw(Graphics2D graphics2D) {
+        super.draw(graphics2D);
+        getWeapon().draw(graphics2D);
     }
 }

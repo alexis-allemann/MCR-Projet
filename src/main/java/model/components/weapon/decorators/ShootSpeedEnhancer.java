@@ -3,7 +3,10 @@ package model.components.weapon.decorators;
 import controllers.Direction;
 import model.components.weapon.IWeapon;
 import model.components.weapon.Projectile;
+import utils.Utils;
 import utils.physics.Vector2D;
+
+import java.awt.*;
 
 /**
  * Shoot speed enhancer
@@ -30,5 +33,12 @@ public class ShootSpeedEnhancer extends WeaponDecorator {
         Vector2D newSpeed = new Vector2D(oldProjectile.getSpeed().getX() * ratio, oldProjectile.getSpeed().getY() * ratio);
         return new Projectile(oldProjectile.getImage(), newSpeed, oldProjectile.isMonsterTeam()) {
         };
+    }
+
+    @Override
+    public void draw(Graphics2D graphics2D) {
+        super.draw(graphics2D);
+        Image image = Utils.getInstance().getImageFromResources("shootspeed.png");
+        graphics2D.drawImage(image, getLocation().getIntX(), getLocation().getIntY(), null);
     }
 }
