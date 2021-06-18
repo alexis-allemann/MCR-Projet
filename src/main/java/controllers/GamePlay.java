@@ -5,6 +5,7 @@ import model.World;
 import model.components.fighters.IFighter;
 import utils.physics.Location;
 import controllers.managers.ViewManager;
+import utils.physics.Vector2D;
 import views.View;
 
 import java.util.Properties;
@@ -82,14 +83,16 @@ public class GamePlay implements IController {
 
     @Override
     public void move(Direction direction) {
-        Location location = World.getInstance().getSpacecraft().getLocation();
+        IFighter sp = World.getInstance().getSpacecraft();
+        Vector2D speed = sp.getSpeed();
+        Location location = sp.getLocation();
         int moveOnX = 0;
         switch (direction) {
             case LEFT:
-                moveOnX = -10;
+                moveOnX = (int) (-1 * speed.getX());
                 break;
             case RIGHT:
-                moveOnX = 10;
+                moveOnX = (int) (speed.getX());
                 break;
         }
         if (isInBounds(new Location(location.x + moveOnX, location.y), World.getInstance().getSpacecraft()))
@@ -120,9 +123,9 @@ public class GamePlay implements IController {
      * @return boolean if it is in bounds
      */
     private boolean isInBounds(Location location, IFighter fighter) {
-        return location.x + fighter.getImageWidth() <= WIDTH  &&
+        return location.x + fighter.getImageWidth() <= WIDTH &&
                 location.y + fighter.getImageHeight() <= HEIGHT &&
-                location.x  >= 0 &&
-                location.y  >= 0;
+                location.x >= 0 &&
+                location.y >= 0;
     }
 }

@@ -7,6 +7,7 @@ import model.components.fighters.Monster;
 import model.components.fighters.decorators.FighterDecorator;
 import model.components.fighters.decorators.MultipleShoot;
 import model.components.fighters.decorators.Shield;
+import model.components.fighters.decorators.SpeedBoost;
 import model.components.weapon.BombWeapon;
 import model.components.weapon.IWeapon;
 import model.components.weapon.decorators.WeaponDecorator;
@@ -74,7 +75,7 @@ public abstract class Level implements IDecoratorFactory {
 //                newMonster = createFighterDecorator(newMonster);
 //        }
 
-        return new MultipleShoot(newMonster, 2, 10);
+        return new SpeedBoost(newMonster, 10, 0);
     }
 
     /**

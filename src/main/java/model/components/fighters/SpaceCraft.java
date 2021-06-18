@@ -2,6 +2,7 @@ package model.components.fighters;
 
 import utils.physics.Location;
 import controllers.Direction;
+import utils.physics.Vector2D;
 
 /**
  * Space craft used to fight against monsters
@@ -45,5 +46,10 @@ public class SpaceCraft extends Fighter {
     @Override
     public boolean isMonsterTeam() {
         return false;
+    }
+
+    @Override
+    public Vector2D getSpeed() {
+        return new Vector2D(10.f, 0);
     }
 }

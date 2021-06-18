@@ -1,6 +1,6 @@
 package model;
 
-import model.components.fighters.decorators.MultipleShoot;
+import model.components.fighters.decorators.SpeedBoost;
 import model.levels.Beginner;
 import model.levels.Level;
 import model.components.fighters.IFighter;
@@ -21,7 +21,7 @@ public class World {
     private static final World INSTANCE = new World();
     private final List<IFighter> monsters = Collections.synchronizedList(new ArrayList<IFighter>());
     private final List<Projectile> projectiles = Collections.synchronizedList(new ArrayList<Projectile>());
-    private IFighter spacecraft = new MultipleShoot(new SpaceCraft(new Location(0, 0)), 4, 10);
+    private IFighter spacecraft = new SpeedBoost(new SpaceCraft(new Location(0, 0)), 10,0);
     private Level level;
 
     /**

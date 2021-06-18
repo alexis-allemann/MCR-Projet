@@ -66,7 +66,7 @@ public class Monster extends Fighter {
     }
 
     @Override
-    public Vector2D getSpeed() {
+    public void setNextSpeed(){
         List<IFighter> monsters = World.getInstance().getMonsters();
         int index = monsters.indexOf(this);
 
@@ -86,7 +86,6 @@ public class Monster extends Fighter {
             speedOnX *= -1;
 
         setSpeed(new Vector2D(speedOnX, getDownMove()));
-        return this.speed;
     }
 
     /**

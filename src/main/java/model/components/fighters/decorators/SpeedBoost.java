@@ -1,5 +1,6 @@
 package model.components.fighters.decorators;
 
+import model.World;
 import model.components.fighters.IFighter;
 import utils.physics.Vector2D;
 
@@ -28,12 +29,22 @@ public class SpeedBoost extends FighterDecorator {
 
     @Override
     public Vector2D getSpeed() {
-        Vector2D resultingSpeed = new Vector2D();
-        Vector2D actualSpeed = fighter.getSpeed();
+        if (this.equals(World.getInstance().getSpacecraft())) {
+            Vector2D resultingSpeed = new Vector2D();
+            Vector2D actualSpeed = super.getSpeed();
 
-        resultingSpeed.setX(actualSpeed.getX() + boostAmountX);
-        resultingSpeed.setY(actualSpeed.getY() + boostAmountY);
+            resultingSpeed.setX(actualSpeed.getX() + boostAmountX);
+            resultingSpeed.setY(actualSpeed.getY() + boostAmountY);
 
-        return resultingSpeed;
+            return resultingSpeed;
+        } else {
+            removeDecoration();
+            return super.getSpeed();
+        }
+    }
+
+    @Override
+    public void move() {
+        fighter.move(getSpeed());
     }
 }

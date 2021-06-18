@@ -108,4 +108,6 @@ public abstract class Projectile extends GameComponentWithHitBox {
     public boolean isMonsterTeam() {
         return isMonsterTeam;
     }
+
+
 }
