@@ -31,11 +31,7 @@ public class Shield extends FighterDecorator {
         shieldPower -= hp;
         if (shieldPower <= 0) {
             fighter.removeHealth(shieldPower);
-            World world = World.getInstance();
-            if(fighter.equals(world.getSpacecraft()))
-                world.setSpacecraft(world.getSpacecraft().removeDecorator(this));
-            else
-                world.replaceOrAddMonster(fighter.removeDecorator(this));
+            removeDecoration();
         }
     }
 

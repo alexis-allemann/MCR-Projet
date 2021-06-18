@@ -1,11 +1,29 @@
 package model.components;
 
 import model.components.fighters.IFighter;
-import model.components.fighters.decorators.FighterDecorator;
 import model.components.weapon.IWeapon;
-import model.components.weapon.decorators.WeaponDecorator;
 
+/**
+ * Decorator factory interface
+ *
+ * @author Allemann, Balestrieri, Christen, Mottier, Zeller
+ * @version 1.0
+ */
 public interface IDecoratorFactory {
-    FighterDecorator createFighterDecorator(IFighter fighter);
-    WeaponDecorator createWeaponDecorator(IWeapon weapon);
+
+    /**
+     * Get a fighter decorator
+     *
+     * @param fighter to decorate
+     * @return the fighter decorated
+     */
+    IFighter createFighterDecorator(IFighter fighter);
+
+    /**
+     * Get a weapon decorator
+     *
+     * @param weapon to decorate
+     * @return the weapon decorated
+     */
+    IWeapon createWeaponDecorator(IWeapon weapon);
 }

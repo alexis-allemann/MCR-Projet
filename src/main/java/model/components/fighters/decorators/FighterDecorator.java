@@ -1,5 +1,6 @@
 package model.components.fighters.decorators;
 
+import model.World;
 import model.components.IGameComponentWithHitBox;
 import model.components.fighters.IFighter;
 import controllers.Direction;
@@ -166,12 +167,23 @@ public abstract class FighterDecorator implements IFighter {
     }
 
     @Override
-    public void move(Vector2D speed){
+    public void move(Vector2D speed) {
         fighter.move(speed);
     }
 
     @Override
-    public boolean equals(Object o){
+    public boolean equals(Object o) {
         return fighter.equals(o);
+    }
+
+    /**
+     * Remove decoration
+     */
+    protected void removeDecoration() {
+        World world = World.getInstance();
+        if (fighter.equals(world.getSpacecraft()))
+            world.setSpacecraft(world.getSpacecraft().removeDecorator(this));
+        else
+            world.replaceOrAddMonster(fighter.removeDecorator(this));
     }
 }

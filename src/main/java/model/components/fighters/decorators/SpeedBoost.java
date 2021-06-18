@@ -10,9 +10,8 @@ import utils.physics.Vector2D;
  * @version 1.0
  */
 public class SpeedBoost extends FighterDecorator {
-
-    private final int boostAmountX;
-    private final int boostAmountY;
+    private final float boostAmountX;
+    private final float boostAmountY;
 
     /**
      * Apply speedboost
@@ -21,7 +20,7 @@ public class SpeedBoost extends FighterDecorator {
      * @param boostAmountX amount to add to x axis
      * @param boostAmountY amount to add to y axis
      */
-    public SpeedBoost(IFighter fighter, int boostAmountX, int boostAmountY) {
+    public SpeedBoost(IFighter fighter, float boostAmountX, float boostAmountY) {
         super(fighter);
         this.boostAmountX = boostAmountX;
         this.boostAmountY = boostAmountY;
@@ -37,5 +36,4 @@ public class SpeedBoost extends FighterDecorator {
 
         return resultingSpeed;
     }
-
 }

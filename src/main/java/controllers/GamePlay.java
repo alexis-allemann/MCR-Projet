@@ -72,7 +72,7 @@ public class GamePlay implements IController {
     @Override
     public void shoot() {
         IFighter sp = World.getInstance().getSpacecraft();
-        sp.getWeapon().shoot();
+        sp.shoot();
     }
 
     @Override

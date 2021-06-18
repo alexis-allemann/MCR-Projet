@@ -5,6 +5,8 @@ import model.components.fighters.Fighter;
 import model.components.fighters.IFighter;
 import model.components.fighters.Monster;
 import model.components.fighters.decorators.FighterDecorator;
+import model.components.fighters.decorators.MultipleShoot;
+import model.components.fighters.decorators.Shield;
 import model.components.weapon.BombWeapon;
 import model.components.weapon.IWeapon;
 import model.components.weapon.decorators.WeaponDecorator;
@@ -69,10 +71,10 @@ public abstract class Level implements IDecoratorFactory {
 //            if (shouldGenerateWeaponDecoration < 0.5)
 //                newMonster.setWeapon(createWeaponDecorator(newMonster.getWeapon()));
 //            else
-                //newMonster = createFighterDecorator(newMonster);
+//                newMonster = createFighterDecorator(newMonster);
 //        }
 
-        return newMonster;
+        return new MultipleShoot(newMonster, 2, 10);
     }
 
     /**
@@ -148,12 +150,18 @@ public abstract class Level implements IDecoratorFactory {
     abstract float getProbabilityOfMonstersToHaveDecorator();
 
     @Override
-    public FighterDecorator createFighterDecorator(IFighter fighter) {
-        return Utils.getInstance().chooseRandom(getFighterDecorators(fighter));
+    public IFighter createFighterDecorator(IFighter fighter) {
+        List<FighterDecorator> decorators = getFighterDecorators(fighter);
+        if (decorators == null)
+            return fighter;
+        return Utils.getInstance().chooseRandom(decorators);
     }
 
     @Override
-    public WeaponDecorator createWeaponDecorator(IWeapon weapon) {
-        return Utils.getInstance().chooseRandom(getWeaponDecorators(weapon));
+    public IWeapon createWeaponDecorator(IWeapon weapon) {
+        List<WeaponDecorator> decorators = getWeaponDecorators(weapon);
+        if (decorators == null)
+            return weapon;
+        return Utils.getInstance().chooseRandom(decorators);
     }
 }

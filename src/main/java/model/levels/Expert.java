@@ -2,12 +2,11 @@ package model.levels;
 
 import model.components.fighters.IFighter;
 import model.components.fighters.decorators.FighterDecorator;
+import model.components.fighters.decorators.MultipleShoot;
 import model.components.fighters.decorators.Shield;
 import model.components.fighters.decorators.SpeedBoost;
 import model.components.weapon.IWeapon;
-import model.components.weapon.decorators.BulletSizeEnhancer;
-import model.components.weapon.decorators.ShootSpeedEnhancer;
-import model.components.weapon.decorators.WeaponDecorator;
+import model.components.weapon.decorators.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,8 +35,9 @@ public class Expert extends Level {
     @Override
     public List<FighterDecorator> getFighterDecorators(final IFighter fighter) {
         return new ArrayList<FighterDecorator>() {{
-            add(new Shield(fighter, 50));
-            add(new SpeedBoost(fighter, 2, 0));
+            add(new Shield(fighter, 100));
+            add(new SpeedBoost(fighter, 1.5f, 0));
+            add(new MultipleShoot(fighter,3, 15));
         }};
     }
 
@@ -45,7 +45,9 @@ public class Expert extends Level {
     public List<WeaponDecorator> getWeaponDecorators(final IWeapon weapon) {
         return new ArrayList<WeaponDecorator>() {{
             add(new BulletSizeEnhancer(weapon, 2));
-            add(new ShootSpeedEnhancer(weapon, 2));
+            add(new ReloadSpeedEnhancer(weapon, 1.5f));
+            add(new ShootPowerEnhancer(weapon, 1.5f));
+            add(new ShootSpeedEnhancer(weapon, 1.5f));
         }};
     }
 

@@ -34,18 +34,12 @@ public class Beginner extends Level {
 
     @Override
     public List<FighterDecorator> getFighterDecorators(final IFighter fighter) {
-        return new ArrayList<FighterDecorator>() {{
-            add(new Shield(fighter, 1));
-            //add(new SpeedBoost(fighter, 2, 0));
-        }};
+        return null;
     }
 
     @Override
     public List<WeaponDecorator> getWeaponDecorators(final IWeapon weapon) {
-        return new ArrayList<WeaponDecorator>() {{
-            add(new BulletSizeEnhancer(weapon, 1.5f));
-            add(new ShootSpeedEnhancer(weapon, 2));
-        }};
+        return null;
     }
 
     @Override

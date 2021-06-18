@@ -1,6 +1,7 @@
 package model.components.weapon.decorators;
 
 import controllers.Direction;
+import model.components.weapon.IWeapon;
 import model.components.weapon.Projectile;
 
 /**
@@ -17,7 +18,7 @@ public class ShootPowerEnhancer extends WeaponDecorator {
      *
      * @param ratio of the power to increment
      */
-    public ShootPowerEnhancer(model.components.weapon.Weapon weapon, float ratio) {
+    public ShootPowerEnhancer(IWeapon weapon, float ratio) {
         super(weapon);
         this.ratio = ratio;
     }

@@ -1,5 +1,7 @@
 package model.components.weapon.decorators;
 
+import model.components.weapon.IWeapon;
+
 /**
  * Reload speed enhancer
  *
@@ -15,7 +17,7 @@ public class ReloadSpeedEnhancer extends WeaponDecorator {
      * @param weapon to decorate
      * @param ratio  of the reload speed increment
      */
-    public ReloadSpeedEnhancer(model.components.weapon.Weapon weapon, float ratio) {
+    public ReloadSpeedEnhancer(IWeapon weapon, float ratio) {
         super(weapon);
         this.ratio = ratio;
     }
