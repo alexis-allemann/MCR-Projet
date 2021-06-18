@@ -5,12 +5,9 @@ import model.components.GameComponentWithHitBox;
 import model.components.fighters.decorators.FighterDecorator;
 import model.components.weapon.IWeapon;
 import model.components.weapon.Projectile;
-import model.components.weapon.Weapon;
 import utils.Utils;
 import utils.physics.Vector2D;
 import utils.physics.Location;
-
-import java.util.Objects;
 
 /**
  * Space invaders fighter
@@ -22,6 +19,8 @@ public abstract class Fighter extends GameComponentWithHitBox implements IFighte
     private static final Vector2D SPEED_BASE = new Vector2D(1.f, 0.f);
     private IWeapon weapon;
     private int health;
+    private static int nb;
+    private final int id = nb++;
 
     /**
      * Instantiation of a new fighter
@@ -45,6 +44,11 @@ public abstract class Fighter extends GameComponentWithHitBox implements IFighte
         speed = fighter.speed;
         weapon = fighter.weapon;
         health = fighter.health;
+    }
+
+    @Override
+    public int getId() {
+        return id;
     }
 
     @Override
@@ -92,7 +96,7 @@ public abstract class Fighter extends GameComponentWithHitBox implements IFighte
                 @Override
                 public void hit(IFighter fighter) {
                     float shouldGenerateWeaponDecoration = Utils.getInstance().randomFloat(1);
-                    if(shouldGenerateWeaponDecoration < 0.5)
+                    if (shouldGenerateWeaponDecoration < 0.5)
                         fighter.setWeapon(world.getLevel().createWeaponDecorator(fighter.getWeapon()));
                     else
                         world.setSpacecraft(world.getLevel().createFighterDecorator(fighter));
@@ -116,7 +120,6 @@ public abstract class Fighter extends GameComponentWithHitBox implements IFighte
         if (this == o) return true;
         if (o == null) return false;
         IFighter fighter = (IFighter) o;
-        // TODO : voir si on peut améliorer la condition
-        return health == fighter.getHealth() && Objects.equals(weapon, fighter.getWeapon());
+        return id == fighter.getId();
     }
 }

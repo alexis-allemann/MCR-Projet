@@ -31,6 +31,11 @@ public abstract class FighterDecorator implements IFighter {
     }
 
     @Override
+    public int getId() {
+        return fighter.getId();
+    }
+
+    @Override
     public Direction getDirection() {
         return fighter.getDirection();
     }

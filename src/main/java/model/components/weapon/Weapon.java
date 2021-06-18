@@ -7,6 +7,8 @@ import utils.physics.Location;
 
 import controllers.Direction;
 
+import java.util.Objects;
+
 /**
  * Weapon to shoot bullets
  *
@@ -17,6 +19,13 @@ public abstract class Weapon implements IWeapon {
     private long lastBulletShotTime = System.currentTimeMillis();
     private IFighter fighter;
     private long nextShootReloadTime;
+    private static int nb;
+    private final int id = nb++;
+
+    @Override
+    public int getId() {
+        return id;
+    }
 
     @Override
     public IFighter getFighter() {
@@ -59,5 +68,13 @@ public abstract class Weapon implements IWeapon {
      */
     private void setNextShootReloadTime() {
         nextShootReloadTime = (long) (getFighter().getNextTimingModifier() * reloadTimeInMilliSeconds());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false;
+        IWeapon weapon = (IWeapon) o;
+        return id == weapon.getId();
     }
 }

@@ -4,7 +4,6 @@ import controllers.Direction;
 import model.components.IGameComponentWithHitBox;
 import model.components.fighters.decorators.FighterDecorator;
 import model.components.weapon.IWeapon;
-import utils.physics.Vector2D;
 
 /**
  * Fighter interface
@@ -13,6 +12,13 @@ import utils.physics.Vector2D;
  * @version 1.0
  */
 public interface IFighter extends IGameComponentWithHitBox {
+
+    /**
+     * Get id of the fighter
+     *
+     * @return id of the fighter
+     */
+    int getId();
 
     /**
      * Get shoot direction

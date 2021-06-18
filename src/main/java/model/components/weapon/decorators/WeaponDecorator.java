@@ -24,6 +24,11 @@ public abstract class WeaponDecorator implements IWeapon {
     }
 
     @Override
+    public int getId() {
+        return weapon.getId();
+    }
+
+    @Override
     public Projectile getBullet(Direction direction) {
         return weapon.getBullet(direction);
     }

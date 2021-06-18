@@ -3,7 +3,20 @@ package model.components.weapon;
 import controllers.Direction;
 import model.components.fighters.IFighter;
 
+/**
+ * Weapon interface
+ *
+ * @author Allemann, Balestrieri, Christen, Mottier, Zeller
+ * @version 1.0
+ */
 public interface IWeapon {
+
+    /**
+     * Get id of the weapon
+     *
+     * @return id of the weapon
+     */
+    int getId();
 
     /**
      * Set weapon's owner
