@@ -47,4 +47,7 @@ public abstract class WeaponDecorator implements IWeapon {
     public void setFighter(IFighter fighter) {
         weapon.setFighter(fighter);
     }
+
+    @Override
+    public boolean equals(Object o){ return weapon.equals(o);}
 }
