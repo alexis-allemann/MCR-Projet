@@ -81,11 +81,11 @@ public abstract class GameComponentWithHitBox extends GameComponent implements I
 
     @Override
     public void move() {
-        move(speed);
+        move(getSpeed());
     }
 
     @Override
     public void move(Vector2D speed){
-        location.translate(speed.getX(), speed.getX());
+        location.translate(speed.getX(), speed.getY());
     }
 }

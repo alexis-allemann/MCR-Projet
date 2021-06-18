@@ -69,7 +69,7 @@ public abstract class Level implements IDecoratorFactory {
 //            if (shouldGenerateWeaponDecoration < 0.5)
 //                newMonster.setWeapon(createWeaponDecorator(newMonster.getWeapon()));
 //            else
-                newMonster = createFighterDecorator(newMonster);
+                //newMonster = createFighterDecorator(newMonster);
 //        }
 
         return newMonster;

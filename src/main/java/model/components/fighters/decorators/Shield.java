@@ -4,10 +4,7 @@ import model.World;
 import model.components.fighters.IFighter;
 import utils.Utils;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.io.IOException;
-import java.util.Objects;
 
 /**
  * Shield to protect model.components.fighters
@@ -32,10 +29,14 @@ public class Shield extends FighterDecorator {
     @Override
     public void removeHealth(int hp) {
         shieldPower -= hp;
-        if (shieldPower < 0)
-            fighter.removeHealth(hp);
-        World world = World.getInstance();
-        world.setSpacecraft(world.getSpacecraft().removeDecorator(this));
+        if (shieldPower < 0) {
+            fighter.removeHealth(shieldPower);
+            World world = World.getInstance();
+            if(fighter.equals(world.getSpacecraft()))
+                world.setSpacecraft(world.getSpacecraft().removeDecorator(this));
+            else
+                world.replaceOrAddMonster(fighter.removeDecorator(this));
+        }
     }
 
     @Override

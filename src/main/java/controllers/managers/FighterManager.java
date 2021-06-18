@@ -4,9 +4,7 @@ import controllers.GamePlay;
 import model.components.fighters.IFighter;
 import model.levels.Level;
 import model.World;
-import model.components.fighters.Fighter;
 import utils.physics.Location;
-import utils.physics.Vector2D;
 
 import java.util.List;
 import java.util.LinkedList;
@@ -18,12 +16,7 @@ import java.util.LinkedList;
  * @version 1.0
  */
 public class FighterManager {
-    // TODO: est-ce que l'on mettrait pas les initialisation de valeur dans le constructeur plutot? (a débattre)
     private static final FighterManager INSTANCE = new FighterManager();
-    private static final int SECONDS_BEFORE_DOWN_MOVE = 2;
-    private static final int NB_MOVES_BEFORE_INVERT = 80;
-    private long lastMonstersDownMove = System.currentTimeMillis();
-    private int nbMoveInSameDirection = 0;
 
     /**
      * Instantiation of the fighter manager
@@ -54,11 +47,6 @@ public class FighterManager {
 
         // Lock monsters list instance to prevent concurrences errors
         synchronized (world.getMonsters()) {
-
-            // Check if monsters should move down or invert speed
-            boolean downMove = System.currentTimeMillis() - lastMonstersDownMove > SECONDS_BEFORE_DOWN_MOVE * 1000;
-            boolean invertSpeed = nbMoveInSameDirection > NB_MOVES_BEFORE_INVERT;
-
             List<IFighter> monsters = world.getMonsters();
             List<IFighter> toRemove = new LinkedList<>();
             for (IFighter monster : monsters) {
@@ -66,7 +54,6 @@ public class FighterManager {
                     toRemove.add(monster);
                     world.getLevel().addMonsterKilled();
                 } else {
-
                     monster.shoot();
                     monster.move();
                 }
@@ -75,12 +62,6 @@ public class FighterManager {
             // Remove monster after iteration to handle concurrence in synchronised list
             for (IFighter monster : toRemove)
                 monster.die();
-
-            // Update nb moves in the same direction
-            if (invertSpeed)
-                nbMoveInSameDirection = 0;
-            else
-                nbMoveInSameDirection++;
         }
     }
 
@@ -107,10 +88,10 @@ public class FighterManager {
             // Generate new monsters
             if (canGenerate) {
                 Level level = world.getLevel();
-                int margin = ((GamePlay.WIDTH - NB_MOVES_BEFORE_INVERT) / (level.getNbMonsterByWave()));
+                int margin = ((GamePlay.WIDTH) / (level.getNbMonsterByWave()));
                 for (int i = 1; i <= level.getNbMonsterByWave(); ++i) {
                     IFighter newMonster = level.generateMonster(new Location(0, 0));
-                    int xAxisValue = (margin * i) - (margin / 2) - (newMonster.getImageWidth() / 2) + nbMoveInSameDirection;
+                    int xAxisValue = (margin * i) - (margin / 2) - (newMonster.getImageWidth() / 2);
                     newMonster.setLocation(new Location(xAxisValue, 0));
                     world.addMonster(newMonster);
                 }

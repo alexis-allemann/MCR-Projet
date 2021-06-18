@@ -169,6 +169,4 @@ public abstract class FighterDecorator implements IFighter {
     public boolean equals(Object o){
         return fighter.equals(o);
     }
-
-    
 }

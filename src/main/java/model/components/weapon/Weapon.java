@@ -43,6 +43,11 @@ public abstract class Weapon implements IWeapon {
         }
     }
 
+    @Override
+    public boolean equals(Object o){
+        return fighter.equals(o);
+    }
+
     /**
      * Compute the starting location of the bullet
      *

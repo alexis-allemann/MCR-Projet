@@ -21,7 +21,7 @@ public class World {
     private static final World INSTANCE = new World();
     private final List<IFighter> monsters = Collections.synchronizedList(new ArrayList<IFighter>());
     private final List<Projectile> projectiles = Collections.synchronizedList(new ArrayList<Projectile>());
-    private IFighter spacecraft = new Shield(new SpaceCraft(new Location(0, 0)), 5);
+    private IFighter spacecraft = new Shield(new SpaceCraft(new Location(0, 0)), 1);
     private Level level;
 
     /**
@@ -69,14 +69,27 @@ public class World {
     }
 
     /**
+     * Add or replace a monster in the world
+     *
+     * @param fighter to add or replace
+     */
+    public void replaceOrAddMonster(final IFighter fighter) {
+        int index = monsters.indexOf(fighter);
+        if (index != -1)
+            monsters.set(index, fighter);
+        else
+            addMonster(fighter);
+    }
+
+    /**
      * Remove a monster from the world
      *
      * @param monster to remove
      */
     public void removeMonster(IFighter monster) {
         Iterator it = monsters.listIterator();
-        while(it.hasNext()){
-            if(Objects.equals(it.next(), monster)){
+        while (it.hasNext()) {
+            if (Objects.equals(it.next(), monster)) {
                 it.remove();
             }
         }

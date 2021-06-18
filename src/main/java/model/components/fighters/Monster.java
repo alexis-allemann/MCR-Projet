@@ -1,10 +1,13 @@
 package model.components.fighters;
 
+import model.World;
 import utils.Utils;
 import utils.physics.Location;
 import controllers.Direction;
 import model.components.weapon.BombWeapon;
 import utils.physics.Vector2D;
+
+import java.util.List;
 
 /**
  * Monsters used to fight against space craft
@@ -13,10 +16,10 @@ import utils.physics.Vector2D;
  * @version 1.0
  */
 public class Monster extends Fighter {
+    private static final int POINTS_MONSTER = 50;
+    private static final int SECONDS_BEFORE_DOWN_MOVE = 2;
+    private long lastMonstersDownMove = System.currentTimeMillis();
     private final float timingRange;
-    private final int DOWN_SPEED_TICK = 30;
-    private int down_speed_current_tick = 0;
-    private final int POINTS_MONSTER = 50;
 
     /**
      * Instantiation of a new monster
@@ -64,13 +67,39 @@ public class Monster extends Fighter {
 
     @Override
     public Vector2D getSpeed() {
-        down_speed_current_tick++;
-        if(down_speed_current_tick == DOWN_SPEED_TICK){
-            down_speed_current_tick = 0;
-            speed.setX(-speed.getX());
-            return new Vector2D(0, 5f);
-        } else {
-            return speed;
-        }
+        List<IFighter> monsters = World.getInstance().getMonsters();
+        int index = monsters.indexOf(this);
+
+        boolean invertSpeed = false;
+        Vector2D nullSpeed = new Vector2D(0.f, 0.f);
+        if (
+                (index != 0 && checkHitBox(nullSpeed, monsters.get(index - 1))) ||
+                        (index != monsters.size() - 1 && checkHitBox(nullSpeed, monsters.get(index + 1))) ||
+                        !isInBounds()
+        )
+            invertSpeed = true;
+
+
+        // Calculate speed on X axis
+        float speedOnX = this.speed.getX();
+        if (invertSpeed)
+            speedOnX *= -1;
+
+        setSpeed(new Vector2D(speedOnX, getDownMove()));
+        return this.speed;
+    }
+
+    /**
+     * Get down move
+     *
+     * @return move on Y axis
+     */
+    private float getDownMove() {
+        boolean downMove = System.currentTimeMillis() - lastMonstersDownMove > SECONDS_BEFORE_DOWN_MOVE * 1000;
+        if (downMove) {
+            lastMonstersDownMove = System.currentTimeMillis();
+            return 10.0f;
+        } else
+            return 0.f;
     }
 }
