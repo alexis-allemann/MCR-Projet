@@ -9,9 +9,7 @@ import model.components.weapon.Projectile;
 import utils.physics.Location;
 import model.components.weapon.StandardWeapon;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * World state representation
@@ -76,7 +74,12 @@ public class World {
      * @param monster to remove
      */
     public void removeMonster(IFighter monster) {
-        monsters.remove(monster);
+        Iterator it = monsters.listIterator();
+        while(it.hasNext()){
+            if(Objects.equals(it.next(), monster)){
+                it.remove();
+            }
+        }
     }
 
     /**

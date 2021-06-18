@@ -164,4 +164,11 @@ public abstract class FighterDecorator implements IFighter {
     public void move(Vector2D speed){
         fighter.move(speed);
     }
+
+    @Override
+    public boolean equals(Object o){
+        return fighter.equals(o);
+    }
+
+    
 }
