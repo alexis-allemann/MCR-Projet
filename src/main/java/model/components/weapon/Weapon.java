@@ -3,6 +3,8 @@ package model.components.weapon;
 import model.World;
 import model.components.fighters.Fighter;
 import model.components.fighters.IFighter;
+import model.components.fighters.decorators.FighterDecorator;
+import model.components.weapon.decorators.WeaponDecorator;
 import utils.physics.Location;
 
 import controllers.Direction;
@@ -107,6 +109,11 @@ public abstract class Weapon implements IWeapon {
         if (o == null) return false;
         IWeapon weapon = (IWeapon) o;
         return id == weapon.getId();
+    }
+
+    @Override
+    public IWeapon removeDecorator(WeaponDecorator decorator) {
+        return this;
     }
 
     @Override

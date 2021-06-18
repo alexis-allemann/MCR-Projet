@@ -113,7 +113,7 @@ public abstract class Fighter extends GameComponentWithHitBox implements IFighte
     }
 
     @Override
-    public Fighter removeDecorator(FighterDecorator decorator) {
+    public IFighter removeDecorator(FighterDecorator decorator) {
         return this;
     }
 

@@ -3,6 +3,7 @@ package model.components.weapon;
 import controllers.Direction;
 import model.components.IGameComponent;
 import model.components.fighters.IFighter;
+import model.components.weapon.decorators.WeaponDecorator;
 
 /**
  * Weapon interface
@@ -52,6 +53,14 @@ public interface IWeapon extends IGameComponent {
      * @return time between shoots
      */
     int reloadTimeInMilliSeconds();
+
+    /**
+     * Remove decorator from weapon
+     *
+     * @param decorator to remove
+     * @return weapon without given decoration
+     */
+    IWeapon removeDecorator(WeaponDecorator decorator);
 
     /**
      * Count decorators from a specific class down the chain

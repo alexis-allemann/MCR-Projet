@@ -15,7 +15,7 @@ import java.awt.*;
  * @version 1.0
  */
 public abstract class WeaponDecorator implements IWeapon {
-    private final IWeapon weapon;
+    private IWeapon weapon;
 
     /**
      * Instantiation of a new decoration
@@ -88,6 +88,24 @@ public abstract class WeaponDecorator implements IWeapon {
 
     @Override
     public boolean equals(Object o){ return weapon.equals(o);}
+
+    @Override
+    public final IWeapon removeDecorator(WeaponDecorator decorator) {
+        if (this == decorator) {
+            return weapon;
+        } else {
+            weapon = weapon.removeDecorator(decorator);
+        }
+        return this;
+    }
+
+    /**
+     * Remove decoration
+     */
+    protected void removeDecoration() {
+        IFighter fighter = getFighter();
+        fighter.setWeapon(fighter.getWeapon().removeDecorator(this));
+    }
 
     @Override
     public int countDecorator(Class decoratorClass){
