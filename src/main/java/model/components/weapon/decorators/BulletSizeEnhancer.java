@@ -14,6 +14,7 @@ import java.awt.*;
  * @version 1.0
  */
 public class BulletSizeEnhancer extends WeaponDecorator {
+    private static final int MAX_COUNT = 2;
     private final float ratio;
 
     /**
@@ -24,6 +25,9 @@ public class BulletSizeEnhancer extends WeaponDecorator {
     public BulletSizeEnhancer(IWeapon weapon, float ratio) {
         super(weapon);
         this.ratio = ratio;
+        if(weapon.countDecorator(this.getClass()) > MAX_COUNT){
+            removeDecoration();
+        }
     }
 
     @Override
