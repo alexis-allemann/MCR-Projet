@@ -205,8 +205,8 @@ IDecoratorFactory
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>600</x>
-      <y>438</y>
+      <x>534</x>
+      <y>444</y>
       <w>306</w>
       <h>126</h>
     </coordinates>
@@ -301,13 +301,13 @@ IGameComponent
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>738</x>
-      <y>558</y>
+      <x>792</x>
+      <y>564</y>
       <w>18</w>
-      <h>186</h>
+      <h>180</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;290.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;280.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -494,5 +494,16 @@ m1=1
 m2=1
 is at ^</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>576</x>
+      <y>564</y>
+      <w>18</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;260.0</additional_attributes>
   </element>
 </diagram>
