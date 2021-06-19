@@ -11,6 +11,10 @@ import javax.swing.JFrame;
 import javax.swing.border.EmptyBorder;
 import javax.swing.BoxLayout;
 import javax.swing.SwingConstants;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.Color;
+import java.awt.Point;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
@@ -112,7 +116,7 @@ public class GUIView extends JFrame implements View {
         LEVEL_LABEL.setText("Difficulty : " + World.getInstance().getLevel().toString());
         SCORE_LABEL.setText("Score : " + World.getInstance().getLevel().getScore());
         GAME_PANEL.setGameImage(image);
-        this.repaint();
+        repaint();
     }
 
     @Override

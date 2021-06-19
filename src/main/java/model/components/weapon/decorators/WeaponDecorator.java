@@ -6,7 +6,8 @@ import model.components.weapon.IWeapon;
 import model.components.weapon.Projectile;
 import utils.physics.Location;
 
-import java.awt.*;
+import java.awt.Image;
+import java.awt.Graphics2D;
 
 /**
  * Weapon decorator
@@ -24,6 +25,15 @@ public abstract class WeaponDecorator implements IWeapon {
      */
     public WeaponDecorator(IWeapon weapon) {
         this.weapon = weapon;
+    }
+
+    /**
+     * Remove decoration
+     */
+    protected void removeDecoration() {
+        IFighter fighter = getFighter();
+        if (fighter != null)
+            fighter.setWeapon(fighter.getWeapon().removeDecorator(this));
     }
 
     @Override
@@ -101,18 +111,9 @@ public abstract class WeaponDecorator implements IWeapon {
         return this;
     }
 
-    /**
-     * Remove decoration
-     */
-    protected void removeDecoration() {
-        IFighter fighter = getFighter();
-        if (fighter != null)
-            fighter.setWeapon(fighter.getWeapon().removeDecorator(this));
-    }
-
     @Override
     public int countDecorator(Class decoratorClass) {
-        if (this.getClass() == decoratorClass) {
+        if (getClass() == decoratorClass) {
             return weapon.countDecorator(decoratorClass) + 1;
         } else {
             return weapon.countDecorator(decoratorClass);

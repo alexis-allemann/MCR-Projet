@@ -36,7 +36,7 @@ public class MultipleGun extends FighterDecorator {
     public MultipleGun(final IFighter fighter, int nbParallelsShoots, int timeInSeconds) {
         super(fighter);
         this.timeInSeconds = timeInSeconds;
-        if (fighter.countDecorator(this.getClass()) > MAX_COUNT - 1)
+        if (fighter.countDecorator(getClass()) > MAX_COUNT - 1)
             removeDecoration();
         else {
             for (int i = 0; i < nbParallelsShoots; ++i) {

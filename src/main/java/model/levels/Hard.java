@@ -10,6 +10,7 @@ import utils.Utils;
  * @version 1.0
  */
 public class Hard extends Level {
+    private static final int MONSTER_HIT_POINTS = Integer.parseInt(Utils.getInstance().getProperty("LEVEL_3_MONSTER_HIT_POINTS"));
     private static final float MONSTER_SHOOT_TIMING = Float.parseFloat(Utils.getInstance().getProperty("LEVEL_3_MONSTER_SHOOT_TIMING"));
     private static final int NB_MONSTER_BY_WAVE = Integer.parseInt(Utils.getInstance().getProperty("LEVEL_3_NB_MONSTER_BY_WAVE"));
     private static final int NB_MONSTER_TO_KILL = Integer.parseInt(Utils.getInstance().getProperty("LEVEL_3_NB_MONSTER_TO_KILL"));
@@ -50,6 +51,11 @@ public class Hard extends Level {
     @Override
     public int getNbMonsterByWave() {
         return NB_MONSTER_BY_WAVE;
+    }
+
+    @Override
+    int getMonsterDefaultHealthPoints() {
+        return MONSTER_HIT_POINTS;
     }
 
     @Override

@@ -26,11 +26,12 @@ public class Monster extends Fighter {
      * Instantiation of a new monster
      *
      * @param location          where monster is located
+     * @param defaultHealth     default health of the monster
      * @param maxTimingModifier timing modifier to shoot a new bullet
      * @param imageName         name of the monster image
      */
-    public Monster(Location location, float maxTimingModifier, String imageName) {
-        super(location, imageName);
+    public Monster(Location location, int defaultHealth, float maxTimingModifier, String imageName) {
+        super(location, defaultHealth, imageName);
         setWeapon(new BombWeapon());
         this.timingRange = maxTimingModifier;
     }
@@ -38,11 +39,6 @@ public class Monster extends Fighter {
     @Override
     public Direction getDirection() {
         return Direction.DOWN;
-    }
-
-    @Override
-    public int getDefaultHealth() {
-        return 10;
     }
 
     @Override
@@ -99,7 +95,7 @@ public class Monster extends Fighter {
 
 
         // Calculate speed on X axis
-        int speedOnX = (int) this.speed.getX();
+        int speedOnX = (int) speed.getX();
         if (invertSpeed)
             speedOnX *= -1;
 

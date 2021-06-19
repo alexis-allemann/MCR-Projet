@@ -17,11 +17,11 @@ import java.awt.Image;
  * @version 1.0
  */
 public abstract class Weapon implements IWeapon {
+    private static int nb;
+    private final int id = nb++;
     private long lastBulletShotTime = System.currentTimeMillis();
     private IFighter fighter;
     private long nextShootReloadTime;
-    private static int nb;
-    private final int id = nb++;
 
     @Override
     public int getId() {
@@ -59,8 +59,8 @@ public abstract class Weapon implements IWeapon {
      * @return the starting location of the bullet
      */
     private Location getStartingBulletLocation() {
-        float x = fighter.getLocation().x + fighter.getImageWidth() / 2.f;
-        float y = fighter.getLocation().y + (fighter.getDirection() == Direction.TOP ? -1.5f : 1.5f) * fighter.getImageHeight();
+        float x = fighter.getLocation().getFloatX() + fighter.getImageWidth() / 2.f;
+        float y = fighter.getLocation().getFloatY() + (fighter.getDirection() == Direction.TOP ? -1.5f : 1.5f) * fighter.getImageHeight();
         return new Location(x, y);
     }
 
@@ -114,12 +114,12 @@ public abstract class Weapon implements IWeapon {
     }
 
     @Override
-    public int countDecorator(Class decoratorClass){
+    public int countDecorator(Class decoratorClass) {
         return 0;
     }
 
     @Override
-    public int countDecorator(){
+    public int countDecorator() {
         return 0;
     }
 }

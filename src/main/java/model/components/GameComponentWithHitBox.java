@@ -38,7 +38,7 @@ public abstract class GameComponentWithHitBox extends GameComponent implements I
 
     @Override
     public Rectangle getHitBoxLocation() {
-        return new Rectangle((int) getLocation().x, (int) getLocation().y, getImageWidth(), getImageHeight());
+        return new Rectangle((int) getLocation().getFloatX(), (int) getLocation().getFloatY(), getImageWidth(), getImageHeight());
     }
 
     @Override
@@ -62,10 +62,10 @@ public abstract class GameComponentWithHitBox extends GameComponent implements I
 
     @Override
     public boolean isInBounds() {
-        return location.x + getImageWidth() <= GameController.WIDTH &&
-                location.y + getImageHeight() <= GameController.WIDTH &&
-                location.x >= 0 &&
-                location.y >= 0;
+        return location.getFloatX() + getImageWidth() <= GameController.WIDTH &&
+                location.getFloatY() + getImageHeight() <= GameController.WIDTH &&
+                location.getFloatX() >= 0 &&
+                location.getFloatY() >= 0;
     }
 
     @Override
@@ -89,12 +89,8 @@ public abstract class GameComponentWithHitBox extends GameComponent implements I
 
     @Override
     public void move() {
-        move(getSpeed());
-    }
-
-    @Override
-    public void move(Speed speed) {
         location.translate(speed.getX(), speed.getY());
     }
+
 
 }

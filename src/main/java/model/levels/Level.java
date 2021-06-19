@@ -66,7 +66,7 @@ public abstract class Level implements IDecoratorFactory {
      * @return generated monster
      */
     public IFighter generateMonster(Location location) {
-        IFighter newMonster = new Monster(location, getMonsterShootTiming(), getMonsterImageName());
+        IFighter newMonster = new Monster(location, getMonsterDefaultHealthPoints(), getMonsterShootTiming(), getMonsterImageName());
         float random = Utils.getInstance().randomFloat(1);
         if (random < getProbabilityOfMonstersToBeDecorated()) {
             float shouldGenerateWeaponDecoration = Utils.getInstance().randomFloat(1);
@@ -122,6 +122,7 @@ public abstract class Level implements IDecoratorFactory {
 
     /**
      * Get the monster image name
+     *
      * @return the monster image name
      */
     abstract String getMonsterImageName();
@@ -141,6 +142,13 @@ public abstract class Level implements IDecoratorFactory {
     abstract float getProbabilityOfMonstersToBeDecorated();
 
     /**
+     * Get the default monster health points
+     *
+     * @return default monster health points
+     */
+    abstract int getMonsterDefaultHealthPoints();
+
+    /**
      * Get list of fighters decorators available
      *
      * @param fighter to decorate
@@ -149,7 +157,7 @@ public abstract class Level implements IDecoratorFactory {
     public List<FighterDecorator> getFighterDecorators(final IFighter fighter) {
         return new ArrayList<FighterDecorator>() {{
             add(new Shield(fighter, 100));
-            add(new SpeedBoost(fighter, 1.5f));
+            add(new SpeedBoost(fighter, 0.5f));
             add(new MultipleGun(fighter, 3, 5));
         }};
     }

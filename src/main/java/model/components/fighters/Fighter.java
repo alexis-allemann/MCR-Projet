@@ -18,21 +18,22 @@ import java.awt.Graphics2D;
 public abstract class Fighter extends GameComponentWithHitBox implements IFighter {
     private static final int MAX_COUNT = Integer.parseInt(Utils.getInstance().getProperty("NB_MAX_DECORATIONS"));
     private static final Speed SPEED_BASE = new Speed(1.f, 0.f);
-    private IWeapon weapon;
-    private int health;
     private static int nb;
     private final int id = nb++;
+    private IWeapon weapon;
+    private int health;
 
     /**
      * Instantiation of a new fighter
      *
-     * @param location where fighter is located
-     * @param image    filename of the fighter to display
+     * @param location      where fighter is located
+     * @param defaultHealth default health of the fighter
+     * @param image         filename of the fighter to display
      */
-    public Fighter(Location location, String image) {
+    public Fighter(Location location, int defaultHealth, String image) {
         super(location, image);
         speed = SPEED_BASE;
-        health = getDefaultHealth();
+        health = defaultHealth;
     }
 
     /**
@@ -127,4 +128,5 @@ public abstract class Fighter extends GameComponentWithHitBox implements IFighte
     public boolean canBeDecorated() {
         return countDecorator() + getWeapon().countDecorator() < MAX_COUNT;
     }
+
 }

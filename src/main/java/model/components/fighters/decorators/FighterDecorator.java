@@ -30,6 +30,17 @@ public abstract class FighterDecorator implements IFighter {
         this.fighter = fighter;
     }
 
+    /**
+     * Remove decoration
+     */
+    protected void removeDecoration() {
+        World world = World.getInstance();
+        if (fighter.equals(world.getSpacecraft()))
+            world.setSpacecraft(world.getSpacecraft().removeDecorator(this));
+        else
+            world.replaceOrAddMonster(fighter.removeDecorator(this));
+    }
+
     @Override
     public void setSpeed(int speedOnX, int speedOnY) {
         fighter.setSpeed(speedOnX, speedOnY);
@@ -43,11 +54,6 @@ public abstract class FighterDecorator implements IFighter {
     @Override
     public Direction getDirection() {
         return fighter.getDirection();
-    }
-
-    @Override
-    public int getDefaultHealth() {
-        return fighter.getDefaultHealth();
     }
 
     @Override
@@ -166,11 +172,6 @@ public abstract class FighterDecorator implements IFighter {
     }
 
     @Override
-    public void move(Speed speed) {
-        fighter.move(speed);
-    }
-
-    @Override
     public boolean equals(Object o) {
         return fighter.equals(o);
     }
@@ -195,24 +196,12 @@ public abstract class FighterDecorator implements IFighter {
         return this;
     }
 
-    /**
-     * Remove decoration
-     */
-    protected void removeDecoration() {
-        World world = World.getInstance();
-        if (fighter.equals(world.getSpacecraft()))
-            world.setSpacecraft(world.getSpacecraft().removeDecorator(this));
-        else
-            world.replaceOrAddMonster(fighter.removeDecorator(this));
-    }
-
     @Override
     public int countDecorator(Class decoratorClass) {
-        if (this.getClass() == decoratorClass) {
+        if (getClass() == decoratorClass) {
             return fighter.countDecorator(decoratorClass) + 1;
         } else {
             return fighter.countDecorator(decoratorClass);
         }
     }
-
 }

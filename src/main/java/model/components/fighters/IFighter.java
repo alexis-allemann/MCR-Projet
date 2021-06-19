@@ -28,13 +28,6 @@ public interface IFighter extends IGameComponentWithHitBox {
     Direction getDirection();
 
     /**
-     * Get default health
-     *
-     * @return default health
-     */
-    int getDefaultHealth();
-
-    /**
      * Get next timing modifier
      *
      * @return next timing modifier
@@ -54,7 +47,6 @@ public interface IFighter extends IGameComponentWithHitBox {
      * @param weapon Weapon to set
      */
     void setWeapon(IWeapon weapon);
-
 
     /**
      * Get fighter's health

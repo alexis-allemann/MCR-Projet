@@ -23,7 +23,6 @@ public class Speed {
 
     /**
      * Instantiation of a new 2D vector with zeros as values for x and y axis
-     *
      */
     public Speed() {
         this(0, 0);

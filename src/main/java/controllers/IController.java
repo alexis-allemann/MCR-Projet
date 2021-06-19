@@ -14,7 +14,7 @@ public interface IController {
     /**
      * Start the gameplay in a new view
      *
-     * @param view       to start gameplay into
+     * @param view to start gameplay into
      */
     void start(View view);
 

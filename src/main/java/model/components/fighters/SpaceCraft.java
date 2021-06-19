@@ -20,18 +20,13 @@ public class SpaceCraft extends Fighter {
      * @param location where spacecraft is located
      */
     public SpaceCraft(Location location) {
-        super(location, "spacecraft.png");
+        super(location, HEALTH, "spacecraft.png");
         setSpeed(SPEED, 0);
     }
 
     @Override
     public Direction getDirection() {
         return Direction.TOP;
-    }
-
-    @Override
-    public int getDefaultHealth() {
-        return HEALTH;
     }
 
     @Override
@@ -46,9 +41,10 @@ public class SpaceCraft extends Fighter {
 
     @Override
     public void move() {
-        float oldLocationX = getLocation().getFloatX();
+        float oldLocationOnX = getLocation().getFloatX();
+        float oldLocationOnY = getLocation().getFloatY();
         getLocation().translate(getSpeed().getX(), 0);
         if (!isInBounds())
-            setLocation(oldLocation);
+            setLocation(new Location(oldLocationOnX, oldLocationOnY));
     }
 }

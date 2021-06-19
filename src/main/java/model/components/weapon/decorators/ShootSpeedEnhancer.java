@@ -6,7 +6,8 @@ import model.components.weapon.Projectile;
 import utils.Utils;
 import utils.physics.Speed;
 
-import java.awt.*;
+import java.awt.Image;
+import java.awt.Graphics2D;
 
 /**
  * Shoot speed enhancer
@@ -20,7 +21,8 @@ public class ShootSpeedEnhancer extends WeaponDecorator {
     /**
      * Instantiation of a new shoot speed enhancer decoration
      *
-     * @param ratio of the shoot speed increment
+     * @param weapon weapon to enhance shoot speed
+     * @param ratio  of the shoot speed increment
      */
     public ShootSpeedEnhancer(IWeapon weapon, float ratio) {
         super(weapon);

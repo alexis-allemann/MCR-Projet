@@ -87,7 +87,7 @@ public class FighterManager {
                 canGenerate = true;
             } else {
                 IFighter last = monsters.get(monsters.size() - 1);
-                canGenerate = last.getLocation().y > last.getImageHeight();
+                canGenerate = last.getLocation().getFloatY() > last.getImageHeight();
             }
 
             // Generate new monsters

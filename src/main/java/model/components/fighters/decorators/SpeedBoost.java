@@ -36,11 +36,12 @@ public class SpeedBoost extends FighterDecorator {
             removeDecoration();
             return;
         }
-        Location oldLocation = fighter.getLocation();
+        float oldLocationOnX = getLocation().getFloatX();
+        float oldLocationOnY = getLocation().getFloatY();
         float boostSpeedX = fighter.getSpeed().getX() * boostAmountX;
         fighter.getLocation().translate(boostSpeedX, 0.f);
-        if(!isInBounds()){
-            fighter.setLocation(oldLocation);
+        if (!isInBounds()){
+            setLocation(new Location(oldLocationOnX, oldLocationOnY));
         }
     }
 

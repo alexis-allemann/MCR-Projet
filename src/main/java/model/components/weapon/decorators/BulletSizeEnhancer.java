@@ -5,7 +5,8 @@ import model.components.weapon.IWeapon;
 import model.components.weapon.Projectile;
 import utils.Utils;
 
-import java.awt.*;
+import java.awt.Image;
+import java.awt.Graphics2D;
 
 /**
  * Bullet size enhancer
@@ -25,7 +26,7 @@ public class BulletSizeEnhancer extends WeaponDecorator {
     public BulletSizeEnhancer(IWeapon weapon, float ratio) {
         super(weapon);
         this.ratio = ratio;
-        if (weapon.countDecorator(this.getClass()) > NB_MAX_BULLET_SIZE_ENHANCER - 1)
+        if (weapon.countDecorator(getClass()) > NB_MAX_BULLET_SIZE_ENHANCER - 1)
             removeDecoration();
     }
 

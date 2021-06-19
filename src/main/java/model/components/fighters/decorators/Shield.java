@@ -3,7 +3,8 @@ package model.components.fighters.decorators;
 import model.components.fighters.IFighter;
 import utils.Utils;
 
-import java.awt.*;
+import java.awt.Graphics2D;
+import java.awt.Image;
 
 /**
  * Shield to protect model.components.fighters

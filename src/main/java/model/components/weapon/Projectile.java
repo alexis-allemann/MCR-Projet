@@ -99,7 +99,7 @@ public abstract class Projectile extends GameComponentWithHitBox {
      * @return True if there's a fighter to next location
      */
     public boolean checkNextLocation(IFighter fighter) {
-        if (fighter.isMonsterTeam() == this.isMonsterTeam)
+        if (fighter.isMonsterTeam() == isMonsterTeam)
             return false;
         return checkHitBox(speed, fighter);
     }
@@ -108,6 +108,4 @@ public abstract class Projectile extends GameComponentWithHitBox {
     public boolean isMonsterTeam() {
         return isMonsterTeam;
     }
-
-
 }

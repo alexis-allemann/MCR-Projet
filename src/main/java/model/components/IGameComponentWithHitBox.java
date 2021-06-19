@@ -10,7 +10,7 @@ import java.awt.Rectangle;
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public interface IGameComponentWithHitBox extends IGameComponent{
+public interface IGameComponentWithHitBox extends IGameComponent {
 
     /**
      * Method to know if a fighter is a monster
@@ -47,12 +47,6 @@ public interface IGameComponentWithHitBox extends IGameComponent{
      */
     void move();
 
-    /**
-     * Move with defined speed
-     *
-     * @param speed to move
-     */
-    void move(Speed speed);
 
     /**
      * Get component speed
