@@ -5,7 +5,8 @@ import model.components.weapon.IWeapon;
 import model.components.weapon.Projectile;
 import utils.Utils;
 
-import java.awt.*;
+import java.awt.Graphics2D;
+import java.awt.Image;
 
 /**
  * Shoot power enhancer

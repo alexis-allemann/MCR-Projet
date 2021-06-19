@@ -7,7 +7,7 @@ import utils.Utils;
 import utils.physics.Location;
 import utils.physics.Speed;
 
-import java.awt.*;
+import java.awt.Graphics2D;
 
 /**
  * Space invaders fighter

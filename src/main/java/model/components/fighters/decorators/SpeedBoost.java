@@ -2,11 +2,11 @@ package model.components.fighters.decorators;
 
 import model.World;
 import model.components.fighters.IFighter;
-import model.components.fighters.SpaceCraft;
 import utils.Utils;
-import utils.physics.Speed;
+import utils.physics.Location;
 
-import java.awt.*;
+import java.awt.Graphics2D;
+import java.awt.Image;
 
 /**
  * Boost applied on movement speed of model.components.fighters
@@ -36,8 +36,12 @@ public class SpeedBoost extends FighterDecorator {
             removeDecoration();
             return;
         }
-        Speed boostSpeed = new Speed(fighter.getSpeed().getX() * boostAmountX, 0);
-        fighter.move(boostSpeed);
+        Location oldLocation = fighter.getLocation();
+        float boostSpeedX = fighter.getSpeed().getX() * boostAmountX;
+        fighter.getLocation().translate(boostSpeedX, 0.f);
+        if(!isInBounds()){
+            fighter.setLocation(oldLocation);
+        }
     }
 
     @Override

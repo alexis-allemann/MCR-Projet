@@ -2,11 +2,14 @@ package model.components.fighters.decorators;
 
 import utils.physics.Direction;
 import model.components.fighters.IFighter;
-import model.components.weapon.*;
+import model.components.weapon.IWeapon;
+import model.components.weapon.Weapon;
+import model.components.weapon.Projectile;
 import utils.Utils;
 import utils.physics.Speed;
 
-import java.awt.*;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
 

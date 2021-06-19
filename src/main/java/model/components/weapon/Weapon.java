@@ -7,7 +7,8 @@ import utils.physics.Location;
 
 import utils.physics.Direction;
 
-import java.awt.*;
+import java.awt.Graphics2D;
+import java.awt.Image;
 
 /**
  * Weapon to shoot bullets

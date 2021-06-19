@@ -46,10 +46,9 @@ public class SpaceCraft extends Fighter {
 
     @Override
     public void move() {
-        int oldLocationOnX = getLocation().getIntX();
-        int oldLocationOnY = getLocation().getIntY();
+        float oldLocationX = getLocation().getFloatX();
         getLocation().translate(getSpeed().getX(), 0);
         if (!isInBounds())
-            setLocation(new Location(oldLocationOnX, oldLocationOnY));
+            setLocation(oldLocation);
     }
 }
