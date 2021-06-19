@@ -120,4 +120,9 @@ public abstract class Weapon implements IWeapon {
     public int countDecorator(Class decoratorClass){
         return 0;
     }
+
+    @Override
+    public int countDecorator(){
+        return 0;
+    }
 }

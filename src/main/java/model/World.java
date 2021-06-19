@@ -1,12 +1,7 @@
 package model;
 
 import controllers.GamePlay;
-import controllers.managers.ComponentManager;
-import controllers.managers.ViewManager;
-import model.components.fighters.decorators.SpeedBoost;
 import model.components.weapon.decorators.BulletSizeEnhancer;
-import model.components.weapon.decorators.ShootPowerEnhancer;
-import model.components.weapon.decorators.ShootSpeedEnhancer;
 import model.levels.Beginner;
 import model.levels.Level;
 import model.components.fighters.IFighter;
@@ -36,6 +31,7 @@ public class World {
      */
     private World() {
         spacecraft.setWeapon(new StandardWeapon());
+        spacecraft.setWeapon(spacecraft.getWeapon());
         this.level = new Beginner();
     }
 

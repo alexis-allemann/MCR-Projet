@@ -1,13 +1,10 @@
 package model.components.fighters;
 
-import model.World;
 import model.components.GameComponentWithHitBox;
 import model.components.fighters.decorators.FighterDecorator;
 import model.components.weapon.IWeapon;
-import model.components.weapon.Projectile;
-import utils.Utils;
-import utils.physics.Vector2D;
 import utils.physics.Location;
+import utils.physics.Vector2D;
 
 import java.awt.*;
 
@@ -18,6 +15,7 @@ import java.awt.*;
  * @version 1.0
  */
 public abstract class Fighter extends GameComponentWithHitBox implements IFighter {
+    private static final int MAX_COUNT = 3;
     private static final Vector2D SPEED_BASE = new Vector2D(1.f, 0.f);
     private IWeapon weapon;
     private int health;
@@ -88,23 +86,7 @@ public abstract class Fighter extends GameComponentWithHitBox implements IFighte
 
     @Override
     public void die() {
-        final World world = World.getInstance();
-        world.removeMonster(this);
-        world.getLevel().addScore(getPoints());
-        float random = Utils.getInstance().randomFloat(1);
-        if (random <= world.getLevel().probabilityToGenerateDecoration()) {
-            world.addBullet(new Projectile(new Location(super.location), "star.png", new Vector2D(0, 5), true) {
-
-                @Override
-                public void hit(IFighter fighter) {
-                    float shouldGenerateWeaponDecoration = Utils.getInstance().randomFloat(1);
-                    if (shouldGenerateWeaponDecoration < 0.5)
-                        fighter.setWeapon(world.getLevel().createWeaponDecorator(fighter.getWeapon()));
-                    else
-                        world.setSpacecraft(world.getLevel().createFighterDecorator(fighter));
-                }
-            });
-        }
+        return;
     }
 
     @Override
@@ -132,7 +114,17 @@ public abstract class Fighter extends GameComponentWithHitBox implements IFighte
     }
 
     @Override
-    public int countDecorator(Class decoratorClass){
+    public int countDecorator(Class decoratorClass) {
         return 0;
+    }
+
+    @Override
+    public int countDecorator() {
+        return 0;
+    }
+
+    @Override
+    public boolean canBeDecorated() {
+        return countDecorator() + getWeapon().countDecorator() < MAX_COUNT;
     }
 }

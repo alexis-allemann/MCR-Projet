@@ -1,5 +1,6 @@
 package model.components.fighters;
 
+import model.World;
 import utils.physics.Location;
 import controllers.Direction;
 import utils.physics.Vector2D;
@@ -38,12 +39,6 @@ public class SpaceCraft extends Fighter {
     }
 
     @Override
-    public void die() {
-        // TODO: trigger game stop here/restart
-        System.out.println("Game over !");
-    }
-
-    @Override
     public boolean isMonsterTeam() {
         return false;
     }
@@ -51,5 +46,14 @@ public class SpaceCraft extends Fighter {
     @Override
     public Vector2D getSpeed() {
         return new Vector2D(10.f, 0);
+    }
+
+    @Override
+    public void move() {
+        int oldLocationOnX = getLocation().getIntX();
+        int oldLocationOnY = getLocation().getIntY();
+        getLocation().translate(speed.getX(), 0);
+        if (!isInBounds())
+            setLocation(new Location(oldLocationOnX, oldLocationOnY));
     }
 }

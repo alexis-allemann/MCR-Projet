@@ -1,10 +1,14 @@
 package utils;
 
+import model.components.fighters.SpaceCraft;
+
 import javax.imageio.ImageIO;
 import java.awt.Image;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Objects;
+import java.util.Properties;
 import java.util.Random;
 
 /**
@@ -13,11 +17,23 @@ import java.util.Random;
 public class Utils {
     private final Random random = new Random();
     private static final Utils instance = new Utils();
+    private Properties properties;
 
     /**
      * Private constructor to apply pattern
      */
     private Utils() {
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+        try (InputStream input = classloader.getResourceAsStream("config.properties")) {
+            if (input == null) {
+                System.out.println("Sorry, unable to find config.properties");
+                return;
+            }
+            properties = new Properties();
+            properties.load(input);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     /**
@@ -77,5 +93,17 @@ public class Utils {
             System.out.println("Component image has not been found in resources");
         }
         return null;
+    }
+
+    /**
+     * Get a property from config file
+     *
+     * @param propertyKey to find
+     * @return
+     */
+    public String getProperty(String propertyKey) {
+        if (!properties.containsKey(propertyKey))
+            throw new IllegalArgumentException("Property" + propertyKey + "missing in config.properties file");
+        return properties.getProperty(propertyKey);
     }
 }

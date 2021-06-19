@@ -95,6 +95,13 @@ public interface IFighter extends IGameComponentWithHitBox {
     int getPoints();
 
     /**
+     * Get if the fighter can be decorated
+     *
+     * @return boolean if the fighter can be decorated
+     */
+    boolean canBeDecorated();
+
+    /**
      * Remove decorator from fighter
      *
      * @param decorator to remove
@@ -109,4 +116,11 @@ public interface IFighter extends IGameComponentWithHitBox {
      * @return the number of decorator belonging to the class
      */
     int countDecorator(Class decoratorClass);
+
+    /**
+     * Count decorators  down the chain
+     *
+     * @return the number of decorator belonging to the class
+     */
+    int countDecorator();
 }

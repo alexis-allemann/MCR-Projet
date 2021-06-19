@@ -16,10 +16,8 @@ public interface IController {
      * Start the gameplay in a new view
      *
      * @param view       to start gameplay into
-     * @param properties used in the game
-     * @throws IllegalArgumentException if the view is null
      */
-    void start(View view, Properties properties);
+    void start(View view);
 
     /**
      * Start a new game

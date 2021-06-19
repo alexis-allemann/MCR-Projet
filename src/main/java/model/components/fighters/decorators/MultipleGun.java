@@ -16,7 +16,8 @@ import java.util.List;
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public class MultipleShoot extends FighterDecorator {
+public class MultipleGun extends FighterDecorator {
+    private static final int MAX_COUNT = 1;
     private List<IWeapon> weapons = new ArrayList<>();
     private int nbGet = 0;
     private long start = System.currentTimeMillis();
@@ -29,30 +30,34 @@ public class MultipleShoot extends FighterDecorator {
      * @param nbParallelsShoots additional shoots
      * @param timeInSeconds     time of the bonus
      */
-    public MultipleShoot(final IFighter fighter, int nbParallelsShoots, int timeInSeconds) {
+    public MultipleGun(final IFighter fighter, int nbParallelsShoots, int timeInSeconds) {
         super(fighter);
         this.timeInSeconds = timeInSeconds;
-        for (int i = 0; i < nbParallelsShoots; ++i) {
-            final int x = (nbParallelsShoots / 2) - nbParallelsShoots + i;
-            Weapon newWeapon = new Weapon() {
-                @Override
-                public Projectile getBullet(Direction direction) {
-                    float y = direction == Direction.TOP ? -10f : 10f;
-                    return new Projectile("laser.png", new Vector2D(x, y), getFighter().isMonsterTeam()) {
-                        @Override
-                        public int getPower() {
-                            return 100;
-                        }
-                    };
-                }
+        if(fighter.countDecorator(this.getClass()) > MAX_COUNT -1)
+            removeDecoration();
+        else{
+            for (int i = 0; i < nbParallelsShoots; ++i) {
+                final int x = (nbParallelsShoots / 2) - nbParallelsShoots + i;
+                Weapon newWeapon = new Weapon() {
+                    @Override
+                    public Projectile getBullet(Direction direction) {
+                        float y = direction == Direction.TOP ? -10f : 10f;
+                        return new Projectile("laser.png", new Vector2D(x, y), getFighter().isMonsterTeam()) {
+                            @Override
+                            public int getPower() {
+                                return 100;
+                            }
+                        };
+                    }
 
-                @Override
-                public int reloadTimeInMilliSeconds() {
-                    return 500;
-                }
-            };
-            newWeapon.setFighter(this);
-            weapons.add(newWeapon);
+                    @Override
+                    public int reloadTimeInMilliSeconds() {
+                        return 500;
+                    }
+                };
+                newWeapon.setFighter(this);
+                weapons.add(newWeapon);
+            }
         }
     }
 

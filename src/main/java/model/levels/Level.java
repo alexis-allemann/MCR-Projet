@@ -1,14 +1,9 @@
 package model.levels;
 
 import model.components.IDecoratorFactory;
-import model.components.fighters.Fighter;
 import model.components.fighters.IFighter;
 import model.components.fighters.Monster;
 import model.components.fighters.decorators.FighterDecorator;
-import model.components.fighters.decorators.MultipleShoot;
-import model.components.fighters.decorators.Shield;
-import model.components.fighters.decorators.SpeedBoost;
-import model.components.weapon.BombWeapon;
 import model.components.weapon.IWeapon;
 import model.components.weapon.decorators.WeaponDecorator;
 import utils.Utils;
@@ -64,7 +59,7 @@ public abstract class Level implements IDecoratorFactory {
      * @return generated monster
      */
     public IFighter generateMonster(Location location) {
-        IFighter newMonster = new Monster(location, getMonsterShootTiming());
+        IFighter newMonster = new Monster(location, getMonsterShootTiming(), getMonsterImageName());
         float random = Utils.getInstance().randomFloat(1);
         if (random < getProbabilityOfMonstersToHaveDecorator()) {
             float shouldGenerateWeaponDecoration = Utils.getInstance().randomFloat(1);
@@ -95,9 +90,9 @@ public abstract class Level implements IDecoratorFactory {
      *
      * @return time in seconds
      */
-    public int getTime() {
+    public int getTimeInSeconds() {
         long current = System.currentTimeMillis();
-        return (int) (START - current) / 1000;
+        return (int) (current - START) / 1000;
     }
 
     /**
@@ -147,6 +142,12 @@ public abstract class Level implements IDecoratorFactory {
      * @return probability to get a decorated monster
      */
     abstract float getProbabilityOfMonstersToHaveDecorator();
+
+    /**
+     * Get the monster image name
+     * @return the monster image name
+     */
+    abstract String getMonsterImageName();
 
     @Override
     public IFighter createFighterDecorator(IFighter fighter) {

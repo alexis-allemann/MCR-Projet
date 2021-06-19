@@ -25,9 +25,8 @@ public class BulletSizeEnhancer extends WeaponDecorator {
     public BulletSizeEnhancer(IWeapon weapon, float ratio) {
         super(weapon);
         this.ratio = ratio;
-        if(weapon.countDecorator(this.getClass()) > MAX_COUNT){
+        if(weapon.countDecorator(this.getClass()) > MAX_COUNT -1)
             removeDecoration();
-        }
     }
 
     @Override

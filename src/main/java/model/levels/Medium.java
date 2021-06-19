@@ -3,7 +3,7 @@ package model.levels;
 import model.World;
 import model.components.fighters.IFighter;
 import model.components.fighters.decorators.FighterDecorator;
-import model.components.fighters.decorators.MultipleShoot;
+import model.components.fighters.decorators.MultipleGun;
 import model.components.fighters.decorators.Shield;
 import model.components.fighters.decorators.SpeedBoost;
 import model.components.weapon.IWeapon;
@@ -31,7 +31,7 @@ public class Medium extends Level {
 
     @Override
     public void checkLevelChanged() {
-        if (nbMonstersKilled >= 15 || getTime() > 90)
+        if (nbMonstersKilled >= 15 || getTimeInSeconds() > 90)
             World.getInstance().setLevel(new Hard(this));
     }
 
@@ -40,7 +40,7 @@ public class Medium extends Level {
         return new ArrayList<FighterDecorator>() {{
             add(new Shield(fighter, 100));
             add(new SpeedBoost(fighter, 1.5f, 0));
-            add(new MultipleShoot(fighter,3, 3));
+            add(new MultipleGun(fighter,3, 3));
         }};
     }
 
@@ -66,6 +66,11 @@ public class Medium extends Level {
     @Override
     public float probabilityToGenerateDecoration() {
         return 0.15f;
+    }
+
+    @Override
+    String getMonsterImageName() {
+        return "monster-blue.png";
     }
 
     @Override

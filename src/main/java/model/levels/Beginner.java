@@ -3,14 +3,9 @@ package model.levels;
 import model.World;
 import model.components.fighters.IFighter;
 import model.components.fighters.decorators.FighterDecorator;
-import model.components.fighters.decorators.Shield;
-import model.components.fighters.decorators.SpeedBoost;
 import model.components.weapon.IWeapon;
-import model.components.weapon.decorators.BulletSizeEnhancer;
-import model.components.weapon.decorators.ShootSpeedEnhancer;
 import model.components.weapon.decorators.WeaponDecorator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,7 +18,7 @@ public class Beginner extends Level {
 
     @Override
     public void checkLevelChanged() {
-        if (nbMonstersKilled >= 2 || getTime() > 20)
+        if (nbMonstersKilled >= 2 || getTimeInSeconds() > 20)
             World.getInstance().setLevel(new Easy(this));
     }
 
@@ -50,6 +45,11 @@ public class Beginner extends Level {
     @Override
     public float getProbabilityOfMonstersToHaveDecorator() {
         return 0.1f;
+    }
+
+    @Override
+    String getMonsterImageName() {
+        return "monster-green.png";
     }
 
     @Override

@@ -2,7 +2,7 @@ package model.levels;
 
 import model.components.fighters.IFighter;
 import model.components.fighters.decorators.FighterDecorator;
-import model.components.fighters.decorators.MultipleShoot;
+import model.components.fighters.decorators.MultipleGun;
 import model.components.fighters.decorators.Shield;
 import model.components.fighters.decorators.SpeedBoost;
 import model.components.weapon.IWeapon;
@@ -37,7 +37,7 @@ public class Expert extends Level {
         return new ArrayList<FighterDecorator>() {{
             add(new Shield(fighter, 100));
             add(new SpeedBoost(fighter, 1.5f, 0));
-            add(new MultipleShoot(fighter,3, 15));
+            add(new MultipleGun(fighter,3, 15));
         }};
     }
 
@@ -57,12 +57,17 @@ public class Expert extends Level {
 
     @Override
     public float getProbabilityOfMonstersToHaveDecorator() {
-        return 0.5f;
+        return 0.8f;
     }
 
     @Override
     public float probabilityToGenerateDecoration() {
         return 0.5f;
+    }
+
+    @Override
+    String getMonsterImageName() {
+        return "monster-pink.png";
     }
 
     @Override

@@ -1,6 +1,7 @@
 package model.components.weapon.decorators;
 
 import controllers.Direction;
+import model.World;
 import model.components.fighters.IFighter;
 import model.components.weapon.IWeapon;
 import model.components.weapon.Projectile;
@@ -87,7 +88,9 @@ public abstract class WeaponDecorator implements IWeapon {
     }
 
     @Override
-    public boolean equals(Object o){ return weapon.equals(o);}
+    public boolean equals(Object o) {
+        return weapon.equals(o);
+    }
 
     @Override
     public final IWeapon removeDecorator(WeaponDecorator decorator) {
@@ -104,15 +107,21 @@ public abstract class WeaponDecorator implements IWeapon {
      */
     protected void removeDecoration() {
         IFighter fighter = getFighter();
-        fighter.setWeapon(fighter.getWeapon().removeDecorator(this));
+        if (fighter != null)
+            fighter.setWeapon(fighter.getWeapon().removeDecorator(this));
     }
 
     @Override
-    public int countDecorator(Class decoratorClass){
-        if(this.getClass() == decoratorClass){
+    public int countDecorator(Class decoratorClass) {
+        if (this.getClass() == decoratorClass) {
             return weapon.countDecorator(decoratorClass) + 1;
         } else {
             return weapon.countDecorator(decoratorClass);
         }
+    }
+
+    @Override
+    public int countDecorator() {
+        return weapon.countDecorator() + 1;
     }
 }

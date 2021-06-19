@@ -69,4 +69,11 @@ public interface IWeapon extends IGameComponent {
      * @return the number of decorator belonging to the class
      */
     int countDecorator(Class decoratorClass);
+
+    /**
+     * Count decorators down the chain
+     *
+     * @return the number of decorator belonging to the class
+     */
+    int countDecorator();
 }

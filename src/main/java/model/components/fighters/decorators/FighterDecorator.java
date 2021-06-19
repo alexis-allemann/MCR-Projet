@@ -31,6 +31,11 @@ public abstract class FighterDecorator implements IFighter {
     }
 
     @Override
+    public void setSpeed(int speedOnX, int speedOnY) {
+        fighter.setSpeed(speedOnX, speedOnY);
+    }
+
+    @Override
     public int getId() {
         return fighter.getId();
     }
@@ -192,11 +197,22 @@ public abstract class FighterDecorator implements IFighter {
     }
 
     @Override
-    public int countDecorator(Class decoratorClass){
-        if(this.getClass() == decoratorClass) {
+    public int countDecorator(Class decoratorClass) {
+        if (this.getClass() == decoratorClass) {
             return fighter.countDecorator(decoratorClass) + 1;
         } else {
             return fighter.countDecorator(decoratorClass);
         }
+    }
+
+
+    @Override
+    public int countDecorator() {
+        return fighter.countDecorator() + 1;
+    }
+
+    @Override
+    public boolean canBeDecorated() {
+        return fighter.canBeDecorated();
     }
 }

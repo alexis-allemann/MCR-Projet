@@ -1,6 +1,7 @@
 package model.components.fighters;
 
 import model.World;
+import model.components.weapon.Projectile;
 import utils.Utils;
 import utils.physics.Location;
 import controllers.Direction;
@@ -26,9 +27,10 @@ public class Monster extends Fighter {
      *
      * @param location          where monster is located
      * @param maxTimingModifier timing modifier to shoot a new bullet
+     * @param imageName         name of the monster image
      */
-    public Monster(Location location, float maxTimingModifier) {
-        super(location, "monster-green.png");
+    public Monster(Location location, float maxTimingModifier, String imageName) {
+        super(location, imageName);
         setWeapon(new BombWeapon());
         this.timingRange = maxTimingModifier;
     }
@@ -59,7 +61,30 @@ public class Monster extends Fighter {
     }
 
     @Override
-    public void setNextSpeed(){
+    public void die() {
+        final World world = World.getInstance();
+        world.removeMonster(this);
+        world.getLevel().addScore(getPoints());
+        float random = Utils.getInstance().randomFloat(1);
+        if (random <= world.getLevel().probabilityToGenerateDecoration()) {
+            world.addBullet(new Projectile(new Location(super.location), "star.png", new Vector2D(0, 5), true) {
+
+                @Override
+                public void hit(IFighter fighter) {
+                    if (fighter.canBeDecorated()) {
+                        float shouldGenerateWeaponDecoration = Utils.getInstance().randomFloat(1);
+                        if (shouldGenerateWeaponDecoration < 0.5)
+                            fighter.setWeapon(world.getLevel().createWeaponDecorator(fighter.getWeapon()));
+                        else
+                            world.setSpacecraft(world.getLevel().createFighterDecorator(fighter));
+                    }
+                }
+            });
+        }
+    }
+
+    @Override
+    public void setNextSpeed() {
         List<IFighter> monsters = World.getInstance().getMonsters();
         int index = monsters.indexOf(this);
 
@@ -74,11 +99,11 @@ public class Monster extends Fighter {
 
 
         // Calculate speed on X axis
-        float speedOnX = this.speed.getX();
+        int speedOnX = (int) this.speed.getX();
         if (invertSpeed)
             speedOnX *= -1;
 
-        setSpeed(new Vector2D(speedOnX, getDownMove()));
+        setSpeed(speedOnX, (int) getDownMove());
     }
 
     /**

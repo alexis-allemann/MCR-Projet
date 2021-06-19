@@ -72,4 +72,12 @@ public interface IGameComponentWithHitBox extends IGameComponent{
      * @param speed vector
      */
     void setSpeed(Vector2D speed);
+
+    /**
+     * Set the component speed vector
+     *
+     * @param speedOnX speed on X
+     * @param speedOnY speed on Y
+     */
+    void setSpeed(int speedOnX, int speedOnY);
 }

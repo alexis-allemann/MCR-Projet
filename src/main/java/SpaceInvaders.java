@@ -1,10 +1,6 @@
 import controllers.GamePlay;
 import views.GUIView;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-
 /**
  * Main application class
  *
@@ -19,16 +15,6 @@ public class SpaceInvaders {
      * @param args no args required
      */
     public static void main(String[] args) {
-        try (InputStream input = SpaceInvaders.class.getResourceAsStream("config.properties")) {
-            if (input == null) {
-                System.out.println("Sorry, unable to find config.properties");
-                return;
-            }
-            Properties prop = new Properties();
-            prop.load(input);
-            GamePlay.getInstance().start(new GUIView(), prop);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        GamePlay.getInstance().start(new GUIView());
     }
 }
