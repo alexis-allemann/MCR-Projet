@@ -29,24 +29,15 @@ public class SpeedBoost extends FighterDecorator {
     }
 
     @Override
-    public Speed getSpeed() {
-        if (this.equals(World.getInstance().getSpacecraft())) {
-            Speed resultingSpeed = new Speed();
-            Speed actualSpeed = super.getSpeed();
-            if(actualSpeed.getX() < 0)
-                resultingSpeed.setX((SpaceCraft.SPEED * boostAmountX) * -1);
-            else
-                resultingSpeed.setX(SpaceCraft.SPEED * boostAmountX);
-            return resultingSpeed;
-        } else { // Speed boost not allowed on monsters because it's the fighter manager that is responsible of moving monsters
-            removeDecoration();
-            return super.getSpeed();
-        }
-    }
-
-    @Override
     public void move() {
         fighter.move();
+        if (!this.equals(World.getInstance().getSpacecraft())) {
+            // Speed boost not allowed on monsters because it's the fighter manager that is responsible of moving monsters
+            removeDecoration();
+            return;
+        }
+        Speed boostSpeed = new Speed(fighter.getSpeed().getX() * boostAmountX, 0);
+        fighter.move(boostSpeed);
     }
 
     @Override
