@@ -1,7 +1,5 @@
 package utils;
 
-import model.components.fighters.SpaceCraft;
-
 import javax.imageio.ImageIO;
 import java.awt.Image;
 import java.io.IOException;
@@ -70,7 +68,7 @@ public class Utils {
      * Choose random object in list
      *
      * @param objectList to choose an object
-     * @return object choosen or null if list is empty
+     * @return object chosen or null if list is empty
      */
     public <T> T chooseRandom(List<T> objectList) {
         if (objectList.isEmpty())
@@ -99,7 +97,7 @@ public class Utils {
      * Get a property from config file
      *
      * @param propertyKey to find
-     * @return
+     * @return the property value
      */
     public String getProperty(String propertyKey) {
         if (!properties.containsKey(propertyKey))

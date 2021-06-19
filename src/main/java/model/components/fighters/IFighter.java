@@ -1,6 +1,6 @@
 package model.components.fighters;
 
-import controllers.Direction;
+import utils.physics.Direction;
 import model.components.IGameComponentWithHitBox;
 import model.components.fighters.decorators.FighterDecorator;
 import model.components.weapon.IWeapon;

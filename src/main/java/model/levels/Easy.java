@@ -1,16 +1,7 @@
 package model.levels;
 
 import model.World;
-import model.components.fighters.IFighter;
-import model.components.fighters.decorators.FighterDecorator;
-import model.components.fighters.decorators.MultipleGun;
-import model.components.fighters.decorators.Shield;
-import model.components.fighters.decorators.SpeedBoost;
-import model.components.weapon.IWeapon;
-import model.components.weapon.decorators.*;
-
-import java.util.ArrayList;
-import java.util.List;
+import utils.Utils;
 
 /**
  * Easy level
@@ -19,6 +10,12 @@ import java.util.List;
  * @version 1.0
  */
 public class Easy extends Level {
+    private static final float MONSTER_SHOOT_TIMING = Float.parseFloat(Utils.getInstance().getProperty("LEVEL_1_MONSTER_SHOOT_TIMING"));
+    private static final int NB_MONSTER_BY_WAVE = Integer.parseInt(Utils.getInstance().getProperty("LEVEL_1_NB_MONSTER_BY_WAVE"));
+    private static final int NB_MONSTER_TO_KILL = Integer.parseInt(Utils.getInstance().getProperty("LEVEL_1_NB_MONSTER_TO_KILL"));
+    private static final float PROB_TO_GET_DECORATION = Float.parseFloat(Utils.getInstance().getProperty("LEVEL_1_PROB_TO_GET_DECORATION"));
+    private static final float PROB_DECORATED_MONSTER = Float.parseFloat(Utils.getInstance().getProperty("LEVEL_1_PROB_DECORATED_MONSTER"));
+    private static final int TIME = Integer.parseInt(Utils.getInstance().getProperty("LEVEL_1_TIME"));
 
     /**
      * Change level to easy
@@ -31,51 +28,33 @@ public class Easy extends Level {
 
     @Override
     public void checkLevelChanged() {
-        if (nbMonstersKilled >= 5 || getTimeInSeconds() > 40)
+        if (nbMonstersKilled >= NB_MONSTER_TO_KILL || getTimeInSeconds() > TIME)
             World.getInstance().setLevel(new Medium(this));
     }
 
     @Override
-    public List<FighterDecorator> getFighterDecorators(final IFighter fighter) {
-        return new ArrayList<FighterDecorator>() {{
-            add(new Shield(fighter, 100));
-            add(new SpeedBoost(fighter, 1.5f, 0));
-            add(new MultipleGun(fighter,2, 2));
-        }};
-    }
-
-    @Override
-    public List<WeaponDecorator> getWeaponDecorators(final IWeapon weapon) {
-        return new ArrayList<WeaponDecorator>() {{
-            add(new BulletSizeEnhancer(weapon, 2));
-            add(new ShootPowerEnhancer(weapon, 1.5f));
-            add(new ShootSpeedEnhancer(weapon, 1.5f));
-        }};
+    public float probabilityToGenerateDecoration() {
+        return PROB_TO_GET_DECORATION;
     }
 
     @Override
     public float getMonsterShootTiming() {
-        return 1.4f;
+        return MONSTER_SHOOT_TIMING;
     }
 
     @Override
-    public float getProbabilityOfMonstersToHaveDecorator() {
-        return 0.2f;
+    public float getProbabilityOfMonstersToBeDecorated() {
+        return PROB_DECORATED_MONSTER;
     }
 
     @Override
-    public float probabilityToGenerateDecoration() {
-        return 0.2f;
+    public int getNbMonsterByWave() {
+        return NB_MONSTER_BY_WAVE;
     }
 
     @Override
     String getMonsterImageName() {
         return "monster-green.png";
-    }
-
-    @Override
-    public int getNbMonsterByWave() {
-        return 5;
     }
 
     @Override

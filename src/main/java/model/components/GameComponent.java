@@ -3,11 +3,8 @@ package model.components;
 import utils.Utils;
 import utils.physics.Location;
 
-import javax.imageio.ImageIO;
 import java.awt.Image;
 import java.awt.Graphics2D;
-import java.io.IOException;
-import java.util.Objects;
 
 /**
  * Displayable game component
@@ -17,7 +14,7 @@ import java.util.Objects;
  */
 public abstract class GameComponent implements IGameComponent{
     protected Location location;
-    protected Image image;
+    protected final Image image;
 
     /**
      * Instantiation of a new game component

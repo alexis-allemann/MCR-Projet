@@ -3,10 +3,10 @@ package model.components.fighters.decorators;
 import model.World;
 import model.components.IGameComponentWithHitBox;
 import model.components.fighters.IFighter;
-import controllers.Direction;
+import utils.physics.Direction;
 import model.components.weapon.IWeapon;
 import utils.physics.Location;
-import utils.physics.Vector2D;
+import utils.physics.Speed;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -81,7 +81,7 @@ public abstract class FighterDecorator implements IFighter {
     }
 
     @Override
-    public Vector2D getSpeed() {
+    public Speed getSpeed() {
         return fighter.getSpeed();
     }
 
@@ -91,7 +91,7 @@ public abstract class FighterDecorator implements IFighter {
     }
 
     @Override
-    public void setSpeed(Vector2D speed) {
+    public void setSpeed(Speed speed) {
         fighter.setSpeed(speed);
     }
 
@@ -131,7 +131,7 @@ public abstract class FighterDecorator implements IFighter {
     }
 
     @Override
-    public boolean checkHitBox(Vector2D speed, IGameComponentWithHitBox other) {
+    public boolean checkHitBox(Speed speed, IGameComponentWithHitBox other) {
         return fighter.checkHitBox(speed, other);
     }
 
@@ -161,6 +161,31 @@ public abstract class FighterDecorator implements IFighter {
     }
 
     @Override
+    public void move() {
+        fighter.move();
+    }
+
+    @Override
+    public void move(Speed speed) {
+        fighter.move(speed);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return fighter.equals(o);
+    }
+
+    @Override
+    public boolean canBeDecorated() {
+        return fighter.canBeDecorated();
+    }
+
+    @Override
+    public int countDecorator() {
+        return fighter.countDecorator() + 1;
+    }
+
+    @Override
     public final IFighter removeDecorator(FighterDecorator decorator) {
         if (this == decorator) {
             return fighter;
@@ -168,21 +193,6 @@ public abstract class FighterDecorator implements IFighter {
             fighter = fighter.removeDecorator(decorator);
         }
         return this;
-    }
-
-    @Override
-    public void move() {
-        fighter.move(fighter.getSpeed());
-    }
-
-    @Override
-    public void move(Vector2D speed) {
-        fighter.move(speed);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        return fighter.equals(o);
     }
 
     /**
@@ -205,14 +215,4 @@ public abstract class FighterDecorator implements IFighter {
         }
     }
 
-
-    @Override
-    public int countDecorator() {
-        return fighter.countDecorator() + 1;
-    }
-
-    @Override
-    public boolean canBeDecorated() {
-        return fighter.canBeDecorated();
-    }
 }

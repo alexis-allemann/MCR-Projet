@@ -1,7 +1,7 @@
 package model.components.weapon;
 
-import utils.physics.Vector2D;
-import controllers.Direction;
+import utils.physics.Speed;
+import utils.physics.Direction;
 
 /**
  * Standard weapon (by default used by spacecraft)
@@ -14,11 +14,7 @@ public class StandardWeapon extends Weapon {
     @Override
     public Projectile getBullet(Direction direction) {
         float y = direction == Direction.TOP ? -5f : 5f;
-        return new Projectile("bullet.png", new Vector2D(0, y), getFighter().isMonsterTeam()) {
-            @Override
-            public int getPower() {
-                return super.getPower();
-            }
+        return new Projectile("bullet.png", new Speed(0, y), getFighter().isMonsterTeam()) {
         };
     }
 

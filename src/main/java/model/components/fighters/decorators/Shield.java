@@ -1,6 +1,5 @@
 package model.components.fighters.decorators;
 
-import model.World;
 import model.components.fighters.IFighter;
 import utils.Utils;
 

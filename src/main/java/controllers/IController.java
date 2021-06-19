@@ -1,8 +1,7 @@
 package controllers;
 
+import utils.physics.Direction;
 import views.View;
-
-import java.util.Properties;
 
 /**
  * Space invaders controller to manage gameplay

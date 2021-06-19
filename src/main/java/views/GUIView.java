@@ -1,8 +1,8 @@
 package views;
 
 import controllers.IController;
-import controllers.Direction;
-import controllers.GamePlay;
+import utils.physics.Direction;
+import controllers.GameController;
 import model.World;
 
 import javax.swing.JPanel;
@@ -36,7 +36,7 @@ public class GUIView extends JFrame implements View {
         setTitle("Space Invaders");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        setLocation(dim.width / 2 - GamePlay.WIDTH / 2, dim.height / 2 - GamePlay.HEIGHT / 2);
+        setLocation(dim.width / 2 - GameController.WIDTH / 2, dim.height / 2 - GameController.HEIGHT / 2);
         setResizable(false);
 
         MAIN_PANEL.setLayout(new BoxLayout(MAIN_PANEL, BoxLayout.Y_AXIS));
@@ -47,7 +47,7 @@ public class GUIView extends JFrame implements View {
         LEVEL_LABEL.setForeground(Color.green);
 
         INFO_PANEL.setLocation(new Point(0, 0));
-        INFO_PANEL.setPreferredSize(new Dimension(GamePlay.WIDTH, GamePlay.INFO_PANEL_HEIGHT));
+        INFO_PANEL.setPreferredSize(new Dimension(GameController.WIDTH, GameController.INFO_PANEL_HEIGHT));
         INFO_PANEL.setBackground(Color.BLACK);
         INFO_PANEL.setLayout(new GridLayout(1, 3));
         INFO_PANEL.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -56,8 +56,8 @@ public class GUIView extends JFrame implements View {
         INFO_PANEL.add(SCORE_LABEL);
         MAIN_PANEL.add(INFO_PANEL);
 
-        GAME_PANEL.setLocation(new Point(0, GamePlay.INFO_PANEL_HEIGHT));
-        GAME_PANEL.setPreferredSize(new Dimension(GamePlay.WIDTH, GamePlay.HEIGHT - GamePlay.INFO_PANEL_HEIGHT));
+        GAME_PANEL.setLocation(new Point(0, GameController.INFO_PANEL_HEIGHT));
+        GAME_PANEL.setPreferredSize(new Dimension(GameController.WIDTH, GameController.HEIGHT - GameController.INFO_PANEL_HEIGHT));
         GAME_PANEL.setBackground(Color.BLACK);
         MAIN_PANEL.add(GAME_PANEL);
 
@@ -99,7 +99,7 @@ public class GUIView extends JFrame implements View {
                 }
             }
         };
-        timer.scheduleAtFixedRate(task, 0, GamePlay.FRAME_RATE);
+        timer.scheduleAtFixedRate(task, 0, GameController.FRAME_RATE);
     }
 
     @Override
@@ -112,8 +112,8 @@ public class GUIView extends JFrame implements View {
 
     @Override
     public Image getBufferedImage() {
-        Image image = GAME_PANEL.createImage(GamePlay.WIDTH, GamePlay.HEIGHT);
-        image.getGraphics().fillRect(0, 0, GamePlay.WIDTH, GamePlay.HEIGHT);
+        Image image = GAME_PANEL.createImage(GameController.WIDTH, GameController.HEIGHT);
+        image.getGraphics().fillRect(0, 0, GameController.WIDTH, GameController.HEIGHT);
         image.getGraphics().setColor(Color.BLACK);
         return image;
     }

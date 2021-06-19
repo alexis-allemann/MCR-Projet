@@ -1,7 +1,6 @@
 package model;
 
-import controllers.GamePlay;
-import model.components.weapon.decorators.BulletSizeEnhancer;
+import controllers.GameController;
 import model.levels.Beginner;
 import model.levels.Level;
 import model.components.fighters.IFighter;
@@ -189,8 +188,8 @@ public class World {
     private void resetSpaceCraftLocation() {
         IFighter spacecraft = World.getInstance().getSpacecraft();
         spacecraft.setLocation(new Location(
-                (GamePlay.WIDTH - spacecraft.getImageWidth()) / 2.f,
-                GamePlay.HEIGHT - spacecraft.getImageHeight() - GamePlay.INFO_PANEL_HEIGHT
+                (GameController.WIDTH - spacecraft.getImageWidth()) / 2.f,
+                GameController.HEIGHT - spacecraft.getImageHeight() - GameController.INFO_PANEL_HEIGHT
         ));
     }
 }

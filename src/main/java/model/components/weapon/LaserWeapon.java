@@ -1,7 +1,7 @@
 package model.components.weapon;
 
-import utils.physics.Vector2D;
-import controllers.Direction;
+import utils.physics.Speed;
+import utils.physics.Direction;
 
 /**
  * Laser weapon
@@ -13,7 +13,7 @@ public class LaserWeapon extends Weapon {
     @Override
     public Projectile getBullet(Direction direction) {
         float y = direction == Direction.TOP ? -10f : 10f;
-        return new Projectile("laser.png", new Vector2D(0, y), getFighter().isMonsterTeam()) {
+        return new Projectile("laser.png", new Speed(0, y), getFighter().isMonsterTeam()) {
             @Override
             public int getPower() {
                 return 100;

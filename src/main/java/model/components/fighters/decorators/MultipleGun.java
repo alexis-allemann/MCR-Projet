@@ -1,10 +1,10 @@
 package model.components.fighters.decorators;
 
-import controllers.Direction;
+import utils.physics.Direction;
 import model.components.fighters.IFighter;
 import model.components.weapon.*;
 import utils.Utils;
-import utils.physics.Vector2D;
+import utils.physics.Speed;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -17,11 +17,11 @@ import java.util.List;
  * @version 1.0
  */
 public class MultipleGun extends FighterDecorator {
-    private static final int MAX_COUNT = 1;
-    private List<IWeapon> weapons = new ArrayList<>();
+    private static final int MAX_COUNT = Integer.parseInt(Utils.getInstance().getProperty("NB_MAX_MULTIPLE_GUN"));
+    private final List<IWeapon> weapons = new ArrayList<>();
+    private final long start = System.currentTimeMillis();
+    private final int timeInSeconds;
     private int nbGet = 0;
-    private long start = System.currentTimeMillis();
-    private int timeInSeconds;
 
     /**
      * Instantiation of a new decoration
@@ -33,16 +33,16 @@ public class MultipleGun extends FighterDecorator {
     public MultipleGun(final IFighter fighter, int nbParallelsShoots, int timeInSeconds) {
         super(fighter);
         this.timeInSeconds = timeInSeconds;
-        if(fighter.countDecorator(this.getClass()) > MAX_COUNT -1)
+        if (fighter.countDecorator(this.getClass()) > MAX_COUNT - 1)
             removeDecoration();
-        else{
+        else {
             for (int i = 0; i < nbParallelsShoots; ++i) {
                 final int x = (nbParallelsShoots / 2) - nbParallelsShoots + i;
                 Weapon newWeapon = new Weapon() {
                     @Override
                     public Projectile getBullet(Direction direction) {
                         float y = direction == Direction.TOP ? -10f : 10f;
-                        return new Projectile("laser.png", new Vector2D(x, y), getFighter().isMonsterTeam()) {
+                        return new Projectile("laser.png", new Speed(x, y), getFighter().isMonsterTeam()) {
                             @Override
                             public int getPower() {
                                 return 100;
@@ -65,8 +65,7 @@ public class MultipleGun extends FighterDecorator {
     public void shoot() {
         long current = System.currentTimeMillis();
         if (current - start <= timeInSeconds * 1000L) {
-            for (int i = 0; i < weapons.size(); i++)
-                weapons.get(i).shoot();
+            for (IWeapon weapon : weapons) weapon.shoot();
         } else
             removeDecoration();
     }

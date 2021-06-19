@@ -1,16 +1,13 @@
 package model.components.weapon;
 
 import model.World;
-import model.components.fighters.Fighter;
 import model.components.fighters.IFighter;
-import model.components.fighters.decorators.FighterDecorator;
 import model.components.weapon.decorators.WeaponDecorator;
 import utils.physics.Location;
 
-import controllers.Direction;
+import utils.physics.Direction;
 
 import java.awt.*;
-import java.util.Objects;
 
 /**
  * Weapon to shoot bullets
@@ -47,7 +44,7 @@ public abstract class Weapon implements IWeapon {
         if (current - lastBulletShotTime >= nextShootReloadTime) {
             Projectile projectile = fighter.getWeapon().getBullet(fighter.getDirection());
             projectile.setLocation(
-                    getStartingBulletLocation(projectile)
+                    getStartingBulletLocation()
             );
             World.getInstance().addBullet(projectile);
             lastBulletShotTime = System.currentTimeMillis();
@@ -60,7 +57,7 @@ public abstract class Weapon implements IWeapon {
      *
      * @return the starting location of the bullet
      */
-    private Location getStartingBulletLocation(Projectile projectile) {
+    private Location getStartingBulletLocation() {
         float x = fighter.getLocation().x + fighter.getImageWidth() / 2.f;
         float y = fighter.getLocation().y + (fighter.getDirection() == Direction.TOP ? -1.5f : 1.5f) * fighter.getImageHeight();
         return new Location(x, y);
@@ -100,7 +97,6 @@ public abstract class Weapon implements IWeapon {
 
     @Override
     public void draw(Graphics2D graphics2D) {
-        return;
     }
 
     @Override

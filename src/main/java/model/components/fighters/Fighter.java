@@ -3,8 +3,9 @@ package model.components.fighters;
 import model.components.GameComponentWithHitBox;
 import model.components.fighters.decorators.FighterDecorator;
 import model.components.weapon.IWeapon;
+import utils.Utils;
 import utils.physics.Location;
-import utils.physics.Vector2D;
+import utils.physics.Speed;
 
 import java.awt.*;
 
@@ -15,8 +16,8 @@ import java.awt.*;
  * @version 1.0
  */
 public abstract class Fighter extends GameComponentWithHitBox implements IFighter {
-    private static final int MAX_COUNT = 3;
-    private static final Vector2D SPEED_BASE = new Vector2D(1.f, 0.f);
+    private static final int MAX_COUNT = Integer.parseInt(Utils.getInstance().getProperty("NB_MAX_DECORATIONS"));
+    private static final Speed SPEED_BASE = new Speed(1.f, 0.f);
     private IWeapon weapon;
     private int health;
     private static int nb;
@@ -86,7 +87,6 @@ public abstract class Fighter extends GameComponentWithHitBox implements IFighte
 
     @Override
     public void die() {
-        return;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package controllers;
+package utils.physics;
 
 /**
  * Spacecraft move directions

@@ -1,4 +1,4 @@
-package controllers.managers;
+package managers;
 
 import model.World;
 import model.components.fighters.IFighter;

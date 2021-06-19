@@ -1,9 +1,9 @@
 package model.components.weapon;
 
 import model.components.GameComponentWithHitBox;
-import model.components.fighters.Fighter;
 import model.components.fighters.IFighter;
-import utils.physics.Vector2D;
+import utils.Utils;
+import utils.physics.Speed;
 import utils.physics.Location;
 
 import java.awt.Image;
@@ -15,8 +15,8 @@ import java.awt.Image;
  * @version 1.0
  */
 public abstract class Projectile extends GameComponentWithHitBox {
-    protected final int BASE_POWER = 50;
-    private boolean isMonsterTeam;
+    protected final int PROJECTILE_BASE_POWER = Integer.parseInt(Utils.getInstance().getProperty("PROJECTILE_BASE_POWER"));
+    private final boolean isMonsterTeam;
 
     /**
      * Instantiation of a new bullet
@@ -26,9 +26,9 @@ public abstract class Projectile extends GameComponentWithHitBox {
      * @param direction     of the bullet
      * @param isMonsterTeam if bullet is shot by a monster
      */
-    public Projectile(Location location, String image, Vector2D direction, boolean isMonsterTeam) {
+    public Projectile(Location location, String image, Speed direction, boolean isMonsterTeam) {
         super(location, image);
-        this.speed = new Vector2D(direction.getX(), direction.getY());
+        this.speed = new Speed(direction.getX(), direction.getY());
         this.isMonsterTeam = isMonsterTeam;
     }
 
@@ -39,9 +39,9 @@ public abstract class Projectile extends GameComponentWithHitBox {
      * @param direction     of the bullet
      * @param isMonsterTeam if bullet is shot by a monster
      */
-    public Projectile(String image, Vector2D direction, boolean isMonsterTeam) {
+    public Projectile(String image, Speed direction, boolean isMonsterTeam) {
         super(new Location(0, 0), image);
-        this.speed = new Vector2D(direction.getX(), direction.getY());
+        this.speed = new Speed(direction.getX(), direction.getY());
         this.isMonsterTeam = isMonsterTeam;
     }
 
@@ -52,9 +52,9 @@ public abstract class Projectile extends GameComponentWithHitBox {
      * @param direction     of the bullet
      * @param isMonsterTeam if bullet is shot by a monster
      */
-    public Projectile(Image image, Vector2D direction, boolean isMonsterTeam) {
+    public Projectile(Image image, Speed direction, boolean isMonsterTeam) {
         super(new Location(0, 0), image);
-        this.speed = new Vector2D(direction.getX(), direction.getY());
+        this.speed = new Speed(direction.getX(), direction.getY());
         this.isMonsterTeam = isMonsterTeam;
     }
 
@@ -64,7 +64,7 @@ public abstract class Projectile extends GameComponentWithHitBox {
      * @return the power
      */
     public int getPower() {
-        return BASE_POWER;
+        return PROJECTILE_BASE_POWER;
     }
 
     /**
@@ -72,7 +72,7 @@ public abstract class Projectile extends GameComponentWithHitBox {
      *
      * @return speed of the bullet
      */
-    public Vector2D getSpeed() {
+    public Speed getSpeed() {
         return speed;
     }
 

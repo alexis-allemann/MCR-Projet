@@ -6,7 +6,7 @@ package utils.physics;
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public class Vector2D {
+public class Speed {
     private float X;
     private float Y;
 
@@ -16,7 +16,7 @@ public class Vector2D {
      * @param x value on x axis
      * @param y value on y axis
      */
-    public Vector2D(float x, float y) {
+    public Speed(float x, float y) {
         this.X = x;
         this.Y = y;
     }
@@ -25,7 +25,7 @@ public class Vector2D {
      * Instantiation of a new 2D vector with zeros as values for x and y axis
      *
      */
-    public Vector2D() {
+    public Speed() {
         this(0, 0);
     }
 

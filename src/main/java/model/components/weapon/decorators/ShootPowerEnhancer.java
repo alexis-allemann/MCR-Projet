@@ -1,6 +1,6 @@
 package model.components.weapon.decorators;
 
-import controllers.Direction;
+import utils.physics.Direction;
 import model.components.weapon.IWeapon;
 import model.components.weapon.Projectile;
 import utils.Utils;

@@ -1,4 +1,4 @@
-package controllers.managers;
+package managers;
 
 import controllers.GameController;
 import model.World;

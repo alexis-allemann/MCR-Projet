@@ -1,6 +1,6 @@
 package views;
 
-import controllers.GamePlay;
+import controllers.GameController;
 import model.World;
 import model.components.fighters.SpaceCraft;
 
@@ -19,7 +19,6 @@ import java.awt.Color;
  */
 public class HealthBar extends JPanel {
     private final JLabel HEALTH_LABEL = new JLabel();
-    private JPanel BAR_PANEL;
 
     /**
      * Instantiation of the health bar
@@ -29,12 +28,12 @@ public class HealthBar extends JPanel {
         HEALTH_LABEL.setForeground(Color.green);
         HEALTH_LABEL.setHorizontalAlignment(SwingConstants.LEFT);
         add(HEALTH_LABEL);
-        BAR_PANEL = new JPanel() {
+        JPanel BAR_PANEL = new JPanel() {
             @Override
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 g.setColor(Color.RED);
-                g.fillRect(getHealthWidth(), 0, (GamePlay.WIDTH / 3) - getHealthWidth(), 15);
+                g.fillRect(getHealthWidth(), 0, (GameController.WIDTH / 3) - getHealthWidth(), 15);
                 g.setColor(Color.GREEN);
                 g.fillRect(0, 0, getHealthWidth(), 15);
             }
@@ -49,7 +48,7 @@ public class HealthBar extends JPanel {
      * @return health panel width
      */
     private int getHealthWidth() {
-        int currentHealthWidth = (int) ((GamePlay.WIDTH / 3) * ((float) World.getInstance().getSpacecraft().getHealth() / SpaceCraft.MAX_HEALTH));
+        int currentHealthWidth = (int) ((GameController.WIDTH / 3) * ((float) World.getInstance().getSpacecraft().getHealth() / SpaceCraft.HEALTH));
         return Math.max(0, currentHealthWidth);
     }
 

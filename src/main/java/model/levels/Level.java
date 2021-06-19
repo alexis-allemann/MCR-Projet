@@ -4,11 +4,18 @@ import model.components.IDecoratorFactory;
 import model.components.fighters.IFighter;
 import model.components.fighters.Monster;
 import model.components.fighters.decorators.FighterDecorator;
+import model.components.fighters.decorators.MultipleGun;
+import model.components.fighters.decorators.Shield;
+import model.components.fighters.decorators.SpeedBoost;
 import model.components.weapon.IWeapon;
+import model.components.weapon.decorators.BulletSizeEnhancer;
+import model.components.weapon.decorators.ShootPowerEnhancer;
+import model.components.weapon.decorators.ShootSpeedEnhancer;
 import model.components.weapon.decorators.WeaponDecorator;
 import utils.Utils;
 import utils.physics.Location;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -61,7 +68,7 @@ public abstract class Level implements IDecoratorFactory {
     public IFighter generateMonster(Location location) {
         IFighter newMonster = new Monster(location, getMonsterShootTiming(), getMonsterImageName());
         float random = Utils.getInstance().randomFloat(1);
-        if (random < getProbabilityOfMonstersToHaveDecorator()) {
+        if (random < getProbabilityOfMonstersToBeDecorated()) {
             float shouldGenerateWeaponDecoration = Utils.getInstance().randomFloat(1);
             if (shouldGenerateWeaponDecoration < 0.5)
                 newMonster.setWeapon(createWeaponDecorator(newMonster.getWeapon()));
@@ -114,20 +121,10 @@ public abstract class Level implements IDecoratorFactory {
     }
 
     /**
-     * Get list of fighters decorators available
-     *
-     * @param fighter to decorate
-     * @return list of fighters decorators
+     * Get the monster image name
+     * @return the monster image name
      */
-    abstract List<FighterDecorator> getFighterDecorators(final IFighter fighter);
-
-    /**
-     * Get list of weapon decorators available
-     *
-     * @param weapon to decorate
-     * @return list of weapon decorators
-     */
-    abstract List<WeaponDecorator> getWeaponDecorators(final IWeapon weapon);
+    abstract String getMonsterImageName();
 
     /**
      * Get monster timing for shoots
@@ -141,13 +138,35 @@ public abstract class Level implements IDecoratorFactory {
      *
      * @return probability to get a decorated monster
      */
-    abstract float getProbabilityOfMonstersToHaveDecorator();
+    abstract float getProbabilityOfMonstersToBeDecorated();
 
     /**
-     * Get the monster image name
-     * @return the monster image name
+     * Get list of fighters decorators available
+     *
+     * @param fighter to decorate
+     * @return list of fighters decorators
      */
-    abstract String getMonsterImageName();
+    public List<FighterDecorator> getFighterDecorators(final IFighter fighter) {
+        return new ArrayList<FighterDecorator>() {{
+            add(new Shield(fighter, 100));
+            add(new SpeedBoost(fighter, 1.5f));
+            add(new MultipleGun(fighter, 3, 5));
+        }};
+    }
+
+    /**
+     * Get list of weapon decorators available
+     *
+     * @param weapon to decorate
+     * @return list of weapon decorators
+     */
+    public List<WeaponDecorator> getWeaponDecorators(final IWeapon weapon) {
+        return new ArrayList<WeaponDecorator>() {{
+            add(new BulletSizeEnhancer(weapon, 2));
+            add(new ShootPowerEnhancer(weapon, 1.5f));
+            add(new ShootSpeedEnhancer(weapon, 1.5f));
+        }};
+    }
 
     @Override
     public IFighter createFighterDecorator(IFighter fighter) {

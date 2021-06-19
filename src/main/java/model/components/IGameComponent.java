@@ -1,7 +1,6 @@
 package model.components;
 
 import utils.physics.Location;
-import utils.physics.Vector2D;
 
 import java.awt.Image;
 import java.awt.Graphics2D;

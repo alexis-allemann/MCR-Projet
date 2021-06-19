@@ -2,8 +2,9 @@ package model.components.fighters.decorators;
 
 import model.World;
 import model.components.fighters.IFighter;
+import model.components.fighters.SpaceCraft;
 import utils.Utils;
-import utils.physics.Vector2D;
+import utils.physics.Speed;
 
 import java.awt.*;
 
@@ -15,30 +16,27 @@ import java.awt.*;
  */
 public class SpeedBoost extends FighterDecorator {
     private final float boostAmountX;
-    private final float boostAmountY;
 
     /**
-     * Apply speedboost
+     * Apply speed boost
      *
      * @param fighter      fighter to apply movement boost on
      * @param boostAmountX amount to add to x axis
-     * @param boostAmountY amount to add to y axis
      */
-    public SpeedBoost(IFighter fighter, float boostAmountX, float boostAmountY) {
+    public SpeedBoost(IFighter fighter, float boostAmountX) {
         super(fighter);
         this.boostAmountX = boostAmountX;
-        this.boostAmountY = boostAmountY;
     }
 
     @Override
-    public Vector2D getSpeed() {
+    public Speed getSpeed() {
         if (this.equals(World.getInstance().getSpacecraft())) {
-            Vector2D resultingSpeed = new Vector2D();
-            Vector2D actualSpeed = super.getSpeed();
-
-            resultingSpeed.setX(actualSpeed.getX() + boostAmountX);
-            resultingSpeed.setY(actualSpeed.getY() + boostAmountY);
-
+            Speed resultingSpeed = new Speed();
+            Speed actualSpeed = super.getSpeed();
+            if(actualSpeed.getX() < 0)
+                resultingSpeed.setX((SpaceCraft.SPEED * boostAmountX) * -1);
+            else
+                resultingSpeed.setX(SpaceCraft.SPEED * boostAmountX);
             return resultingSpeed;
         } else { // Speed boost not allowed on monsters because it's the fighter manager that is responsible of moving monsters
             removeDecoration();
@@ -48,7 +46,7 @@ public class SpeedBoost extends FighterDecorator {
 
     @Override
     public void move() {
-        fighter.move(getSpeed());
+        fighter.move();
     }
 
     @Override

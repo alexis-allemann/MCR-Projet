@@ -1,10 +1,10 @@
 package model.components.weapon.decorators;
 
-import controllers.Direction;
+import utils.physics.Direction;
 import model.components.weapon.IWeapon;
 import model.components.weapon.Projectile;
 import utils.Utils;
-import utils.physics.Vector2D;
+import utils.physics.Speed;
 
 import java.awt.*;
 
@@ -30,7 +30,7 @@ public class ShootSpeedEnhancer extends WeaponDecorator {
     @Override
     public Projectile getBullet(Direction direction) {
         Projectile oldProjectile = super.getBullet(direction);
-        Vector2D newSpeed = new Vector2D(oldProjectile.getSpeed().getX() * ratio, oldProjectile.getSpeed().getY() * ratio);
+        Speed newSpeed = new Speed(oldProjectile.getSpeed().getX() * ratio, oldProjectile.getSpeed().getY() * ratio);
         return new Projectile(oldProjectile.getImage(), newSpeed, oldProjectile.isMonsterTeam()) {
         };
     }
@@ -38,7 +38,7 @@ public class ShootSpeedEnhancer extends WeaponDecorator {
     @Override
     public void draw(Graphics2D graphics2D) {
         super.draw(graphics2D);
-        Image image = Utils.getInstance().getImageFromResources("shootspeed.png");
+        Image image = Utils.getInstance().getImageFromResources("shoot_speed.png");
         graphics2D.drawImage(image, getLocation().getIntX(), getLocation().getIntY(), null);
     }
 }

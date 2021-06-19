@@ -1,20 +1,20 @@
 package model.components;
 
-import controllers.GamePlay;
+import controllers.GameController;
 import utils.physics.Location;
-import utils.physics.Vector2D;
+import utils.physics.Speed;
 
 import java.awt.Image;
 import java.awt.Rectangle;
 
 /**
- * Displayable game component with a hitbox
+ * Displayable game component with a hit box
  *
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
 public abstract class GameComponentWithHitBox extends GameComponent implements IGameComponentWithHitBox {
-    protected Vector2D speed;
+    protected Speed speed;
 
     /**
      * Instantiation of a new game component with a hit box
@@ -42,7 +42,7 @@ public abstract class GameComponentWithHitBox extends GameComponent implements I
     }
 
     @Override
-    public boolean checkHitBox(Vector2D speed, IGameComponentWithHitBox other) {
+    public boolean checkHitBox(Speed speed, IGameComponentWithHitBox other) {
         Rectangle otherHitBox = other.getHitBoxLocation();
         Rectangle hitBoxWithMovement = getHitBoxLocation();
         int xSpeed = (int) speed.getX();
@@ -62,30 +62,29 @@ public abstract class GameComponentWithHitBox extends GameComponent implements I
 
     @Override
     public boolean isInBounds() {
-        return location.x + getImageWidth() <= GamePlay.WIDTH &&
-                location.y + getImageHeight() <= GamePlay.WIDTH &&
+        return location.x + getImageWidth() <= GameController.WIDTH &&
+                location.y + getImageHeight() <= GameController.WIDTH &&
                 location.x >= 0 &&
                 location.y >= 0;
     }
 
     @Override
-    public Vector2D getSpeed() {
+    public Speed getSpeed() {
         return speed;
     }
 
     @Override
-    public void setSpeed(Vector2D speed) {
+    public void setSpeed(Speed speed) {
         this.speed = speed;
     }
 
     @Override
     public void setSpeed(int speedOnX, int speedOnY) {
-        this.speed = new Vector2D(speedOnX, speedOnY);
+        this.speed = new Speed(speedOnX, speedOnY);
     }
 
     @Override
     public void setNextSpeed() {
-        return;
     }
 
     @Override
@@ -94,7 +93,7 @@ public abstract class GameComponentWithHitBox extends GameComponent implements I
     }
 
     @Override
-    public void move(Vector2D speed) {
+    public void move(Speed speed) {
         location.translate(speed.getX(), speed.getY());
     }
 

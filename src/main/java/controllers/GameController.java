@@ -1,12 +1,12 @@
 package controllers;
 
-import controllers.managers.ComponentManager;
+import managers.ComponentManager;
 import model.World;
 import model.components.fighters.IFighter;
 import utils.Utils;
-import utils.physics.Location;
-import controllers.managers.ViewManager;
-import utils.physics.Vector2D;
+import utils.physics.Direction;
+import managers.ViewManager;
+import utils.physics.Speed;
 import views.View;
 
 /**
@@ -15,22 +15,17 @@ import views.View;
  * @author Allemann, Balestrieri, Christen, Mottier, Zeller
  * @version 1.0
  */
-public class GamePlay implements IController {
-    public static int INFO_PANEL_HEIGHT;
-    public static int HEIGHT;
-    public static int WIDTH;
-    public static int FRAME_RATE;
-    private static final GamePlay INSTANCE = new GamePlay();
+public class GameController implements IController {
+    public static final int INFO_PANEL_HEIGHT = Integer.parseInt(Utils.getInstance().getProperty("INFO_PANEL_HEIGHT"));
+    public static final int HEIGHT = Integer.parseInt(Utils.getInstance().getProperty("HEIGHT"));
+    public static final int WIDTH = Integer.parseInt(Utils.getInstance().getProperty("WIDTH"));
+    public static final int FRAME_RATE = Integer.parseInt(Utils.getInstance().getProperty("FRAME_RATE"));
+    private static final GameController INSTANCE = new GameController();
 
     /**
      * Private constructor to implement Singleton pattern
      */
-    private GamePlay() {
-        Utils utils = Utils.getInstance();
-        FRAME_RATE = Integer.parseInt(utils.getProperty("FRAME_RATE"));
-        HEIGHT = Integer.parseInt(utils.getProperty("HEIGHT"));
-        WIDTH = Integer.parseInt(utils.getProperty("WIDTH"));
-        INFO_PANEL_HEIGHT = Integer.parseInt(utils.getProperty("INFO_PANEL_HEIGHT"));
+    private GameController() {
     }
 
     /**
@@ -38,7 +33,7 @@ public class GamePlay implements IController {
      *
      * @return the gameplay instance
      */
-    public static GamePlay getInstance() {
+    public static GameController getInstance() {
         return INSTANCE;
     }
 
@@ -64,31 +59,23 @@ public class GamePlay implements IController {
     @Override
     public void move(Direction direction) {
         IFighter sp = World.getInstance().getSpacecraft();
-        Vector2D speed = sp.getSpeed();
+        Speed speed = sp.getSpeed();
         int moveOnX = 0;
         switch (direction) {
             case LEFT:
-                moveOnX = (int) (-1 * speed.getX());
+                if (speed.getX() > 0)
+                    moveOnX = (int) (-1 * speed.getX());
+                else
+                    moveOnX = (int) (speed.getX());
                 break;
             case RIGHT:
-                moveOnX = (int) (speed.getX());
+                if (speed.getX() < 0)
+                    moveOnX = (int) (-1 * speed.getX());
+                else
+                    moveOnX = (int) (speed.getX());
                 break;
         }
         sp.setSpeed(moveOnX, 0);
         sp.move();
-    }
-
-    /**
-     * Check if a location of a fighter is in view bounds
-     *
-     * @param location of the fighter
-     * @param fighter  to get image width and height
-     * @return boolean if it is in bounds
-     */
-    private boolean isInBounds(Location location, IFighter fighter) {
-        return location.x + fighter.getImageWidth() <= WIDTH &&
-                location.y + fighter.getImageHeight() <= HEIGHT &&
-                location.x >= 0 &&
-                location.y >= 0;
     }
 }

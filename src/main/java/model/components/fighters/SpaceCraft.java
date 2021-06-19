@@ -1,9 +1,8 @@
 package model.components.fighters;
 
-import model.World;
+import utils.Utils;
 import utils.physics.Location;
-import controllers.Direction;
-import utils.physics.Vector2D;
+import utils.physics.Direction;
 
 /**
  * Space craft used to fight against monsters
@@ -12,7 +11,8 @@ import utils.physics.Vector2D;
  * @version 1.0
  */
 public class SpaceCraft extends Fighter {
-    public static final int MAX_HEALTH = 1000;
+    public static final int HEALTH = Integer.parseInt(Utils.getInstance().getProperty("SPACECRAFT_HEALTH"));
+    public static final int SPEED = Integer.parseInt(Utils.getInstance().getProperty("SPACECRAFT_SPEED"));
 
     /**
      * Instantiation of a new spacecraft
@@ -21,6 +21,7 @@ public class SpaceCraft extends Fighter {
      */
     public SpaceCraft(Location location) {
         super(location, "spacecraft.png");
+        setSpeed(SPEED, 0);
     }
 
     @Override
@@ -30,7 +31,7 @@ public class SpaceCraft extends Fighter {
 
     @Override
     public int getDefaultHealth() {
-        return MAX_HEALTH;
+        return HEALTH;
     }
 
     @Override
@@ -44,15 +45,10 @@ public class SpaceCraft extends Fighter {
     }
 
     @Override
-    public Vector2D getSpeed() {
-        return new Vector2D(10.f, 0);
-    }
-
-    @Override
     public void move() {
         int oldLocationOnX = getLocation().getIntX();
         int oldLocationOnY = getLocation().getIntY();
-        getLocation().translate(speed.getX(), 0);
+        getLocation().translate(getSpeed().getX(), 0);
         if (!isInBounds())
             setLocation(new Location(oldLocationOnX, oldLocationOnY));
     }

@@ -1,6 +1,6 @@
 package model.components;
 
-import utils.physics.Vector2D;
+import utils.physics.Speed;
 
 import java.awt.Rectangle;
 
@@ -33,7 +33,7 @@ public interface IGameComponentWithHitBox extends IGameComponent{
      * @param other other component to check collision
      * @return if component has been touched
      */
-    boolean checkHitBox(Vector2D speed, IGameComponentWithHitBox other);
+    boolean checkHitBox(Speed speed, IGameComponentWithHitBox other);
 
     /**
      * Check if a location of a fighter is in view bounds
@@ -52,14 +52,14 @@ public interface IGameComponentWithHitBox extends IGameComponent{
      *
      * @param speed to move
      */
-    void move(Vector2D speed);
+    void move(Speed speed);
 
     /**
      * Get component speed
      *
      * @return vector 2d of the speed
      */
-    Vector2D getSpeed();
+    Speed getSpeed();
 
     /**
      * Calculate and set next speed of the component
@@ -71,7 +71,7 @@ public interface IGameComponentWithHitBox extends IGameComponent{
      *
      * @param speed vector
      */
-    void setSpeed(Vector2D speed);
+    void setSpeed(Speed speed);
 
     /**
      * Set the component speed vector

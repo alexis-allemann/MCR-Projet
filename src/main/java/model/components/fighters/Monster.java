@@ -4,9 +4,9 @@ import model.World;
 import model.components.weapon.Projectile;
 import utils.Utils;
 import utils.physics.Location;
-import controllers.Direction;
+import utils.physics.Direction;
 import model.components.weapon.BombWeapon;
-import utils.physics.Vector2D;
+import utils.physics.Speed;
 
 import java.util.List;
 
@@ -17,8 +17,8 @@ import java.util.List;
  * @version 1.0
  */
 public class Monster extends Fighter {
-    private static final int POINTS_MONSTER = 50;
-    private static final int SECONDS_BEFORE_DOWN_MOVE = 2;
+    private static final int MONSTER_POINTS = Integer.parseInt(Utils.getInstance().getProperty("MONSTER_POINTS"));
+    private static final int SECONDS_BEFORE_DOWN_MOVE = Integer.parseInt(Utils.getInstance().getProperty("SECONDS_BEFORE_DOWN_MOVE"));
     private long lastMonstersDownMove = System.currentTimeMillis();
     private final float timingRange;
 
@@ -57,7 +57,7 @@ public class Monster extends Fighter {
 
     @Override
     public int getPoints() {
-        return POINTS_MONSTER;
+        return MONSTER_POINTS;
     }
 
     @Override
@@ -67,7 +67,7 @@ public class Monster extends Fighter {
         world.getLevel().addScore(getPoints());
         float random = Utils.getInstance().randomFloat(1);
         if (random <= world.getLevel().probabilityToGenerateDecoration()) {
-            world.addBullet(new Projectile(new Location(super.location), "star.png", new Vector2D(0, 5), true) {
+            world.addBullet(new Projectile(new Location(super.location), "star.png", new Speed(0, 5), true) {
 
                 @Override
                 public void hit(IFighter fighter) {
@@ -89,7 +89,7 @@ public class Monster extends Fighter {
         int index = monsters.indexOf(this);
 
         boolean invertSpeed = false;
-        Vector2D nullSpeed = new Vector2D(0.f, 0.f);
+        Speed nullSpeed = new Speed(0.f, 0.f);
         if (
                 (index != 0 && checkHitBox(nullSpeed, monsters.get(index - 1))) ||
                         (index != monsters.size() - 1 && checkHitBox(nullSpeed, monsters.get(index + 1))) ||
@@ -112,7 +112,7 @@ public class Monster extends Fighter {
      * @return move on Y axis
      */
     private float getDownMove() {
-        boolean downMove = System.currentTimeMillis() - lastMonstersDownMove > SECONDS_BEFORE_DOWN_MOVE * 1000;
+        boolean downMove = System.currentTimeMillis() - lastMonstersDownMove > SECONDS_BEFORE_DOWN_MOVE * 1000L;
         if (downMove) {
             lastMonstersDownMove = System.currentTimeMillis();
             return 10.0f;
