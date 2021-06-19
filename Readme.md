@@ -50,7 +50,7 @@ Voici les bonus et leurs actions :
 
 Voici une image du gameplay :
 
-<img src="./img/Game.jpg" style="zoom:50%;" />
+<img src="img/Game.jpg" style="zoom:50%;" />
 
 ### :wrench: Fichier de configuration
 
@@ -60,7 +60,7 @@ Le fichier [config.properties](./src/main/resources/) permet de modifier le comp
 
 Pour réaliser le jeu, nous avons décidé de mettre en place une architecture basée sur le modèle de conception <u>MVC</u> (Modèle-Vue-Controlleur). Nous avons choisi d'utiliser un thread responsable de l'affichage de la vue et un thread responsable de la mise à jour de l'état du jeu.
 
-<img src="./diagrams/UML - Architecture.png" style="zoom: 80%;" />
+<img src="diagrams/UML - Architecture.png" style="zoom: 80%;" />
 
 Comme on peut le voir, les différents composants du patron MVC sont tous des <u>Singletons</u>.
 
@@ -75,11 +75,11 @@ Pour gérer des appuis simultanés de touches, nous avons créé une classe `Mul
 
 Voici notre schéma UML principal du jeu :
 
-![](./diagrams/UML - Game.png)
+![](diagrams/UML - Game.png)
 
 Finalement, voici les quelques classes utilitaires que nous avons mises en place :
 
-![](./diagrams/UML - Utils.png)
+![](diagrams/UML - Utils.png)
 
 ## :arrow_heading_up: Gestion des niveaux de jeu
 
@@ -87,7 +87,7 @@ Pour gérer les niveaux de jeu, nous avons mis en place le pattern <u>Etat</u> e
 
 Voici l'implémentation :
 
-<img src="./diagrams/UML - Levels.png" style="zoom:80%;" />
+<img src="diagrams/UML - Levels.png" style="zoom:80%;" />
 
 ## :books: Mise en œuvre du modèle
 
@@ -97,13 +97,13 @@ Les décorations sont disponibles sur les `fighters` et sur les `weapons` :
 
 **Fighters  :**
 
-<img src="./diagrams/UML - Fighters with decorators.png" style="zoom:80%;" />
+<img src="diagrams/UML - Fighters with decorators.png" style="zoom:80%;" />
 
 **Weapons :**
 
-<img src="./diagrams/UML - Weapons  with decorators.png" style="zoom:80%;" />
+<img src="diagrams/UML - Weapons  with decorators.png" style="zoom:80%;" />
 
-### Comportements avancés
+### :chart_with_upwards_trend: Comportements avancés
 
 Voici les comportements avancés du pattern mis en œuvre :
 
