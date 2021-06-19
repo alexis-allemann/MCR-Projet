@@ -54,13 +54,6 @@ public class Monster extends Fighter {
     }
 
     @Override
-    public void shoot() {
-        float randomNumber = Utils.getInstance().randomFloat(1);
-        if (randomNumber <= timingRange)
-            super.shoot();
-    }
-
-    @Override
     public int getPoints() {
         return POINTS_MONSTER;
     }

@@ -59,10 +59,10 @@ public class MultipleShoot extends FighterDecorator {
     @Override
     public void shoot() {
         long current = System.currentTimeMillis();
-        if (current - start <= timeInSeconds * 1000L)
+        if (current - start <= timeInSeconds * 1000L) {
             for (int i = 0; i < weapons.size(); i++)
                 weapons.get(i).shoot();
-        else
+        } else
             removeDecoration();
     }
 

@@ -44,7 +44,7 @@ public abstract class Weapon implements IWeapon {
     @Override
     public void shoot() {
         long current = System.currentTimeMillis();
-        if (current - lastBulletShotTime >= reloadTimeInMilliSeconds()) {
+        if (current - lastBulletShotTime >= nextShootReloadTime) {
             Projectile projectile = fighter.getWeapon().getBullet(fighter.getDirection());
             projectile.setLocation(
                     getStartingBulletLocation(projectile)
