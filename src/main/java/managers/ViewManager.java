@@ -4,7 +4,7 @@ import controllers.GameController;
 import model.World;
 import model.components.GameComponentWithHitBox;
 import model.components.IGameComponentWithHitBox;
-import views.View;
+import views.IView;
 
 import java.awt.Image;
 import java.awt.Graphics2D;
@@ -19,26 +19,26 @@ import java.util.TimerTask;
  */
 public class ViewManager implements Runnable {
     private static ViewManager instance;
-    private final View view;
+    private final IView view;
 
     /**
      * Instantiation of the view manager
      *
      * @param view to manage
      */
-    private ViewManager(View view) {
+    private ViewManager(IView view) {
         this.view = view;
     }
 
     /**
      * Get instance of the view manager to implement singleton pattern
      *
-     * @param view to manage
+     * @param IView to manage
      * @return the instance of the view manager
      */
-    public static ViewManager getInstance(View view) {
+    public static ViewManager getInstance(IView IView) {
         if (instance == null)
-            instance = new ViewManager(view);
+            instance = new ViewManager(IView);
         return instance;
     }
 

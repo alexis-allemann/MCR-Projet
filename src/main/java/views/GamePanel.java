@@ -27,5 +27,4 @@ public class GamePanel extends JPanel {
     public void setGameImage(Image gameImage) {
         this.gameImage = gameImage;
     }
-
 }

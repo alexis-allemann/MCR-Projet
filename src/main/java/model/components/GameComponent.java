@@ -20,11 +20,11 @@ public abstract class GameComponent implements IGameComponent{
      * Instantiation of a new game component
      *
      * @param location where component is located
-     * @param filename of the image to display
+     * @param imageName of the image to display
      */
-    public GameComponent(Location location, String filename) {
+    public GameComponent(Location location, String imageName) {
         this.location = location;
-        image = Utils.getInstance().getImageFromResources(filename);
+        image = Utils.getInstance().getImageFromResources(imageName);
     }
 
     /**

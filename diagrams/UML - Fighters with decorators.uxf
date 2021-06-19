@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <help_text>// Uncomment the following line to change the fontsize and font:
+fontsize=10
+// fontfamily=SansSerif //possible: SansSerif,Serif,Monospaced
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Welcome to UMLet!
+//
+// Double-click on elements to add them to the diagram, or to copy them
+// Edit elements by modifying the text in this panel
+// Hold Ctrl to select multiple elements
+// Use Ctrl+mouse to select via lasso
+//
+// Use +/- or Ctrl+mouse wheel to zoom
+// Drag a whole relation at its central square icon
+//
+// Press Ctrl+C to copy the whole diagram to the system clipboard (then just paste it to, eg, Word)
+// Edit the files in the "palettes" directory to create your own element palettes
+//
+// Select "Custom Elements &gt; New..." to create new element types
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// This text will be stored with each diagram;  use it for notes.</help_text>
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>272</x>
+      <y>424</y>
+      <w>264</w>
+      <h>248</h>
+    </coordinates>
+    <panel_attributes>/Fighter/
+--
+_- MAX_COUNT : int_
+_- BASE_SPEED : Speed_
+_- nb : int_
+- ID : int
+- health : int
+--
++ Fighter(location : Location, defaultHealth : int, imageName : String)
++ Fighter(fighter : Fighter)
++ getId() : int
++ getWeapon() : IWeapon
++ setWeapon(IWeapon weapon) : void
++ getHealth() : int
++ removeHealth(hp : int) : void
++ isAlive() : boolean
++ shoot() : void
++ die() : void
++ getPoints() : int
++ canBeDecorated() : boolean
++ removeDecorator(decorator : FighterDecorator) : IFighter
++ countDecorator(decoratorClass : Class) : int
++ countDecorator() : int
++ equals(o : Object) : boolean
++ draw(graphics2D : Graphics2D) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>600</x>
+      <y>168</y>
+      <w>224</w>
+      <h>184</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; Interface &gt;&gt;
+IFighter
+--
+/+ getId() : int/
+/+ getDirection() : Direction/
+/+ getNextTimingModifier() : float/
+/+ getWeapon() : IWeapon/
+/+ setWeapon(IWeapon weapon) : void/
+/+ getHealth() : int/
+/+ removeHealth(hp : int) : void/
+/+ isAlive() : boolean/
+/+ shoot() : void/
+/+ die() : void/
+/+ getPoints() : int/
+/+ canBeDecorated() : boolean/
+/+ removeDecorator(decorator : FighterDecorator) : IFighter/
+/+ countDecorator(decoratorClass : Class) : int/
+/+ countDecorator() : int/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>392</x>
+      <y>344</y>
+      <w>336</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>400.0;10.0;400.0;60.0;10.0;60.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>112</x>
+      <y>744</y>
+      <w>344</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>Monster
+--
+_- POINTS : int_
+_- SECONDS_BEFORE_MOVE_DOWN : int_
+- lastMonstersDownMove : long
+- timingRange : float
+--
++ Monster(location : Location, defaultHealth : int, timingRange : float, imageName : String)
++ getDirection() : Direction
++ getNextTimingModifier() : float
++ isMonsterTeam() : boolean
++ getPoints() : int
++ die() : void
++ calculateAndSetNextSpeed() : void
+- getDownMove() : float</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>472</x>
+      <y>744</y>
+      <w>136</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>Spacecraft
+--
+_- HEALTH : int_
+_- SPEED : int_
+--
++ Spacecraft(location : Location)
++ getDirection() : Direction
++ getNextTimingModifier() : float
++ isMonsterTeam() : boolean
++ move() : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>272</x>
+      <y>664</y>
+      <w>152</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>170.0;10.0;170.0;60.0;10.0;60.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>400</x>
+      <y>664</y>
+      <w>160</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0;180.0;60.0;180.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>904</x>
+      <y>432</y>
+      <w>224</w>
+      <h>248</h>
+    </coordinates>
+    <panel_attributes>/FighterDecorator/
+--
++ FighterDecorator(fighter IFighter)
+~ removeDecoration() : void
++ getId() : int
++ getDirection() : Direction
++ getNextTimingModifier() : float
++ getWeapon() : IWeapon
++ setWeapon(IWeapon weapon) : void
++ getHealth() : int
++ removeHealth(hp : int) : void
++ isAlive() : boolean
++ shoot() : void
++ die() : void
++ getPoints() : int
++ canBeDecorated() : boolean
++ removeDecorator(decorator : FighterDecorator) : IFighter
++ countDecorator(decoratorClass : Class) : int
++ countDecorator() : int
++ getImage() : Image
++ getImageWidth() : int
++ getImageHeight() : int
++ getLocation : Location
++ setLocation(location : Location) : void
++ draw(graphics2D : Graphics2D) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>816</x>
+      <y>248</y>
+      <w>280</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>330.0;230.0;330.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>704</x>
+      <y>344</y>
+      <w>328</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0;390.0;60.0;390.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>680</x>
+      <y>752</y>
+      <w>288</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>MultipleGun
+--
+_- MAX_COUNT : int_
+- WEAPONS : List&lt;IWeapon&gt;
+- START : long
+- TIME_IN_SECONDS : int
+- nbGet : int
+--
++ MultipleGun(fighter : IFighter, nbParallelsShoots : int, timeInSeconds : int)
++ getWeapon() : IWeapon
++ shoot() : void
++ draw(graphics2D : Graphics2D) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>984</x>
+      <y>752</y>
+      <w>168</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>Shield
+--
+- shieldPower : int
+--
++ Shield(fighter : IFighter, shieldPower : int)
++ removeHealth(hp : int) : void
++ draw(graphics2D : Graphics2D) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1168</x>
+      <y>752</y>
+      <w>176</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>SpeedBoost
+--
+- BOOST : int
+--
++ SpeedBoost(fighter : IFighter, boost : float)
++ move() : void
++ draw(graphics2D : Graphics2D) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1008</x>
+      <y>672</y>
+      <w>264</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0;310.0;60.0;310.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1008</x>
+      <y>672</y>
+      <w>72</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0;70.0;60.0;70.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>816</x>
+      <y>672</y>
+      <w>216</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>250.0;10.0;250.0;60.0;10.0;60.0;10.0;100.0</additional_attributes>
+  </element>
+</diagram>

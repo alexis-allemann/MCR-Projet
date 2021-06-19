@@ -7,7 +7,7 @@ import utils.Utils;
 import utils.physics.Direction;
 import managers.ViewManager;
 import utils.physics.Speed;
-import views.View;
+import views.IView;
 
 /**
  * Space invaders gameplay management
@@ -38,10 +38,10 @@ public class GameController implements IController {
     }
 
     @Override
-    public void start(View view) {
+    public void start(IView IView) {
         newGame();
-        view.startView(this);
-        new Thread(ViewManager.getInstance(view)).start();
+        IView.startView(this);
+        new Thread(ViewManager.getInstance(IView)).start();
         new Thread(ComponentManager.getInstance()).start();
     }
 

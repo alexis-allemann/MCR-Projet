@@ -16,7 +16,7 @@ import java.awt.Graphics2D;
  */
 public class BulletSizeEnhancer extends WeaponDecorator {
     private static final int NB_MAX_BULLET_SIZE_ENHANCER = Integer.parseInt(Utils.getInstance().getProperty("NB_MAX_BULLET_SIZE_ENHANCER"));
-    private final float ratio;
+    private final float RATIO;
 
     /**
      * Instantiation of a new bullet size enhancer decoration
@@ -25,7 +25,7 @@ public class BulletSizeEnhancer extends WeaponDecorator {
      */
     public BulletSizeEnhancer(IWeapon weapon, float ratio) {
         super(weapon);
-        this.ratio = ratio;
+        this.RATIO = ratio;
         if (weapon.countDecorator(getClass()) > NB_MAX_BULLET_SIZE_ENHANCER - 1)
             removeDecoration();
     }
@@ -34,7 +34,7 @@ public class BulletSizeEnhancer extends WeaponDecorator {
     public Projectile getBullet(Direction direction) {
         Projectile oldProjectile = super.getBullet(direction);
         Image oldImage = oldProjectile.getImage();
-        Image newImage = oldImage.getScaledInstance((int) (oldImage.getWidth(null) * ratio), (int) (oldImage.getHeight(null) * ratio), Image.SCALE_DEFAULT);
+        Image newImage = oldImage.getScaledInstance((int) (oldImage.getWidth(null) * RATIO), (int) (oldImage.getHeight(null) * RATIO), Image.SCALE_DEFAULT);
         return new Projectile(newImage, oldProjectile.getSpeed(), oldProjectile.isMonsterTeam()) {
 
         };

@@ -7,8 +7,8 @@ package utils.physics;
  * @version 1.0
  */
 public class Speed {
-    private float X;
-    private float Y;
+    private float x;
+    private float y;
 
     /**
      * Instantiation of a new 2D vector
@@ -17,8 +17,8 @@ public class Speed {
      * @param y value on y axis
      */
     public Speed(float x, float y) {
-        this.X = x;
-        this.Y = y;
+        this.x = x;
+        this.y = y;
     }
 
     /**
@@ -34,7 +34,7 @@ public class Speed {
      * @return move on x axis
      */
     public float getX() {
-        return X;
+        return x;
     }
 
     /**
@@ -43,7 +43,7 @@ public class Speed {
      * @return value on y axis
      */
     public float getY() {
-        return Y;
+        return y;
     }
 
     /**
@@ -52,7 +52,7 @@ public class Speed {
      * @param x move on x axis
      */
     public void setX(float x) {
-        X = x;
+        this.x = x;
     }
 
     /**
@@ -61,7 +61,7 @@ public class Speed {
      * @param y move on y axis
      */
     public void setY(float y) {
-        Y = y;
+        this.y = y;
     }
 
 }

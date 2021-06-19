@@ -28,16 +28,16 @@ public interface IWeapon extends IGameComponent {
     void setFighter(IFighter fighter);
 
     /**
-     * Shoot a new bullet
-     */
-    void shoot();
-
-    /**
      * Fighter who owns the weapon
      *
      * @return who owns the weapon
      */
     IFighter getFighter();
+
+    /**
+     * Shoot a new bullet
+     */
+    void shoot();
 
     /**
      * Get a new bullet

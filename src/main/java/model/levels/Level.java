@@ -25,9 +25,9 @@ import java.util.List;
  * @version 1.0
  */
 public abstract class Level implements IDecoratorFactory {
+    private final long START;
     protected int score;
     protected int nbMonstersKilled;
-    private final long START;
 
     /**
      * Instantiation of a new level (Beginner by default)
@@ -60,6 +60,41 @@ public abstract class Level implements IDecoratorFactory {
     public abstract int getNbMonsterByWave();
 
     /**
+     * Get probability to generate a decoration when a monster dies
+     *
+     * @return probability to generate a decoration when a monster dies
+     */
+    public abstract float probabilityToGenerateDecoration();
+
+    /**
+     * Get the monster image name
+     *
+     * @return the monster image name
+     */
+    abstract String getMonsterImageName();
+
+    /**
+     * Get monster timing for shoots
+     *
+     * @return the timing ratio between shoots
+     */
+    abstract float getMonsterShootTiming();
+
+    /**
+     * Get probability to get a decorated monster
+     *
+     * @return probability to get a decorated monster
+     */
+    abstract float getProbabilityOfMonstersToBeDecorated();
+
+    /**
+     * Get the default monster health points
+     *
+     * @return default monster health points
+     */
+    abstract int getMonsterDefaultHealthPoints();
+
+    /**
      * Generate a new monster
      *
      * @param location Location where the monster should spawn
@@ -77,13 +112,6 @@ public abstract class Level implements IDecoratorFactory {
         }
         return newMonster;
     }
-
-    /**
-     * Get probability to generate a decoration when a monster dies
-     *
-     * @return probability to generate a decoration when a monster dies
-     */
-    public abstract float probabilityToGenerateDecoration();
 
     /**
      * Notify the level that a new monster has been killed
@@ -121,34 +149,6 @@ public abstract class Level implements IDecoratorFactory {
     }
 
     /**
-     * Get the monster image name
-     *
-     * @return the monster image name
-     */
-    abstract String getMonsterImageName();
-
-    /**
-     * Get monster timing for shoots
-     *
-     * @return the timing ratio between shoots
-     */
-    abstract float getMonsterShootTiming();
-
-    /**
-     * Get probability to get a decorated monster
-     *
-     * @return probability to get a decorated monster
-     */
-    abstract float getProbabilityOfMonstersToBeDecorated();
-
-    /**
-     * Get the default monster health points
-     *
-     * @return default monster health points
-     */
-    abstract int getMonsterDefaultHealthPoints();
-
-    /**
      * Get list of fighters decorators available
      *
      * @param fighter to decorate
@@ -181,7 +181,7 @@ public abstract class Level implements IDecoratorFactory {
         List<FighterDecorator> decorators = getFighterDecorators(fighter);
         if (decorators == null)
             return fighter;
-        return Utils.getInstance().chooseRandom(decorators);
+        return Utils.getInstance().chooseRandomElement(decorators);
     }
 
     @Override
@@ -189,6 +189,6 @@ public abstract class Level implements IDecoratorFactory {
         List<WeaponDecorator> decorators = getWeaponDecorators(weapon);
         if (decorators == null)
             return weapon;
-        return Utils.getInstance().chooseRandom(decorators);
+        return Utils.getInstance().chooseRandomElement(decorators);
     }
 }

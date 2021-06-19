@@ -21,9 +21,9 @@ import java.util.List;
  */
 public class MultipleGun extends FighterDecorator {
     private static final int MAX_COUNT = Integer.parseInt(Utils.getInstance().getProperty("NB_MAX_MULTIPLE_GUN"));
-    private final List<IWeapon> weapons = new ArrayList<>();
-    private final long start = System.currentTimeMillis();
-    private final int timeInSeconds;
+    private final List<IWeapon> WEAPONS = new ArrayList<>();
+    private final long START = System.currentTimeMillis();
+    private final int TIME_IN_SECONDS;
     private int nbGet = 0;
 
     /**
@@ -35,7 +35,7 @@ public class MultipleGun extends FighterDecorator {
      */
     public MultipleGun(final IFighter fighter, int nbParallelsShoots, int timeInSeconds) {
         super(fighter);
-        this.timeInSeconds = timeInSeconds;
+        this.TIME_IN_SECONDS = timeInSeconds;
         if (fighter.countDecorator(getClass()) > MAX_COUNT - 1)
             removeDecoration();
         else {
@@ -59,7 +59,7 @@ public class MultipleGun extends FighterDecorator {
                     }
                 };
                 newWeapon.setFighter(this);
-                weapons.add(newWeapon);
+                WEAPONS.add(newWeapon);
             }
         }
     }
@@ -67,16 +67,16 @@ public class MultipleGun extends FighterDecorator {
     @Override
     public void shoot() {
         long current = System.currentTimeMillis();
-        if (current - start <= timeInSeconds * 1000L) {
-            for (IWeapon weapon : weapons) weapon.shoot();
+        if (current - START <= TIME_IN_SECONDS * 1000L) {
+            for (IWeapon weapon : WEAPONS) weapon.shoot();
         } else
             removeDecoration();
     }
 
     @Override
     public IWeapon getWeapon() {
-        IWeapon weapon = weapons.get(nbGet);
-        if (++nbGet == weapons.size())
+        IWeapon weapon = WEAPONS.get(nbGet);
+        if (++nbGet == WEAPONS.size())
             nbGet = 0;
         return weapon;
     }

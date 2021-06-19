@@ -15,20 +15,20 @@ import java.awt.Image;
  * @version 1.0
  */
 public abstract class Projectile extends GameComponentWithHitBox {
-    protected final int PROJECTILE_BASE_POWER = Integer.parseInt(Utils.getInstance().getProperty("PROJECTILE_BASE_POWER"));
+    protected final int BASE_POWER = Integer.parseInt(Utils.getInstance().getProperty("PROJECTILE_BASE_POWER"));
     private final boolean isMonsterTeam;
 
     /**
      * Instantiation of a new bullet
      *
      * @param location      location of the projectile
-     * @param image         filename of the bullet image
-     * @param direction     of the bullet
+     * @param imageName     filename of the bullet image
+     * @param speed         of the bullet
      * @param isMonsterTeam if bullet is shot by a monster
      */
-    public Projectile(Location location, String image, Speed direction, boolean isMonsterTeam) {
-        super(location, image);
-        this.speed = new Speed(direction.getX(), direction.getY());
+    public Projectile(Location location, String imageName, Speed speed, boolean isMonsterTeam) {
+        super(location, imageName);
+        this.speed = new Speed(speed.getX(), speed.getY());
         this.isMonsterTeam = isMonsterTeam;
     }
 
@@ -49,12 +49,12 @@ public abstract class Projectile extends GameComponentWithHitBox {
      * Instantiation of a new bullet
      *
      * @param image         filename of the bullet image
-     * @param direction     of the bullet
+     * @param speed         of the bullet
      * @param isMonsterTeam if bullet is shot by a monster
      */
-    public Projectile(Image image, Speed direction, boolean isMonsterTeam) {
+    public Projectile(Image image, Speed speed, boolean isMonsterTeam) {
         super(new Location(0, 0), image);
-        this.speed = new Speed(direction.getX(), direction.getY());
+        this.speed = new Speed(speed.getX(), speed.getY());
         this.isMonsterTeam = isMonsterTeam;
     }
 
@@ -64,7 +64,7 @@ public abstract class Projectile extends GameComponentWithHitBox {
      * @return the power
      */
     public int getPower() {
-        return PROJECTILE_BASE_POWER;
+        return BASE_POWER;
     }
 
     /**

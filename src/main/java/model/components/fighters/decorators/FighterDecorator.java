@@ -92,8 +92,8 @@ public abstract class FighterDecorator implements IFighter {
     }
 
     @Override
-    public void setNextSpeed() {
-        fighter.setNextSpeed();
+    public void calculateAndSetNextSpeed() {
+        fighter.calculateAndSetNextSpeed();
     }
 
     @Override

@@ -16,7 +16,7 @@ import java.awt.Graphics2D;
  * @version 1.0
  */
 public class ShootSpeedEnhancer extends WeaponDecorator {
-    private final float ratio;
+    private final float RATIO;
 
     /**
      * Instantiation of a new shoot speed enhancer decoration
@@ -26,13 +26,13 @@ public class ShootSpeedEnhancer extends WeaponDecorator {
      */
     public ShootSpeedEnhancer(IWeapon weapon, float ratio) {
         super(weapon);
-        this.ratio = ratio;
+        this.RATIO = ratio;
     }
 
     @Override
     public Projectile getBullet(Direction direction) {
         Projectile oldProjectile = super.getBullet(direction);
-        Speed newSpeed = new Speed(oldProjectile.getSpeed().getX() * ratio, oldProjectile.getSpeed().getY() * ratio);
+        Speed newSpeed = new Speed(oldProjectile.getSpeed().getX() * RATIO, oldProjectile.getSpeed().getY() * RATIO);
         return new Projectile(oldProjectile.getImage(), newSpeed, oldProjectile.isMonsterTeam()) {
         };
     }

@@ -18,14 +18,14 @@ import java.awt.Image;
  */
 public abstract class Weapon implements IWeapon {
     private static int nb;
-    private final int id = nb++;
+    private final int ID = nb++;
     private long lastBulletShotTime = System.currentTimeMillis();
-    private IFighter fighter;
     private long nextShootReloadTime;
+    private IFighter fighter;
 
     @Override
     public int getId() {
-        return id;
+        return ID;
     }
 
     @Override
@@ -53,22 +53,19 @@ public abstract class Weapon implements IWeapon {
         }
     }
 
-    /**
-     * Compute the starting location of the bullet
-     *
-     * @return the starting location of the bullet
-     */
-    private Location getStartingBulletLocation() {
-        float x = fighter.getLocation().getFloatX() + fighter.getImageWidth() / 2.f;
-        float y = fighter.getLocation().getFloatY() + (fighter.getDirection() == Direction.TOP ? -1.5f : 1.5f) * fighter.getImageHeight();
-        return new Location(x, y);
+    @Override
+    public IWeapon removeDecorator(WeaponDecorator decorator) {
+        return this;
     }
 
-    /**
-     * Set next shoot reload time
-     */
-    private void setNextShootReloadTime() {
-        nextShootReloadTime = (long) (getFighter().getNextTimingModifier() * reloadTimeInMilliSeconds());
+    @Override
+    public int countDecorator(Class decoratorClass) {
+        return 0;
+    }
+
+    @Override
+    public int countDecorator() {
+        return 0;
     }
 
     @Override
@@ -105,21 +102,24 @@ public abstract class Weapon implements IWeapon {
         if (this == o) return true;
         if (o == null) return false;
         IWeapon weapon = (IWeapon) o;
-        return id == weapon.getId();
+        return ID == weapon.getId();
     }
 
-    @Override
-    public IWeapon removeDecorator(WeaponDecorator decorator) {
-        return this;
+    /**
+     * Compute the starting location of the bullet
+     *
+     * @return the starting location of the bullet
+     */
+    private Location getStartingBulletLocation() {
+        float x = fighter.getLocation().getFloatX() + fighter.getImageWidth() / 2.f;
+        float y = fighter.getLocation().getFloatY() + (fighter.getDirection() == Direction.TOP ? -1.5f : 1.5f) * fighter.getImageHeight();
+        return new Location(x, y);
     }
 
-    @Override
-    public int countDecorator(Class decoratorClass) {
-        return 0;
-    }
-
-    @Override
-    public int countDecorator() {
-        return 0;
+    /**
+     * Set next shoot reload time
+     */
+    private void setNextShootReloadTime() {
+        nextShootReloadTime = (long) (getFighter().getNextTimingModifier() * reloadTimeInMilliSeconds());
     }
 }

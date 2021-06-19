@@ -13,8 +13,8 @@ import java.util.Random;
  * Application utils (singleton pattern used)
  */
 public class Utils {
-    private final Random random = new Random();
-    private static final Utils instance = new Utils();
+    private static final Utils INSTANCE = new Utils();
+    private final Random RANDOM = new Random();
     private Properties properties;
 
     /**
@@ -40,7 +40,7 @@ public class Utils {
      * @return the instance of the singleton
      */
     public static Utils getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     /**
@@ -51,7 +51,7 @@ public class Utils {
      * @return the random float
      */
     public float randomFloat(float min, float max) {
-        return random.nextFloat() * (max - min) + min;
+        return RANDOM.nextFloat() * (max - min) + min;
     }
 
     /**
@@ -70,10 +70,10 @@ public class Utils {
      * @param objectList to choose an object
      * @return object chosen or null if list is empty
      */
-    public <T> T chooseRandom(List<T> objectList) {
+    public <T> T chooseRandomElement(List<T> objectList) {
         if (objectList.isEmpty())
             return null;
-        int index = random.nextInt(objectList.size());
+        int index = RANDOM.nextInt(objectList.size());
         return objectList.get(index);
     }
 

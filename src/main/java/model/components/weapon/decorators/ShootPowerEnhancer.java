@@ -15,7 +15,7 @@ import java.awt.Image;
  * @version 1.0
  */
 public class ShootPowerEnhancer extends WeaponDecorator {
-    private final float ratio;
+    private final float RATIO;
 
     /**
      * Instantiation of a new shoot power enhancer decoration
@@ -24,7 +24,7 @@ public class ShootPowerEnhancer extends WeaponDecorator {
      */
     public ShootPowerEnhancer(IWeapon weapon, float ratio) {
         super(weapon);
-        this.ratio = ratio;
+        this.RATIO = ratio;
     }
 
     @Override
@@ -33,7 +33,7 @@ public class ShootPowerEnhancer extends WeaponDecorator {
         return new Projectile(oldProjectile.getImage(), oldProjectile.getSpeed(), oldProjectile.isMonsterTeam()) {
             @Override
             public int getPower() {
-                return (int) (super.getPower() * ratio);
+                return (int) (super.getPower() * RATIO);
             }
         };
     }

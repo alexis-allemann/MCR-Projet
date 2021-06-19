@@ -17,9 +17,9 @@ import java.awt.Graphics2D;
  */
 public abstract class Fighter extends GameComponentWithHitBox implements IFighter {
     private static final int MAX_COUNT = Integer.parseInt(Utils.getInstance().getProperty("NB_MAX_DECORATIONS"));
-    private static final Speed SPEED_BASE = new Speed(1.f, 0.f);
+    private static final Speed BASE_SPEED = new Speed(1.f, 0.f);
     private static int nb;
-    private final int id = nb++;
+    private final int ID = nb++;
     private IWeapon weapon;
     private int health;
 
@@ -28,11 +28,11 @@ public abstract class Fighter extends GameComponentWithHitBox implements IFighte
      *
      * @param location      where fighter is located
      * @param defaultHealth default health of the fighter
-     * @param image         filename of the fighter to display
+     * @param imageName     filename of the fighter to display
      */
-    public Fighter(Location location, int defaultHealth, String image) {
-        super(location, image);
-        speed = SPEED_BASE;
+    public Fighter(Location location, int defaultHealth, String imageName) {
+        super(location, imageName);
+        speed = BASE_SPEED;
         health = defaultHealth;
     }
 
@@ -50,7 +50,7 @@ public abstract class Fighter extends GameComponentWithHitBox implements IFighte
 
     @Override
     public int getId() {
-        return id;
+        return ID;
     }
 
     @Override
@@ -70,13 +70,13 @@ public abstract class Fighter extends GameComponentWithHitBox implements IFighte
     }
 
     @Override
-    public boolean isAlive() {
-        return getHealth() > 0;
+    public void removeHealth(int hp) {
+        health -= hp;
     }
 
     @Override
-    public void removeHealth(int hp) {
-        health -= hp;
+    public boolean isAlive() {
+        return getHealth() > 0;
     }
 
     @Override
@@ -96,22 +96,13 @@ public abstract class Fighter extends GameComponentWithHitBox implements IFighte
     }
 
     @Override
+    public boolean canBeDecorated() {
+        return countDecorator() + getWeapon().countDecorator() < MAX_COUNT;
+    }
+
+    @Override
     public IFighter removeDecorator(FighterDecorator decorator) {
         return this;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null) return false;
-        IFighter fighter = (IFighter) o;
-        return id == fighter.getId();
-    }
-
-    @Override
-    public void draw(Graphics2D graphics2D) {
-        super.draw(graphics2D);
-        getWeapon().draw(graphics2D);
     }
 
     @Override
@@ -125,8 +116,16 @@ public abstract class Fighter extends GameComponentWithHitBox implements IFighte
     }
 
     @Override
-    public boolean canBeDecorated() {
-        return countDecorator() + getWeapon().countDecorator() < MAX_COUNT;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false;
+        IFighter fighter = (IFighter) o;
+        return ID == fighter.getId();
     }
 
+    @Override
+    public void draw(Graphics2D graphics2D) {
+        super.draw(graphics2D);
+        getWeapon().draw(graphics2D);
+    }
 }

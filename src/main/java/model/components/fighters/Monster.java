@@ -17,7 +17,7 @@ import java.util.List;
  * @version 1.0
  */
 public class Monster extends Fighter {
-    private static final int MONSTER_POINTS = Integer.parseInt(Utils.getInstance().getProperty("MONSTER_POINTS"));
+    private static final int POINTS = Integer.parseInt(Utils.getInstance().getProperty("MONSTER_POINTS"));
     private static final int SECONDS_BEFORE_DOWN_MOVE = Integer.parseInt(Utils.getInstance().getProperty("SECONDS_BEFORE_DOWN_MOVE"));
     private long lastMonstersDownMove = System.currentTimeMillis();
     private final float timingRange;
@@ -25,15 +25,15 @@ public class Monster extends Fighter {
     /**
      * Instantiation of a new monster
      *
-     * @param location          where monster is located
-     * @param defaultHealth     default health of the monster
-     * @param maxTimingModifier timing modifier to shoot a new bullet
-     * @param imageName         name of the monster image
+     * @param location      where monster is located
+     * @param defaultHealth default health of the monster
+     * @param timingRange   timing modifier to shoot a new bullet
+     * @param imageName     name of the monster image
      */
-    public Monster(Location location, int defaultHealth, float maxTimingModifier, String imageName) {
+    public Monster(Location location, int defaultHealth, float timingRange, String imageName) {
         super(location, defaultHealth, imageName);
         setWeapon(new BombWeapon());
-        this.timingRange = maxTimingModifier;
+        this.timingRange = timingRange;
     }
 
     @Override
@@ -53,7 +53,7 @@ public class Monster extends Fighter {
 
     @Override
     public int getPoints() {
-        return MONSTER_POINTS;
+        return POINTS;
     }
 
     @Override
@@ -80,7 +80,7 @@ public class Monster extends Fighter {
     }
 
     @Override
-    public void setNextSpeed() {
+    public void calculateAndSetNextSpeed() {
         List<IFighter> monsters = World.getInstance().getMonsters();
         int index = monsters.indexOf(this);
 

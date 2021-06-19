@@ -55,7 +55,7 @@ public class FighterManager {
                     world.getLevel().addMonsterKilled();
                 } else {
                     monster.shoot();
-                    monster.setNextSpeed();
+                    monster.calculateAndSetNextSpeed();
                     monster.move();
                 }
             }

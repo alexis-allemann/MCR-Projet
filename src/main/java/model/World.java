@@ -57,6 +57,15 @@ public class World {
     }
 
     /**
+     * Set spacecraft
+     *
+     * @param spacecraft to set
+     */
+    public void setSpacecraft(IFighter spacecraft) {
+        this.spacecraft = spacecraft;
+    }
+
+    /**
      * Get all monsters
      *
      * @return the list of all monsters
@@ -77,14 +86,14 @@ public class World {
     /**
      * Add or replace a monster in the world
      *
-     * @param fighter to add or replace
+     * @param monster to add or replace
      */
-    public void replaceOrAddMonster(final IFighter fighter) {
-        int index = monsters.indexOf(fighter);
+    public void replaceOrAddMonster(final IFighter monster) {
+        int index = monsters.indexOf(monster);
         if (index != -1)
-            monsters.set(index, fighter);
+            monsters.set(index, monster);
         else
-            addMonster(fighter);
+            addMonster(monster);
     }
 
     /**
@@ -147,28 +156,6 @@ public class World {
     }
 
     /**
-     * Set spacecraft
-     *
-     * @param spacecraft to set
-     */
-    public void setSpacecraft(IFighter spacecraft) {
-        this.spacecraft = spacecraft;
-    }
-
-    /**
-     * Reset world
-     */
-    public void reset() {
-        monsters.clear();
-        projectiles.clear();
-        spacecraft = new SpaceCraft(new Location(0, 0));
-        resetSpaceCraftLocation();
-        spacecraft.setWeapon(new StandardWeapon());
-        level = new Beginner();
-        isRunning = true;
-    }
-
-    /**
      * Get if a game is running
      *
      * @return if a game is running
@@ -184,6 +171,19 @@ public class World {
      */
     public void setRunning(boolean isRunning) {
         this.isRunning = isRunning;
+    }
+
+    /**
+     * Reset world
+     */
+    public void reset() {
+        monsters.clear();
+        projectiles.clear();
+        spacecraft = new SpaceCraft(new Location(0, 0));
+        resetSpaceCraftLocation();
+        spacecraft.setWeapon(new StandardWeapon());
+        level = new Beginner();
+        isRunning = true;
     }
 
     /**

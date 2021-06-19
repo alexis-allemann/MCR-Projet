@@ -1,7 +1,7 @@
 package controllers;
 
 import utils.physics.Direction;
-import views.View;
+import views.IView;
 
 /**
  * Space invaders controller to manage gameplay
@@ -14,9 +14,9 @@ public interface IController {
     /**
      * Start the gameplay in a new view
      *
-     * @param view to start gameplay into
+     * @param IView to start gameplay into
      */
-    void start(View view);
+    void start(IView IView);
 
     /**
      * Start a new game

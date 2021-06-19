@@ -28,10 +28,10 @@ fontsize=10
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>296</x>
-      <y>528</y>
-      <w>160</w>
-      <h>88</h>
+      <x>392</x>
+      <y>704</y>
+      <w>168</w>
+      <h>96</h>
     </coordinates>
     <panel_attributes>Provenance des classes non affichées :
 --
@@ -40,6 +40,7 @@ JPanel : javax.swing.JPanel
 JFrame : javax.swing.JFrame
 JLabel : javax.swing.JLabel
 Collection : java.util.Collections
+KeyListener : java.awt.event.KeyListener
 Runnable : java.lang.Runnable
 bg=yellow</panel_attributes>
     <additional_attributes/>
@@ -47,34 +48,33 @@ bg=yellow</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>984</x>
-      <y>536</y>
-      <w>184</w>
-      <h>88</h>
+      <x>1040</x>
+      <y>608</y>
+      <w>144</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>&lt;&lt; interface &gt;&gt;
 Controller
 --
-/+ start(view : View, properties : Properties) : void/
+/+ start(view : View) : void/
 /+ newGame() : void/
 /+ shoot(): void/
 /+ move(direction : Direction): void/
-/+ isRunning() : boolean/
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>296</x>
-      <y>192</y>
+      <x>768</x>
+      <y>352</y>
       <w>160</w>
       <h>64</h>
     </coordinates>
     <panel_attributes>&lt;&lt; interface &gt;&gt;
-View
+IView
 --
-/+ startView(IController : Controller) : void/
+/+ startView(controller : IController) : void/
 /+ paintImage(image : Image) : void/
 /+ getBufferedImage() : Image/</panel_attributes>
     <additional_attributes/>
@@ -82,35 +82,32 @@ View
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>968</x>
-      <y>672</y>
-      <w>224</w>
-      <h>168</h>
+      <x>1040</x>
+      <y>736</y>
+      <w>144</w>
+      <h>136</h>
     </coordinates>
-    <panel_attributes>GamePlay
+    <panel_attributes>GameController
 --
-_- LOG : Logger_
-_- instance : GamePlay_
 _+ INFO_PANEL_HEIGHT : int_
 _+ HEIGHT : int_
 _+ WIDTH : int_
 _+ FRAME_RATE : int_
+_- INSTANCE : GameController_
 --
-- GamePlay()
+- GameController()
 _+ getInstance() : GamePlay_
-+ start(view : View, properties : Properties) : void
++ start(view : View) : void
 + newGame() : void
 + shoot(): void
-+ move(direction : MoveDirection): void
-- resetSpaceCraftLocation() : void
-- isInBounds(location : Location, fighter : Fighter) : boolean</panel_attributes>
++ move(direction : Direction): void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1072</x>
-      <y>616</y>
+      <x>1104</x>
+      <y>680</y>
       <w>24</w>
       <h>72</h>
     </coordinates>
@@ -120,8 +117,8 @@ _+ getInstance() : GamePlay_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>712</x>
-      <y>696</y>
+      <x>696</x>
+      <y>632</y>
       <w>152</w>
       <h>48</h>
     </coordinates>
@@ -133,33 +130,30 @@ _+ main (args : String[]) : void_</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>296</x>
-      <y>304</y>
+      <x>768</x>
+      <y>464</y>
       <w>160</w>
-      <h>144</h>
+      <h>120</h>
     </coordinates>
     <panel_attributes>GUIView
 --
 - MAIN_PANEL : JPanel
 - GAME_PANEL : JPanel
 - INFO_PANEL : JPanel
-- HEALTH_PANEL : JPanel
 - SCORE_LABEL : JLabel
 - LEVEL_LABEL : JLabel
-- HEALTH_LABEL : JLabel
-- HEALTH_RECTANGLE : JPanel
+
 --
-+ startView(IController : Controller) : void
++ startView(controller : Icontroller) : void
 + paintImage(image : Image) : void
-+ getBufferedImage() : Image
-- getHealthWidth() : int</panel_attributes>
++ getBufferedImage() : Image</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>368</x>
-      <y>248</y>
+      <x>840</x>
+      <y>408</y>
       <w>24</w>
       <h>72</h>
     </coordinates>
@@ -169,25 +163,8 @@ _+ main (args : String[]) : void_</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>712</x>
-      <y>560</y>
-      <w>144</w>
-      <h>72</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt; enumeration &gt;&gt;
-Direction
---
-LEFT
-RIGHT
-TOP
-DOWN</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>296</x>
-      <y>712</y>
+      <x>696</x>
+      <y>776</y>
       <w>160</w>
       <h>80</h>
     </coordinates>
@@ -204,8 +181,8 @@ DOWN</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>472</x>
-      <y>672</y>
+      <x>872</x>
+      <y>736</y>
       <w>112</w>
       <h>24</h>
     </coordinates>
@@ -216,8 +193,8 @@ bg=yellow</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>448</x>
-      <y>688</y>
+      <x>848</x>
+      <y>752</y>
       <w>40</w>
       <h>40</h>
     </coordinates>
@@ -227,110 +204,48 @@ bg=yellow</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>576</x>
-      <y>352</y>
-      <w>208</w>
+      <x>992</x>
+      <y>472</y>
+      <w>232</w>
       <h>80</h>
     </coordinates>
-    <panel_attributes>BulletManager
+    <panel_attributes>ProjectileManager
 --
-_- INSTANCE : BulletManager_
+_- INSTANCE : ProjectileManager_
 --
-- BulletManager()
-_+ getInstance() : BulletManager_
-+ run() : void
-- checkFighterOnNextLocation(projectile : Bullet) : Fighter
+- ProjectileManager()
+_+ getInstance() : ProjectileManager_
++ manage() : void
+- checkFighterOnNextLocation(projectile : Projectile) : IFighter
 
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>800</x>
-      <y>312</y>
-      <w>112</w>
-      <h>24</h>
-    </coordinates>
-    <panel_attributes>implements Runnable
-bg=yellow</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>776</x>
-      <y>328</y>
-      <w>40</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>30.0;10.0;10.0;30.0</additional_attributes>
-  </element>
-  <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>968</x>
-      <y>272</y>
-      <w>208</w>
-      <h>120</h>
+      <x>1040</x>
+      <y>344</y>
+      <w>144</w>
+      <h>88</h>
     </coordinates>
     <panel_attributes>FighterManager
 --
 _- INSTANCE : FighterManager_
-_- SECONDS_BEFORE_DOWN_MOVE = 2 : int_
-_- NB_MOVES_BEFORE_INVERT = 80 : int_
-- lastMonstersDownMove : long
-- nbMoveInSameDirection :  int
 --
 - FighterManager()
 _+ getInstance() : FighterManager_
-+ run() : void
++ manage() : void
 - checkMonsterGeneration() : void
 
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1168</x>
-      <y>248</y>
-      <w>40</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>30.0;10.0;10.0;30.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>1192</x>
-      <y>232</y>
-      <w>112</w>
-      <h>24</h>
-    </coordinates>
-    <panel_attributes>implements Runnable
-bg=yellow</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>800</x>
-      <y>144</y>
-      <w>112</w>
-      <h>24</h>
-    </coordinates>
-    <panel_attributes>implements Runnable
-bg=yellow</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>576</x>
-      <y>184</y>
+      <x>744</x>
+      <y>232</y>
       <w>208</w>
       <h>72</h>
     </coordinates>
@@ -347,8 +262,65 @@ _+ getInstance() : ViewManager_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>776</x>
-      <y>160</y>
+      <x>840</x>
+      <y>296</y>
+      <w>64</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=*
+manage v</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1032</x>
+      <y>232</y>
+      <w>152</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>ComponentManager
+--
+_- INSTANCE : ComponentManager_
+--
+- ComponentManager()
+_+ getInstance() : ComponentManager_
++ run() : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>952</x>
+      <y>144</y>
+      <w>64</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; Interface &gt;&gt;
+Runnable
+--
+/+ run() : void/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1032</x>
+      <y>104</y>
+      <w>144</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>Runnable de java.lang.Runnable
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1008</x>
+      <y>120</y>
       <w>40</w>
       <h>40</h>
     </coordinates>
@@ -358,15 +330,141 @@ _+ getInstance() : ViewManager_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>448</x>
-      <y>208</y>
+      <x>840</x>
+      <y>176</y>
+      <w>160</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>180.0;10.0;180.0;40.0;10.0;40.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>976</x>
+      <y>176</y>
       <w>144</w>
-      <h>32</h>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0;160.0;40.0;160.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>504</x>
+      <y>232</y>
+      <w>160</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>HealthBar
+--
+- HEALTH_LABEL : JLabel
+--
++ HealthBar()
+- getHealthWidth() : int
++ paintComponent(g : Graphics) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>296</x>
+      <y>232</y>
+      <w>176</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>GamePanel
+--
+- gameImage : Image
++ paintComponent(g : Graphics) : void
++ setGameImage(gameImage : Image) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>456</x>
+      <y>144</y>
+      <w>64</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>JPanel
+--
+...</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>512</x>
+      <y>120</y>
+      <w>40</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>30.0;10.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>536</x>
+      <y>104</y>
+      <w>144</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>JPanel de javax.swing.JPanel
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>480</x>
+      <y>176</y>
+      <w>120</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0;130.0;40.0;130.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>376</x>
+      <y>176</y>
+      <w>128</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>140.0;10.0;140.0;40.0;10.0;40.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>584</x>
+      <y>296</y>
+      <w>200</w>
+      <h>208</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=1
-m2=*
-&lt; manage</panel_attributes>
-    <additional_attributes>10.0;20.0;160.0;20.0</additional_attributes>
+m2=1
+score displayed on ^</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;240.0;230.0;240.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>376</x>
+      <y>280</y>
+      <w>408</w>
+      <h>296</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1
+game displayed on ^</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;350.0;490.0;350.0</additional_attributes>
   </element>
 </diagram>

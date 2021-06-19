@@ -15,17 +15,17 @@ import java.awt.Image;
  * @version 1.0
  */
 public class SpeedBoost extends FighterDecorator {
-    private final float boostAmountX;
+    private final float BOOST;
 
     /**
      * Apply speed boost
      *
-     * @param fighter      fighter to apply movement boost on
-     * @param boostAmountX amount to add to x axis
+     * @param fighter fighter to apply movement boost on
+     * @param boost   amount to add to x axis
      */
-    public SpeedBoost(IFighter fighter, float boostAmountX) {
+    public SpeedBoost(IFighter fighter, float boost) {
         super(fighter);
-        this.boostAmountX = boostAmountX;
+        this.BOOST = boost;
     }
 
     @Override
@@ -38,9 +38,9 @@ public class SpeedBoost extends FighterDecorator {
         }
         float oldLocationOnX = getLocation().getFloatX();
         float oldLocationOnY = getLocation().getFloatY();
-        float boostSpeedX = fighter.getSpeed().getX() * boostAmountX;
+        float boostSpeedX = fighter.getSpeed().getX() * BOOST;
         fighter.getLocation().translate(boostSpeedX, 0.f);
-        if (!isInBounds()){
+        if (!isInBounds()) {
             setLocation(new Location(oldLocationOnX, oldLocationOnY));
         }
     }

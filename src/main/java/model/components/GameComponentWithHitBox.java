@@ -20,10 +20,10 @@ public abstract class GameComponentWithHitBox extends GameComponent implements I
      * Instantiation of a new game component with a hit box
      *
      * @param location where component is
-     * @param filename of the component image
+     * @param imageName of the component image
      */
-    public GameComponentWithHitBox(Location location, String filename) {
-        super(location, filename);
+    public GameComponentWithHitBox(Location location, String imageName) {
+        super(location, imageName);
     }
 
     /**
@@ -69,8 +69,17 @@ public abstract class GameComponentWithHitBox extends GameComponent implements I
     }
 
     @Override
+    public void move() {
+        location.translate(speed.getX(), speed.getY());
+    }
+
+    @Override
     public Speed getSpeed() {
         return speed;
+    }
+
+    @Override
+    public void calculateAndSetNextSpeed() {
     }
 
     @Override
@@ -82,15 +91,4 @@ public abstract class GameComponentWithHitBox extends GameComponent implements I
     public void setSpeed(int speedOnX, int speedOnY) {
         this.speed = new Speed(speedOnX, speedOnY);
     }
-
-    @Override
-    public void setNextSpeed() {
-    }
-
-    @Override
-    public void move() {
-        location.translate(speed.getX(), speed.getY());
-    }
-
-
 }

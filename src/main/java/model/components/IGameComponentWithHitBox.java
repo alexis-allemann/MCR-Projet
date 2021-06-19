@@ -47,7 +47,6 @@ public interface IGameComponentWithHitBox extends IGameComponent {
      */
     void move();
 
-
     /**
      * Get component speed
      *
@@ -58,7 +57,7 @@ public interface IGameComponentWithHitBox extends IGameComponent {
     /**
      * Calculate and set next speed of the component
      */
-    void setNextSpeed();
+    void calculateAndSetNextSpeed();
 
     /**
      * Set the component speed vector

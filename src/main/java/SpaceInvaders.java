@@ -1,5 +1,5 @@
 import controllers.GameController;
-import views.GUIView;
+import views.GUIIView;
 
 /**
  * Main application class
@@ -15,6 +15,6 @@ public class SpaceInvaders {
      * @param args no args required
      */
     public static void main(String[] args) {
-        GameController.getInstance().start(new GUIView());
+        GameController.getInstance().start(new GUIIView());
     }
 }
