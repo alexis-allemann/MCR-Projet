@@ -1,6 +1,6 @@
 package controllers.managers;
 
-import controllers.GamePlay;
+import controllers.GameController;
 import model.World;
 import model.components.GameComponentWithHitBox;
 import model.components.IGameComponentWithHitBox;
@@ -76,6 +76,6 @@ public class ViewManager implements Runnable {
                 }
             }
         };
-        timer.scheduleAtFixedRate(task, 0, GamePlay.FRAME_RATE);
+        timer.scheduleAtFixedRate(task, 0, GameController.FRAME_RATE);
     }
 }

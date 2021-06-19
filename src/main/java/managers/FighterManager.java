@@ -1,6 +1,6 @@
 package controllers.managers;
 
-import controllers.GamePlay;
+import controllers.GameController;
 import model.components.fighters.IFighter;
 import model.levels.Level;
 import model.World;
@@ -93,7 +93,7 @@ public class FighterManager {
             // Generate new monsters
             if (canGenerate) {
                 Level level = world.getLevel();
-                int margin = ((GamePlay.WIDTH) / (level.getNbMonsterByWave()));
+                int margin = ((GameController.WIDTH) / (level.getNbMonsterByWave()));
                 for (int i = 1; i <= level.getNbMonsterByWave(); ++i) {
                     IFighter newMonster = level.generateMonster(new Location(0, 0));
                     int xAxisValue = (margin * i) - (margin / 2) - (newMonster.getImageWidth() / 2);

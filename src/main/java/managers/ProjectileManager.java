@@ -3,7 +3,6 @@ package controllers.managers;
 import model.World;
 import model.components.fighters.IFighter;
 import model.components.weapon.Projectile;
-import model.components.fighters.Fighter;
 
 import java.util.LinkedList;
 
