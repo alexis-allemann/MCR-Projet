@@ -1,6 +1,7 @@
 package controllers.managers;
 
 import controllers.GamePlay;
+import model.World;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -34,17 +35,15 @@ public class ComponentManager implements Runnable {
         final FighterManager fighterManager = FighterManager.getInstance();
         final ProjectileManager projectileManager = ProjectileManager.getInstance();
         final Timer timer = new Timer();
+        final World world = World.getInstance();
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
                 // Check if game is still running
-                if (!GamePlay.getInstance().isRunning()) {
-                    cancel();
-                    timer.cancel();
+                if (world.isRunning()) {
+                    fighterManager.manage();
+                    projectileManager.manage();
                 }
-
-                fighterManager.manage();
-                projectileManager.manage();
             }
         };
         timer.scheduleAtFixedRate(task, 0, GamePlay.FRAME_RATE);

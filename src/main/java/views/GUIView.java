@@ -89,6 +89,7 @@ public class GUIView extends JFrame implements View {
                                     IController.shoot();
                                     break;
 
+                                case KeyEvent.VK_N:
                                 case KeyEvent.VK_R:
                                     IController.newGame();
                                     break;

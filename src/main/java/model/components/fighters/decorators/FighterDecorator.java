@@ -5,7 +5,6 @@ import model.components.IGameComponentWithHitBox;
 import model.components.fighters.IFighter;
 import controllers.Direction;
 import model.components.weapon.IWeapon;
-import model.components.weapon.Weapon;
 import utils.physics.Location;
 import utils.physics.Vector2D;
 
@@ -112,8 +111,8 @@ public abstract class FighterDecorator implements IFighter {
     }
 
     @Override
-    public boolean alive() {
-        return fighter.alive();
+    public boolean isAlive() {
+        return fighter.isAlive();
     }
 
     @Override

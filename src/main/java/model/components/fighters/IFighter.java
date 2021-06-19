@@ -75,7 +75,7 @@ public interface IFighter extends IGameComponentWithHitBox {
      *
      * @return true if fighter is alive
      */
-    boolean alive();
+    boolean isAlive();
 
     /**
      * shoot with weapon

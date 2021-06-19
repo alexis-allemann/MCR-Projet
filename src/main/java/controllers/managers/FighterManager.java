@@ -50,7 +50,7 @@ public class FighterManager {
             List<IFighter> monsters = world.getMonsters();
             List<IFighter> toRemove = new LinkedList<>();
             for (IFighter monster : monsters) {
-                if (!monster.alive()) {
+                if (!monster.isAlive()) {
                     toRemove.add(monster);
                     world.getLevel().addMonsterKilled();
                 } else {
@@ -63,6 +63,10 @@ public class FighterManager {
             // Remove monster after iteration to handle concurrence in synchronised list
             for (IFighter monster : toRemove)
                 monster.die();
+
+            // Check if the spacecraft is still alive
+            if (!world.getSpacecraft().isAlive())
+                world.setRunning(false);
         }
     }
 

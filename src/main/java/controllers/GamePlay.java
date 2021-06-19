@@ -24,7 +24,6 @@ public class GamePlay implements IController {
     public static int WIDTH;
     public static int FRAME_RATE;
     private static final GamePlay instance = new GamePlay();
-    private static final Logger LOG = Logger.getLogger(GamePlay.class.getName());
 
     /**
      * Private constructor to implement Singleton pattern
@@ -43,9 +42,6 @@ public class GamePlay implements IController {
 
     @Override
     public void start(View view, Properties properties) {
-
-        LOG.info("Reading properties");
-
         if (!properties.containsKey("FRAME_RATE"))
             throw new IllegalArgumentException("Property FRAME_RATE missing in");
 
@@ -63,11 +59,10 @@ public class GamePlay implements IController {
         WIDTH = Integer.parseInt(properties.getProperty("WIDTH"));
         INFO_PANEL_HEIGHT = Integer.parseInt(properties.getProperty("INFO_PANEL_HEIGHT"));
 
-        resetSpaceCraftLocation();
+        newGame();
         view.startView(this);
-
-        new Thread(ComponentManager.getInstance()).start();
         new Thread(ViewManager.getInstance(view)).start();
+        new Thread(ComponentManager.getInstance()).start();
     }
 
     @Override
@@ -78,7 +73,7 @@ public class GamePlay implements IController {
 
     @Override
     public void newGame() {
-        LOG.info("New game started");
+        World.getInstance().reset();
     }
 
     @Override
@@ -97,22 +92,6 @@ public class GamePlay implements IController {
         }
         if (isInBounds(new Location(location.x + moveOnX, location.y), World.getInstance().getSpacecraft()))
             World.getInstance().getSpacecraft().getLocation().translate(moveOnX, 0);
-    }
-
-    @Override
-    public boolean isRunning() {
-        return true;
-    }
-
-    /**
-     * Reset default location of the spacecraft
-     */
-    private void resetSpaceCraftLocation() {
-        IFighter spacecraft = World.getInstance().getSpacecraft();
-        spacecraft.setLocation(new Location(
-                (GamePlay.WIDTH - spacecraft.getImageWidth()) / 2.f,
-                GamePlay.HEIGHT - spacecraft.getImageHeight() - GamePlay.INFO_PANEL_HEIGHT
-        ));
     }
 
     /**

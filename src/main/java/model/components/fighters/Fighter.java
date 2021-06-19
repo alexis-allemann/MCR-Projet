@@ -70,7 +70,7 @@ public abstract class Fighter extends GameComponentWithHitBox implements IFighte
     }
 
     @Override
-    public boolean alive() {
+    public boolean isAlive() {
         return getHealth() > 0;
     }
 

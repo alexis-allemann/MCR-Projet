@@ -37,11 +37,4 @@ public interface IController {
      * @param direction where to move
      */
     void move(Direction direction);
-
-    /**
-     * Know if the game is running
-     *
-     * @return boolean if the game is running
-     */
-    boolean isRunning();
 }

@@ -44,37 +44,36 @@ public class ViewManager implements Runnable {
 
     @Override
     public void run() {
+        final World world = World.getInstance();
         final Timer timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
                 // Check if game is still running
-                if (!GamePlay.getInstance().isRunning()) {
-                    cancel();
-                    timer.cancel();
+                if (world.isRunning()) {
+
+                    // Get next image to paint
+                    Image nextImage = view.getBufferedImage();
+                    Graphics2D graphics = (Graphics2D) nextImage.getGraphics();
+
+                    // Add spacecraft image
+                    IGameComponentWithHitBox spacecraft = World.getInstance().getSpacecraft();
+                    spacecraft.draw(graphics);
+
+                    // Add monsters images
+                    synchronized (World.getInstance().getMonsters()) {
+                        for (IGameComponentWithHitBox component : World.getInstance().getMonsters())
+                            component.draw(graphics);
+                    }
+
+                    // Add bullets images
+                    synchronized (World.getInstance().getBullets()) {
+                        for (GameComponentWithHitBox component : World.getInstance().getBullets())
+                            component.draw(graphics);
+                    }
+
+                    view.paintImage(nextImage);
                 }
-
-                // Get next image to paint
-                Image nextImage = view.getBufferedImage();
-                Graphics2D graphics = (Graphics2D) nextImage.getGraphics();
-
-                // Add spacecraft image
-                IGameComponentWithHitBox spacecraft = World.getInstance().getSpacecraft();
-                spacecraft.draw(graphics);
-
-                // Add monsters images
-                synchronized (World.getInstance().getMonsters()) {
-                    for (IGameComponentWithHitBox component : World.getInstance().getMonsters())
-                        component.draw(graphics);
-                }
-
-                // Add bullets images
-                synchronized (World.getInstance().getBullets()) {
-                    for (GameComponentWithHitBox component : World.getInstance().getBullets())
-                        component.draw(graphics);
-                }
-
-                view.paintImage(nextImage);
             }
         };
         timer.scheduleAtFixedRate(task, 0, GamePlay.FRAME_RATE);

@@ -1,5 +1,8 @@
 package model;
 
+import controllers.GamePlay;
+import controllers.managers.ComponentManager;
+import controllers.managers.ViewManager;
 import model.components.fighters.decorators.SpeedBoost;
 import model.components.weapon.decorators.BulletSizeEnhancer;
 import model.components.weapon.decorators.ShootPowerEnhancer;
@@ -26,6 +29,7 @@ public class World {
     private final List<Projectile> projectiles = Collections.synchronizedList(new ArrayList<Projectile>());
     private IFighter spacecraft = new SpaceCraft(new Location(0, 0));
     private Level level;
+    private boolean isRunning;
 
     /**
      * Instantiation of the world (private to apply Singleton pattern)
@@ -150,5 +154,47 @@ public class World {
      */
     public void setSpacecraft(IFighter spacecraft) {
         this.spacecraft = spacecraft;
+    }
+
+    /**
+     * Reset world
+     */
+    public void reset() {
+        monsters.clear();
+        projectiles.clear();
+        spacecraft = new SpaceCraft(new Location(0, 0));
+        resetSpaceCraftLocation();
+        spacecraft.setWeapon(new StandardWeapon());
+        level = new Beginner();
+        isRunning = true;
+    }
+
+    /**
+     * Get if a game is running
+     *
+     * @return if a game is running
+     */
+    public boolean isRunning() {
+        return isRunning;
+    }
+
+    /**
+     * Set if the game is running
+     *
+     * @param isRunning if the game is running
+     */
+    public void setRunning(boolean isRunning) {
+        this.isRunning = isRunning;
+    }
+
+    /**
+     * Reset default location of the spacecraft
+     */
+    private void resetSpaceCraftLocation() {
+        IFighter spacecraft = World.getInstance().getSpacecraft();
+        spacecraft.setLocation(new Location(
+                (GamePlay.WIDTH - spacecraft.getImageWidth()) / 2.f,
+                GamePlay.HEIGHT - spacecraft.getImageHeight() - GamePlay.INFO_PANEL_HEIGHT
+        ));
     }
 }
