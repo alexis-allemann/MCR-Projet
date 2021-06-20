@@ -12,6 +12,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.BoxLayout;
 import javax.swing.SwingConstants;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.Color;
 import java.awt.Point;
@@ -35,6 +36,7 @@ public class GUIIView extends JFrame implements IView {
     private final JLabel SCORE_LABEL = new JLabel();
     private final JLabel LEVEL_LABEL = new JLabel();
     private final JPanel HEALTH_BAR = new HealthBar();
+    private final JLabel GAME_OVER = new JLabel();
 
     @Override
     public void startView(final IController controller) {
@@ -66,6 +68,15 @@ public class GUIIView extends JFrame implements IView {
         GAME_PANEL.setBackground(Color.BLACK);
         MAIN_PANEL.add(GAME_PANEL);
 
+        GAME_OVER.setText("Game over, press R or N to restart");
+        GAME_OVER.setForeground(Color.RED);
+        GAME_OVER.setFont(new Font(GAME_OVER.getFont().getName(), Font.PLAIN, 30));
+        GAME_OVER.setHorizontalAlignment(SwingConstants.CENTER);
+        GAME_OVER.setVerticalAlignment(SwingConstants.CENTER);
+        GAME_OVER.setVisible(false);
+        GAME_PANEL.add(GAME_OVER);
+        GAME_PANEL.setLayout(new GridLayout());
+
         setVisible(true);
         pack();
 
@@ -96,6 +107,7 @@ public class GUIIView extends JFrame implements IView {
 
                                 case KeyEvent.VK_N:
                                 case KeyEvent.VK_R:
+                                    GAME_OVER.setVisible(false);
                                     controller.newGame();
                                     break;
                             }
@@ -109,8 +121,9 @@ public class GUIIView extends JFrame implements IView {
 
     @Override
     public void paintImage(Image image) {
-        LEVEL_LABEL.setText("Difficulty : " + World.getInstance().getLevel().toString());
-        SCORE_LABEL.setText("Score : " + World.getInstance().getLevel().getScore());
+        World world = World.getInstance();
+        LEVEL_LABEL.setText("Difficulty : " + world.getLevel().toString());
+        SCORE_LABEL.setText("Score : " + world.getLevel().getScore());
         GAME_PANEL.setGameImage(image);
         repaint();
     }
@@ -121,5 +134,10 @@ public class GUIIView extends JFrame implements IView {
         image.getGraphics().fillRect(0, 0, GameController.WIDTH, GameController.HEIGHT);
         image.getGraphics().setColor(Color.BLACK);
         return image;
+    }
+
+    @Override
+    public void displayGameOverMessage() {
+        GAME_OVER.setVisible(true);
     }
 }

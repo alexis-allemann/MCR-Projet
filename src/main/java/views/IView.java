@@ -32,4 +32,9 @@ public interface IView {
      * @return an empty image with the right size
      */
     Image getBufferedImage();
+
+    /**
+     * Display the game over message
+     */
+    void displayGameOverMessage();
 }

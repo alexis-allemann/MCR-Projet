@@ -74,6 +74,9 @@ public class ViewManager implements Runnable {
 
                     view.paintImage(nextImage);
                 }
+                else{
+                    view.displayGameOverMessage();
+                }
             }
         };
         timer.scheduleAtFixedRate(task, 0, GameController.FRAME_RATE);

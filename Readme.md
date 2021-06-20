@@ -24,7 +24,7 @@ Le but du jeu est de résister le plus longtemps possible face à une invasion d
 
 La difficulté augmente au long de la partie et les monstres deviennent de plus en plus dur à tuer et sont parfois décorés avec des pouvoirs supplémentaires.
 
-Un système de bonus vous permet d'améliorer votre vaisseau. Pour gagner des bonus, il faut tuer des monstres et récupérer les étoiles qui apparaîtront dans le jeu.
+Un système de bonus vous permet d'améliorer votre vaisseau. Pour gagner des bonus, il faut tuer des monstres et récupérer les étoiles qui apparaîtront dans le jeu. ![](./src/main/resources/star.png)
 
 Voici les touches du clavier et leurs actions :
 
@@ -58,11 +58,11 @@ Le fichier [config.properties](./src/main/resources/) permet de modifier le comp
 
 ## :factory: Conception du jeu
 
-Pour réaliser le jeu, nous avons décidé de mettre en place une architecture basée sur le modèle de conception <u>MVC</u> (Modèle-Vue-Controlleur). Nous avons choisi d'utiliser un thread responsable de l'affichage de la vue et un thread responsable de la mise à jour de l'état du jeu.
+Pour réaliser le jeu, nous avons décidé de mettre en place une architecture basée sur le modèle de conception <u>MVC</u> (Modèle-Vue-Controlleur). Nous avons choisi d'utiliser un thread responsable de l'affichage de la vue (`ViewManager`) et un thread responsable de la mise à jour de l'état du jeu (`ComponentManager`).
 
 <img src="diagrams/UML - Architecture.png" style="zoom: 80%;" />
 
-Comme on peut le voir, les différents composants du patron MVC sont tous des <u>Singletons</u>.
+Comme on peut le voir, les différents composants du patron MVC sont tous des <u>Singletons</u>. Cela nous permet de facilement accéder à l'instance et aux méthodes des classes de gestion du jeu.
 
 Il existe plusieurs classes de gestion :
 
@@ -71,15 +71,23 @@ Il existe plusieurs classes de gestion :
 - `ProjectileManager` : qui gère les balles et les bonus
 - `ViewManager` : qui gère la vue
 
-Pour gérer des appuis simultanés de touches, nous avons créé une classe `MuliKeyPrsesListener`.
+Pour gérer des appuis simultanés de touches, nous avons créé une classe `MuliKeyPressListener`.
 
 Voici notre schéma UML principal du jeu :
 
 ![](diagrams/UML - Game.png)
 
+> Des interfaces ont été créées afin de gérer les composants du jeu. Celles-ci définissent l'ensemble des méthodes que doivent implémenter les classes qui les implémentent et notemment tout ce qui concerne la partie graphique et affichage sur la vue.
+>
+> Le modèle principal du jeu est la classe `World`. Celle-ci est un Singleton et permet au controlleur ou à la vue de facilement manipuler ou récupérer l'état de la partie.
+
 Finalement, voici les quelques classes utilitaires que nous avons mises en place :
 
 ![](diagrams/UML - Utils.png)
+
+> Ces diférentes classes ont permis de gérer la "phisique" du jeu.
+>
+> La classe `Utils` est un Singleton et elle a permis de centraliser des fonctions utilitaires appelées à plusieurs endroits dans le code.
 
 ## :arrow_heading_up: Gestion des niveaux de jeu
 
@@ -89,7 +97,11 @@ Voici l'implémentation :
 
 <img src="diagrams/UML - Levels.png" style="zoom:80%;" />
 
-## :books: Mise en œuvre du modèle
+> Durant la partie, le niveau augmente en fonction du temps qui passe où selon le nombre de monstres tués. Les paramètres du jeu sont donc modifiés à chaque niveau afin de rendre le jeu de plus en plus difficile.
+>
+> Les niveaux sont des fabriques car ils génèrent des monstres. En effet, les monstres qui apparaissent dans le jeu sont de plus en plus résistants et contiennent de plus en plus de décorations.
+
+## :books: Mise en œuvre du modèle du pattern Décorateur
 
 Le modèle a été mis en place afin de réaliser les bonus que les monstres et le vaisseau peuvent obtenir.
 
@@ -99,13 +111,17 @@ Les décorations sont disponibles sur les `fighters` et sur les `weapons` :
 
 <img src="diagrams/UML - Fighters with decorators.png" style="zoom:80%;" />
 
+> Les fighters sont les monstres où le vaisseau spatial. Dans notre jeu, tant les monstres que le vaisseau peuvent être décorés avec des pouvoirs supplémentaires (augmenter le nombre de gun, ajouter un bouclier, augmenter la vitesse de déplacement).
+
 **Weapons :**
 
 <img src="diagrams/UML - Weapons  with decorators.png" style="zoom:80%;" />
 
+> Les armes utilisés par les monstres ou par le vaisseau peuvent aussi être décorés pour modifier le comportement ou ajouter des fonctionnalités.
+
 ### :chart_with_upwards_trend: Comportements avancés
 
-Voici les comportements avancés du pattern mis en œuvre :
+Voici les comportements du pattern mis en œuvre :
 
 **Ajout de fonctionnalités : **
 
@@ -129,7 +145,7 @@ Voici les comportements avancés du pattern mis en œuvre :
 
 **Limiter le nombre de décorateur totaux :**
 
-- Nombre de décorateurs max du vaisseau à 3 (paramètre modifiable)
+- Nombre de décorateurs max du vaisseau à 3 (paramètre modifiable via fichier de config)
 
 ## :end: Conclusion
 

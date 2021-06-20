@@ -69,14 +69,15 @@ Controller
       <x>768</x>
       <y>352</y>
       <w>160</w>
-      <h>64</h>
+      <h>72</h>
     </coordinates>
     <panel_attributes>&lt;&lt; interface &gt;&gt;
 IView
 --
 /+ startView(controller : IController) : void/
 /+ paintImage(image : Image) : void/
-/+ getBufferedImage() : Image/</panel_attributes>
+/+ getBufferedImage() : Image/
+/+ displayGameOverMessage() : void/</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -133,7 +134,7 @@ _+ main (args : String[]) : void_</panel_attributes>
       <x>768</x>
       <y>464</y>
       <w>160</w>
-      <h>120</h>
+      <h>136</h>
     </coordinates>
     <panel_attributes>GUIView
 --
@@ -142,23 +143,24 @@ _+ main (args : String[]) : void_</panel_attributes>
 - INFO_PANEL : JPanel
 - SCORE_LABEL : JLabel
 - LEVEL_LABEL : JLabel
-
+- GAME_OVER : JLabel
 --
 + startView(controller : Icontroller) : void
 + paintImage(image : Image) : void
-+ getBufferedImage() : Image</panel_attributes>
++ getBufferedImage() : Image
++ displayGameOverMessage() : void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>840</x>
-      <y>408</y>
+      <y>416</y>
       <w>24</w>
-      <h>72</h>
+      <h>64</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
